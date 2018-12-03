@@ -44,8 +44,6 @@
     
     2. runSim.ipynbを開き，[%run -i runSim.py]と書かれたセルを実行する．
         
-    
-③エラーが出たり，何かわからないことがあれば，himoto@protein.osaka-u.ac.jpまで
 
 
 
