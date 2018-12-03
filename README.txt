@@ -39,10 +39,10 @@
 ②実行方法
     0. Anaconda(Python3.x version)をhttps://www.anaconda.com/download/ よりダウンロードする．
     
-    1. Jupyter NotebookでrunGA.ipynbを開き，[%run -i GA.py]と書かれたセルを実行する．計算中は誤差が小さくなっていく様子が表示される．計算は世代数の上限に達するか，許容誤差を下回るまでずっと実行される．Generation: 1000くらいまで計算すれば十分（だいぶ時間がかかります）．
+    1. Jupyter NotebookでrunGA.ipynbを開き，[%run -i runGA.py]と書かれたセルを実行する．計算中は誤差が小さくなっていく様子が表示される．計算は世代数の上限に達するか，許容誤差を下回るまでずっと実行される．Generation: 1000くらいまで計算すれば十分（だいぶ時間がかかります）．
     
     
-    2. runSim.ipynbを開き，[%run -i Simulation.py]と書かれたセルを実行する．
+    2. runSim.ipynbを開き，[%run -i runSim.py]と書かれたセルを実行する．
         
     
 ③エラーが出たり，何かわからないことがあれば，himoto@protein.osaka-u.ac.jpまで
