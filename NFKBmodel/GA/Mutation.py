@@ -3,7 +3,7 @@ def Mutation(parents,n_gene,SearchRegion):
     flg = True
     for i in range(maxitr):
         child = NDM(parents,n_gene)
-        if 0 <= np.min(child[:n_gene]) and np.max(child[:n_gene]) <= 1:
+        if 0. <= np.min(child[:n_gene]) and np.max(child[:n_gene]) <= 1.:
             flg = False
             break
     if flg == True:
