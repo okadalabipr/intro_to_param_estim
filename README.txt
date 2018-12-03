@@ -1,4 +1,4 @@
-%Parameter Optimization for ODE models
+%Parameter Estimation for ODE models
 %Copyright 2018 Hiroaki Imoto.
 
 %MODEL: NF-kB model[1]
@@ -13,7 +13,7 @@
     パラメータ探索で結果が更新されるとここに入る．
 ・GA
     GAによるパラメータ探索，ODEソルバー，誤差の計算等に必要な関数
-・Paper
+・PaperOptimization
     論文
     
 ・setParamConst.py
