@@ -1,8 +1,4 @@
 %Parameter Estimation for ODE models
-<<<<<<< HEAD
-=======
-%Copyright 2018 Hiroaki Imoto.
->>>>>>> 11c2345cb5d3dd4c81d1b5d483e29567b6b016c0
 
 %MODEL: NF-kB model[1]
 %EXPERIMENTAL DATA: nuclear NF-kB signal intensity (Measured by Mr. Michida)
@@ -40,32 +36,17 @@
 
 
 ②実行方法
-<<<<<<< HEAD
     0. Anaconda(Python3.x version)を https://www.anaconda.com/download/ よりダウンロードする．
-=======
-    0. Anaconda(Python3.x version)をhttps://www.anaconda.com/download/ よりダウンロードする．
-    
+
     1. Jupyter NotebookでrunGA.ipynbを開き，[%run -i runGA.py]と書かれたセルを実行する．計算中は誤差が小さくなっていく様子が表示される．計算は世代数の上限に達するか，許容誤差を下回るまでずっと実行される．Generation: 1000くらいまで計算すれば十分（だいぶ時間がかかります）．
     
     
     2. runSim.ipynbを開き，[%run -i runSim.py]と書かれたセルを実行する．
         
->>>>>>> 11c2345cb5d3dd4c81d1b5d483e29567b6b016c0
-
-    1. Jupyter NotebookでrunGA.ipynbを開き，[%run -i runGA.py]と書かれたセルを実行する．計算中は誤差が小さくなっていく様子が表示される．計算は世代数の上限に達するか，許容誤差を下回るまでずっと実行される．Generation: 1000くらいまで計算すれば十分（だいぶ時間がかかります）．
-
-
-    2. runSim.ipynbを開き，[%run -i runSim.py]と書かれたセルを実行する．
-
 
 Reference:
     [1]Oppelt A, Kaschek D, Huppelschoten S, Sison-Young R, Zhang F, Buck-Wiese M et al. Model-based identification of TNFα-induced IKKβ-mediated and IκBα-mediated regulation of NFκB signal transduction as a tool to quantify the impact of drug-induced liver injury compounds. npj Syst Biol Appl 2018; 4: 23.
 
     [2]Ono I., Kita H., Kobayashi S.. A robust real-coded genetic algorithm using unimodal normal distribution crossover augmented by uniform crossover: effects of self-adaptation of crossover probabilities. in Proceedings of the 1st Annual Conference on Genetic and Evolutionary Computation 1, 496–503 (1999).
-<<<<<<< HEAD
 
     [3]Sato, H., Ono, I. & Kobayashi, S. A new generation alternation model of genetic algorithms and its assesment. J. Jpn Soc. Artif. Intell. 12, 734–744 (1997).
-=======
-    
-    [3]Sato, H., Ono, I. & Kobayashi, S. A new generation alternation model of genetic algorithms and its assesment. J. Jpn Soc. Artif. Intell. 12, 734–744 (1997).
->>>>>>> 11c2345cb5d3dd4c81d1b5d483e29567b6b016c0
