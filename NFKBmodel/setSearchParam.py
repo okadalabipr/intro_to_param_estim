@@ -48,5 +48,7 @@ def setSearchParam():
     return SearchConstIdx, SearchInitIdx, SearchParam
 
 SearchConstIdx, SearchInitIdx, SearchParam = setSearchParam()
+
 if np.any(SearchParam == 0.):
-    print('SearchParam must not contain zero')
+    print('Error: SearchParam must not contain zero.')
+    sys.exit()
