@@ -3,7 +3,7 @@ def Crossover(parents,n_gene):
     flg = True
     for i in range(maxitr):
         child = ENDX(parents,n_gene)
-        if 0 <= np.min(child[:n_gene]) and np.max(child[:n_gene]) <= 1:
+        if 0. <= np.min(child[:n_gene]) and np.max(child[:n_gene]) <= 1.:
             flg = False
             break
     if flg == True: 
