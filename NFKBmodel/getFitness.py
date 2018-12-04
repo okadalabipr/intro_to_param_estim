@@ -1,3 +1,10 @@
+'''
+def compute_objval_abs(simData,exData):#Residual Sum of Squares
+    return np.dot((simData-exData),(simData-exData))
+
+def compute_objval_cs(simData,exData):#Cosine similarity
+    return cosine(simData,exData)
+'''
 def getFitness(Individual_gene,SearchRegion):
 
     tspan = range(181)#180 min (Unit time: 1min)
