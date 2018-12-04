@@ -14,7 +14,6 @@
     GAによるパラメータ探索，ODEソルバー，誤差の計算等に必要な関数
 ・PaperOptimization
     論文
-
 ・setParamConst.py
     定数のパラメータ(x)の名前およびその値
 ・setVarEnum.py
