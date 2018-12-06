@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def using(filename):
-        with open(filename,'r') as f:
+        with open(filename,'r',encoding='utf-8') as f:
             script = f.read()
         exec(script,globals())
 

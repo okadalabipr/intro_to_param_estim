@@ -13,7 +13,7 @@ for file in files:
 
 def using(file):
         if '.py' in file:
-            with open(file,'r') as f:
+            with open(file,'r',encoding='utf-8') as f:
                 script = f.read()
                 exec(script,globals())
         else:
