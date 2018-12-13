@@ -1,4 +1,4 @@
-#diffeq
+#Reduced model
 def diffeq(t,y,x):
 
     dydt = [0]*len(variable)

@@ -1,6 +1,7 @@
 import os
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.interpolate import interp1d
 
 def using(filename):
         with open(filename,'r',encoding='utf-8') as f:
