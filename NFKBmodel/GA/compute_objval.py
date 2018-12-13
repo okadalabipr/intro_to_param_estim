@@ -6,7 +6,7 @@ def compute_objval_abs(simData,exData):#Residual Sum of Squares
 def compute_objval_cs(simData,exData):#Cosine similarity
     return cosine(simData,exData)
 
-def compute_objval_cs2(simData_egf,simData_hrg,exData_egf,exData_hrg):#Cosine similarity
-    simData = np.append(simData_egf,simData_hrg)
-    exData = np.append(exData_egf,exData_hrg)
+def compute_objval_cs2(simData_c1,simData_c2,exData_c1,exData_c2):#Cosine similarity
+    simData = np.append(simData_c1,simData_c2)
+    exData = np.append(exData_c1,exData_c2)
     return cosine(simData,exData)
