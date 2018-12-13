@@ -2,7 +2,7 @@
 
 Parameter Estimation for ODE Models
 
-![nuclear_nfkb](https://user-images.githubusercontent.com/31299606/49920930-40a51680-feef-11e8-9c2b-7493b8f736a0.png)
+![nuclear_nfkb](https://user-images.githubusercontent.com/31299606/49927633-b619e280-ff01-11e8-9e23-f1caac1c9944.png)
 
 ## Model
 
