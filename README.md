@@ -2,7 +2,7 @@
 
 Parameter Estimation for ODE Models
 
-Parameter values are searched by genetic algorithm.
+![nuclear_NFKB](https://github.com/u360665a/Saitekichan/files/2674618/nuclear_NFKB.pdf)
 
 ## Requirement
 
