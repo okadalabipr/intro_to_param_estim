@@ -26,5 +26,5 @@ t = np.array(tspan)
 (T,Y) = odesolve(diffeq,y0,tspan,tuple(x))
 
 
-nuclear_NFKB = x[Vnuc]*(Y[:,pnNfk] + Y[:, nNfk] + Y[:,nNfkIkb])
+nuclear_NFKB = x[Vnuc]*(Y[:,pnNfk] + Y[:,nNfk] + Y[:,nNfkIkb])
 nuclear_NFKB = nuclear_NFKB/np.max(nuclear_NFKB)

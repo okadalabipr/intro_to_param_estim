@@ -15,7 +15,7 @@ def getFitness(Individual_gene,SearchRegion):
     if T[-1] < tspan[-1]:
         return np.inf
 
-    nuclear_NFKB = x[Vnuc]*(Y[:,pnNfk] + Y[:, nNfk] + Y[:,nNfkIkb])
+    nuclear_NFKB = x[Vnuc]*(Y[:,pnNfk] + Y[:,nNfk] + Y[:,nNfkIkb])
 
     fit = compute_objval_cs(nuclear_NFKB[ex_t],ex_nuclear_NFKB)
 
