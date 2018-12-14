@@ -6,7 +6,7 @@ Parameter Estimation for ODE Models
 
 ## Model
 
-[Oppelt A, Kaschek D, Huppelschoten S, Sison-Young R, Zhang F, Buck-Wiese M et al. Model-based identification of TNFα-induced IKKβ-mediated and IκBα-mediated regulation of NFκB signal transduction as a tool to quantify the impact of drug-induced liver injury compounds. npj Syst Biol Appl 2018; 4: 23.](https://www.nature.com/articles/s41540-018-0058-z){:target="_blank"}
+[Oppelt A, Kaschek D, Huppelschoten S, Sison-Young R, Zhang F, Buck-Wiese M et al. Model-based identification of TNFα-induced IKKβ-mediated and IκBα-mediated regulation of NFκB signal transduction as a tool to quantify the impact of drug-induced liver injury compounds. npj Syst Biol Appl 2018; 4: 23.](https://www.nature.com/articles/s41540-018-0058-z)
 
 ## Requirement
 
