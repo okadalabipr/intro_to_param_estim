@@ -39,7 +39,7 @@ def main():
     SearchRegion = np.log10(SearchRegion)
 
     n_generation = np.iinfo(np.int16).max
-    n_population = int(3*len(SearchParam))
+    n_population = int(15*len(SearchParam))
     n_children = 50
     n_gene = len(SearchParam)
     allowable_error = 0.0

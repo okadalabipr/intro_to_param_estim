@@ -3,10 +3,10 @@ def myGAv2(n_generation,n_population,n_children,n_gene,allowable_error,SearchReg
     np.save('./FitParam/FitParam0.npy',SearchParam)
 
     N_iter = 1
-    FIT    = np.random.rand(n_population)
+    room = np.random.rand(n_population)
 
     population = getInitialPopulation(n_population,n_gene,SearchRegion)
-    FIT[0] = population[0,-1]
+    room[0] = population[0,-1]
     print('Generation%d: Best Fitness = %e'%(1,population[0,-1]))
     X0 = decodeGene2Variable(population[0,:n_gene],SearchRegion)
     BestFitness = population[0,-1]
@@ -29,13 +29,13 @@ def myGAv2(n_generation,n_population,n_children,n_gene,allowable_error,SearchReg
             ip = np.random.choice(n_population,n_gene+2,replace=False)
             ip,population = Converging(ip,population,n_population,n_children,n_gene,SearchRegion)
         if i%n_population == 0:
-            FIT = np.random.rand(n_population)
+            room = np.random.rand(n_population)
         else:
             pass
 
-        FIT[i%n_population] = population[0,-1]
+        room[i%n_population] = population[0,-1]
 
-        if FIT[0] == FIT[n_population-1]:
+        if room[0] == room[n_population-1]:
             N_iter *= 2
         else:
             N_iter = 1
