@@ -1,6 +1,6 @@
 # Saitekichan
 
-Parameter Estimation Using Genetic Algorithm to Fit ODE Models to Data
+**Parameter Estimation:** Using Genetic Algorithm to Fit ODE Models to Data
 
 ![nuclear_nfkb](https://user-images.githubusercontent.com/31299606/49927633-b619e280-ff01-11e8-9e23-f1caac1c9944.png)
 
