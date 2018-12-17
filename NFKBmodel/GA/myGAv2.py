@@ -35,10 +35,11 @@ def myGAv2(n_generation,n_population,n_children,n_gene,allowable_error,SearchReg
 
         N0[i%(2*n_population)] = population[0,-1]
 
-        if N0[0] == N0[2*n_population-1]:
-            N_iter *= 2
-        else:
-            N_iter = 1
+        if i%(2*n_population-1) == 0:
+            if N0[0] == N0[2*n_population-1]:
+                N_iter *= 2
+            else:
+                N_iter = 1
 
         print('Generation%d: Best Fitness = %e'%(i+1,population[0,-1]))
         X0 = decodeGene2Variable(population[0,:n_gene],SearchRegion)
