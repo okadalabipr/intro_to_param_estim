@@ -103,7 +103,7 @@ def diffeq(t,y,x):
         elif t <= 5400.:
             dydt[ppMEKc] = -0.0000478
     else:
-        print('Error: x[Ligand] = 0(EGF) or 1(HRG)')
+        sys.exit()
 
     dydt[CREBn] = -v27 + v28
     dydt[pCREBn] = v27 - v28
