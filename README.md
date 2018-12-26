@@ -2,15 +2,16 @@
 
 **Parameter Estimation:** Using Genetic Algorithm to Fit ODE Models to Data
 
-![nuclear_nfkb](https://user-images.githubusercontent.com/31299606/49927633-b619e280-ff01-11e8-9e23-f1caac1c9944.png)
+![cfos](https://user-images.githubusercontent.com/31299606/50444096-d27a3e00-0949-11e9-9df0-b3f8c1400b69.png)
 
+ Points (blue diamonds, EGF; red squares, HRG) denote experimental data, solid lines denote simulations
 ## Model
 
-[Oppelt A, Kaschek D, Huppelschoten S, Sison-Young R, Zhang F, Buck-Wiese M et al. Model-based identification of TNFα-induced IKKβ-mediated and IκBα-mediated regulation of NFκB signal transduction as a tool to quantify the impact of drug-induced liver injury compounds. npj Syst Biol Appl 2018; 4: 23.](https://www.nature.com/articles/s41540-018-0058-z)
+- [c-Fos model](https://www.cell.com/cell/fulltext/S0092-8674(10)00373-9)
 
 ## Requirement
 
-- Anaconda3
+- [Anaconda3](https://www.anaconda.com/)
 
 ## Installation
 
