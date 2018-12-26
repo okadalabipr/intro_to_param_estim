@@ -1,6 +1,7 @@
 # Saitekichan
 
 **Parameter Estimation:** Using Genetic Algorithm to Fit ODE Models to Data
+***
 
 ![cfos](https://user-images.githubusercontent.com/31299606/50444096-d27a3e00-0949-11e9-9df0-b3f8c1400b69.png)
 
