@@ -5,10 +5,10 @@
 ![cfos](https://user-images.githubusercontent.com/31299606/50464653-81b02700-09d5-11e9-910a-e3e2dcbd4fdd.png)
 
  Points (blue diamonds, EGF; red squares, HRG) denote experimental data, solid lines denote simulations.
- ***
+
 ## Model
 
-- [c-Fos model](https://www.cell.com/cell/fulltext/S0092-8674(10)00373-9)
+- [c-Fos Model](https://www.cell.com/cell/fulltext/S0092-8674(10)00373-9)
 
 ## Requirement
 
