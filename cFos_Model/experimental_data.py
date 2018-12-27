@@ -15,17 +15,17 @@ ex_egf_RSKw_sd = np.array([0,0.064,0.194,0.030,0.027,0.031,0.043,0.051])/np.sqrt
 ex_hrg_RSKw_av = np.array([0,0.953,1.000,0.844,0.935,0.868,0.779,0.558])
 ex_hrg_RSKw_sd = np.array([0,0.230,0.118,0.058,0.041,0.076,0.090,0.077])/np.sqrt(3)
 
+ex_egf_PcFos_av = np.array([0,0.060,0.109,0.083,0.068,0.049,0.027,0.017])
+ex_egf_PcFos_sd = np.array([0,0.003,0.021,0.013,0.016,0.007,0.003,0.002])/np.sqrt(3)
+ex_hrg_PcFos_av = np.array([0,0.145,0.177,0.158,0.598,1.000,0.852,0.431])
+ex_hrg_PcFos_sd = np.array([0,0.010,0.013,0.001,0.014,0.000,0.077,0.047])/np.sqrt(3)
+
 ex_t3   = np.array([0, 600, 1800, 3600, 5400])
 
 ex_egf_CREBw_av = np.array([0,0.446,0.030,0.000,0.000])
 ex_egf_CREBw_sd = np.array([0,0.0,0.0,0.0,0.0])/np.sqrt(3)
 ex_hrg_CREBw_av = np.array([0,1.000,0.668,0.460,0.340])
 ex_hrg_CREBw_sd = np.array([0,0.0,0.0,0.0,0.0])/np.sqrt(3)
-
-ex_egf_DUSPmRNA_av = np.array([0.000,0.177,0.331,0.214,0.177,0.231])
-ex_egf_DUSPmRNA_sd = np.array([0.033,0.060,0.061,0.032,0.068,0.050])/np.sqrt(3)
-ex_hrg_DUSPmRNA_av = np.array([0.000,0.221,0.750,1.000,0.960,0.934])
-ex_hrg_DUSPmRNA_sd = np.array([0.027,0.059,0.094,0.124,0.113,0.108])/np.sqrt(3)
 
 ex_t4 = np.array([0,600,1200,1800,2700,3600,5400])
 
@@ -41,7 +41,7 @@ ex_egf_cFosPro_sd = np.array([0,0.036,0.028,0.056,0.071,0.048])/np.sqrt(3)
 ex_hrg_cFosPro_av = np.array([0,0.089,0.552,0.861,1.000,0.698])
 ex_hrg_cFosPro_sd = np.array([0,0.021,0.042,0.063,0.000,0.047])/np.sqrt(3)
 
-ex_egf_PcFos_av = np.array([0,0.060,0.109,0.083,0.068,0.049,0.027,0.017])
-ex_egf_PcFos_sd = np.array([0,0.003,0.021,0.013,0.016,0.007,0.003,0.002])/np.sqrt(3)
-ex_hrg_PcFos_av = np.array([0,0.145,0.177,0.158,0.598,1.000,0.852,0.431])
-ex_hrg_PcFos_sd = np.array([0,0.010,0.013,0.001,0.014,0.000,0.077,0.047])/np.sqrt(3)
+ex_egf_DUSPmRNA_av = np.array([0.000,0.177,0.331,0.214,0.177,0.231])
+ex_egf_DUSPmRNA_sd = np.array([0.033,0.060,0.061,0.032,0.068,0.050])/np.sqrt(3)
+ex_hrg_DUSPmRNA_av = np.array([0.000,0.221,0.750,1.000,0.960,0.934])
+ex_hrg_DUSPmRNA_sd = np.array([0.027,0.059,0.094,0.124,0.113,0.108])/np.sqrt(3)

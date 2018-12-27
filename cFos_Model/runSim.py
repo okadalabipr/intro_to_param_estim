@@ -1,7 +1,8 @@
 import os
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.interpolate import interp1d
+import warnings
+warnings.filterwarnings('ignore')
 
 def using(filename):
         with open(filename,'r',encoding='utf-8') as f:
@@ -39,14 +40,14 @@ tspan = range(5401)
 t = np.array(tspan)/60.
 condition = 2
 
-PMEK_cyt = np.empty((len(tspan),condition))
-PERK_cyt = np.empty((len(tspan),condition))
-PRSK_wcl = np.empty((len(tspan),condition))
+PMEK_cyt  = np.empty((len(tspan),condition))
+PERK_cyt  = np.empty((len(tspan),condition))
+PRSK_wcl  = np.empty((len(tspan),condition))
 PCREB_wcl = np.empty((len(tspan),condition))
-DUSPmRNA = np.empty((len(tspan),condition))
-cFosmRNA = np.empty((len(tspan),condition))
-cFosPro = np.empty((len(tspan),condition))
-PcFos = np.empty((len(tspan),condition))
+DUSPmRNA  = np.empty((len(tspan),condition))
+cFosmRNA  = np.empty((len(tspan),condition))
+cFosPro   = np.empty((len(tspan),condition))
+PcFos     = np.empty((len(tspan),condition))
 
 for i in range(condition):
     if i==0:

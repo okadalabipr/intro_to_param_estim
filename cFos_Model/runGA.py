@@ -34,8 +34,8 @@ def main():
 
     SearchRegion=np.empty((2,len(SearchParam)))
 
-    SearchRegion[0,:] = SearchParam*0.1#lower bound
-    SearchRegion[1,:] = SearchParam*10.#upper bound
+    SearchRegion[0,:] = SearchParam*0.01#lower bound
+    SearchRegion[1,:] = SearchParam*100.#upper bound
 
     #Hill coefficient
     Hill_C = [n10,n31,n57,nF31]
