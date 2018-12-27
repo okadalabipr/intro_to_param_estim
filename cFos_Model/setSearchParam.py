@@ -114,7 +114,7 @@ def setSearchParam():
         KF31,
         nF31,
         #
-        a,
+        a\
         ]
 
     #initialvalues(not necessary)
