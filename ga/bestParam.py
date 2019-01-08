@@ -3,8 +3,8 @@ def bestParam():
     y0 = initialValues()
 
 
-    generation = np.load('./FitParam/generation.npy')
-    X0 = np.load('./FitParam/FitParam%d.npy'%(int(generation)))#
+    generation = np.load('../FitParam/generation.npy')
+    X0 = np.load('../FitParam/FitParam%d.npy'%(int(generation)))#
 
     for i in range(len(SearchConstIdx)):
         x[SearchConstIdx[i]] = X0[i]

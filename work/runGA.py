@@ -6,10 +6,10 @@ import os
 import warnings
 warnings.filterwarnings('ignore')
 
-files = os.listdir('./FitParam/')
+files = os.listdir('../FitParam/')
 for file in files:
     if '.npy' in file:
-        os.remove('./FitParam/%s'%(file))
+        os.remove('../FitParam/%s'%(file))
 
 def using(file):
         if '.py' in file:
@@ -21,14 +21,14 @@ def using(file):
             for file in files:
                 using(file)
 
-using ('./GA/*')
-using('setParamConst.py')
-using('setVarEnum.py')
-using('initialValues.py')
-using('diffeq.py')
-using('setSearchParam.py')
-using('getFitness.py')
-using('experimental_data.py')
+using('../ga/*')
+using('../work/model/setParamConst.py')
+using('../work/model/setVarEnum.py')
+using('../work/model/initialValues.py')
+using('../work/model/diffeq.py')
+using('../work/model/expData.py')
+using('../work/model/getFitness.py')
+using('../work/model/setSearchParam.py')
 
 def main():
 

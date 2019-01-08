@@ -1,23 +1,28 @@
 import os
 import numpy as np
+import glob
 import matplotlib.pyplot as plt
 import warnings
 warnings.filterwarnings('ignore')
 
-def using(filename):
-        with open(filename,'r',encoding='utf-8') as f:
-            script = f.read()
-        exec(script,globals())
+def using(file):
+        if '.py' in file:
+            with open(file,'r',encoding='utf-8') as f:
+                script = f.read()
+                exec(script,globals())
+        else:
+            files = glob.glob(file)
+            for file in files:
+                using(file)
 
-using('./GA/odesolve.py')
-using('./GA/bestParam.py')
-using('./GA/myEnum.py')
-using('setParamConst.py')
-using('setVarEnum.py')
-using('initialValues.py')
-using('diffeq.py')
-using('setSearchParam.py')
-using('experimental_data.py')
+using('../ga/*')
+using('../work/model/setParamConst.py')
+using('../work/model/setVarEnum.py')
+using('../work/model/initialValues.py')
+using('../work/model/diffeq.py')
+using('../work/model/expData.py')
+using('../work/model/getFitness.py')
+using('../work/model/setSearchParam.py')
 
 (x,y0) = bestParam()
 #constraints

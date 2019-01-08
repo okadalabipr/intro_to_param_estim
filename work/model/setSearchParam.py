@@ -128,7 +128,8 @@ def setSearchParam():
 
     return SearchConstIdx, SearchInitIdx, SearchParam
 
-SearchConstIdx, SearchInitIdx, SearchParam = setSearchParam()
+if __name__ == '__main__':
+    SearchConstIdx, SearchInitIdx, SearchParam = setSearchParam()
 
 if np.any(SearchParam == 0.):
     print('Error: SearchParam must not contain zero.')
