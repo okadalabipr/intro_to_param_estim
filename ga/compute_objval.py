@@ -1,3 +1,5 @@
+from scipy.spatial.distance import cosine
+
 def compute_objval_abs(simData,exData):#Residual Sum of Squares
     return np.dot((simData-exData),(simData-exData))
 
