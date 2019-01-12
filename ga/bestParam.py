@@ -4,7 +4,7 @@ def bestParam():
 
 
     generation = np.load('../FitParam/generation.npy')
-    X0 = np.load('../FitParam/FitParam%d.npy'%(int(generation)))#
+    X0 = np.load('../FitParam/FitParam%d.npy'%(int(generation)))
 
     for i in range(len(SearchConstIdx)):
         x[SearchConstIdx[i]] = X0[i]
