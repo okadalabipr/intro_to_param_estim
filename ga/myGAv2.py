@@ -28,15 +28,15 @@ def myGAv2(n_generation,n_population,n_children,n_gene,allowable_error,SearchReg
         for j in range(N_iter-1):
             ip = np.random.choice(n_population,n_gene+2,replace=False)
             ip,population = Converging(ip,population,n_population,n_children,n_gene,SearchRegion)
-        if i%(2*n_population) == 0:
-            N0 = np.zeros(2*n_population)
+        if i%len(N0) == 0:
+            N0 = np.zeros(len(N0))
         else:
             pass
 
-        N0[i%(2*n_population)] = population[0,-1]
+        N0[i%len(N0)] = population[0,-1]
 
-        if i%(2*n_population-1) == 0:
-            if N0[0] == N0[2*n_population-1]:
+        if i%(len(N0)-1) == 0:
+            if N0[0] == N0[len(N0)-1]:
                 N_iter *= 2
             else:
                 N_iter = 1
