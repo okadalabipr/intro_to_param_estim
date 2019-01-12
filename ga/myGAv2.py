@@ -1,6 +1,4 @@
 def myGAv2(n_generation,n_population,n_children,n_gene,allowable_error,SearchRegion):
-    np.save('../FitParam/generation.npy',int(0))
-    np.save('../FitParam/FitParam0.npy',SearchParam)
 
     N_iter = 1
     N0 = np.zeros(2*n_population)

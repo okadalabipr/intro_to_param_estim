@@ -1,6 +1,4 @@
 def myGA(n_generation,n_population,n_children,n_gene,allowable_error,SearchRegion):
-    np.save('../FitParam/generation.npy',int(0))
-    np.save('../FitParam/FitParam0.npy',SearchParam)
 
     population = getInitialPopulation(n_population,n_gene,SearchRegion)
     print('Generation%d: Best Fitness = %e'%(1,population[0,-1]))
