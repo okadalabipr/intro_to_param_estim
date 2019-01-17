@@ -102,8 +102,6 @@ def diffeq(t,y,x):
             dydt[ppMEKc] = -0.0000500
         elif t <= 5400.:
             dydt[ppMEKc] = -0.0000478
-    else:
-        sys.exit()
 
     dydt[CREBn] = -v27 + v28
     dydt[pCREBn] = v27 - v28

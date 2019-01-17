@@ -4,7 +4,7 @@ def setSearchParam():
     y0 = initialValues()
 
     #write param index for optimization
-    SearchConstIdx=[\
+    SearchConstIdx = [\
         V1,
         Km1,
         #V2,
@@ -115,7 +115,7 @@ def setSearchParam():
         nF31,
         #
         a\
-        ]
+    ]
 
     #initialvalues(not necessary)
     SearchInitIdx= []

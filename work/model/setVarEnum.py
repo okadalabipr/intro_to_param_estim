@@ -35,6 +35,6 @@ variable = [\
     'Fn',
     'FmRNAc',
     'PreFmRNAn'\
-    ]
+]
 
 myEnum('variable')
