@@ -116,7 +116,7 @@ constant = [\
   'HRG'\
 ]
 
-myEnum('constant')
+name2idx(constant)
 
 def setParamConst():
   x = [0]*len(constant)

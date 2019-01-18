@@ -37,4 +37,4 @@ variable = [\
     'PreFmRNAn'\
 ]
 
-myEnum('variable')
+name2idx(variable)
