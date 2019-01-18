@@ -37,4 +37,6 @@ variable = [\
     'PreFmRNAn'\
 ]
 
-name2idx(variable)
+#name2idx(variable)
+for i,name in enumerate(variable):
+  exec('%s=%d'%(name,i))

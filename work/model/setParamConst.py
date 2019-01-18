@@ -116,7 +116,9 @@ constant = [\
   'HRG'\
 ]
 
-name2idx(constant)
+#name2idx(constant)
+for i,name in enumerate(constant):
+  exec('%s=%d'%(name,i))
 
 def setParamConst():
   x = [0]*len(constant)
