@@ -5,6 +5,11 @@ import matplotlib.pyplot as plt
 import warnings
 warnings.filterwarnings('ignore')
 
+if not glob.glob('../Fig'):
+    os.mkdir('../Fig')
+else:
+    pass
+
 def using(file):
         if '.py' in file:
             with open(file,'r',encoding='utf-8') as f:
