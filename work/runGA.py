@@ -6,10 +6,13 @@ import os
 import warnings
 warnings.filterwarnings('ignore')
 
-files = os.listdir('../FitParam/')
-for file in files:
-    if '.npy' in file:
-        os.remove('../FitParam/%s'%(file))
+try:
+    files = os.listdir('../FitParam/')
+    for file in files:
+        if '.npy' in file:
+            os.remove('../FitParam/%s'%(file))
+except:
+    os.mkdir('../FitParam')
 
 def using(file):
         if '.py' in file:
