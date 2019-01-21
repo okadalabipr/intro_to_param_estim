@@ -136,6 +136,3 @@ plt.yticks([0,0.2,0.4,0.6,0.8,1,1.2])
 plt.ylim(0,1.2)
 plt.xlabel('Time (min)')
 plt.ylabel('Phosphorylated c-Fos\nProtein expression')
-
-plt.savefig('../Fig/simResult.png',bbox_inches='tight')
-plt.show()
