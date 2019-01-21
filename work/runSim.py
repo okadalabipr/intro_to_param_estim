@@ -1,7 +1,6 @@
 import os
 import numpy as np
 import glob
-import matplotlib.pyplot as plt
 import warnings
 warnings.filterwarnings('ignore')
 
