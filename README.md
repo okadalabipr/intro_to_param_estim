@@ -16,4 +16,4 @@
 
 ## Installation
 
-    $ git clone https://github.com/u360665a/Saitekichan
+    $ git clone https://github.com/u360665a/ODEParamEstim
