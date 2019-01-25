@@ -13,7 +13,7 @@
 
 0. [Anaconda3](https://www.anaconda.com/)をダウンロードする．
 1. **Parameter Search**
-    - Jupyter Notebookでnotebooks/ParamEstim.ipynbを開き，一番上のセルを実行する．更新された最良のパラメータセットはFitParamフォルダに格納される．設定した世代数の上限に達する or 許容誤差を下回るまで計算は実行される．
+    - Jupyter Notebookでnotebooks/ParamEstim.ipynbを開き，一番上のセルを実行する．更新された最良のパラメータセットはFitParamフォルダに格納される．設定した世代数の上限に達する or 許容誤差を下回るまで計算は実行される．
 2. **Plot simulation results**
     - Jupyter Notebookでnotebooks/Simulation.ipynbを開き，上からセルを実行するとその時点での最良のパラメータセットでのシミュレーション結果を表示する．
 
