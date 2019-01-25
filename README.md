@@ -1,4 +1,4 @@
-# Saitekichan
+# ODEParamEstim
 
 **Parameter Estimation:** Using Genetic Algorithm to Fit ODE Models to Data
 ***
