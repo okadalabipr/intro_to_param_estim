@@ -1,10 +1,10 @@
 from scipy.integrate import ode
 
-def odesolve(diffeq,y0,tspan,tuple_x):
+def odesolve(diffeq,y0,tspan,args):
     sol = ode(diffeq)
     sol.set_integrator('vode',method='bdf',min_step=1e-8,with_jacobian=True)
     sol.set_initial_value(y0,tspan[0])
-    sol.set_f_params(tuple_x)
+    sol.set_f_params(args)
 
     T = [tspan[0]]
     Y = [y0]
