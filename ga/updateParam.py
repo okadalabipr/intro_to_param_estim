@@ -3,6 +3,8 @@ def updateParam(Individual_gene,SearchRegion):
     x = setParamConst()
     y0 = initialValues()
 
+    (SearchConstIdx,SearchInitIdx) = setSearchParamIdx()
+
     X = decodeGene2Variable(Individual_gene,SearchRegion)
 
     for i in range(len(SearchConstIdx)):

@@ -2,6 +2,8 @@ def bestParam():
     x = setParamConst()
     y0 = initialValues()
 
+    (SearchConstIdx,SearchInitIdx) = setSearchParamIdx()
+
     try:
         generation = np.load('../FitParam/generation.npy')
         X0 = np.load('../FitParam/FitParam%d.npy'%(int(generation)))
