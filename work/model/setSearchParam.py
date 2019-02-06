@@ -224,21 +224,6 @@ def setSearchRegion():
     SearchRegion[:,nF31] = [1.00,4.00]
     SearchRegion[:,a] = [1.00e+2,5.00e+2]
 
-    difference = list(set(np.where(np.any(SearchRegion != 0.,axis=0) == True)[0]) ^ set(np.append(SearchConstIdx,len(x)+SearchInitIdx)))
-    if len(difference) > 0:
-        for i in range(len(difference)):
-            if difference[i] <= len(x):
-                print('Set "%s" in both SearchConstIdx and SearchRegion'%(constant[difference[i]]))
-            else:
-                print('Set "%s" in both SearchInitIdx and SearchRegion'%(variable[difference[i]-len(x)]))
-        sys.exit()
-
-
-    SearchRegion = SearchRegion[:,np.any(SearchRegion != 0.,axis=0)]
-    if len(SearchParam) != SearchRegion.shape[1]:
-        print('Error: SearchRegion[lb,ub] must be positive.')
-        sys.exit()
-
-    SearchRegion = np.log10(SearchRegion)
+    SearchRegion = lin2log(SearchRegion,len(x),len(SearchParam))
 
     return SearchRegion
