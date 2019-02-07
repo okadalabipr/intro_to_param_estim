@@ -21,11 +21,11 @@ def myGAv2(n_generation,n_population,n_children,n_gene,allowable_error,SearchReg
 
     for i in range(1,n_generation):
         ip = np.random.choice(n_population,n_gene+2,replace=False)# m=n+2
-        ip, population = Converging(ip,population,n_population,n_children,n_gene,SearchRegion)
+        ip, population = Converging(ip,population,n_population,n_gene,SearchRegion)
         ip, population = LocalSearch(ip,population,n_population,n_children,n_gene,SearchRegion)
         for j in range(N_iter-1):
             ip = np.random.choice(n_population,n_gene+2,replace=False)
-            ip,population = Converging(ip,population,n_population,n_children,n_gene,SearchRegion)
+            ip,population = Converging(ip,population,n_population,n_gene,SearchRegion)
         if i%len(N0) == 0:
             N0 = np.zeros(len(N0))
         else:
