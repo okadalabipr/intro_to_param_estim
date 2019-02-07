@@ -54,6 +54,8 @@ def myGAv2(n_generation,n_population,n_children,n_gene,allowable_error,SearchReg
         else:
             pass
 
+        np.save('../FitParam/count.npy',i+1)
+
     X0 = decodeGene2Variable(population[0,:n_gene],SearchRegion)
 
     BestFitness = population[0,-1]
