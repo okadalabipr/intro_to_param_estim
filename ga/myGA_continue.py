@@ -23,14 +23,14 @@ def myGA_continue(n_generation,n_population,n_children,n_gene,allowable_error,Se
     else:
         pass
 
-    for i in range(int(count)+1,n_generation):
+    for i in range(1,n_generation):
         population = MGGvariant(population,n_population,n_children,n_gene,SearchRegion)
-        print('Generation%d: Best Fitness = %e'%(i+1,population[0,-1]))
+        print('Generation%d: Best Fitness = %e'%(i+int(count)+1,population[0,-1]))
         X0 = decodeGene2Variable(population[0,:n_gene],SearchRegion)
 
         if population[0,-1] < BestFitness:
-            np.save('../FitParam/FitParam%d.npy'%(i+1),X0)
-            np.save('../FitParam/generation.npy',int(i+1))
+            np.save('../FitParam/FitParam%d.npy'%(i+int(count)+1),X0)
+            np.save('../FitParam/generation.npy',i+int(count)+1)
         BestFitness = population[0,-1]
 
         if population[0,-1] <= allowable_error:
@@ -40,7 +40,7 @@ def myGA_continue(n_generation,n_population,n_children,n_gene,allowable_error,Se
         else:
             pass
 
-        np.save('../FitParam/count.npy',i+1)
+        np.save('../FitParam/count.npy',i+int(count)+1)
 
     X0 = decodeGene2Variable(population[0,:n_gene],SearchRegion)
 
