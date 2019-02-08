@@ -6,7 +6,7 @@ def myGA(n_generation,n_population,n_children,n_gene,allowable_error,SearchRegio
 
     BestFitness = population[0,-1]
 
-    np.save('../FitParam/generation.npy',int(1))
+    np.save('../FitParam/generation.npy',1)
     np.save('../FitParam/FitParam1',X0)
 
     if population[0,-1] <= allowable_error:
@@ -23,7 +23,7 @@ def myGA(n_generation,n_population,n_children,n_gene,allowable_error,SearchRegio
 
         if population[0,-1] < BestFitness:
             np.save('../FitParam/FitParam%d.npy'%(i+1),X0)
-            np.save('../FitParam/generation.npy',int(i+1))
+            np.save('../FitParam/generation.npy',i+1)
         BestFitness = population[0,-1]
 
         if population[0,-1] <= allowable_error:
