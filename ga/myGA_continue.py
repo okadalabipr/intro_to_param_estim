@@ -1,10 +1,10 @@
-def myGA_continue(n_generation,n_population,n_children,n_gene,allowable_error,SearchRegion):
+def myGA_continue(n_generation,n_population,n_children,n_gene,allowable_error,SearchRegion,p0_bounds):
     count = np.load('../FitParam/count.npy')
     generation = np.load('../FitParam/generation.npy')
     X0 = np.load('../FitParam/FitParam%d.npy'%(int(generation)))
     BestFitness = getFitness((np.log10(X0) - SearchRegion[0,:])/(SearchRegion[1,:] - SearchRegion[0,:]),SearchRegion)
 
-    population = getInitialPopulation_continue(n_population,n_gene,SearchRegion)
+    population = getInitialPopulation_continue(n_population,n_gene,SearchRegion,p0_bounds)
 
     if BestFitness < population[0,-1]:
         population[0,:n_gene] = (np.log10(X0) - SearchRegion[0,:])/(SearchRegion[1,:] - SearchRegion[0,:])

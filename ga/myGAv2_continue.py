@@ -1,4 +1,4 @@
-def myGAv2_continue(n_generation,n_population,n_children,n_gene,allowable_error,SearchRegion):
+def myGAv2_continue(n_generation,n_population,n_children,n_gene,allowable_error,SearchRegion,p0_bounds):
 
     N_iter = 1
     N0 = np.zeros(2*n_population)
@@ -8,7 +8,7 @@ def myGAv2_continue(n_generation,n_population,n_children,n_gene,allowable_error,
     X0 = np.load('../FitParam/FitParam%d.npy'%(int(generation)))
     BestFitness = getFitness((np.log10(X0) - SearchRegion[0,:])/(SearchRegion[1,:] - SearchRegion[0,:]),SearchRegion)
 
-    population = getInitialPopulation_continue(n_population,n_gene,SearchRegion)
+    population = getInitialPopulation_continue(n_population,n_gene,SearchRegion,p0_bounds)
 
     if BestFitness < population[0,-1]:
         population[0,:n_gene] = (np.log10(X0) - SearchRegion[0,:])/(SearchRegion[1,:] - SearchRegion[0,:])
