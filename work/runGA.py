@@ -33,7 +33,7 @@ using('../work/model/expData.py')
 using('../work/model/getFitness.py')
 using('../work/model/setSearchParam.py')
 
-def main():
+def runGA():
 
     SearchRegion = setSearchRegion()
 
@@ -47,4 +47,4 @@ def main():
 
 
 if __name__ == '__main__':
-	main()
+	runGA()
