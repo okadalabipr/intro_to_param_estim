@@ -1,4 +1,4 @@
-def LocalSearch(ip,population,n_population,n_children,n_gene,SearchRegion):
+def LocalSearch(ip,population,n_population,n_children,n_gene,SearchParamIdx,SearchRegion):
     idx = [True]*n_population
     idx[ip[0]] = False
 
@@ -6,7 +6,7 @@ def LocalSearch(ip,population,n_population,n_children,n_gene,SearchRegion):
 
     for i in range(n_children):
         ip[1:] = np.random.choice(np.arange(n_population)[idx],n_gene+1,replace=False)
-        children[i,:] = Mutation(population[ip,:],n_gene,SearchRegion)
+        children[i,:] = Mutation(population[ip,:],n_gene,SearchParamIdx,SearchRegion)
 
     family = np.empty((n_children+1,n_gene+1))
 
@@ -20,7 +20,7 @@ def LocalSearch(ip,population,n_population,n_children,n_gene,SearchRegion):
 
     return ip,population
 
-def Mutation(parents,n_gene,SearchRegion):
+def Mutation(parents,n_gene,SearchParamIdx,SearchRegion):
     maxitr = np.iinfo(np.int8).max
 
     flg = True
@@ -33,7 +33,7 @@ def Mutation(parents,n_gene,SearchRegion):
     if flg == True:
         child[:n_gene] = np.clip(child[:n_gene],0.,1.)
 
-    child[-1] = getFitness(child[:n_gene],SearchRegion)
+    child[-1] = getFitness(child[:n_gene],SearchParamIdx,SearchRegion)
 
     return child
 

@@ -1,15 +1,13 @@
-def updateParam(Individual_gene,SearchRegion):
+def updateParam(Individual_gene,SearchParamIdx,SearchRegion):
 
     x = setParamConst()
     y0 = initialValues()
 
-    (SearchConstIdx,SearchInitIdx) = setSearchParamIdx()
-
     X = decodeGene2Variable(Individual_gene,SearchRegion)
 
-    for i in range(len(SearchConstIdx)):
-        x[SearchConstIdx[i]] = X[i]
-    for i in range(len(SearchInitIdx)):
-        y0[SearchInitIdx[i]] = X[i+len(SearchConstIdx)]
+    for i in range(len(SearchParamIdx[0])):
+        x[SearchParamIdx[0][i]] = X[i]
+    for i in range(len(SearchParamIdx[1])):
+        y0[SearchParamIdx[1][i]] = X[i+len(SearchParamIdx[0])]
 
     return x, y0

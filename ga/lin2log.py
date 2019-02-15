@@ -1,8 +1,6 @@
-def lin2log(SearchRegion,n_paramConst,n_SearchParam):
+def lin2log(SearchParamIdx,SearchRegion,n_paramConst,n_SearchParam):
 
-    (SearchConstIdx,SearchInitIdx) = setSearchParamIdx()
-
-    difference = list(set(np.where(np.any(SearchRegion != 0.,axis=0) == True)[0]) ^ set(np.append(SearchConstIdx,n_paramConst+SearchInitIdx)))
+    difference = list(set(np.where(np.any(SearchRegion != 0.,axis=0) == True)[0]) ^ set(np.append(SearchParamIdx[0],n_paramConst+SearchParamIdx[1])))
     if len(difference) > 0:
         for i in range(len(difference)):
             if difference[i] <= n_paramConst:

@@ -1,4 +1,12 @@
-def getFitness(Individual_gene,SearchRegion):
+from scipy.spatial.distance import cosine
+
+def compute_objval_abs(simData,expData):#Residual Sum of Squares
+    return np.dot((simData-expData),(simData-expData))
+
+def compute_objval_cs(simData,expData):#Cosine similarity
+    return cosine(simData,expData)
+
+def getFitness(Individual_gene,SearchParamIdx,SearchRegion):
 
     tspan = range(5401)
 
@@ -13,7 +21,7 @@ def getFitness(Individual_gene,SearchRegion):
     cFosPro   = np.empty((len(tspan),condition))
     PcFos     = np.empty((len(tspan),condition))
 
-    (x,y0) = updateParam(Individual_gene,SearchRegion)
+    (x,y0) = updateParam(Individual_gene,SearchParamIdx,SearchRegion)
     #constraints
     x[V6] = x[V5]
     x[Km6] = x[Km5]

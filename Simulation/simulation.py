@@ -10,25 +10,36 @@ else:
     pass
 
 def using(file):
-        if '.py' in file:
-            with open(file,'r',encoding='utf-8') as f:
-                script = f.read()
-                exec(script,globals())
-        else:
-            files = glob.glob(file)
-            for file in files:
-                using(file)
+    with open(file,'r',encoding='utf-8') as f:
+        script = f.read()
+        exec(script,globals())
 
-using('../ga/*')
-using('../work/model/setParamConst.py')
-using('../work/model/setVarEnum.py')
-using('../work/model/initialValues.py')
-using('../work/model/diffeq.py')
-using('../work/model/expData.py')
-using('../work/model/getFitness.py')
-using('../work/model/setSearchParam.py')
+using('../Model/setParamConst.py')
+using('../Model/setVarEnum.py')
+using('../Model/initialValues.py')
+using('../Model/diffeq.py')
+using('../Model/expData.py')
+using('../Model/setSearchParam.py')
+using('../solver.py')
 
-(x,y0) = bestParam()
+SearchParamIdx = setSearchParamIdx()
+
+x = setParamConst()
+y0 = initialValues()
+
+#getBestParam
+try:
+    generation = np.load('../FitParam/generation.npy')
+    X0 = np.load('../FitParam/FitParam%d.npy'%(int(generation)))
+
+    for i in range(len(SearchParamIdx[0])):
+        x[SearchParamIdx[0][i]] = X0[i]
+    for i in range(len(SearchParamIdx[1])):
+        y0[SearchParamIdx[1][i]] = X0[i+len(SearchParamIdx[0])]
+
+except:
+    pass
+
 #constraints
 x[V6] = x[V5]
 x[Km6] = x[Km5]

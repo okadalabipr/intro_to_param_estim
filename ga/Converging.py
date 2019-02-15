@@ -1,4 +1,4 @@
-def Converging(ip,population,n_population,n_gene,SearchRegion):
+def Converging(ip,population,n_population,n_gene,SearchParamIdx,SearchRegion):
     Nc = 10
     children = np.empty((Nc,n_gene+1))
 
@@ -17,7 +17,7 @@ def Converging(ip,population,n_population,n_gene,SearchRegion):
     population[ip[1],:] = family[np.random.randint(low=1,high=Nc+2,dtype=np.int),:]#Random
 
     if np.isinf(population[ip[1],-1]):
-        population[ip[1],-1] = getFitness(population[ip[1],:n_gene],SearchRegion)
+        population[ip[1],-1] = getFitness(population[ip[1],:n_gene],SearchParamIdx,SearchRegion)
 
     population = population[np.argsort(population[:,-1]),:]
 

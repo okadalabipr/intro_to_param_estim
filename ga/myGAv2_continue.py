@@ -1,4 +1,4 @@
-def myGAv2_continue(n_generation,n_population,n_children,n_gene,allowable_error,SearchRegion,p0_bounds):
+def myGAv2_continue(n_generation,n_population,n_children,n_gene,allowable_error,SearchParamIdx,SearchRegion,p0_bounds):
 
     N_iter = 1
     N0 = np.zeros(2*n_population)
@@ -6,9 +6,9 @@ def myGAv2_continue(n_generation,n_population,n_children,n_gene,allowable_error,
     count = np.load('../FitParam/count.npy')
     generation = np.load('../FitParam/generation.npy')
     X0 = np.load('../FitParam/FitParam%d.npy'%(int(generation)))
-    BestFitness = getFitness((np.log10(X0) - SearchRegion[0,:])/(SearchRegion[1,:] - SearchRegion[0,:]),SearchRegion)
+    BestFitness = getFitness((np.log10(X0) - SearchRegion[0,:])/(SearchRegion[1,:] - SearchRegion[0,:]),SearchParamIdx,SearchRegion)
 
-    population = getInitialPopulation_continue(n_population,n_gene,SearchRegion,p0_bounds)
+    population = getInitialPopulation_continue(n_population,n_gene,SearchParamIdx,SearchRegion,p0_bounds)
 
     if BestFitness < population[0,-1]:
         population[0,:n_gene] = (np.log10(X0) - SearchRegion[0,:])/(SearchRegion[1,:] - SearchRegion[0,:])
@@ -31,11 +31,11 @@ def myGAv2_continue(n_generation,n_population,n_children,n_gene,allowable_error,
 
     for i in range(1,n_generation):
         ip = np.random.choice(n_population,n_gene+2,replace=False)# m=n+2
-        ip, population = Converging(ip,population,n_population,n_gene,SearchRegion)
-        ip, population = LocalSearch(ip,population,n_population,n_children,n_gene,SearchRegion)
+        ip, population = Converging(ip,population,n_population,n_gene,SearchParamIdx,SearchRegion)
+        ip, population = LocalSearch(ip,population,n_population,n_children,n_gene,SearchParamIdx,SearchRegion)
         for j in range(N_iter-1):
             ip = np.random.choice(n_population,n_gene+2,replace=False)
-            ip,population = Converging(ip,population,n_population,n_gene,SearchRegion)
+            ip,population = Converging(ip,population,n_population,n_gene,SearchParamIdx,SearchRegion)
         if i%len(N0) == 0:
             N0 = np.zeros(len(N0))
         else:

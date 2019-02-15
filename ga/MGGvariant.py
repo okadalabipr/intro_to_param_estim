@@ -1,4 +1,4 @@
-def MGGvariant(population,n_population,n_children,n_gene,SearchRegion):#Minimal Generation Gap selection for UNDX
+def MGGvariant(population,n_population,n_children,n_gene,SearchParamIdx,SearchRegion):#Minimal Generation Gap selection for UNDX
     ip = [0]*3
     ip[:2] = np.random.choice(n_population,2,replace=False)
     idx = [True]*n_population
@@ -9,7 +9,7 @@ def MGGvariant(population,n_population,n_children,n_gene,SearchRegion):#Minimal 
 
     for i in range(n_children):
         ip[2] = np.random.choice(np.arange(n_population)[idx])
-        children[i,:] = getNewChild(population[ip,:],n_gene,SearchRegion)
+        children[i,:] = getNewChild(population[ip,:],n_gene,SearchParamIdx,SearchRegion)
 
     family = np.empty((n_children+2,n_gene+1))
 
@@ -27,7 +27,7 @@ def MGGvariant(population,n_population,n_children,n_gene,SearchRegion):#Minimal 
 
     return population
 
-def getNewChild(parents,n_gene,SearchRegion):
+def getNewChild(parents,n_gene,SearchParamIdx,SearchRegion):
     maxitr = np.iinfo(np.int8).max
 
     flg = True
@@ -40,7 +40,7 @@ def getNewChild(parents,n_gene,SearchRegion):
     if flg == True:
         child[:n_gene] = np.clip(child[:n_gene],0.,1.)
 
-    child[-1] = getFitness(child[:n_gene],SearchRegion)
+    child[-1] = getFitness(child[:n_gene],SearchParamIdx,SearchRegion)
 
     return child
 

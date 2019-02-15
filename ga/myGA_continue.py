@@ -1,10 +1,10 @@
-def myGA_continue(n_generation,n_population,n_children,n_gene,allowable_error,SearchRegion,p0_bounds):
+def myGA_continue(n_generation,n_population,n_children,n_gene,allowable_error,SearchParamIdx,SearchRegion,p0_bounds):
     count = np.load('../FitParam/count.npy')
     generation = np.load('../FitParam/generation.npy')
     X0 = np.load('../FitParam/FitParam%d.npy'%(int(generation)))
-    BestFitness = getFitness((np.log10(X0) - SearchRegion[0,:])/(SearchRegion[1,:] - SearchRegion[0,:]),SearchRegion)
+    BestFitness = getFitness((np.log10(X0) - SearchRegion[0,:])/(SearchRegion[1,:] - SearchRegion[0,:]),SearchParamIdx,SearchRegion)
 
-    population = getInitialPopulation_continue(n_population,n_gene,SearchRegion,p0_bounds)
+    population = getInitialPopulation_continue(n_population,n_gene,SearchParamIdx,SearchRegion,p0_bounds)
 
     if BestFitness < population[0,-1]:
         population[0,:n_gene] = (np.log10(X0) - SearchRegion[0,:])/(SearchRegion[1,:] - SearchRegion[0,:])
@@ -24,7 +24,7 @@ def myGA_continue(n_generation,n_population,n_children,n_gene,allowable_error,Se
         pass
 
     for i in range(1,n_generation):
-        population = MGGvariant(population,n_population,n_children,n_gene,SearchRegion)
+        population = MGGvariant(population,n_population,n_children,n_gene,SearchParamIdx,SearchRegion)
         print('Generation%d: Best Fitness = %e'%(i+int(count)+1,population[0,-1]))
         X0 = decodeGene2Variable(population[0,:n_gene],SearchRegion)
 

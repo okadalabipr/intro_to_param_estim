@@ -1,9 +1,9 @@
-def myGAv2(n_generation,n_population,n_children,n_gene,allowable_error,SearchRegion):
+def myGAv2(n_generation,n_population,n_children,n_gene,allowable_error,SearchParamIdx,SearchRegion):
 
     N_iter = 1
     N0 = np.zeros(2*n_population)
 
-    population = getInitialPopulation(n_population,n_gene,SearchRegion)
+    population = getInitialPopulation(n_population,n_gene,SearchParamIdx,SearchRegion)
     N0[0] = population[0,-1]
     print('Generation%d: Best Fitness = %e'%(1,population[0,-1]))
     X0 = decodeGene2Variable(population[0,:n_gene],SearchRegion)
@@ -21,11 +21,11 @@ def myGAv2(n_generation,n_population,n_children,n_gene,allowable_error,SearchReg
 
     for i in range(1,n_generation):
         ip = np.random.choice(n_population,n_gene+2,replace=False)# m=n+2
-        ip, population = Converging(ip,population,n_population,n_gene,SearchRegion)
-        ip, population = LocalSearch(ip,population,n_population,n_children,n_gene,SearchRegion)
+        ip, population = Converging(ip,population,n_population,n_gene,SearchParamIdx,SearchRegion)
+        ip, population = LocalSearch(ip,population,n_population,n_children,n_gene,SearchParamIdx,SearchRegion)
         for j in range(N_iter-1):
             ip = np.random.choice(n_population,n_gene+2,replace=False)
-            ip,population = Converging(ip,population,n_population,n_gene,SearchRegion)
+            ip,population = Converging(ip,population,n_population,n_gene,SearchParamIdx,SearchRegion)
         if i%len(N0) == 0:
             N0 = np.zeros(len(N0))
         else:

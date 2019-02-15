@@ -1,6 +1,6 @@
-def myGA(n_generation,n_population,n_children,n_gene,allowable_error,SearchRegion):
+def myGA(n_generation,n_population,n_children,n_gene,allowable_error,SearchParamIdx,SearchRegion):
 
-    population = getInitialPopulation(n_population,n_gene,SearchRegion)
+    population = getInitialPopulation(n_population,n_gene,SearchParamIdx,SearchRegion)
     print('Generation%d: Best Fitness = %e'%(1,population[0,-1]))
     X0 = decodeGene2Variable(population[0,:n_gene],SearchRegion)
 
@@ -17,7 +17,7 @@ def myGA(n_generation,n_population,n_children,n_gene,allowable_error,SearchRegio
         pass
 
     for i in range(1,n_generation):
-        population = MGGvariant(population,n_population,n_children,n_gene,SearchRegion)
+        population = MGGvariant(population,n_population,n_children,n_gene,SearchParamIdx,SearchRegion)
         print('Generation%d: Best Fitness = %e'%(i+1,population[0,-1]))
         X0 = decodeGene2Variable(population[0,:n_gene],SearchRegion)
 

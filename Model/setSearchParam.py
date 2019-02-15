@@ -189,6 +189,7 @@ def setSearchRegion():
     SearchRegion[:,nF31] = [1.00,4.00]
     SearchRegion[:,a] = [1.00e+2,5.00e+2]
 
-    SearchRegion = lin2log(SearchRegion,len(x),len(SearchParam))
+    SearchParamIdx = setSearchParamIdx()
+    SearchRegion = lin2log(SearchParamIdx,SearchRegion,len(x),len(SearchParam))
 
     return SearchRegion
