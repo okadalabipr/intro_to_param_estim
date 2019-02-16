@@ -1,3 +1,6 @@
+def decodeGene2Variable(Individual_gene,SearchRegion):
+    return 10.**(Individual_gene*(SearchRegion[1,:] - SearchRegion[0,:]) + SearchRegion[0,:])
+
 def updateParam(Individual_gene,SearchParamIdx,SearchRegion):
 
     x = setParamConst()
