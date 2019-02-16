@@ -1,4 +1,4 @@
-def runGA_continue():
+def paramestim_continue():
 
     SearchRegion = setSearchRegion()
     SearchParamIdx = setSearchParamIdx()
