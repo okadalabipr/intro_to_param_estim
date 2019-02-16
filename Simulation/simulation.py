@@ -20,7 +20,7 @@ using('../Model/initialValues.py')
 using('../Model/diffeq.py')
 using('../Model/expData.py')
 using('../Model/setSearchParam.py')
-using('../solver.py')
+using('../Model/solver.py')
 
 SearchParamIdx = setSearchParamIdx()
 

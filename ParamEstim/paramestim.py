@@ -32,7 +32,7 @@ using('../Model/diffeq.py')
 using('../Model/expData.py')
 using('../Model/fitness.py')
 using('../Model/setSearchParam.py')
-using('../solver.py')
+using('../Model/solver.py')
 
 
 def paramestim():
