@@ -47,7 +47,3 @@ def paramestim():
     allowable_error = 0.0
 
     (X0,BestFitness) = myGAv2(n_generation,n_population,n_children,n_gene,allowable_error,SearchParamIdx,SearchRegion)
-
-
-if __name__ == '__main__':
-	paramestim()

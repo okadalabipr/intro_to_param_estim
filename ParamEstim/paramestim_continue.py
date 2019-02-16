@@ -11,7 +11,3 @@ def runGA_continue():
     p0_bounds = [0.1, 10.0] # [lower_bounds, upper bounds]
 
     (X0,BestFitness) = myGAv2_continue(n_generation,n_population,n_children,n_gene,allowable_error,SearchParamIdx,SearchRegion,p0_bounds)
-
-
-if __name__ == '__main__':
-	runGA_continue()
