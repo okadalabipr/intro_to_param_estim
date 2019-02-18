@@ -1,4 +1,4 @@
-def MGGvariant(population,n_population,n_children,n_gene,SearchParamIdx,SearchRegion):#Minimal Generation Gap selection for UNDX
+def MGGvariant(population,n_population,n_children,n_gene,SearchParamIdx,SearchRegion): # Minimal Generation Gap selection for UNDX
     ip = [0]*3
     ip[:2] = np.random.choice(n_population,2,replace=False)
     idx = [True]*n_population
@@ -19,9 +19,9 @@ def MGGvariant(population,n_population,n_children,n_gene,SearchParamIdx,SearchRe
 
     family = family[np.argsort(family[:,-1]),:]
 
-    population[ip[0],:] = family[0,:]#Elite
+    population[ip[0],:] = family[0,:] # Elite
     ic1 = RankSelection(n_children+2)
-    population[ip[1],:] = family[ic1,:]#Rank-based Roulette Selection
+    population[ip[1],:] = family[ic1,:] # Rank-based Roulette Selection
 
     population = population[np.argsort(population[:,-1]),:]
 
@@ -44,7 +44,7 @@ def getNewChild(parents,n_gene,SearchParamIdx,SearchRegion):
 
     return child
 
-def UNDX(parents,n_gene):#Unimodal Normal Distribution Crossover
+def UNDX(parents,n_gene): # Unimodal Normal Distribution Crossover
     child = np.empty(n_gene+1)
     alpha = 0.5
     beta = 0.35/(n_gene**0.5)

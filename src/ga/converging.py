@@ -13,8 +13,8 @@ def Converging(ip,population,n_population,n_gene,SearchParamIdx,SearchRegion):
 
     family = family[np.argsort(family[:,-1]),:]
 
-    population[ip[0],:] = family[0,:]#Best, either of parents
-    population[ip[1],:] = family[np.random.randint(low=1,high=Nc+2,dtype=np.int),:]#Random
+    population[ip[0],:] = family[0,:] # Best, either of parents
+    population[ip[1],:] = family[np.random.randint(low=1,high=Nc+2,dtype=np.int),:] # Random
 
     if np.isinf(population[ip[1],-1]):
         population[ip[1],-1] = getFitness(population[ip[1],:n_gene],SearchParamIdx,SearchRegion)
@@ -39,7 +39,7 @@ def Crossover(parents,n_gene):
 
     return child
 
-def ENDX(parents,n_gene):#Extended Normal Distribution Crossover
+def ENDX(parents,n_gene): # Extended Normal Distribution Crossover
     alpha = (1.-2*0.35**2)**0.5/2.
     beta = 0.35/(n_gene-1)**0.5
 

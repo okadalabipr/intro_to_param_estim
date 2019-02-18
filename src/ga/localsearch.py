@@ -14,7 +14,7 @@ def LocalSearch(ip,population,n_population,n_children,n_gene,SearchParamIdx,Sear
     family[n_children,:] = population[ip[0],:]
     family = family[np.argsort(family[:,-1]),:]
 
-    population[ip[0],:] = family[0,:]#Elite
+    population[ip[0],:] = family[0,:] # Elite
 
     population = population[np.argsort(population[:,-1]),:]
 
@@ -37,7 +37,7 @@ def Mutation(parents,n_gene,SearchParamIdx,SearchRegion):
 
     return child
 
-def NDM(parents,n_gene):#Normal Distribution Mutation
+def NDM(parents,n_gene): # Normal Distribution Mutation
     gamma = 0.35/n_gene**0.5
 
     child = np.empty(n_gene+1)

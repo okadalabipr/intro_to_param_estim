@@ -1,6 +1,6 @@
 def getInitialPopulation_continue(n_population,n_gene,SearchParamIdx,SearchRegion,p0_bounds):
-    generation = np.load('../FitParam/generation.npy')
-    X0 = np.load('../FitParam/FitParam%d.npy'%(int(generation)))
+    generation = np.load('./FitParam/generation.npy')
+    X0 = np.load('./FitParam/FitParam%d.npy'%(int(generation)))
 
     population = np.inf*np.ones((n_population,n_gene+1))
 
@@ -18,9 +18,9 @@ def getInitialPopulation_continue(n_population,n_gene,SearchParamIdx,SearchRegio
     return population
 
 def myGA_continue(n_generation,n_population,n_children,n_gene,allowable_error,SearchParamIdx,SearchRegion,p0_bounds):
-    count = np.load('../FitParam/count.npy')
-    generation = np.load('../FitParam/generation.npy')
-    X0 = np.load('../FitParam/FitParam%d.npy'%(int(generation)))
+    count = np.load('./FitParam/count.npy')
+    generation = np.load('./FitParam/generation.npy')
+    X0 = np.load('./FitParam/FitParam%d.npy'%(int(generation)))
     BestFitness = getFitness((np.log10(X0) - SearchRegion[0,:])/(SearchRegion[1,:] - SearchRegion[0,:]),SearchParamIdx,SearchRegion)
 
     population = getInitialPopulation_continue(n_population,n_gene,SearchParamIdx,SearchRegion,p0_bounds)
@@ -31,7 +31,7 @@ def myGA_continue(n_generation,n_population,n_children,n_gene,allowable_error,Se
     else:
         X0 = decodeGene2Variable(population[0,:n_gene],SearchRegion)
         BestFitness = population[0,-1]
-        np.save('../FitParam/FitParam%d.npy'%(int(count)+1),X0)
+        np.save('./FitParam/FitParam%d.npy'%(int(count)+1),X0)
 
     print('Generation%d: Best Fitness = %e'%(int(count)+1,population[0,-1]))
 
@@ -48,8 +48,8 @@ def myGA_continue(n_generation,n_population,n_children,n_gene,allowable_error,Se
         X0 = decodeGene2Variable(population[0,:n_gene],SearchRegion)
 
         if population[0,-1] < BestFitness:
-            np.save('../FitParam/FitParam%d.npy'%(i+int(count)+1),X0)
-            np.save('../FitParam/generation.npy',i+int(count)+1)
+            np.save('./FitParam/FitParam%d.npy'%(i+int(count)+1),X0)
+            np.save('./FitParam/generation.npy',i+int(count)+1)
         BestFitness = population[0,-1]
 
         if population[0,-1] <= allowable_error:
@@ -59,7 +59,7 @@ def myGA_continue(n_generation,n_population,n_children,n_gene,allowable_error,Se
         else:
             pass
 
-        np.save('../FitParam/count.npy',i+int(count)+1)
+        np.save('./FitParam/count.npy',i+int(count)+1)
 
     X0 = decodeGene2Variable(population[0,:n_gene],SearchRegion)
 
@@ -72,9 +72,9 @@ def myGAv2_continue(n_generation,n_population,n_children,n_gene,allowable_error,
     N_iter = 1
     N0 = np.zeros(2*n_population)
 
-    count = np.load('../FitParam/count.npy')
-    generation = np.load('../FitParam/generation.npy')
-    X0 = np.load('../FitParam/FitParam%d.npy'%(int(generation)))
+    count = np.load('./FitParam/count.npy')
+    generation = np.load('./FitParam/generation.npy')
+    X0 = np.load('./FitParam/FitParam%d.npy'%(int(generation)))
     BestFitness = getFitness((np.log10(X0) - SearchRegion[0,:])/(SearchRegion[1,:] - SearchRegion[0,:]),SearchParamIdx,SearchRegion)
 
     population = getInitialPopulation_continue(n_population,n_gene,SearchParamIdx,SearchRegion,p0_bounds)
@@ -85,7 +85,7 @@ def myGAv2_continue(n_generation,n_population,n_children,n_gene,allowable_error,
     else:
         X0 = decodeGene2Variable(population[0,:n_gene],SearchRegion)
         BestFitness = population[0,-1]
-        np.save('../FitParam/FitParam%d.npy'%(int(count)+1),X0)
+        np.save('./FitParam/FitParam%d.npy'%(int(count)+1),X0)
 
     N0[0] = population[0,-1]
 
@@ -99,7 +99,7 @@ def myGAv2_continue(n_generation,n_population,n_children,n_gene,allowable_error,
         pass
 
     for i in range(1,n_generation):
-        ip = np.random.choice(n_population,n_gene+2,replace=False)# m=n+2
+        ip = np.random.choice(n_population,n_gene+2,replace=False) # m=n+2
         ip, population = Converging(ip,population,n_population,n_gene,SearchParamIdx,SearchRegion)
         ip, population = LocalSearch(ip,population,n_population,n_children,n_gene,SearchParamIdx,SearchRegion)
         for j in range(N_iter-1):
@@ -122,8 +122,8 @@ def myGAv2_continue(n_generation,n_population,n_children,n_gene,allowable_error,
         X0 = decodeGene2Variable(population[0,:n_gene],SearchRegion)
 
         if population[0,-1] < BestFitness:
-            np.save('../FitParam/generation.npy',i+int(count)+1)
-            np.save('../FitParam/FitParam%d.npy'%(i+int(count)+1),X0)
+            np.save('./FitParam/generation.npy',i+int(count)+1)
+            np.save('./FitParam/FitParam%d.npy'%(i+int(count)+1),X0)
         BestFitness = population[0,-1]
 
         if population[0,-1] <= allowable_error:
@@ -133,7 +133,7 @@ def myGAv2_continue(n_generation,n_population,n_children,n_gene,allowable_error,
         else:
             pass
 
-        np.save('../FitParam/count.npy',i+int(count)+1)
+        np.save('./FitParam/count.npy',i+int(count)+1)
 
     X0 = decodeGene2Variable(population[0,:n_gene],SearchRegion)
 

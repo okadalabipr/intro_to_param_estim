@@ -4,23 +4,31 @@ import numpy as np
 import warnings
 warnings.filterwarnings('ignore')
 
-if not glob.glob('../Fig'):
-    os.mkdir('../Fig')
+if not glob.glob('./Fig'):
+    os.mkdir('./Fig')
 else:
     pass
 
 def using(file):
-    with open(file,'r',encoding='utf-8') as f:
-        script = f.read()
-        exec(script,globals())
+    os.chdir('../src')
+    if '.py' in file:
+        with open(file,'r',encoding='utf-8') as f:
+            script = f.read()
+            exec(script,globals())
+    else:
+        files = glob.glob(file)
+        for file in files:
+            using(file)
+    os.chdir('../work')
 
-using('../Model/setParamConst.py')
-using('../Model/setVarEnum.py')
-using('../Model/initialValues.py')
-using('../Model/diffeq.py')
-using('../Model/expData.py')
-using('../Model/setSearchParam.py')
-using('../Model/solver.py')
+using('model/set_constant.py')
+using('model/set_variable.py')
+using('model/differential_equation.py')
+using('model/initial_condition.py')
+using('model/experimental_data.py')
+using('lin2log.py')
+using('set_search_parameter.py')
+using('solver.py')
 
 SearchParamIdx = setSearchParamIdx()
 
@@ -29,8 +37,8 @@ y0 = initialValues()
 
 #getBestParam
 try:
-    generation = np.load('../FitParam/generation.npy')
-    X0 = np.load('../FitParam/FitParam%d.npy'%(int(generation)))
+    generation = np.load('./FitParam/generation.npy')
+    X0 = np.load('./FitParam/FitParam%d.npy'%(int(generation)))
 
     for i in range(len(SearchParamIdx[0])):
         x[SearchParamIdx[0][i]] = X0[i]
