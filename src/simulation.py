@@ -1,95 +1,61 @@
-import os
-import glob
-import numpy as np
-import warnings
-warnings.filterwarnings('ignore')
+from scipy.integrate import ode
 
-if not glob.glob('./Fig'):
-    os.mkdir('./Fig')
-else:
-    pass
+def odesolve(diffeq,y0,tspan,args):
+    sol = ode(diffeq)
+    sol.set_integrator('vode',method='bdf',min_step=1e-8,with_jacobian=True)
+    sol.set_initial_value(y0,tspan[0])
+    sol.set_f_params(args)
 
-def using(file):
-    os.chdir('../src')
-    if '.py' in file:
-        with open(file,'r',encoding='utf-8') as f:
-            script = f.read()
-            exec(script,globals())
-    else:
-        files = glob.glob(file)
-        for file in files:
-            using(file)
-    os.chdir('../work')
+    T = [tspan[0]]
+    Y = [y0]
 
-using('model/set_param_const.py')
-using('model/set_var_enum.py')
-using('model/differential_equation.py')
-using('model/initial_condition.py')
-using('experimental_data.py')
-using('linear2log.py')
-using('set_param_search.py')
-using('solver.py')
+    while sol.successful() and sol.t < tspan[-1]:
+        #sol.integrate(tspan[-1],step=True)
+        sol.integrate(sol.t+1.)
+        T.append(sol.t)
+        Y.append(sol.y)
 
-SearchParamIdx = setSearchParamIdx()
+    return np.array(T),np.array(Y)
 
-x = setParamConst()
-y0 = initialValues()
+class Simulation(object):
 
-#getBestParam
-try:
-    generation = np.load('./FitParam/generation.npy')
-    X0 = np.load('./FitParam/FitParam%d.npy'%(int(generation)))
+    tspan = range(5401)
+    condition = 2
 
-    for i in range(len(SearchParamIdx[0])):
-        x[SearchParamIdx[0][i]] = X0[i]
-    for i in range(len(SearchParamIdx[1])):
-        y0[SearchParamIdx[1][i]] = X0[i+len(SearchParamIdx[0])]
+    t = np.array(tspan)/60.
 
-except:
-    pass
+    PMEK_cyt  = np.empty((len(tspan),condition))
+    PERK_cyt  = np.empty((len(tspan),condition))
+    PRSK_wcl  = np.empty((len(tspan),condition))
+    PCREB_wcl = np.empty((len(tspan),condition))
+    DUSPmRNA  = np.empty((len(tspan),condition))
+    cFosmRNA  = np.empty((len(tspan),condition))
+    cFosPro   = np.empty((len(tspan),condition))
+    PcFos     = np.empty((len(tspan),condition))
 
-#constraints
-x[V6] = x[V5]
-x[Km6] = x[Km5]
-x[KimpDUSP] = x[KimDUSP]
-x[KexpDUSP] = x[KexDUSP]
-x[KimpcFOS] = x[KimFOS]
-x[KexpcFOS] = x[KexFOS]
-x[p52] = x[p47]
-x[m52] = x[m47]
-x[p53] = x[p48]
-x[p54] = x[p49]
-x[m54] = x[m49]
-x[p55] = x[p50]
-x[p56] = x[p51]
-x[m56] = x[m51]
+    def __init__(self,x,y0):
+        self.x = x
+        self.y0 = y0
 
-tspan = range(5401)
-t = np.array(tspan)/60.
-condition = 2
+    @classmethod
+    def runSimulation(cls,x,y0):
 
-PMEK_cyt  = np.empty((len(tspan),condition))
-PERK_cyt  = np.empty((len(tspan),condition))
-PRSK_wcl  = np.empty((len(tspan),condition))
-PCREB_wcl = np.empty((len(tspan),condition))
-DUSPmRNA  = np.empty((len(tspan),condition))
-cFosmRNA  = np.empty((len(tspan),condition))
-cFosPro   = np.empty((len(tspan),condition))
-PcFos     = np.empty((len(tspan),condition))
+        for i in range(cls.condition):
+            if i==0:
+                x[Ligand] = x[EGF]
+            elif i==1:
+                x[Ligand] = x[HRG]
 
-for i in range(condition):
-    if i==0:
-        x[Ligand] = x[EGF]
-    elif i==1:
-        x[Ligand] = x[HRG]
+            (T,Y) = odesolve(diffeq,y0,cls.tspan,tuple(x))
 
-    (T,Y) = odesolve(diffeq,y0,tspan,tuple(x))
-
-    PMEK_cyt[:,i] = Y[:,ppMEKc]
-    PERK_cyt[:,i] = Y[:,pERKc] + Y[:,ppERKc]
-    PRSK_wcl[:,i] = Y[:,pRSKc] + Y[:,pRSKn]*(x[Vn]/x[Vc])
-    PCREB_wcl[:,i] = Y[:,pCREBn]*(x[Vn]/x[Vc])
-    DUSPmRNA[:,i] = Y[:,duspmRNAc]
-    cFosmRNA[:,i] = Y[:,cfosmRNAc]
-    cFosPro[:,i] = (Y[:,pcFOSn] + Y[:,cFOSn])*(x[Vn]/x[Vc]) + Y[:,cFOSc] + Y[:,pcFOSc]
-    PcFos[:,i] = Y[:,pcFOSn]*(x[Vn]/x[Vc]) + Y[:,pcFOSc]
+            if T[-1] < cls.tspan[-1]:
+                return False
+            else:
+                cls.PMEK_cyt[:,i] = Y[:,ppMEKc]
+                cls.PERK_cyt[:,i] = Y[:,pERKc] + Y[:,ppERKc]
+                cls.PRSK_wcl[:,i] = Y[:,pRSKc] + Y[:,pRSKn]*(x[Vn]/x[Vc])
+                cls.PCREB_wcl[:,i] = Y[:,pCREBn]*(x[Vn]/x[Vc])
+                cls.DUSPmRNA[:,i] = Y[:,duspmRNAc]
+                cls.cFosmRNA[:,i] = Y[:,cfosmRNAc]
+                cls.cFosPro[:,i] = (Y[:,pcFOSn] + Y[:,cFOSn])*(x[Vn]/x[Vc]) + Y[:,cFOSc] + Y[:,pcFOSc]
+                cls.PcFos[:,i] = Y[:,pcFOSn]*(x[Vn]/x[Vc]) + Y[:,pcFOSc]
