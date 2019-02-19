@@ -1,5 +1,5 @@
 def initialValues():
-    y0 = [0]*len(variable)
+    y0 = [0]*len(PARAM_VAR)
 
     y0[ERKc] = 9.60e+02
     y0[RSKc] = 3.53e+02

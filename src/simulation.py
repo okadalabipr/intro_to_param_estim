@@ -21,13 +21,13 @@ def using(file):
             using(file)
     os.chdir('../work')
 
-using('model/set_constant.py')
-using('model/set_variable.py')
+using('model/set_param_const.py')
+using('model/set_var_enum.py')
 using('model/differential_equation.py')
 using('model/initial_condition.py')
-using('model/experimental_data.py')
-using('lin2log.py')
-using('set_search_parameter.py')
+using('experimental_data.py')
+using('linear2log.py')
+using('set_param_search.py')
 using('solver.py')
 
 SearchParamIdx = setSearchParamIdx()

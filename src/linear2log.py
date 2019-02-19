@@ -4,9 +4,9 @@ def lin2log(SearchParamIdx,SearchRegion,n_paramConst,n_SearchParam):
     if len(difference) > 0:
         for i in range(len(difference)):
             if difference[i] <= n_paramConst:
-                print('Set "%s" in both SearchConstIdx and SearchRegion'%(constant[difference[i]]))
+                print('Set "%s" in both SearchConstIdx and SearchRegion'%(PARAM_CONST[difference[i]]))
             else:
-                print('Set "%s" in both SearchInitIdx and SearchRegion'%(variable[difference[i]-n_paramConst]))
+                print('Set "%s" in both SearchInitIdx and SearchRegion'%(PARAM_VAR[difference[i]-n_paramConst]))
         sys.exit()
 
     SearchRegion = SearchRegion[:,np.any(SearchRegion != 0.,axis=0)]

@@ -1,4 +1,4 @@
-constant = [\
+PARAM_COSNT = [\
   'V1',
   'Km1',
   'V2',
@@ -116,12 +116,11 @@ constant = [\
   'HRG'\
 ]
 
-#name2idx(constant)
-for i,name in enumerate(constant):
-  exec('%s=%d'%(name,i))
+for i,name in enumerate(PARAM_COSNT):
+  exec('%s=%d'%(name,i),globals())
 
 def setParamConst():
-  x = [0]*len(constant)
+  x = [0]*len(PARAM_COSNT)
   x[V1] = 0.34284837
   x[Km1] = 307.0415253
   x[V2] = 2.20e-01

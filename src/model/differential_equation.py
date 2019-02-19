@@ -67,7 +67,7 @@ def diffeq(t,y,x):
     v[62] = x[KimF] * y[Fc] - x[KexF] * (x[Vn]/x[Vc]) * y[Fn]
     v[63] = x[p63] * y[Fn]
 
-    dydt = [0]*len(variable)
+    dydt = [0]*len(PARAM_VAR)
 
     if x[Ligand] == x[EGF]:#EGF=10nM
         if t < 300.:

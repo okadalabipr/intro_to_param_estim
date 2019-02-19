@@ -1,4 +1,4 @@
-variable = [\
+PARAM_VAR = [\
     'ppMEKc',
     'CREBn',
     'pCREBn',
@@ -37,6 +37,5 @@ variable = [\
     'PreFmRNAn'\
 ]
 
-#name2idx(variable)
-for i,name in enumerate(variable):
-  exec('%s=%d'%(name,i))
+for i,name in enumerate(PARAM_VAR):
+  exec('%s=%d'%(name,i),globals())
