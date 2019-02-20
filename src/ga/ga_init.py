@@ -49,7 +49,7 @@ def ga_v1(n_generation,n_population,n_children,n_gene,allowable_error,search_idx
         else:
             pass
 
-        np.save('./FitParam/count.npy',i+1)
+        np.save('./FitParam/count_num.npy',i+1)
 
     best_indiv = decode_gene2variable(population[0,:n_gene],search_region)
 
@@ -114,7 +114,7 @@ def ga_v2(n_generation,n_population,n_children,n_gene,allowable_error,search_idx
         else:
             pass
 
-        np.save('./FitParam/count.npy',i+1)
+        np.save('./FitParam/count_num.npy',i+1)
 
     best_indiv = decode_gene2variable(population[0,:n_gene],search_region)
 
