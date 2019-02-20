@@ -17,6 +17,7 @@ def odesolve(diffeq,y0,tspan,args):
 
     return np.array(T),np.array(Y)
 
+
 class Simulation(object):
 
     tspan = range(5401)
@@ -38,7 +39,7 @@ class Simulation(object):
         self.y0 = y0
 
     @classmethod
-    def runSimulation(cls,x,y0):
+    def run_simulation(cls,x,y0):
 
         for i in range(cls.condition):
             if i==0:

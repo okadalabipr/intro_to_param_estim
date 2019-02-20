@@ -1,16 +1,18 @@
-def decodeGene2Variable(Individual_gene,SearchRegion):
-    return 10.**(Individual_gene*(SearchRegion[1,:] - SearchRegion[0,:]) + SearchRegion[0,:])
+def decode_gene2variable(individual_gene,search_region):
 
-def updateParam(Individual_gene,SearchParamIdx,SearchRegion):
+    return 10.**(individual_gene*(search_region[1,:] - search_region[0,:]) + search_region[0,:])
 
-    x = setParamConst()
-    y0 = initialValues()
 
-    X = decodeGene2Variable(Individual_gene,SearchRegion)
+def update_param(individual_gene,search_idx,search_region):
 
-    for i in range(len(SearchParamIdx[0])):
-        x[SearchParamIdx[0][i]] = X[i]
-    for i in range(len(SearchParamIdx[1])):
-        y0[SearchParamIdx[1][i]] = X[i+len(SearchParamIdx[0])]
+    x = set_param_const()
+    y0 = set_initial_values()
+
+    X = decode_gene2variable(individual_gene,search_region)
+
+    for i in range(len(search_idx[0])):
+        x[search_idx[0][i]] = X[i]
+    for i in range(len(search_idx[1])):
+        y0[search_idx[1][i]] = X[i+len(search_idx[0])]
 
     return x, y0

@@ -1,4 +1,4 @@
-def LocalSearch(ip,population,n_population,n_children,n_gene,SearchParamIdx,SearchRegion):
+def local_search(ip,population,n_population,n_children,n_gene,search_idx,search_region):
     idx = [True]*n_population
     idx[ip[0]] = False
 
@@ -6,7 +6,7 @@ def LocalSearch(ip,population,n_population,n_children,n_gene,SearchParamIdx,Sear
 
     for i in range(n_children):
         ip[1:] = np.random.choice(np.arange(n_population)[idx],n_gene+1,replace=False)
-        children[i,:] = Mutation(population[ip,:],n_gene,SearchParamIdx,SearchRegion)
+        children[i,:] = mutation(population[ip,:],n_gene,search_idx,search_region)
 
     family = np.empty((n_children+1,n_gene+1))
 
@@ -20,12 +20,13 @@ def LocalSearch(ip,population,n_population,n_children,n_gene,SearchParamIdx,Sear
 
     return ip,population
 
-def Mutation(parents,n_gene,SearchParamIdx,SearchRegion):
-    maxitr = np.iinfo(np.int8).max
+
+def mutation(parents,n_gene,search_idx,search_region):
+    MAXITER = np.iinfo(np.int8).max
 
     flg = True
-    for i in range(maxitr):
-        child = NDM(parents,n_gene)
+    for i in range(MAXITER):
+        child = ndm(parents,n_gene)
         if 0. <= np.min(child[:n_gene]) and np.max(child[:n_gene]) <= 1.:
             flg = False
             break
@@ -33,16 +34,17 @@ def Mutation(parents,n_gene,SearchParamIdx,SearchRegion):
     if flg == True:
         child[:n_gene] = np.clip(child[:n_gene],0.,1.)
 
-    child[-1] = getFitness(child[:n_gene],SearchParamIdx,SearchRegion)
+    child[-1] = get_fitness(child[:n_gene],search_idx,search_region)
 
     return child
 
-def NDM(parents,n_gene): # Normal Distribution Mutation
-    gamma = 0.35/n_gene**0.5
+
+def ndm(parents,n_gene): # Normal Distribution mutation
+    GAMMA = 0.35/n_gene**0.5
 
     child = np.empty(n_gene+1)
 
-    t2 = np.sum(np.random.normal(scale=gamma,size=n_gene+1)[:,None]*(parents[1:,:n_gene]-(np.sum(parents[1:,:n_gene],axis=0)/(n_gene+1))),axis=0)
+    t2 = np.sum(np.random.normal(scale=GAMMA,size=n_gene+1)[:,None]*(parents[1:,:n_gene]-(np.sum(parents[1:,:n_gene],axis=0)/(n_gene+1))),axis=0)
 
     child[:n_gene] = parents[0,:n_gene] + t2
 

@@ -1,14 +1,18 @@
 from scipy.spatial.distance import cosine
 
-def compute_objval_abs(simData,expData):#Residual Sum of Squares
-    return np.dot((simData-expData),(simData-expData))
+def compute_objval_abs(sim_data,ex_data):  # Residual Sum of Squares
 
-def compute_objval_cs(simData,expData):#Cosine similarity
-    return cosine(simData,expData)
+    return np.dot((sim_data-ex_data),(sim_data-ex_data))
 
-def getFitness(Individual_gene,SearchParamIdx,SearchRegion):
 
-    (x,y0) = updateParam(Individual_gene,SearchParamIdx,SearchRegion)
+def compute_objval_cs(sim_data,ex_data):  # Cosine similarity
+
+    return cosine(sim_data,ex_data)
+
+
+def get_fitness(individual_gene,search_idx,search_region):
+
+    (x,y0) = update_param(individual_gene,search_idx,search_region)
     #constraints
     x[V6] = x[V5]
     x[Km6] = x[Km5]
@@ -28,7 +32,7 @@ def getFitness(Individual_gene,SearchParamIdx,SearchRegion):
     ex = ExperimentalData()
     sim = Simulation(x,y0)
 
-    if sim.runSimulation(x,y0) == False:
+    if sim.run_simulation(x,y0) == False:
       return np.inf
     else:
       fit=np.zeros(7)

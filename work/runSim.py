@@ -22,29 +22,29 @@ def using(file):
             using(file)
     os.chdir('../work')
 
-using('model/set_param_const.py')
-using('model/set_var_enum.py')
+using('model/param_const.py')
+using('model/param_var.py')
 using('model/differential_equation.py')
 using('model/initial_condition.py')
 using('experimental_data.py')
 using('linear2log.py')
-using('set_param_search.py')
+using('param_search.py')
 using('simulation.py')
 
-SearchParamIdx = setSearchParamIdx()
+search_idx = set_search_idx()
 
-x = setParamConst()
-y0 = initialValues()
+x = set_param_const()
+y0 = set_initial_values()
 
 #getBestParam
 try:
     generation = np.load('./FitParam/generation.npy')
-    X0 = np.load('./FitParam/FitParam%d.npy'%(int(generation)))
+    best_indiv = np.load('./FitParam/FitParam%d.npy'%(int(generation)))
 
-    for i in range(len(SearchParamIdx[0])):
-        x[SearchParamIdx[0][i]] = X0[i]
-    for i in range(len(SearchParamIdx[1])):
-        y0[SearchParamIdx[1][i]] = X0[i+len(SearchParamIdx[0])]
+    for i in range(len(search_idx[0])):
+        x[search_idx[0][i]] = best_indiv[i]
+    for i in range(len(search_idx[1])):
+        y0[search_idx[1][i]] = best_indiv[i+len(search_idx[0])]
 
 except:
     pass
@@ -52,13 +52,13 @@ except:
 ex = ExperimentalData()
 sim = Simulation(x,y0)
 
-if sim.runSimulation(x,y0) == False:
+if sim.run_simulation(x,y0) == False:
     print('Simulation failed.')
 else:
     pass
 
 ''' for Spyder
-%run -i plotFunc.py
+%run -i plot_func.py
 plt.savefig('./Fig/simResult.png',bbox_inches='tight')
 plt.show()
 '''

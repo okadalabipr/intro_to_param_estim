@@ -1,4 +1,4 @@
-def MGGvariant(population,n_population,n_children,n_gene,SearchParamIdx,SearchRegion): # Minimal Generation Gap selection for UNDX
+def mgg_variant(population,n_population,n_children,n_gene,search_idx,search_region):  # Minimal Generation Gap selection for undx
     ip = [0]*3
     ip[:2] = np.random.choice(n_population,2,replace=False)
     idx = [True]*n_population
@@ -9,7 +9,7 @@ def MGGvariant(population,n_population,n_children,n_gene,SearchParamIdx,SearchRe
 
     for i in range(n_children):
         ip[2] = np.random.choice(np.arange(n_population)[idx])
-        children[i,:] = getNewChild(population[ip,:],n_gene,SearchParamIdx,SearchRegion)
+        children[i,:] = get_new_child(population[ip,:],n_gene,search_idx,search_region)
 
     family = np.empty((n_children+2,n_gene+1))
 
@@ -20,19 +20,20 @@ def MGGvariant(population,n_population,n_children,n_gene,SearchParamIdx,SearchRe
     family = family[np.argsort(family[:,-1]),:]
 
     population[ip[0],:] = family[0,:] # Elite
-    ic1 = RankSelection(n_children+2)
+    ic1 = rank_selection(n_children+2)
     population[ip[1],:] = family[ic1,:] # Rank-based Roulette Selection
 
     population = population[np.argsort(population[:,-1]),:]
 
     return population
 
-def getNewChild(parents,n_gene,SearchParamIdx,SearchRegion):
-    maxitr = np.iinfo(np.int8).max
+
+def get_new_child(parents,n_gene,search_idx,search_region):
+    MAXITER = np.iinfo(np.int8).max
 
     flg = True
-    for i in range(maxitr):
-        child = UNDX(parents,n_gene)
+    for i in range(MAXITER):
+        child = undx(parents,n_gene)
         if 0. <= np.min(child[:n_gene]) and np.max(child[:n_gene]) <= 1.:
             flg = False
             break
@@ -40,14 +41,16 @@ def getNewChild(parents,n_gene,SearchParamIdx,SearchRegion):
     if flg == True:
         child[:n_gene] = np.clip(child[:n_gene],0.,1.)
 
-    child[-1] = getFitness(child[:n_gene],SearchParamIdx,SearchRegion)
+    child[-1] = get_fitness(child[:n_gene],search_idx,search_region)
 
     return child
 
-def UNDX(parents,n_gene): # Unimodal Normal Distribution Crossover
+
+def undx(parents,n_gene): # Unimodal Normal Distribution Crossover
     child = np.empty(n_gene+1)
-    alpha = 0.5
-    beta = 0.35/(n_gene**0.5)
+
+    ALPHA = 0.5
+    BETA = 0.35/(n_gene**0.5)
 
     p1 = parents[0,:n_gene]
     p2 = parents[1,:n_gene]
@@ -56,16 +59,17 @@ def UNDX(parents,n_gene): # Unimodal Normal Distribution Crossover
     d2 = np.linalg.norm((p3-p1) - (np.dot((p3-p1),(p2-p1))/(d1**2))*(p2-p1))
     e1 = p1/d1
 
-    t = np.random.normal(scale=beta,size=n_gene)*d2
+    t = np.random.normal(scale=BETA,size=n_gene)*d2
     t = t - np.dot(t,e1)*e1
-    t = t + np.random.normal(scale=alpha)*d1*e1
+    t = t + np.random.normal(scale=ALPHA)*d1*e1
 
 
     child[:n_gene] = t + (parents[0,:n_gene]+parents[1,:n_gene])/2.
 
     return child
 
-def RankSelection(n_family):
+
+def rank_selection(n_family):
     ranking = np.repeat(np.arange(1,n_family),np.arange(1,n_family)[-1::-1])
     np.random.shuffle(ranking)
     idx = np.random.randint(len(ranking))

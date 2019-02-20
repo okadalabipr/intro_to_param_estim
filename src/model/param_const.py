@@ -119,8 +119,10 @@ PARAM_COSNT = [\
 for i,name in enumerate(PARAM_COSNT):
   exec('%s=%d'%(name,i),globals())
 
-def setParamConst():
+def set_param_const():
+
   x = [0]*len(PARAM_COSNT)
+
   x[V1] = 0.34284837
   x[Km1] = 307.0415253
   x[V2] = 2.20e-01
@@ -236,24 +238,5 @@ def setParamConst():
 
   x[EGF]= 0
   x[HRG]= 1
-
-  return x
-
-def setConstraints(x):
-  #constraints
-  x[V6] = x[V5]
-  x[Km6] = x[Km5]
-  x[KimpDUSP] = x[KimDUSP]
-  x[KexpDUSP] = x[KexDUSP]
-  x[KimpcFOS] = x[KimFOS]
-  x[KexpcFOS] = x[KexFOS]
-  x[p52] = x[p47]
-  x[m52] = x[m47]
-  x[p53] = x[p48]
-  x[p54] = x[p49]
-  x[m54] = x[m49]
-  x[p55] = x[p50]
-  x[p56] = x[p51]
-  x[m56] = x[m51]
 
   return x

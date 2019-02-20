@@ -1,33 +1,34 @@
-def Converging(ip,population,n_population,n_gene,SearchParamIdx,SearchRegion):
-    Nc = 10
-    children = np.empty((Nc,n_gene+1))
+def converging(ip,population,n_population,n_gene,search_idx,search_region):
+    NC = 10
+    children = np.empty((NC,n_gene+1))
 
-    for i in range(Nc):
+    for i in range(NC):
         ip[2:] = np.random.choice(n_population,n_gene,replace=False)
-        children[i,:] = Crossover(population[ip,:],n_gene)
+        children[i,:] = xover(population[ip,:],n_gene)
 
-    family = np.empty((Nc+2,n_gene+1))
-    family[:Nc,:] = children
-    family[Nc,:] = population[ip[0],:]
-    family[Nc+1,:] = population[ip[1],:]
+    family = np.empty((NC+2,n_gene+1))
+    family[:NC,:] = children
+    family[NC,:] = population[ip[0],:]
+    family[NC+1,:] = population[ip[1],:]
 
     family = family[np.argsort(family[:,-1]),:]
 
     population[ip[0],:] = family[0,:] # Best, either of parents
-    population[ip[1],:] = family[np.random.randint(low=1,high=Nc+2,dtype=np.int),:] # Random
+    population[ip[1],:] = family[np.random.randint(low=1,high=NC+2,dtype=np.int),:] # Random
 
     if np.isinf(population[ip[1],-1]):
-        population[ip[1],-1] = getFitness(population[ip[1],:n_gene],SearchParamIdx,SearchRegion)
+        population[ip[1],-1] = get_fitness(population[ip[1],:n_gene],search_idx,search_region)
 
     population = population[np.argsort(population[:,-1]),:]
 
     return ip, population
 
-def Crossover(parents,n_gene):
-    maxitr = np.iinfo(np.int8).max
+
+def xover(parents,n_gene):
+    MAXITER = np.iinfo(np.int8).max
     flg = True
-    for i in range(maxitr):
-        child = ENDX(parents,n_gene)
+    for i in range(MAXITER):
+        child = endx(parents,n_gene)
         if 0. <= np.min(child[:n_gene]) and np.max(child[:n_gene]) <= 1.:
             flg = False
             break
@@ -39,15 +40,16 @@ def Crossover(parents,n_gene):
 
     return child
 
-def ENDX(parents,n_gene): # Extended Normal Distribution Crossover
-    alpha = (1.-2*0.35**2)**0.5/2.
-    beta = 0.35/(n_gene-1)**0.5
+
+def endx(parents,n_gene):  # Extended Normal Distribution crossover
+    ALPHA = (1.-2*0.35**2)**0.5/2.
+    BETA = 0.35/(n_gene-1)**0.5
 
     child = np.empty(n_gene+1)
 
     t1 = (parents[1,:n_gene]-parents[0,:n_gene])/2.
-    t2 = np.random.normal(scale=alpha)*(parents[1,:n_gene]-parents[0,:n_gene])
-    t3 = np.sum(np.random.normal(scale=beta,size=n_gene)[:,None]*(parents[2:,:n_gene]-(np.sum(parents[2:,:n_gene],axis=0)/n_gene)),axis=0)
+    t2 = np.random.normal(scale=ALPHA)*(parents[1,:n_gene]-parents[0,:n_gene])
+    t3 = np.sum(np.random.normal(scale=BETA,size=n_gene)[:,None]*(parents[2:,:n_gene]-(np.sum(parents[2:,:n_gene],axis=0)/n_gene)),axis=0)
 
     child[:n_gene] = t1 + t2 + t3
 

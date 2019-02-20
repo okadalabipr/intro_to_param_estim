@@ -1,4 +1,4 @@
-def initialValues():
+def set_initial_values():
     y0 = [0]*len(PARAM_VAR)
 
     y0[ERKc] = 9.60e+02

@@ -1,4 +1,4 @@
-class ExperimentalData:
+class ExperimentalData(object):
 
   t2   = np.array([0, 300, 600, 900, 1800, 2700, 3600, 5400])
 
