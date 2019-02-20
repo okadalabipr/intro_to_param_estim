@@ -1,6 +1,6 @@
 class ExperimentalData(object):
 
-  t2   = np.array([0, 300, 600, 900, 1800, 2700, 3600, 5400])
+  t2 = np.array([0, 300, 600, 900, 1800, 2700, 3600, 5400])
 
   egf_MEKc_av = np.array([0.000,0.773,0.439,0.252,0.130,0.087,0.080,0.066])
   egf_MEKc_se = np.array([0.000,0.030,0.048,0.009,0.009,0.017,0.012,0.008])/np.sqrt(3)
@@ -22,7 +22,7 @@ class ExperimentalData(object):
   hrg_PcFos_av = np.array([0,0.145,0.177,0.158,0.598,1.000,0.852,0.431])
   hrg_PcFos_se = np.array([0,0.010,0.013,0.001,0.014,0.000,0.077,0.047])/np.sqrt(3)
 
-  t3   = np.array([0, 600, 1800, 3600, 5400])
+  t3 = np.array([0, 600, 1800, 3600, 5400])
 
   egf_CREBw_av = np.array([0,0.446,0.030,0.000,0.000])
   egf_CREBw_se = np.array([0,0.0,0.0,0.0,0.0])/np.sqrt(3)

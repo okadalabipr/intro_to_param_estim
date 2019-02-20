@@ -52,10 +52,10 @@ except:
 ex = ExperimentalData()
 sim = Simulation(x,y0)
 
-if sim.run_simulation(x,y0) == False:
-    print('Simulation failed.')
-else:
+if sim.run_simulation(x,y0) is None:
     pass
+else:
+    print('Simulation failed.')
 
 ''' for Spyder
 %run -i plot_func.py

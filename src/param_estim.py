@@ -9,7 +9,7 @@ def parameter_estimation():
     n_gene = search_region.shape[1]
     allowable_error = 0.0
 
-    (X0,BestFitness) = ga_v2(n_generation,n_population,n_children,n_gene,allowable_error,search_idx,search_region)
+    (best_indiv,best_fitness) = ga_v2(n_generation,n_population,n_children,n_gene,allowable_error,search_idx,search_region)
 
 
 def parameter_estimation_continue():
@@ -24,4 +24,4 @@ def parameter_estimation_continue():
     allowable_error = 0.0
     p0_bounds = [0.1, 10.0] # [lower_bounds, upper bounds]
 
-    (X0,BestFitness) = ga_v2_continue(n_generation,n_population,n_children,n_gene,allowable_error,search_idx,search_region,p0_bounds)
+    (best_indiv,best_fitness) = ga_v2_continue(n_generation,n_population,n_children,n_gene,allowable_error,search_idx,search_region,p0_bounds)
