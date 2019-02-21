@@ -2,8 +2,6 @@
 import os
 import glob
 import numpy as np
-import warnings
-warnings.filterwarnings('ignore')
 
 if not glob.glob('./Fig'):
     os.mkdir('./Fig')
