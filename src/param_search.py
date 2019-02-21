@@ -87,7 +87,7 @@ def set_search_idx():
 
 def set_search_region():
     x = set_param_const()
-    y0 = set_initial_values()
+    y0 = set_initial_condition()
 
     (search_idx_const,search_idx_init) = set_search_idx()
 

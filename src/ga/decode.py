@@ -6,7 +6,7 @@ def decode_gene2variable(individual_gene,search_region):
 def update_param(individual_gene,search_idx,search_region):
 
     x = set_param_const()
-    y0 = set_initial_values()
+    y0 = set_initial_condition()
 
     X = decode_gene2variable(individual_gene,search_region)
 

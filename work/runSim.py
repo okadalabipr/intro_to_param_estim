@@ -34,7 +34,7 @@ using('simulation.py')
 search_idx = set_search_idx()
 
 x = set_param_const()
-y0 = set_initial_values()
+y0 = set_initial_condition()
 
 #getBestParam
 try:

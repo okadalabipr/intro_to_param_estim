@@ -119,7 +119,7 @@ PARAM_CONST = [\
 for i,name in enumerate(PARAM_CONST):
   exec('%s=%d'%(name,i),globals())
 
-def set_param_const():
+def set_f_param_const():
 
   x = [0]*len(PARAM_CONST)
 
