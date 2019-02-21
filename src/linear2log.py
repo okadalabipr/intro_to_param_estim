@@ -1,12 +1,12 @@
 def lin2log(search_idx,search_region,n_param_const,n_search_param):
 
-    difference = list(set(np.where(np.any(search_region != 0.,axis=0) == True)[0]) ^ set(np.append(search_idx[0],n_param_const+search_idx[1])))
+    difference = list(set(np.where(np.any(search_region != 0.,axis=0))[0]) ^ set(np.append(search_idx[0],n_param_const+search_idx[1])))
     if len(difference) > 0:
         for i in range(len(difference)):
             if difference[i] <= n_param_const:
-                print('Set "%s" in both SearchConstIdx and search_region'%(PARAM_CONST[difference[i]]))
+                print('Set "%s" in both search_idx_const and search_region'%(PARAM_CONST[int(difference[i])]))
             else:
-                print('Set "%s" in both SearchInitIdx and search_region'%(PARAM_VAR[difference[i]-n_param_const]))
+                print('Set "%s" in both search_idx_init and search_region'%(PARAM_VAR[int(difference[i]-n_param_const)]))
         sys.exit()
 
     search_region = search_region[:,np.any(search_region != 0.,axis=0)]
