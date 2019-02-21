@@ -1,13 +1,13 @@
 from scipy.spatial.distance import cosine
 
-def compute_objval_abs(sim_data,ex_data):  # Residual Sum of Squares
+def compute_objval_abs(sim_data,exp_data):  # Residual Sum of Squares
 
-    return np.dot((sim_data-ex_data),(sim_data-ex_data))
+    return np.dot((sim_data-exp_data),(sim_data-exp_data))
 
 
-def compute_objval_cs(sim_data,ex_data):  # Cosine similarity
+def compute_objval_cs(sim_data,exp_data):  # Cosine similarity
 
-    return cosine(sim_data,ex_data)
+    return cosine(sim_data,exp_data)
 
 
 def get_fitness(individual_gene,search_idx,search_region):
@@ -29,7 +29,7 @@ def get_fitness(individual_gene,search_idx,search_region):
     x[p56] = x[p51]
     x[m56] = x[m51]
 
-    ex = ExperimentalData()
+    exp = ExperimentalData()
     sim = Simulation(x,y0)
 
     if sim.run_simulation(x,y0) is None:
@@ -37,26 +37,28 @@ def get_fitness(individual_gene,search_idx,search_region):
 
       # ERK
       norm_max = np.max(sim.PERK_cyt)
-      fit[0] = compute_objval_abs(np.append(sim.PERK_cyt[ex.t2,0],sim.PERK_cyt[ex.t2,1])/norm_max,np.append(ex.egf_ERKc_av,ex.hrg_ERKc_av))
+      fit[0] = compute_objval_abs(np.append(sim.PERK_cyt[exp.t2,0],sim.PERK_cyt[exp.t2,1])/norm_max,np.append(exp.egf_ERKc_av,exp.hrg_ERKc_av))
       # RSK
       norm_max = np.max(sim.PRSK_wcl)
-      fit[1] = compute_objval_abs(np.append(sim.PRSK_wcl[ex.t2,0],sim.PRSK_wcl[ex.t2,1])/norm_max,np.append(ex.egf_RSKw_av,ex.hrg_RSKw_av))
+      fit[1] = compute_objval_abs(np.append(sim.PRSK_wcl[exp.t2,0],sim.PRSK_wcl[exp.t2,1])/norm_max,np.append(exp.egf_RSKw_av,exp.hrg_RSKw_av))
       # CREB
       norm_max = np.max(sim.PCREB_wcl)
-      fit[2] = compute_objval_abs(np.append(sim.PCREB_wcl[ex.t3,0],sim.PCREB_wcl[ex.t3,1])/norm_max,np.append(ex.egf_CREBw_av,ex.hrg_CREBw_av))
+      fit[2] = compute_objval_abs(np.append(sim.PCREB_wcl[exp.t3,0],sim.PCREB_wcl[exp.t3,1])/norm_max,np.append(exp.egf_CREBw_av,exp.hrg_CREBw_av))
       # DUSPmRNA
       norm_max = np.max(sim.DUSPmRNA)
-      fit[3] = compute_objval_abs(np.append(sim.DUSPmRNA[ex.t5,0],sim.DUSPmRNA[ex.t5,1])/norm_max,np.append(ex.egf_DUSPmRNA_av,ex.hrg_DUSPmRNA_av))
+      fit[3] = compute_objval_abs(np.append(sim.DUSPmRNA[exp.t5,0],sim.DUSPmRNA[exp.t5,1])/norm_max,np.append(exp.egf_DUSPmRNA_av,exp.hrg_DUSPmRNA_av))
       # cFosmRNA
       norm_max = np.max(sim.cFosmRNA)
-      fit[4] = compute_objval_abs(np.append(sim.cFosmRNA[ex.t4,0],sim.cFosmRNA[ex.t4,1])/norm_max,np.append(ex.egf_cFosmRNA_av,ex.hrg_cFosmRNA_av))
+      fit[4] = compute_objval_abs(np.append(sim.cFosmRNA[exp.t4,0],sim.cFosmRNA[exp.t4,1])/norm_max,np.append(exp.egf_cFosmRNA_av,exp.hrg_cFosmRNA_av))
       # cFosPro
       norm_max = np.max(sim.cFosPro)
-      fit[5] = compute_objval_abs(np.append(sim.cFosPro[ex.t5,0],sim.cFosPro[ex.t5,1])/norm_max,np.append(ex.egf_cFosPro_av,ex.hrg_cFosPro_av))
+      fit[5] = compute_objval_abs(np.append(sim.cFosPro[exp.t5,0],sim.cFosPro[exp.t5,1])/norm_max,np.append(exp.egf_cFosPro_av,exp.hrg_cFosPro_av))
       # PcFos
       norm_max = np.max(sim.PcFos)
-      fit[6] = compute_objval_abs(np.append(sim.PcFos[ex.t2,0],sim.PcFos[ex.t2,1])/norm_max,np.append(ex.egf_PcFos_av,ex.hrg_PcFos_av))
+      fit[6] = compute_objval_abs(np.append(sim.PcFos[exp.t2,0],sim.PcFos[exp.t2,1])/norm_max,np.append(exp.egf_PcFos_av,exp.hrg_PcFos_av))
 
       return np.sum(fit)
+
     else:
+
       return np.inf

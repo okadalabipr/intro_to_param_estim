@@ -15,6 +15,7 @@ try:
 except:
     os.mkdir('./FitParam')
 
+
 def using(file):
     os.chdir('../src')
     if '.py' in file:
@@ -27,6 +28,7 @@ def using(file):
             using(file)
     os.chdir('../work')
 
+
 using('ga/*')
 using('model/param_const.py')
 using('model/param_var.py')
@@ -38,3 +40,5 @@ using('param_search.py')
 using('fitness.py')
 using('simulation.py')
 using('estimation.py')
+
+parameter_estimation()

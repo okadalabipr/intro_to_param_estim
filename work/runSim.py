@@ -10,6 +10,7 @@ if not glob.glob('./Fig'):
 else:
     pass
 
+
 def using(file):
     os.chdir('../src')
     if '.py' in file:
@@ -21,6 +22,7 @@ def using(file):
         for file in files:
             using(file)
     os.chdir('../work')
+
 
 using('model/param_const.py')
 using('model/param_var.py')
@@ -49,7 +51,7 @@ try:
 except:
     pass
 
-ex = ExperimentalData()
+exp = ExperimentalData()
 sim = Simulation(x,y0)
 
 if sim.run_simulation(x,y0) is None:
