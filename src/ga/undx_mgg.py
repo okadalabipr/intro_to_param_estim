@@ -31,14 +31,14 @@ def mgg_variant(population,n_population,n_children,n_gene,search_idx,search_regi
 def get_new_child(parents,n_gene,search_idx,search_region):
     MAXITER = np.iinfo(np.int8).max
 
-    flg = True
+    in_range = False
     for i in range(MAXITER):
         child = undx(parents,n_gene)
         if 0. <= np.min(child[:n_gene]) and np.max(child[:n_gene]) <= 1.:
-            flg = False
+            in_range = True
             break
 
-    if flg == True:
+    if not in_range:
         child[:n_gene] = np.clip(child[:n_gene],0.,1.)
 
     child[-1] = get_fitness(child[:n_gene],search_idx,search_region)
