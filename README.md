@@ -10,7 +10,7 @@
 ga_v2 optimizes an objective function through the following procedure.
 
 1. **Initialization**<br>
-As an initial population, create *n*<sub>*p*</sub> individuals randomly. ga_v2 also represents individuals as n-dimensional real number vectors, where n is the dimension of the search space. To these individuals, ga_v2 tentatively assigns a single objective value which is worse than those of any of the possible candidate solutions. Set Generation to 0, and set the iteration number of converging operations *N<sub>iter</sub>* to 1.
+As an initial population, create *n*<sub>*p*</sub> individuals randomly. ga_v2 also represents individuals as *n*-dimensional real number vectors, where *n* is the dimension of the search space. To these individuals, ga_v2 tentatively assigns a single objective value which is worse than those of any of the possible candidate solutions. Set Generation to 0, and set the iteration number of converging operations *N<sub>iter</sub>* to 1.
 
 1. **Selection for reproduction**<br>
 As parents for the recombination operator, ENDX, select *m* individuals, **p**<sub>1</sub>, **p**<sub>2</sub>, · · · ,**p**<sub>*m*</sub>, without replacement from the population.
@@ -33,7 +33,7 @@ To achieve a good search performance, ga_v2 optimizes a function, gradually narr
     1. Select two individuals from a family containing the two parents, i.e., **p**<sub>1</sub> and **p**<sub>2</sub>, and their children. The first selected individual should be the one with the best objective value, and the second should be selected randomly. Then, replace the two parents with the selected individuals.
 
 1. **Adaptation of *N<sub>iter</sub>***<br>
-If the best individual has not improved during the last *n*<sub>*p*</sub> generations, *N<sub>iter</sub>* ← 2 × *N<sub>iter</sub>* . Otherwise, set *Niter* to 1.
+If the best individual has not improved during the last *n*<sub>*p*</sub> generations, *N<sub>iter</sub>* ← 2 × *N<sub>iter</sub>*. Otherwise, set *Niter* to 1.
 
 1. **Termination**<br>
 Stop if the halting criteria are satisfied. Otherwise, *Generation* ← *Generation* +1, and return to the step 2.
