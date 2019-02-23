@@ -38,10 +38,6 @@ If the best individual has not improved during the last *n*<sub>*p*</sub> genera
 1. **Termination**<br>
 Stop if the halting criteria are satisfied. Otherwise, *Generation* ← *Generation* +1, and return to the step 2.
 
-## Model
-
-- [Nakakuki, T. et al. Ligand-specific c-Fos expression emerges from the spatiotemporal control of ErbB network dynamics. Cell 141, 884–896 (2010).](https://www.cell.com/cell/fulltext/S0092-8674(10)00373-9)
-
 ## Requirement
 
 - [Anaconda3](https://www.anaconda.com/)
@@ -49,3 +45,14 @@ Stop if the halting criteria are satisfied. Otherwise, *Generation* ← *Generat
 ## Installation
 
     $ git clone https://github.com/u360665a/ODEParamEstim
+
+## References
+- Nakakuki, T. et al. Ligand-specific c-Fos expression emerges from the spatiotemporal control of ErbB network dynamics. Cell 141, 884–896 (2010).
+- Ono, I., Satoh, H. & Kobayashi, S. A Real Coded Genetic Algorithm for Function Optimization Using Unimodal Normal Distributed Crossover. Proc. Seventh Int. Conf. Genet. Algorithms ICGA97 14, 1146–1155 (1997).
+- Sato, H., Ono, I. & Kobayashi, S. A New Generation Alternation Model of Genetic Algorithms and Its Assessment. J. Japanese Soc. Artif. Intell. 12, 734–744 (1997).
+- Kimura, S., Ono, I., Kita, H. & Kobayashi, S. An extension of UNDX based on guidelines for designing crossover operators: proposition and evaluation of ENDX. Trans. Soc. Instrum. Control Eng. 36, 1162–1171 (2000).
+- Kimura, S. & Konagaya, A. A Genetic Algorithm with Distance Independent Diversity Control for High Dimensional Function Optimization. J. Japanese Soc. Artif. Intell. 18, 193–202 (2003).
+- Kimura, S., Nakakuki, T., Kirita, S. & Okada, M. AGLSDC: A Genetic Local Search Suitable for Parallel Computation. SICE J. Control. Meas. Syst. Integr. 4, 105–113 (2012).
+
+## License
+MIT
