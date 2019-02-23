@@ -48,7 +48,7 @@ Stop if the halting criteria are satisfied. Otherwise, *Generation* ← *Generat
 
 ## References
 - Nakakuki, T. et al. Ligand-specific c-Fos expression emerges from the spatiotemporal control of ErbB network dynamics. Cell 141, 884–896 (2010).
-- Ono, I., Satoh, H. & Kobayashi, S. A Real Coded Genetic Algorithm for Function Optimization Using Unimodal Normal Distributed Crossover. Proc. Seventh Int. Conf. Genet. Algorithms ICGA97 14, 1146–1155 (1997).
+- Ono, I., Satoh, H. & Kobayashi, S. A robust real-coded genetic algorithm using unimodal normal distribution crossover augmented by uniform crossover: effects of self-adaptation of crossover probabilities. in Proceedings of the 1st Annual Conference on Genetic and Evolutionary Computation 1, 496–503 (1999).
 - Sato, H., Ono, I. & Kobayashi, S. A New Generation Alternation Model of Genetic Algorithms and Its Assessment. J. Japanese Soc. Artif. Intell. 12, 734–744 (1997).
 - Kimura, S., Ono, I., Kita, H. & Kobayashi, S. An extension of UNDX based on guidelines for designing crossover operators: proposition and evaluation of ENDX. Trans. Soc. Instrum. Control Eng. 36, 1162–1171 (2000).
 - Kimura, S. & Konagaya, A. A Genetic Algorithm with Distance Independent Diversity Control for High Dimensional Function Optimization. J. Japanese Soc. Artif. Intell. 18, 193–202 (2003).
