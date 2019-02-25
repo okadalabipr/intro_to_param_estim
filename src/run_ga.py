@@ -1,4 +1,3 @@
-#%%
 import os
 import sys
 import time
@@ -14,10 +13,10 @@ try:
             os.remove('./FitParam/%s'%(file))
 except:
     os.mkdir('./FitParam')
-
+finally:
+    os.chdir('../src')
 
 def using(file):
-    os.chdir('../src')
     if '.py' in file:
         with open(file,'r',encoding='utf-8') as f:
             script = f.read()
@@ -26,19 +25,18 @@ def using(file):
         files = glob.glob(file)
         for file in files:
             using(file)
-    os.chdir('../work')
 
 
 using('ga/*')
-using('model/param_const.py')
-using('model/param_var.py')
+using('model/f_parameter.py')
+using('model/f_variable.py')
 using('model/differential_equation.py')
 using('model/initial_condition.py')
 using('experimental_data.py')
 using('linear2log.py')
-using('param_search.py')
+using('search_parameter.py')
 using('fitness.py')
 using('simulation.py')
 using('estimation.py')
 
-parameter_estimation()
+os.chdir('../work')

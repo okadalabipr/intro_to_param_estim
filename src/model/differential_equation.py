@@ -1,7 +1,7 @@
-#Refined Model
+# Refined Model
 def diffeq(t,y,x):
 
-    v = [0]*64 #Rate equations
+    v = [0]*64  # Rate equations
 
     v[1] = x[V1] * x[a] * y[ppMEKc] * y[ERKc] /  ( x[Km1] * (1 + y[pERKc] / x[Km2]) + y[ERKc] )
     v[2] = x[V2] * x[a] * y[ppMEKc] * y[pERKc] /  ( x[Km2] * (1 + y[ERKc] / x[Km1]) + y[pERKc] )
@@ -67,7 +67,7 @@ def diffeq(t,y,x):
     v[62] = x[KimF] * y[Fc] - x[KexF] * (x[Vn]/x[Vc]) * y[Fn]
     v[63] = x[p63] * y[Fn]
 
-    dydt = [0]*len(PARAM_VAR)
+    dydt = [0]*len(F_V)
 
     if x[Ligand] == x[EGF]:#EGF=10nM
         if t < 300.:

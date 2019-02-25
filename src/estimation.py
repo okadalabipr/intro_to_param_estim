@@ -1,7 +1,7 @@
 def parameter_estimation():
 
-    search_region = set_search_region()
-    search_idx = set_search_idx()
+    search_idx = search_parameter_index()
+    search_region = get_search_region()
 
     n_generation = np.iinfo(np.int16).max
     n_population = int(3*search_region.shape[1])
@@ -15,8 +15,8 @@ def parameter_estimation():
 
 def parameter_estimation_continue():
 
-    search_region = set_search_region()
-    search_idx = set_search_idx()
+    search_idx = search_parameter_index()
+    search_region = get_search_region()
 
     n_generation = int(10*np.iinfo(np.int16).max)
     n_population = int(3*search_region.shape[1])

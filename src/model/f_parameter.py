@@ -1,4 +1,4 @@
-PARAM_CONST = [\
+F_P = [\
   'V1',
   'Km1',
   'V2',
@@ -116,12 +116,12 @@ PARAM_CONST = [\
   'HRG'\
 ]
 
-for i,name in enumerate(PARAM_CONST):
+for i,name in enumerate(F_P):
   exec('%s=%d'%(name,i),globals())
 
-def set_param_const():
+def f_params():
 
-  x = [0]*len(PARAM_CONST)
+  x = [0]*len(F_P)
 
   x[V1] = 0.34284837
   x[Km1] = 307.0415253

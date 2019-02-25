@@ -1,4 +1,4 @@
-def set_search_idx():
+def search_parameter_index():
 
     # Write param index for optimization
     search_idx_const = np.array([\
@@ -85,17 +85,17 @@ def set_search_idx():
     return search_idx_const, search_idx_init
 
 
-def set_search_region():
-    x = set_param_const()
-    y0 = set_initial_condition()
+def get_search_region():
+    x = f_params()
+    y0 = initial_values()
 
-    (search_idx_const,search_idx_init) = set_search_idx()
+    search_idx = search_parameter_index()
 
-    search_param = np.empty(len(search_idx_const)+len(search_idx_init))
-    for i in range(len(search_idx_const)):
-        search_param[i] = x[search_idx_const[i]]
-    for i in range(len(search_idx_init)):
-        search_param[i+len(search_idx_const)] = y0[search_idx_init[i]]
+    search_param = np.empty(len(search_idx[0])+len(search_idx[1]))
+    for i in range(len(search_idx[0])):
+        search_param[i] = x[search_idx[0][i]]
+    for i in range(len(search_idx[1])):
+        search_param[i+len(search_idx[0])] = y0[search_idx[1][i]]
 
     if np.any(search_param == 0.):
         print('Error: search_param must not contain zero.')
@@ -104,12 +104,12 @@ def set_search_region():
     search_region = np.zeros((2,len(x)+len(y0)))
     '''
     # Default: 0.1 ~ 10
-    for i in range(len(search_idx_const)):
-        search_region[0,search_idx_const[i]] = search_param[i]*0.1 # lower bound
-        search_region[1,search_idx_const[i]] = search_param[i]*10. # upper bound
-    for i in range(len(search_idx_init)):
-        search_region[0,search_idx_init[i]+len(x)] = search_param[i+len(search_idx_const)]*0.1 # lower bound
-        search_region[1,search_idx_init[i]+len(x)] = search_param[i+len(search_idx_const)]*10. # upper bound
+    for i in range(len(search_idx[0])):
+        search_region[0,search_idx[0][i]] = search_param[i]*0.1 # lower bound
+        search_region[1,search_idx[0][i]] = search_param[i]*10. # upper bound
+    for i in range(len(search_idx[1])):
+        search_region[0,search_idx[1][i]+len(x)] = search_param[i+len(search_idx[0])]*0.1 # lower bound
+        search_region[1,search_idx[1][i]+len(x)] = search_param[i+len(search_idx[0])]*10. # upper bound
     '''
 
     # search_region[:,param_name] = [lower_bound,upper_bound]
@@ -190,7 +190,6 @@ def set_search_region():
     search_region[:,nF31] = [1.00,4.00]
     search_region[:,a] = [1.00e+2,5.00e+2]
 
-    search_idx = set_search_idx()
     search_region = lin2log(search_idx,search_region,len(x),len(search_param))
 
     return search_region
