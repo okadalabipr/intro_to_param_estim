@@ -2,12 +2,10 @@ import os
 import glob
 import numpy as np
 
-try:
-    os.listdir('./Fig')
-except:
+if not glob.glob('./Fig'):
     os.mkdir('./Fig')
-finally:
-    os.chdir('../src')
+
+os.chdir('../src')
 
 def using(file):
     if '.py' in file:
