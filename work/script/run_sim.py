@@ -26,13 +26,12 @@ using('linear2log.py')
 using('search_parameter.py')
 using('simulation.py')
 
-
 search_idx = search_parameter_index()
 
 x = f_params()
 y0 = initial_values()
 
-#getBestParam
+# getBestParam
 try:
     generation = np.load('./FitParam/generation.npy')
     best_indiv = np.load('./FitParam/FitParam%d.npy'%(int(generation)))

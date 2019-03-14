@@ -6,6 +6,7 @@ import numpy as np
 import warnings
 warnings.filterwarnings('ignore')
 
+
 def using(src_file):
     if '.py' in src_file:
         with open('../src/'+src_file,'r',encoding='utf-8') as f:
@@ -15,6 +16,7 @@ def using(src_file):
         files = glob.glob('../src/'+src_file)
         for file in files:
             using(file[len('../src/'):])
+
 
 using('ga/*')
 using('model/f_parameter.py')

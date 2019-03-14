@@ -6,13 +6,6 @@ import numpy as np
 import warnings
 warnings.filterwarnings('ignore')
 
-try:
-    files = os.listdir('./FitParam/')
-    for file in files:
-        if '.npy' in file:
-            os.remove('./FitParam/%s'%(file))
-except:
-    os.mkdir('./FitParam')
 
 def using(src_file):
     if '.py' in src_file:
@@ -23,6 +16,7 @@ def using(src_file):
         files = glob.glob('../src/'+src_file)
         for file in files:
             using(file[len('../src/'):])
+            
 
 using('ga/*')
 using('model/f_parameter.py')
@@ -35,5 +29,13 @@ using('search_parameter.py')
 using('fitness.py')
 using('simulation.py')
 using('estimation.py')
+
+try:
+    files = os.listdir('./FitParam/')
+    for file in files:
+        if '.npy' in file:
+            os.remove('./FitParam/%s'%(file))
+except:
+    os.mkdir('./FitParam')
 
 parameter_estimation()
