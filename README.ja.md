@@ -13,7 +13,7 @@
 
 0. [Anaconda3](https://www.anaconda.com/)をダウンロードする．
 1. **Parameter search**
-    - Jupyter Notebookでwork/runGA_jupyter.ipynbを開き，一番上の`%run -i script/run_ga.py`で始まるセルを実行する．更新された最良のパラメータセットはFitParamフォルダに格納される．設定した世代数の上限に達する or 許容誤差を下回るまで計算は実行される．一度中断した最適化計算を再開する場合は，その下の`parameter_estimation_continue()`と書かれたセルを実行する．
+    - Jupyter Notebookでwork/runGA_jupyter.ipynbを開き，一番上の`%run -i script/run_ga1.py`と書かれたセルを実行する．更新された最良のパラメータセットはFitParamフォルダに格納される．設定した世代数の上限に達する or 許容誤差を下回るまで計算は実行される．一度中断した最適化計算を再開する場合は，その下の`%run -i script/run_ga2.py`と書かれたセルを実行する．
 2. **Plot simulation results**
     - Jupyter Notebookでwork/runSim_jupyter.ipynbを開き，一番上のセルを実行するとその時点での最良のパラメータセットでのシミュレーション結果を表示する．
 
