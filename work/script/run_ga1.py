@@ -8,14 +8,15 @@ warnings.filterwarnings('ignore')
 
 
 def using(src_file):
+    src_dir = '../src/'
     if '.py' in src_file:
-        with open('../src/'+src_file,'r',encoding='utf-8') as f:
+        with open(src_dir+src_file,'r',encoding='utf-8') as f:
             script = f.read()
             exec(script,globals())
     else:
-        files = glob.glob('../src/'+src_file)
+        files = glob.glob(src_dir+src_file)
         for file in files:
-            using(file[len('../src/'):])
+            using(file[len(src_dir):])
             
 
 using('ga/*')
