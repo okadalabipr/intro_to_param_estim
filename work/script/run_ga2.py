@@ -28,7 +28,6 @@ using('experimental_data.py')
 using('search_parameter.py')
 using('fitness.py')
 using('simulation.py')
-using('estimation.py')
 
 if not glob.glob('./FitParam'):
     os.mkdir('./FitParam')
