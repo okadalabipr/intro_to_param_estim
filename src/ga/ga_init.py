@@ -1,17 +1,16 @@
-def get_initial_population(n_population,n_gene,search_idx,search_region):
-    population = np.inf*np.ones((n_population,n_gene+1))
+def parameter_estimation():
 
-    print('initpop')
-    for i in range(n_population):
-        while np.isinf(population[i,-1]) or np.isnan(population[i,-1]):
-            population[i,:n_gene] = np.random.rand(n_gene)
-            population[i,-1] = get_fitness(population[i,:n_gene],search_idx,search_region)
-        sys.stdout.write('\r%d/%d'%(i+1,n_population))
-    sys.stdout.write('\n')
+    search_idx = search_parameter_index()
+    search_region = get_search_region()
 
-    population = population[np.argsort(population[:,-1]),:]
+    n_generation = np.iinfo(np.int16).max
+    n_population = int(5*search_region.shape[1])
+    n_children = 50
+    n_gene = search_region.shape[1]
+    allowable_error = 0.0
 
-    return population
+    (best_indiv,best_fitness) = ga_v2(
+        n_generation,n_population,n_children,n_gene,allowable_error,search_idx,search_region)
 
 
 def ga_v1(n_generation,n_population,n_children,n_gene,allowable_error,search_idx,search_region):
@@ -121,3 +120,19 @@ def ga_v2(n_generation,n_population,n_children,n_gene,allowable_error,search_idx
     best_fitness = population[0,-1]
 
     return best_indiv,best_fitness
+
+
+def get_initial_population(n_population,n_gene,search_idx,search_region):
+    population = np.inf*np.ones((n_population,n_gene+1))
+
+    print('initpop')
+    for i in range(n_population):
+        while np.isinf(population[i,-1]) or np.isnan(population[i,-1]):
+            population[i,:n_gene] = np.random.rand(n_gene)
+            population[i,-1] = get_fitness(population[i,:n_gene],search_idx,search_region)
+        sys.stdout.write('\r%d/%d'%(i+1,n_population))
+    sys.stdout.write('\n')
+
+    population = population[np.argsort(population[:,-1]),:]
+
+    return population

@@ -1,21 +1,17 @@
-def get_initial_population_continue(n_population,n_gene,search_idx,search_region,p0_bounds):
-    generation = np.load('./FitParam/generation.npy')
-    best_indiv = np.load('./FitParam/FitParam%d.npy'%(int(generation)))
+def parameter_estimation_continue():
 
-    population = np.inf*np.ones((n_population,n_gene+1))
+    search_idx = search_parameter_index()
+    search_region = get_search_region()
 
-    print('initpop')
-    for i in range(n_population):
-        while np.isinf(population[i,-1]) or np.isnan(population[i,-1]):
-            population[i,:n_gene] = (np.log10(best_indiv*10**(np.random.rand(len(best_indiv))*np.log10(p0_bounds[1]/p0_bounds[0])+np.log10(p0_bounds[0]))) - search_region[0,:])/(search_region[1,:] - search_region[0,:])
-            population[i,:n_gene] = np.clip(population[i,:n_gene],0.,1.)
-            population[i,-1] = get_fitness(population[i,:n_gene],search_idx,search_region)
-        sys.stdout.write('\r%d/%d'%(i+1,n_population))
-    sys.stdout.write('\n')
+    n_generation = int(10*np.iinfo(np.int16).max)
+    n_population = int(5*search_region.shape[1])
+    n_children = 50
+    n_gene = search_region.shape[1]
+    allowable_error = 0.0
+    p0_bounds = [0.1,10.0]  # [lower_bounds, upper bounds]
 
-    population = population[np.argsort(population[:,-1]),:]
-
-    return population
+    (best_indiv,best_fitness) = ga_v2_continue(
+        n_generation,n_population,n_children,n_gene,allowable_error,search_idx,search_region,p0_bounds)
 
 
 def ga_v1_continue(n_generation,n_population,n_children,n_gene,allowable_error,search_idx,search_region,p0_bounds):
@@ -142,3 +138,23 @@ def ga_v2_continue(n_generation,n_population,n_children,n_gene,allowable_error,s
     best_fitness = population[0,-1]
 
     return best_indiv,best_fitness
+
+
+    def get_initial_population_continue(n_population,n_gene,search_idx,search_region,p0_bounds):
+        generation = np.load('./FitParam/generation.npy')
+        best_indiv = np.load('./FitParam/FitParam%d.npy'%(int(generation)))
+
+        population = np.inf*np.ones((n_population,n_gene+1))
+
+        print('initpop')
+        for i in range(n_population):
+            while np.isinf(population[i,-1]) or np.isnan(population[i,-1]):
+                population[i,:n_gene] = (np.log10(best_indiv*10**(np.random.rand(len(best_indiv))*np.log10(p0_bounds[1]/p0_bounds[0])+np.log10(p0_bounds[0]))) - search_region[0,:])/(search_region[1,:] - search_region[0,:])
+                population[i,:n_gene] = np.clip(population[i,:n_gene],0.,1.)
+                population[i,-1] = get_fitness(population[i,:n_gene],search_idx,search_region)
+            sys.stdout.write('\r%d/%d'%(i+1,n_population))
+        sys.stdout.write('\n')
+
+        population = population[np.argsort(population[:,-1]),:]
+
+        return population
