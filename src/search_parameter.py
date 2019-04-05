@@ -102,7 +102,7 @@ def get_search_region():
         sys.exit()
 
     search_region = np.zeros((2,len(x)+len(y0)))
-    '''
+    
     # Default: 0.1 ~ 10
     for i in range(len(search_idx[0])):
         search_region[0,search_idx[0][i]] = search_param[i]*0.1 # lower bound
@@ -110,8 +110,13 @@ def get_search_region():
     for i in range(len(search_idx[1])):
         search_region[0,search_idx[1][i]+len(x)] = search_param[i+len(search_idx[0])]*0.1 # lower bound
         search_region[1,search_idx[1][i]+len(x)] = search_param[i+len(search_idx[0])]*10. # upper bound
-    '''
+    
+    search_region[:,n10] = [1.00,4.00]
+    search_region[:,n31] = [1.00,4.00]
+    search_region[:,n57] = [1.00,4.00]
+    search_region[:,nF31] = [1.00,4.00]
 
+    '''
     # search_region[:,param_name] = [lower_bound,upper_bound]
 
     search_region[:,V1] = [7.33e-2,6.60e-01]
@@ -189,7 +194,7 @@ def get_search_region():
     search_region[:,KF31] = [np.exp(-10),np.exp(10)]
     search_region[:,nF31] = [1.00,4.00]
     search_region[:,a] = [1.00e+2,5.00e+2]
-
+    '''
     search_region = lin2log(search_idx,search_region,len(x),len(search_param))
 
     return search_region

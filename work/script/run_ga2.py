@@ -2,13 +2,14 @@ import os
 import sys
 import time
 import glob
+import re
 import numpy as np
 import warnings
 warnings.filterwarnings('ignore')
 
 
 def using(src_file):
-    src_dir = '../src/'
+    src_dir = '../../src/'
     if '.py' in src_file:
         with open(src_dir+src_file,'r',encoding='utf-8') as f:
             script = f.read()
@@ -29,8 +30,10 @@ using('search_parameter.py')
 using('fitness.py')
 using('simulation.py')
 
-if not glob.glob('./FitParam'):
-    os.mkdir('./FitParam')
-    parameter_estimation()
+n_fitparam = int(re.sub(r'\D','',current_ipynb))
+
+if not os.path.isdir('../FitParam/%d'%(n_fitparam)):
+    os.mkdir('../FitParam/%d'%(n_fitparam))
+    parameter_estimation(n_fitparam)
 else:
-    parameter_estimation_continue()
+    parameter_estimation_continue(n_fitparam)

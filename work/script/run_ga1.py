@@ -2,13 +2,15 @@ import os
 import sys
 import time
 import glob
+import shutil
+import re
 import numpy as np
 import warnings
 warnings.filterwarnings('ignore')
 
 
 def using(src_file):
-    src_dir = '../src/'
+    src_dir = '../../src/'
     if '.py' in src_file:
         with open(src_dir+src_file,'r',encoding='utf-8') as f:
             script = f.read()
@@ -17,7 +19,7 @@ def using(src_file):
         files = glob.glob(src_dir+src_file)
         for file in files:
             using(file[len(src_dir):])
-            
+
 
 using('ga/*')
 using('model/f_parameter.py')
@@ -29,12 +31,31 @@ using('search_parameter.py')
 using('fitness.py')
 using('simulation.py')
 
+n_fitparam = int(re.sub(r'\D','',current_ipynb))
+
 try:
-    files = os.listdir('./FitParam/')
+    if n_fitparam == 1:
+        n_file = 0
+        jupyter_files = os.listdir('.')
+        for file in jupyter_files:
+            base,ext = os.path.splitext(file)
+            if ext == '.ipynb':
+                n_file += 1
+        if n_file > 1:
+            for i in range(1,n_file):
+                if os.path.isfile('./runGA_%d.ipynb'%(i+1)):
+                    os.remove('./runGA_%d.ipynb'%(i+1))
+
+                if os.path.isdir('../FitParam/%d'%(i+1)):
+                    shutil.rmtree('../FitParam/%d'%(i+1))
+
+    files = os.listdir('../FitParam/%d'%(n_fitparam))
     for file in files:
         if '.npy' in file:
-            os.remove('./FitParam/%s'%(file))
+            os.remove('../FitParam/%d/%s'%(n_fitparam,file))
 except:
-    os.mkdir('./FitParam')
+    os.mkdir('../FitParam/%d'%(n_fitparam))
 
-parameter_estimation()
+shutil.copy('./runGA_%d.ipynb'%(n_fitparam),'./runGA_%d.ipynb'%(n_fitparam+1))
+
+parameter_estimation(n_fitparam)

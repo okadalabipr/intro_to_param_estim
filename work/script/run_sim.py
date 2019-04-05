@@ -1,8 +1,11 @@
 import os
 import glob
+import re
 import numpy as np
+import warnings
+warnings.filterwarnings('ignore')
 
-if not glob.glob('./Fig'):
+if not os.path.isdir('./Fig'):
     os.mkdir('./Fig')
 
 
@@ -25,29 +28,5 @@ using('model/initial_condition.py')
 using('experimental_data.py')
 using('search_parameter.py')
 using('simulation.py')
-
-search_idx = search_parameter_index()
-
-x = f_params()
-y0 = initial_values()
-
-# getBestParam
-try:
-    generation = np.load('./FitParam/generation.npy')
-    best_indiv = np.load('./FitParam/FitParam%d.npy'%(int(generation)))
-
-    for i in range(len(search_idx[0])):
-        x[search_idx[0][i]] = best_indiv[i]
-    for i in range(len(search_idx[1])):
-        y0[search_idx[1][i]] = best_indiv[i+len(search_idx[0])]
-
-except:
-    pass
-
-exp = ExperimentalData()
-sim = Simulation(x,y0)
-
-if sim.run_simulation(x,y0) is None:
-    pass
-else:
-    print('Simulation failed.')
+using('plot_func.py')
+using('viz.py')

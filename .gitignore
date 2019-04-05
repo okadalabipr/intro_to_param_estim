@@ -3,6 +3,3 @@
 
 # Jupyter files
 .ipynb_checkpoints
-
-# FitParam
-*.npy
