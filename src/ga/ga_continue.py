@@ -84,8 +84,17 @@ def ga_v1_continue(
     return best_indiv,best_fitness
 
 
-def ga_v2_continue(nth_paramset,n_generation,n_population,n_children,n_gene,allowable_error,search_idx,search_region,p0_bounds):
-
+def ga_v2_continue(
+    nth_paramset,
+    n_generation,
+    n_population,
+    n_children,
+    n_gene,
+    allowable_error,
+    search_idx,
+    search_region,
+    p0_bounds
+    ):
     n_iter = 1
     n0 = np.zeros(2*n_population)
 

@@ -1,4 +1,5 @@
-def mgg_variant(population,n_population,n_children,n_gene,search_idx,search_region):  # Minimal Generation Gap selection for undx
+# Minimal Generation Gap selection for undx
+def mgg_variant(population,n_population,n_children,n_gene,search_idx,search_region):
     ip = [0]*3
     ip[:2] = np.random.choice(n_population,2,replace=False)
     idx = [True]*n_population
@@ -46,7 +47,8 @@ def get_new_child(parents,n_gene,search_idx,search_region):
     return child
 
 
-def undx(parents,n_gene): # Unimodal Normal Distribution Crossover
+# Unimodal Normal Distribution Crossover
+def undx(parents,n_gene):
     child = np.empty(n_gene+1)
 
     ALPHA = 0.5

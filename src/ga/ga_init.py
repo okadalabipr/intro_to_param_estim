@@ -21,8 +21,16 @@ def parameter_estimation(nth_paramset):
     )
 
 
-def ga_v1(nth_paramset,n_generation,n_population,n_children,n_gene,allowable_error,search_idx,search_region):
-
+def ga_v1(
+    nth_paramset,
+    n_generation,
+    n_population,
+    n_children,
+    n_gene,
+    allowable_error,
+    search_idx,
+    search_region
+    ):
     population = get_initial_population(n_population,n_gene,search_idx,search_region)
     print('Generation%d: Best Fitness = %e'%(1,population[0,-1]))
     best_indiv = decode_gene2variable(population[0,:n_gene],search_region)
@@ -67,8 +75,16 @@ def ga_v1(nth_paramset,n_generation,n_population,n_children,n_gene,allowable_err
     return best_indiv,best_fitness
 
 
-def ga_v2(nth_paramset,n_generation,n_population,n_children,n_gene,allowable_error,search_idx,search_region):
-
+def ga_v2(
+    nth_paramset,
+    n_generation,
+    n_population,
+    n_children,
+    n_gene,
+    allowable_error,
+    search_idx,
+    search_region
+    ):
     n_iter = 1
     n0 = np.zeros(2*n_population)
 
