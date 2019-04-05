@@ -31,10 +31,10 @@ using('search_parameter.py')
 using('fitness.py')
 using('simulation.py')
 
-n_fitparam = int(re.sub(r'\D','',current_ipynb))
+nth_paramset = int(re.sub(r'\D','',current_ipynb))
 
 try:
-    if n_fitparam == 1:
+    if nth_paramset == 1:
         n_file = 0
         jupyter_files = os.listdir('.')
         for file in jupyter_files:
@@ -49,13 +49,13 @@ try:
                 if os.path.isdir('../FitParam/%d'%(i+1)):
                     shutil.rmtree('../FitParam/%d'%(i+1))
 
-    files = os.listdir('../FitParam/%d'%(n_fitparam))
+    files = os.listdir('../FitParam/%d'%(nth_paramset))
     for file in files:
         if '.npy' in file:
-            os.remove('../FitParam/%d/%s'%(n_fitparam,file))
+            os.remove('../FitParam/%d/%s'%(nth_paramset,file))
 except:
-    os.mkdir('../FitParam/%d'%(n_fitparam))
+    os.mkdir('../FitParam/%d'%(nth_paramset))
 
-shutil.copy('./runGA_%d.ipynb'%(n_fitparam),'./runGA_%d.ipynb'%(n_fitparam+1))
+shutil.copy('./runGA_%d.ipynb'%(nth_paramset),'./runGA_%d.ipynb'%(nth_paramset+1))
 
-parameter_estimation(n_fitparam)
+parameter_estimation(nth_paramset)

@@ -30,10 +30,10 @@ using('search_parameter.py')
 using('fitness.py')
 using('simulation.py')
 
-n_fitparam = int(re.sub(r'\D','',current_ipynb))
+nth_paramset = int(re.sub(r'\D','',current_ipynb))
 
-if not os.path.isdir('../FitParam/%d'%(n_fitparam)):
-    os.mkdir('../FitParam/%d'%(n_fitparam))
-    parameter_estimation(n_fitparam)
+if not os.path.isdir('../FitParam/%d'%(nth_paramset)):
+    os.mkdir('../FitParam/%d'%(nth_paramset))
+    parameter_estimation(nth_paramset)
 else:
-    parameter_estimation_continue(n_fitparam)
+    parameter_estimation_continue(nth_paramset)

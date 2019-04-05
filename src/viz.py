@@ -1,10 +1,10 @@
-def sim1(n_fitparam,sim,x,y0):
+def sim1(nth_paramset,sim,x,y0):
     search_idx = search_parameter_index()
 
     # get_best_param
     try:
-        generation = np.load('./FitParam/%d/generation.npy'%(n_fitparam))
-        best_indiv = np.load('./FitParam/%d/FitParam%d.npy'%(n_fitparam,int(generation)))
+        generation = np.load('./FitParam/%d/generation.npy'%(nth_paramset))
+        best_indiv = np.load('./FitParam/%d/FitParam%d.npy'%(nth_paramset,int(generation)))
 
         for i in range(len(search_idx[0])):
             x[search_idx[0][i]] = best_indiv[i]
@@ -17,7 +17,7 @@ def sim1(n_fitparam,sim,x,y0):
     if sim.run_simulation(x,y0) is None:
         pass
     else:
-        print('Simulation failed.\nparameter_set #%d'%(n_fitparam))
+        print('Simulation failed.\nparameter_set #%d'%(nth_paramset))
 
     return sim
 

@@ -1,4 +1,4 @@
-def parameter_estimation(n_fitparam):
+def parameter_estimation(nth_paramset):
 
     search_idx = search_parameter_index()
     search_region = get_search_region()
@@ -10,7 +10,7 @@ def parameter_estimation(n_fitparam):
     allowable_error = 0.5
 
     (best_indiv,best_fitness) = ga_v2(
-        n_fitparam,
+        nth_paramset,
         n_generation,
         n_population,
         n_children,
@@ -21,7 +21,7 @@ def parameter_estimation(n_fitparam):
     )
 
 
-def ga_v1(n_fitparam,n_generation,n_population,n_children,n_gene,allowable_error,search_idx,search_region):
+def ga_v1(nth_paramset,n_generation,n_population,n_children,n_gene,allowable_error,search_idx,search_region):
 
     population = get_initial_population(n_population,n_gene,search_idx,search_region)
     print('Generation%d: Best Fitness = %e'%(1,population[0,-1]))
@@ -29,9 +29,9 @@ def ga_v1(n_fitparam,n_generation,n_population,n_children,n_gene,allowable_error
 
     best_fitness = population[0,-1]
 
-    np.save('../FitParam/%d/generation.npy'%(n_fitparam),1)
-    np.save('../FitParam/%d/FitParam1'%(n_fitparam),best_indiv)
-    np.save('../FitParam/%d/BestFitness.npy'%(n_fitparam),best_fitness)
+    np.save('../FitParam/%d/generation.npy'%(nth_paramset),1)
+    np.save('../FitParam/%d/FitParam1'%(nth_paramset),best_indiv)
+    np.save('../FitParam/%d/BestFitness.npy'%(nth_paramset),best_fitness)
 
     if population[0,-1] <= allowable_error:
         best_indiv = decode_gene2variable(population[0,:n_gene],search_region)
@@ -46,10 +46,10 @@ def ga_v1(n_fitparam,n_generation,n_population,n_children,n_gene,allowable_error
         best_indiv = decode_gene2variable(population[0,:n_gene],search_region)
 
         if population[0,-1] < best_fitness:
-            np.save('../FitParam/%d/generation.npy'%(n_fitparam),i+1)
-            np.save('../FitParam/%d/FitParam%d.npy'%(n_fitparam,i+1),best_indiv)
+            np.save('../FitParam/%d/generation.npy'%(nth_paramset),i+1)
+            np.save('../FitParam/%d/FitParam%d.npy'%(nth_paramset,i+1),best_indiv)
         best_fitness = population[0,-1]
-        np.save('../FitParam/%d/BestFitness.npy'%(n_fitparam),best_fitness)
+        np.save('../FitParam/%d/BestFitness.npy'%(nth_paramset),best_fitness)
 
         if population[0,-1] <= allowable_error:
             best_indiv = decode_gene2variable(population[0,:n_gene],search_region)
@@ -58,7 +58,7 @@ def ga_v1(n_fitparam,n_generation,n_population,n_children,n_gene,allowable_error
         else:
             pass
 
-        np.save('../FitParam/%d/count_num.npy'%(n_fitparam),i+1)
+        np.save('../FitParam/%d/count_num.npy'%(nth_paramset),i+1)
 
     best_indiv = decode_gene2variable(population[0,:n_gene],search_region)
 
@@ -67,7 +67,7 @@ def ga_v1(n_fitparam,n_generation,n_population,n_children,n_gene,allowable_error
     return best_indiv,best_fitness
 
 
-def ga_v2(n_fitparam,n_generation,n_population,n_children,n_gene,allowable_error,search_idx,search_region):
+def ga_v2(nth_paramset,n_generation,n_population,n_children,n_gene,allowable_error,search_idx,search_region):
 
     n_iter = 1
     n0 = np.zeros(2*n_population)
@@ -78,9 +78,9 @@ def ga_v2(n_fitparam,n_generation,n_population,n_children,n_gene,allowable_error
     best_indiv = decode_gene2variable(population[0,:n_gene],search_region)
     best_fitness = population[0,-1]
 
-    np.save('../FitParam/%d/generation.npy'%(n_fitparam),1)
-    np.save('../FitParam/%d/FitParam1.npy'%(n_fitparam),best_indiv)
-    np.save('../FitParam/%d/BestFitness.npy'%(n_fitparam),best_fitness)
+    np.save('../FitParam/%d/generation.npy'%(nth_paramset),1)
+    np.save('../FitParam/%d/FitParam1.npy'%(nth_paramset),best_indiv)
+    np.save('../FitParam/%d/BestFitness.npy'%(nth_paramset),best_fitness)
 
     if population[0,-1] <= allowable_error:
         best_indiv = decode_gene2variable(population[0,:n_gene],search_region)
@@ -113,10 +113,10 @@ def ga_v2(n_fitparam,n_generation,n_population,n_children,n_gene,allowable_error
         best_indiv = decode_gene2variable(population[0,:n_gene],search_region)
 
         if population[0,-1] < best_fitness:
-            np.save('../FitParam/%d/generation.npy'%(n_fitparam),i+1)
-            np.save('../FitParam/%d/FitParam%d.npy'%(n_fitparam,i+1),best_indiv)
+            np.save('../FitParam/%d/generation.npy'%(nth_paramset),i+1)
+            np.save('../FitParam/%d/FitParam%d.npy'%(nth_paramset,i+1),best_indiv)
         best_fitness = population[0,-1]
-        np.save('../FitParam/%d/BestFitness.npy'%(n_fitparam),best_fitness)
+        np.save('../FitParam/%d/BestFitness.npy'%(nth_paramset),best_fitness)
 
         if population[0,-1] <= allowable_error:
             best_indiv = decode_gene2variable(population[0,:n_gene],search_region)
@@ -125,7 +125,7 @@ def ga_v2(n_fitparam,n_generation,n_population,n_children,n_gene,allowable_error
         else:
             pass
 
-        np.save('../FitParam/%d/count_num.npy'%(n_fitparam),i+1)
+        np.save('../FitParam/%d/count_num.npy'%(nth_paramset),i+1)
 
     best_indiv = decode_gene2variable(population[0,:n_gene],search_region)
 
