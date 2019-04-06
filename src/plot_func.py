@@ -1,5 +1,3 @@
-import matplotlib.pyplot as plt
-
 def plot_func(sim,n_file,viz_type,show_all,stdev,
               PMEK_cyt_all,
               PERK_cyt_all,

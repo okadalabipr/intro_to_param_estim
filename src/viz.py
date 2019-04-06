@@ -21,6 +21,43 @@ def sim1(nth_paramset,sim,x,y0):
 
     return sim
 
+
+def save_param_range(n_file):
+    search_idx = search_parameter_index()
+    search_param_matrix = np.empty((n_file,len(search_idx[0])))
+    
+    for nth_paramset in range(1,n_file+1):
+        generation = np.load('./FitParam/%d/generation.npy'%(nth_paramset))
+        best_indiv = np.load('./FitParam/%d/FitParam%d.npy'%(nth_paramset,int(generation)))
+    
+            
+        search_param_matrix[nth_paramset-1,:] = best_indiv
+    
+    # ==========================================================================
+    # seaborn.boxplot
+    
+    fig = plt.figure(figsize=(8,24))
+    plt.gca().spines['right'].set_visible(False)
+    plt.gca().spines['top'].set_visible(False)
+    plt.gca().yaxis.set_ticks_position('left')
+    plt.gca().xaxis.set_ticks_position('bottom')
+    
+    ax = sns.boxplot(data=search_param_matrix,
+                     orient='h',
+                     linewidth=0.5,
+                     palette='Set2'
+                    )
+    
+    ax.set_xlabel('Parameter value')
+    ax.set_ylabel('')
+    ax.set_yticklabels([F_P[i] for i in search_idx[0]])
+    ax.set_xscale('log')
+    
+    plt.savefig('./Fig/param_range.pdf',bbox_inches='tight')
+    plt.close(fig)
+    # ========================================================================== 
+    
+
 def viz(viz_type,show_all,stdev):
     x = f_params()
     y0 = initial_values()
@@ -64,6 +101,8 @@ def viz(viz_type,show_all,stdev):
     best_paramset = np.argmin(best_fitness_all) + 1
 
     sim = sim1(int(best_paramset),sim,x,y0)
+
+    save_param_range(n_file)
 
     plot_func(sim,n_file,viz_type,show_all,stdev,
         PMEK_cyt_all,
