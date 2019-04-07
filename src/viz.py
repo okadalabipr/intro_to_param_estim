@@ -64,8 +64,8 @@ def viz(viz_type,show_all,stdev):
     sim = Simulation(x,y0)
 
     n_file = 0
-    jupyter_files = os.listdir('./FitParam')
-    for file in jupyter_files:
+    fitparam_files = os.listdir('./FitParam')
+    for file in fitparam_files:
         if re.match(r'\d',file):
             n_file += 1
 
