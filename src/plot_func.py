@@ -45,10 +45,10 @@ def plot_func(sim,n_file,viz_type,show_all,stdev,
             plt.plot(sim.t,PERK_cyt_all[i,:,0]/np.max(PERK_cyt_all[i,:,:]),'b',alpha=0.05)
             plt.plot(sim.t,PERK_cyt_all[i,:,1]/np.max(PERK_cyt_all[i,:,:]),'r',alpha=0.05)
 
-    if viz_type == 'best':
+    if not viz_type == 'average':
         plt.plot(sim.t,sim.PERK_cyt[:,0]/np.max(sim.PERK_cyt[:,1]),'b')
         plt.plot(sim.t,sim.PERK_cyt[:,1]/np.max(sim.PERK_cyt[:,1]),'r')
-    elif viz_type == 'average':
+    else:
         PERK_cyt_norm  = np.empty((n_file,len(sim.tspan),sim.condition))
         for i in range(n_file):
             PERK_cyt_norm[i,:,0] = PERK_cyt_all[i,:,0]/np.max(PERK_cyt_all[i,:,:])
@@ -85,10 +85,10 @@ def plot_func(sim,n_file,viz_type,show_all,stdev,
             plt.plot(sim.t,PRSK_wcl_all[i,:,0]/np.max(PRSK_wcl_all[i,:,:]),'b',alpha=0.05)
             plt.plot(sim.t,PRSK_wcl_all[i,:,1]/np.max(PRSK_wcl_all[i,:,:]),'r',alpha=0.05)
 
-    if viz_type == 'best':
+    if not viz_type == 'average':
         plt.plot(sim.t,sim.PRSK_wcl[:,0]/np.max(sim.PRSK_wcl[:,1]),'b')
         plt.plot(sim.t,sim.PRSK_wcl[:,1]/np.max(sim.PRSK_wcl[:,1]),'r')
-    elif viz_type == 'average':
+    else:
         PRSK_wcl_norm  = np.empty((n_file,len(sim.tspan),sim.condition))
         for i in range(n_file):
             PRSK_wcl_norm[i,:,0] = PRSK_wcl_all[i,:,0]/np.max(PRSK_wcl_all[i,:,:])
@@ -125,10 +125,10 @@ def plot_func(sim,n_file,viz_type,show_all,stdev,
             plt.plot(sim.t,PCREB_wcl_all[i,:,0]/np.max(PCREB_wcl_all[i,:,:]),'b',alpha=0.05)
             plt.plot(sim.t,PCREB_wcl_all[i,:,1]/np.max(PCREB_wcl_all[i,:,:]),'r',alpha=0.05)
 
-    if viz_type == 'best':
+    if not viz_type == 'average':
         plt.plot(sim.t,sim.PCREB_wcl[:,0]/np.max(sim.PCREB_wcl[:,1]),'b')
         plt.plot(sim.t,sim.PCREB_wcl[:,1]/np.max(sim.PCREB_wcl[:,1]),'r')
-    elif viz_type == 'average':
+    else:
         PCREB_wcl_norm  = np.empty((n_file,len(sim.tspan),sim.condition))
         for i in range(n_file):
             PCREB_wcl_norm[i,:,0] = PCREB_wcl_all[i,:,0]/np.max(PCREB_wcl_all[i,:,:])
@@ -165,10 +165,10 @@ def plot_func(sim,n_file,viz_type,show_all,stdev,
             plt.plot(sim.t,DUSPmRNA_all[i,:,0]/np.max(DUSPmRNA_all[i,:,:]),'b',alpha=0.05)
             plt.plot(sim.t,DUSPmRNA_all[i,:,1]/np.max(DUSPmRNA_all[i,:,:]),'r',alpha=0.05)
 
-    if viz_type == 'best':
+    if not viz_type == 'average':
         plt.plot(sim.t,sim.DUSPmRNA[:,0]/np.max(sim.DUSPmRNA[:,1]),'b')
         plt.plot(sim.t,sim.DUSPmRNA[:,1]/np.max(sim.DUSPmRNA[:,1]),'r')
-    elif viz_type == 'average':
+    else:
         DUSPmRNA_norm  = np.empty((n_file,len(sim.tspan),sim.condition))
         for i in range(n_file):
             DUSPmRNA_norm[i,:,0] = DUSPmRNA_all[i,:,0]/np.max(DUSPmRNA_all[i,:,:])
@@ -205,10 +205,10 @@ def plot_func(sim,n_file,viz_type,show_all,stdev,
             plt.plot(sim.t,cFosmRNA_all[i,:,0]/np.max(cFosmRNA_all[i,:,:]),'b',alpha=0.05)
             plt.plot(sim.t,cFosmRNA_all[i,:,1]/np.max(cFosmRNA_all[i,:,:]),'r',alpha=0.05)
 
-    if viz_type == 'best':
+    if not viz_type == 'average':
         plt.plot(sim.t,sim.cFosmRNA[:,0]/np.max(sim.cFosmRNA[:,1]),'b')
         plt.plot(sim.t,sim.cFosmRNA[:,1]/np.max(sim.cFosmRNA[:,1]),'r')
-    elif viz_type == 'average':
+    else:
         cFosmRNA_norm  = np.empty((n_file,len(sim.tspan),sim.condition))
         for i in range(n_file):
             cFosmRNA_norm[i,:,0] = cFosmRNA_all[i,:,0]/np.max(cFosmRNA_all[i,:,:])
@@ -245,10 +245,10 @@ def plot_func(sim,n_file,viz_type,show_all,stdev,
             plt.plot(sim.t,cFosPro_all[i,:,0]/np.max(cFosPro_all[i,:,:]),'b',alpha=0.05)
             plt.plot(sim.t,cFosPro_all[i,:,1]/np.max(cFosPro_all[i,:,:]),'r',alpha=0.05)
 
-    if viz_type == 'best':
+    if not viz_type == 'average':
         plt.plot(sim.t,sim.cFosPro[:,0]/np.max(sim.cFosPro[:,1]),'b')
         plt.plot(sim.t,sim.cFosPro[:,1]/np.max(sim.cFosPro[:,1]),'r')
-    elif viz_type == 'average':
+    else:
         cFosPro_norm  = np.empty((n_file,len(sim.tspan),sim.condition))
         for i in range(n_file):
             cFosPro_norm[i,:,0] = cFosPro_all[i,:,0]/np.max(cFosPro_all[i,:,:])
@@ -285,10 +285,10 @@ def plot_func(sim,n_file,viz_type,show_all,stdev,
             plt.plot(sim.t,PcFos_all[i,:,0]/np.max(PcFos_all[i,:,:]),'b',alpha=0.05)
             plt.plot(sim.t,PcFos_all[i,:,1]/np.max(PcFos_all[i,:,:]),'r',alpha=0.05)
 
-    if viz_type == 'best':
+    if not viz_type == 'average':
         plt.plot(sim.t,sim.PcFos[:,0]/np.max(sim.PcFos[:,1]),'b')
         plt.plot(sim.t,sim.PcFos[:,1]/np.max(sim.PcFos[:,1]),'r')
-    elif viz_type == 'average':
+    else:
         PcFos_norm  = np.empty((n_file,len(sim.tspan),sim.condition))
         for i in range(n_file):
             PcFos_norm[i,:,0] = PcFos_all[i,:,0]/np.max(PcFos_all[i,:,:])
