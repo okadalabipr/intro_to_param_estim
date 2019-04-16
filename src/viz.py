@@ -121,7 +121,7 @@ def save_param_range(n_file,x,y0):
     plt.gca().yaxis.set_ticks_position('left')
     plt.gca().xaxis.set_ticks_position('bottom')
     
-    ax = sns.boxplot(data=search_param_matrix,
+    ax = sns.lvplot(data=search_param_matrix,
                      orient='h',
                      linewidth=0.5,
                      palette='Set2'
