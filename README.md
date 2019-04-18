@@ -7,6 +7,9 @@
  Points (blue diamonds, EGF; red squares, HRG) denote experimental data, solid lines denote simulations.
 
 ## Algorithm
+#### ga_v1:
+Parameter values are searched by genetic algorithm with Unimodal Normal Distribution Crossover (UNDX) and Minimal Generation Gap (MGG).
+#### ga_v2:
 ga_v2 optimizes an objective function through the following procedure.
 
 1. **Initialization**<br>
