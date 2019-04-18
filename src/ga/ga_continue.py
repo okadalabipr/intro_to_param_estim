@@ -149,7 +149,7 @@ def ga_v2_continue(
 
         if population[0,-1] < best_fitness:
             np.save('../FitParam/%d/generation.npy'%(nth_paramset),i+int(count_num)+1)
-            np.save('../FitParam/%d/FitParam%d.npy'%(i+int(count_num)+1),best_indiv)
+            np.save('../FitParam/%d/FitParam%d.npy'%(nth_paramset,i+int(count_num)+1),best_indiv)
         best_fitness = population[0,-1]
 
         if population[0,-1] <= allowable_error:
