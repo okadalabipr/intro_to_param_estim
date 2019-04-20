@@ -34,6 +34,7 @@ using('simulation.py')
 nth_paramset = int(re.sub(r'\D','',current_ipynb))
 
 try:
+    '''
     if nth_paramset == 1:
         n_file = 0
         jupyter_files = os.listdir('.')
@@ -48,7 +49,7 @@ try:
 
                 if os.path.isdir('../FitParam/%d'%(i+1)):
                     shutil.rmtree('../FitParam/%d'%(i+1))
-
+    '''
     files = os.listdir('../FitParam/%d'%(nth_paramset))
     for file in files:
         if '.npy' in file:
@@ -56,6 +57,7 @@ try:
 except:
     os.mkdir('../FitParam/%d'%(nth_paramset))
 
-shutil.copy('./runGA_%d.ipynb'%(nth_paramset),'./runGA_%d.ipynb'%(nth_paramset+1))
+if not os.path.isfile('./runGA_%d.ipynb'%(nth_paramset+1)):
+    shutil.copy('./runGA_%d.ipynb'%(nth_paramset),'./runGA_%d.ipynb'%(nth_paramset+1))
 
 parameter_estimation(nth_paramset)
