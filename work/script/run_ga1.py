@@ -36,6 +36,7 @@ nth_paramset = int(re.sub(r'\D','',current_ipynb))
 try:
     '''
     if nth_paramset == 1:
+        # clear work/runGA/runGA_i (i ≧ 2)
         n_file = 0
         jupyter_files = os.listdir('.')
         for file in jupyter_files:
@@ -47,6 +48,14 @@ try:
                 if os.path.isfile('./runGA_%d.ipynb'%(i+1)):
                     os.remove('./runGA_%d.ipynb'%(i+1))
 
+        # clear work/FitParam/i (i ≧ 2)
+        n_fitparam = 0
+        fitparam_files = os.listdir('../FitParam')
+        for file in fitparam_files:
+            if re.match(r'\d',file):
+                n_fitparam += 1
+        if n_fitparam > 1:
+            for i in range(1,n_fitparam):
                 if os.path.isdir('../FitParam/%d'%(i+1)):
                     shutil.rmtree('../FitParam/%d'%(i+1))
     '''
