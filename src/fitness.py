@@ -37,38 +37,38 @@ def get_fitness(individual_gene,search_idx,search_region):
 
       # ERK
       norm_max = np.max(sim.PERK_cyt)
-      fit[0] = compute_objval_abs(np.append(sim.PERK_cyt[exp.t2,0],sim.PERK_cyt[exp.t2,1])/norm_max,
-                                  np.append(exp.egf_ERKc_av,exp.hrg_ERKc_av)
+      fit[0] = compute_objval_abs(np.r_[sim.PERK_cyt[exp.t2,0],sim.PERK_cyt[exp.t2,1]]/norm_max,
+                                  np.r_[exp.egf_ERKc_av,exp.hrg_ERKc_av]
                                   )
       # RSK
       norm_max = np.max(sim.PRSK_wcl)
-      fit[1] = compute_objval_abs(np.append(sim.PRSK_wcl[exp.t2,0],sim.PRSK_wcl[exp.t2,1])/norm_max,
-                                  np.append(exp.egf_RSKw_av,exp.hrg_RSKw_av)
+      fit[1] = compute_objval_abs(np.r_[sim.PRSK_wcl[exp.t2,0],sim.PRSK_wcl[exp.t2,1]]/norm_max,
+                                  np.r_[exp.egf_RSKw_av,exp.hrg_RSKw_av]
                                   )
       # CREB
       norm_max = np.max(sim.PCREB_wcl)
-      fit[2] = compute_objval_abs(np.append(sim.PCREB_wcl[exp.t3,0],sim.PCREB_wcl[exp.t3,1])/norm_max,
-                                  np.append(exp.egf_CREBw_av,exp.hrg_CREBw_av)
+      fit[2] = compute_objval_abs(np.r_[sim.PCREB_wcl[exp.t3,0],sim.PCREB_wcl[exp.t3,1]]/norm_max,
+                                  np.r_[exp.egf_CREBw_av,exp.hrg_CREBw_av]
                                   )
       # DUSPmRNA
       norm_max = np.max(sim.DUSPmRNA)
-      fit[3] = compute_objval_abs(np.append(sim.DUSPmRNA[exp.t5,0],sim.DUSPmRNA[exp.t5,1])/norm_max,
-                                  np.append(exp.egf_DUSPmRNA_av,exp.hrg_DUSPmRNA_av)
+      fit[3] = compute_objval_abs(np.r_[sim.DUSPmRNA[exp.t5,0],sim.DUSPmRNA[exp.t5,1]]/norm_max,
+                                  np.r_[exp.egf_DUSPmRNA_av,exp.hrg_DUSPmRNA_av]
                                   )
       # cFosmRNA
       norm_max = np.max(sim.cFosmRNA)
-      fit[4] = compute_objval_abs(np.append(sim.cFosmRNA[exp.t4,0],sim.cFosmRNA[exp.t4,1])/norm_max,
-                                  np.append(exp.egf_cFosmRNA_av,exp.hrg_cFosmRNA_av)
+      fit[4] = compute_objval_abs(np.r_[sim.cFosmRNA[exp.t4,0],sim.cFosmRNA[exp.t4,1]]/norm_max,
+                                  np.r_[exp.egf_cFosmRNA_av,exp.hrg_cFosmRNA_av]
                                   )
       # cFosPro
       norm_max = np.max(sim.cFosPro)
-      fit[5] = compute_objval_abs(np.append(sim.cFosPro[exp.t5,0],sim.cFosPro[exp.t5,1])/norm_max,
-                                  np.append(exp.egf_cFosPro_av,exp.hrg_cFosPro_av)
+      fit[5] = compute_objval_abs(np.r_[sim.cFosPro[exp.t5,0],sim.cFosPro[exp.t5,1]]/norm_max,
+                                  np.r_[exp.egf_cFosPro_av,exp.hrg_cFosPro_av]
                                   )
       # PcFos
       norm_max = np.max(sim.PcFos)
-      fit[6] = compute_objval_abs(np.append(sim.PcFos[exp.t2,0],sim.PcFos[exp.t2,1])/norm_max,
-                                  np.append(exp.egf_PcFos_av,exp.hrg_PcFos_av)
+      fit[6] = compute_objval_abs(np.r_[sim.PcFos[exp.t2,0],sim.PcFos[exp.t2,1]]/norm_max,
+                                  np.r_[exp.egf_PcFos_av,exp.hrg_PcFos_av]
                                   )
 
       return np.sum(fit)
