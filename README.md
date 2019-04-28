@@ -1,4 +1,4 @@
-# ODEParamEstim
+# intro_to_param_estim
 
 **Parameter Estimation:** Using Genetic Algorithm to Fit ODE Models to Data
 ***
@@ -6,6 +6,39 @@
 
  Points (blue diamonds, EGF; red squares, HRG) denote experimental data, solid lines denote simulations.
 
+## Description
+A brief description of each file you will need to use is below:
+- [**src/**](/src/)<br>
+    - [**model/f_parameter.py**](/src/model/f_parameter.py)<br>
+        This file contains the parameters used in the differential equations.
+
+    - [**model/f_variable.py**](/src/model/f_variable.py)<br>
+        This file is where you define the variables of your model.
+
+    - [**model/differential_equation.py**](/src/model/differential_equation.py)<br>
+        This file contains the differential equations that instruct the model how to change concentrations of reactants over the time course of the simulation.
+
+    - [**model/initial_condition.py**](/src/model/initial_condition.py)<br>
+        This is where you define initial concentrations.
+
+    - [**simulation.py**](/src/simulation.py)<br>
+        This is where you define the simulations you want to run. In this file you can define different conditions for each simulation (for example, ligand concentration) and how you would like each variable to be simulated (i.e. do you want absolute concentration to be simulated? or percentage change over time? Etc).
+
+    - [**experimental_data.py**](/src/experimental_data.py)<br>
+        This is where you input the experimental data that you are going to use to try and fit the parameters to.
+
+    - [**fitness.py**](/src/fitness.py)<br>
+        This file calculates the difference between the simulated values and the experimental values.
+
+    - [**plot_func.py**](/src/plot_func.py)<br>
+        This is where you define how you would like each variable to be plotted.
+
+- [**work/**](/work/)<br>
+    - [**runGA/runGA_*n*.ipynb (*n* ≧ 1)**](/work/runGA/runGA_1.ipynb)<br>
+        Run both input boxes and leave it. When you run the first one, a second will appear in the runGA folder. You can run these different parameter fittings simultaneously.
+
+    - [**runSim.ipynb**](/work/runSim.ipynb)<br>
+        This is the file that is used to actually run the simulations for your model and plot the results.
 ## Algorithm
 #### ga_v1:
 Parameter values are searched by genetic algorithm with Unimodal Normal Distribution Crossover (UNDX) and Minimal Generation Gap (MGG).
@@ -47,7 +80,10 @@ Stop if the halting criteria are satisfied. Otherwise, *Generation* ← *Generat
 
 ## Installation
 
-    $ git clone https://github.com/u360665a/ODEParamEstim.git
+    $ git clone https://github.com/okadalabipr/intro_to_param_estim.git
+
+## Acknowledgements
+We thank Ben Roberts and Iosifina Sampson (University of Leeds) for helpful comments and discussions.
 
 ## References
 - Nakakuki, T. et al. Ligand-specific c-Fos expression emerges from the spatiotemporal control of ErbB network dynamics. Cell 141, 884–896 (2010). https://doi.org/10.1016/j.cell.2010.03.054
