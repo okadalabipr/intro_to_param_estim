@@ -27,21 +27,28 @@ A brief description of each file you will need to use is below:
     - [**experimental_data.py**](/src/experimental_data.py)<br>
         This is where you input the experimental data that you are going to use to try and fit the parameters to.
 
+    - [**search_parameter.py**](/src/search_parameter.py)<br>
+        This is where you specify the model parameters to estimate.
+
     - [**fitness.py**](/src/fitness.py)<br>
         This file calculates the difference between the simulated values and the experimental values.
 
-    - [**plot_func.py**](/src/plot_func.py)<br>
+    - [**plot_func.py**](/src/plot_func.py) & [**viz.py**](/src/viz.py)<br>
         This is where you define how you would like each variable to be plotted.
 
 - [**work/**](/work/)<br>
     - [**runGA/runGA_*n*.ipynb (*n* ≧ 1)**](/work/runGA/runGA_1.ipynb)<br>
-        Run both input boxes and leave it. When you run the first one, a second will appear in the runGA folder. You can run these different parameter fittings simultaneously.
+        Run both input boxes and leave it. When you run the *i*<sup>th</sup> file, runGA_(*i+1*).ipynb will be generated in the runGA folder. You can run these different parameter fittings simultaneously.
 
     - [**runSim.ipynb**](/work/runSim.ipynb)<br>
         This is the file that is used to actually run the simulations for your model and plot the results.
+
+    - [**Fig/**](/work/Fig/)<br>
+        Within this folder there are several figures that will be saved. One is the ‘param_range.pdf’ which shows the range of values for your parameters based on all the fittings. The others are results of your simulations.
 ## Algorithm
 #### ga_v1:
 Parameter values are searched by genetic algorithm with Unimodal Normal Distribution Crossover (UNDX) and Minimal Generation Gap (MGG).
+
 #### ga_v2:
 ga_v2 optimizes an objective function through the following procedure.
 
