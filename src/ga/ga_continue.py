@@ -37,7 +37,11 @@ def ga_v1_continue(
     count_num = np.load('../FitParam/%d/count_num.npy'%(nth_paramset))
     generation = np.load('../FitParam/%d/generation.npy'%(nth_paramset))
     best_indiv = np.load('../FitParam/%d/FitParam%d.npy'%(nth_paramset,int(generation)))
-    best_fitness = get_fitness((np.log10(best_indiv) - search_region[0,:])/(search_region[1,:] - search_region[0,:]),search_idx,search_region)
+    best_fitness = get_fitness(
+        (np.log10(best_indiv) - search_region[0,:])/(search_region[1,:] - search_region[0,:]),
+        search_idx,
+        search_region
+    )
 
     population = get_initial_population_continue(nth_paramset,n_population,n_gene,search_idx,search_region,p0_bounds)
 
@@ -101,7 +105,11 @@ def ga_v2_continue(
     count_num = np.load('../FitParam/%d/count_num.npy'%(nth_paramset))
     generation = np.load('../FitParam/%d/generation.npy'%(nth_paramset))
     best_indiv = np.load('../FitParam/%d/FitParam%d.npy'%(nth_paramset,int(generation)))
-    best_fitness = get_fitness((np.log10(best_indiv) - search_region[0,:])/(search_region[1,:] - search_region[0,:]),search_idx,search_region)
+    best_fitness = get_fitness(
+        (np.log10(best_indiv) - search_region[0,:])/(search_region[1,:] - search_region[0,:]),
+        search_idx,
+        search_region
+    )
 
     population = get_initial_population_continue(nth_paramset,n_population,n_gene,search_idx,search_region,p0_bounds)
 
@@ -177,7 +185,13 @@ def get_initial_population_continue(nth_paramset,n_population,n_gene,search_idx,
     print('initpop')
     for i in range(n_population):
         while np.isinf(population[i,-1]) or np.isnan(population[i,-1]):
-            population[i,:n_gene] = (np.log10(best_indiv*10**(np.random.rand(len(best_indiv))*np.log10(p0_bounds[1]/p0_bounds[0])+np.log10(p0_bounds[0]))) - search_region[0,:])/(search_region[1,:] - search_region[0,:])
+            population[i,:n_gene] = (
+                np.log10(
+                    best_indiv*10**(
+                        np.random.rand(len(best_indiv))*np.log10(p0_bounds[1]/p0_bounds[0])+np.log10(p0_bounds[0])
+                    )
+                ) - search_region[0,:]
+            )/(search_region[1,:] - search_region[0,:])
             population[i,:n_gene] = np.clip(population[i,:n_gene],0.,1.)
             population[i,-1] = get_fitness(population[i,:n_gene],search_idx,search_region)
         sys.stdout.write('\r%d/%d'%(i+1,n_population))

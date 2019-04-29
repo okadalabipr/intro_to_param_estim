@@ -1,4 +1,11 @@
-def converging(ip,population,n_population,n_gene,search_idx,search_region):
+def converging(
+    ip,
+    population,
+    n_population,
+    n_gene,
+    search_idx,
+    search_region
+):
     NC = 10
     children = np.empty((NC,n_gene+1))
 
@@ -42,7 +49,7 @@ def xover(parents,n_gene):
     return child
 
 
-# Extended Normal Distribution crossover
+# Extended Normal Distribution Xover
 def endx(parents,n_gene):
     ALPHA = (1.-2*0.35**2)**0.5/2.
     BETA = 0.35/(n_gene-1)**0.5
@@ -51,8 +58,11 @@ def endx(parents,n_gene):
 
     t1 = (parents[1,:n_gene]-parents[0,:n_gene])/2.
     t2 = np.random.normal(scale=ALPHA)*(parents[1,:n_gene]-parents[0,:n_gene])
-    t3 = np.sum(np.random.normal(scale=BETA,size=n_gene)[:,None]\
-                *(parents[2:,:n_gene]-(np.sum(parents[2:,:n_gene],axis=0)/n_gene)),axis=0)
+    t3 = np.sum(
+        np.random.normal(scale=BETA,size=n_gene)[:,None]
+        *(parents[2:,:n_gene]-(np.sum(parents[2:,:n_gene],axis=0)/n_gene)),
+        axis=0
+    )
 
     child[:n_gene] = t1 + t2 + t3
 

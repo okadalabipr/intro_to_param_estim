@@ -1,4 +1,12 @@
-def local_search(ip,population,n_population,n_children,n_gene,search_idx,search_region):
+def local_search(
+    ip,
+    population,
+    n_population,
+    n_children,
+    n_gene,
+    search_idx,
+    search_region
+):
     idx = [True]*n_population
     idx[ip[0]] = False
 
@@ -40,14 +48,17 @@ def mutation(parents,n_gene,search_idx,search_region):
     return child
 
 
-# Normal Distribution mutation
+# Normal Distribution Mutation
 def ndm(parents,n_gene):
     GAMMA = 0.35/n_gene**0.5
 
     child = np.empty(n_gene+1)
 
-    t2 = np.sum(np.random.normal(scale=GAMMA,size=n_gene+1)[:,None]\
-                *(parents[1:,:n_gene]-(np.sum(parents[1:,:n_gene],axis=0)/(n_gene+1))),axis=0)
+    t2 = np.sum(
+        np.random.normal(scale=GAMMA,size=n_gene+1)[:,None]
+        *(parents[1:,:n_gene]-(np.sum(parents[1:,:n_gene],axis=0)/(n_gene+1))),
+        axis=0
+    )
 
     child[:n_gene] = parents[0,:n_gene] + t2
 
