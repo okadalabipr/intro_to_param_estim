@@ -10,7 +10,7 @@ def odesolve(diffeq,y0,tspan,args):
     Y = [y0]
 
     while sol.successful() and sol.t < tspan[-1]:
-        #sol.integrate(tspan[-1],step=True)
+        # sol.integrate(tspan[-1],step=True)
         sol.integrate(sol.t+1.)
         T.append(sol.t)
         Y.append(sol.y)
@@ -20,10 +20,10 @@ def odesolve(diffeq,y0,tspan,args):
 
 class Simulation(object):
 
-    tspan = range(5401)
+    tspan = range(5401) # Unit time: 1 sec.
     condition = 2
 
-    t = np.array(tspan)/60.
+    t = np.array(tspan)/60. # sec. -> min. (plot_func.py)
 
     PMEK_cyt  = np.empty((len(tspan),condition))
     PERK_cyt  = np.empty((len(tspan),condition))
