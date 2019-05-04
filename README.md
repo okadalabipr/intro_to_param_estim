@@ -9,17 +9,18 @@
 ## Description
 A brief description of each file you will need to use is below:
 - [**src/**](/src/)<br>
-    - [**model/f_parameter.py**](/src/model/f_parameter.py)<br>
-        This file contains the parameters used in the differential equations.
+    - [**model/**](/src/model/)<br>
+        - [**f_parameter.py**](/src/model/f_parameter.py)<br>
+            This file contains the parameters used in the differential equations.
 
-    - [**model/f_variable.py**](/src/model/f_variable.py)<br>
-        This file is where you define the variables of your model.
+        - [**f_variable.py**](/src/model/f_variable.py)<br>
+            This file is where you define the variables of your model.
 
-    - [**model/differential_equation.py**](/src/model/differential_equation.py)<br>
-        This file contains the differential equations that instruct the model how to change concentrations of reactants over the time course of the simulation.
+        - [**differential_equation.py**](/src/model/differential_equation.py)<br>
+            This file contains the differential equations that instruct the model how to change concentrations of reactants over the time course of the simulation.
 
-    - [**model/initial_condition.py**](/src/model/initial_condition.py)<br>
-        This is where you define initial concentrations.
+        - [**initial_condition.py**](/src/model/initial_condition.py)<br>
+            This is where you define initial concentrations.
 
     - [**simulation.py**](/src/simulation.py)<br>
         This is where you define the simulations you want to run. In this file you can define different conditions for each simulation (for example, ligand concentration) and how you would like each variable to be simulated (i.e. do you want absolute concentration to be simulated? or percentage change over time? Etc).
@@ -37,8 +38,9 @@ A brief description of each file you will need to use is below:
         This is where you define how you would like each variable to be plotted.
 
 - [**work/**](/work/)<br>
-    - [**runGA/runGA_*n*.ipynb (*n* ≧ 1)**](/work/runGA/runGA_1.ipynb)<br>
-        Run both input boxes and leave it. When you run the *i*<sup>th</sup> file, runGA_(*i+1*).ipynb will be generated in the runGA folder. You can run these different parameter fittings simultaneously.
+    - [**runGA/**](/work/runGA/)<br>
+        - [**runGA_*n*.ipynb (*n* ≧ 1)**](/work/runGA/runGA_1.ipynb)<br>
+            Run both input boxes and leave it. When you run the *i*<sup>th</sup> file, runGA_(*i+1*).ipynb will be generated in the runGA folder. You can run these different parameter fittings simultaneously.
 
     - [**runSim.ipynb**](/work/runSim.ipynb)<br>
         This is the file that is used to actually run the simulations for your model and plot the results.
