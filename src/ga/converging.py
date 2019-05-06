@@ -1,3 +1,4 @@
+# [ga_v2] ENDX + MGG(best&random)
 def converging(
     ip,
     population,
@@ -5,7 +6,7 @@ def converging(
     n_gene,
     search_idx,
     search_region
-):
+    ):
     NC = 10
     children = np.empty((NC,n_gene+1))
 

@@ -1,3 +1,4 @@
+# [ga_v2] NDM + MGG(best)
 def local_search(
     ip,
     population,
@@ -6,7 +7,7 @@ def local_search(
     n_gene,
     search_idx,
     search_region
-):
+    ):
     idx = [True]*n_population
     idx[ip[0]] = False
 

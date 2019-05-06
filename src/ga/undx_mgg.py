@@ -1,4 +1,4 @@
-# Minimal Generation Gap selection for undx
+# Minimal Generation Gap selection for UNDX
 def mgg_variant(
     population,
     n_population,
@@ -6,7 +6,7 @@ def mgg_variant(
     n_gene,
     search_idx,
     search_region
-):
+    ):
     ip = [0]*3
     ip[:2] = np.random.choice(n_population,2,replace=False)
     idx = [True]*n_population
