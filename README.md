@@ -83,9 +83,13 @@ If the best individual has not improved during the last *n*<sub>*p*</sub> genera
 1. **Termination**<br>
 Stop if the halting criteria are satisfied. Otherwise, *Generation* ← *Generation* +1, and return to the step 2.
 
-## Requirement
-
-- [Anaconda3](https://www.anaconda.com/)
+## Requirements
+- Python3+
+    - numpy
+    - scipy
+    - matplotlib
+    - seaborn
+    - jupyter
 
 ## Installation
 
