@@ -1,4 +1,4 @@
-# Minimal Generation Gap selection for UNDX
+# [ga_v1] Minimal Generation Gap selection for UNDX
 def mgg_variant(
     population,
     n_population,
@@ -71,7 +71,6 @@ def undx(parents,n_gene):
     t = np.random.normal(scale=BETA,size=n_gene)*d2
     t = t - np.dot(t,e1)*e1
     t = t + np.random.normal(scale=ALPHA)*d1*e1
-
 
     child[:n_gene] = t + (parents[0,:n_gene]+parents[1,:n_gene])/2.
 
