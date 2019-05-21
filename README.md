@@ -96,7 +96,7 @@ Stop if the halting criteria are satisfied. Otherwise, *Generation* ← *Generat
     $ git clone https://github.com/okadalabipr/intro_to_param_estim.git
 
 ## Acknowledgements
-We thank Ben Roberts and Iosifina Sampson (University of Leeds) for helpful comments and discussions.
+We thank Benjamin Roberts and Iosifina Sampson (University of Leeds) for helpful comments and discussions.
 
 ## References
 - Nakakuki, T. et al. Ligand-specific c-Fos expression emerges from the spatiotemporal control of ErbB network dynamics. Cell 141, 884–896 (2010). https://doi.org/10.1016/j.cell.2010.03.054
@@ -108,4 +108,4 @@ We thank Ben Roberts and Iosifina Sampson (University of Leeds) for helpful comm
 - Kimura, S., Nakakuki, T., Kirita, S. & Okada, M. AGLSDC: A Genetic Local Search Suitable for Parallel Computation. SICE J. Control. Meas. Syst. Integr. 4, 105–113 (2012). https://doi.org/10.9746/jcmsi.4.105
 
 ## License
-MIT
+[MIT](/LICENSE)
