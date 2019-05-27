@@ -57,7 +57,10 @@ def viz(viz_type,show_all,stdev):
         print('%d is larger than n_fitparam(%d)'%(int(viz_type),n_file))
         sys.exit()
 
-    save_param_range(n_file,x,y0)
+    if n_file < 2:
+        pass
+    else:
+        save_param_range(n_file,x,y0)
 
     plot_func(sim,n_file,viz_type,show_all,stdev,
         PMEK_cyt_all,
@@ -122,10 +125,10 @@ def save_param_range(n_file,x,y0):
     plt.gca().xaxis.set_ticks_position('bottom')
 
     ax = sns.lvplot(data=search_param_matrix,
-                     orient='h',
-                     linewidth=0.5,
-                     palette='Set2'
-                    )
+        orient='h',
+        linewidth=0.5,
+        palette='Set2'
+    )
 
     ax.set_xlabel('Parameter value')
     ax.set_ylabel('')
