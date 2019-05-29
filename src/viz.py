@@ -1,9 +1,9 @@
 def viz(viz_type,show_all,stdev):
-    if not viz_type in ['best','average']:
+    if not viz_type in ['best','average','original']:
         try:
             int(viz_type)
         except ValueError:
-            print("Error: viz_type ∈ {'best','average',int(1~n_fitparam)}")
+            print("Error: viz_type ∈ {'best','average','original',int(1~n_fitparam)}")
             sys.exit()
 
     x = f_params()
@@ -11,10 +11,13 @@ def viz(viz_type,show_all,stdev):
     sim = Simulation(x,y0)
 
     n_file = 0
-    fitparam_files = os.listdir('./FitParam')
-    for file in fitparam_files:
-        if re.match(r'\d',file):
-            n_file += 1
+    if viz_type == 'original':
+        pass
+    else:
+        fitparam_files = os.listdir('./FitParam')
+        for file in fitparam_files:
+            if re.match(r'\d',file):
+                n_file += 1
 
     PMEK_cyt_all  = np.empty((n_file,len(sim.tspan),sim.condition))
     PERK_cyt_all  = np.empty((n_file,len(sim.tspan),sim.condition))
@@ -25,42 +28,49 @@ def viz(viz_type,show_all,stdev):
     cFosPro_all   = np.empty((n_file,len(sim.tspan),sim.condition))
     PcFos_all     = np.empty((n_file,len(sim.tspan),sim.condition))
 
-    for i in range(n_file):
-        sim = update_sim(i+1,sim,x,y0)
+    if n_file > 0:
+        for i in range(n_file):
+            sim = update_sim(i+1,sim,x,y0)
 
-        PMEK_cyt_all[i,:,:]  = sim.PMEK_cyt
-        PERK_cyt_all[i,:,:]  = sim.PERK_cyt
-        PRSK_wcl_all[i,:,:]  = sim.PRSK_wcl
-        PCREB_wcl_all[i,:,:] = sim.PCREB_wcl
-        DUSPmRNA_all[i,:,:]  = sim.DUSPmRNA
-        cFosmRNA_all[i,:,:]  = sim.cFosmRNA
-        cFosPro_all[i,:,:]   = sim.cFosPro
-        PcFos_all[i,:,:]     = sim.PcFos
+            PMEK_cyt_all[i,:,:]  = sim.PMEK_cyt
+            PERK_cyt_all[i,:,:]  = sim.PERK_cyt
+            PRSK_wcl_all[i,:,:]  = sim.PRSK_wcl
+            PCREB_wcl_all[i,:,:] = sim.PCREB_wcl
+            DUSPmRNA_all[i,:,:]  = sim.DUSPmRNA
+            cFosmRNA_all[i,:,:]  = sim.cFosmRNA
+            cFosPro_all[i,:,:]   = sim.cFosPro
+            PcFos_all[i,:,:]     = sim.PcFos
 
-    best_fitness_all = np.empty(n_file)
-    for i in range(n_file):
-        if os.path.isfile('./FitParam/%d/BestFitness.npy'%(i+1)):
-            best_fitness_all[i] = np.load('./FitParam/%d/BestFitness.npy'%(i+1))
+        best_fitness_all = np.empty(n_file)
+        for i in range(n_file):
+            if os.path.isfile('./FitParam/%d/BestFitness.npy'%(i+1)):
+                best_fitness_all[i] = np.load('./FitParam/%d/BestFitness.npy'%(i+1))
+            else:
+                best_fitness_all[i] = np.inf
+
+        # global best_paramset
+        best_paramset = np.argmin(best_fitness_all) + 1
+
+        if viz_type == 'average':
+            pass
+        elif viz_type == 'best':
+            sim = update_sim(int(best_paramset),sim,x,y0)
+        elif int(viz_type) <= n_file:
+            sim = update_sim(int(viz_type),sim,x,y0)
         else:
-            best_fitness_all[i] = np.inf
+            print('%d is larger than n_fitparam(%d)'%(int(viz_type),n_file))
+            sys.exit()
 
-    # global best_paramset
-    best_paramset = np.argmin(best_fitness_all) + 1
+        if n_file == 1:
+            pass
+        else:
+            save_param_range(n_file,x,y0)
 
-    if viz_type == 'average':
-        pass
-    elif viz_type == 'best':
-        sim = update_sim(int(best_paramset),sim,x,y0)
-    elif int(viz_type) <= n_file:
-        sim = update_sim(int(viz_type),sim,x,y0)
     else:
-        print('%d is larger than n_fitparam(%d)'%(int(viz_type),n_file))
-        sys.exit()
-
-    if n_file < 2:
-        pass
-    else:
-        save_param_range(n_file,x,y0)
+        if sim.run_simulation(x,y0) is None:
+            pass
+        else:
+            print('Simulation failed.')
 
     plot_func(sim,n_file,viz_type,show_all,stdev,
         PMEK_cyt_all,

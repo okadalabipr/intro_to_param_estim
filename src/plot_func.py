@@ -1,13 +1,13 @@
 def plot_func(sim,n_file,viz_type,show_all,stdev,
-              PMEK_cyt_all,
-              PERK_cyt_all,
-              PRSK_wcl_all,
-              PCREB_wcl_all,
-              DUSPmRNA_all,
-              cFosmRNA_all,
-              cFosPro_all,
-              PcFos_all
-              ):
+    PMEK_cyt_all,
+    PERK_cyt_all,
+    PRSK_wcl_all,
+    PCREB_wcl_all,
+    DUSPmRNA_all,
+    cFosmRNA_all,
+    cFosPro_all,
+    PcFos_all
+    ):
 
     exp = ExperimentalData()
 
@@ -24,11 +24,11 @@ def plot_func(sim,n_file,viz_type,show_all,stdev,
     plt.plot(sim.t,sim.PMEK_cyt[:,1],'r')
 
     e = plt.errorbar(exp.t2/60.,exp.egf_MEKc_av,yerr=exp.egf_MEKc_se,lw=1,
-                    markerfacecolor='None',markeredgecolor='b',fmt='bD',capsize=8,clip_on=False)
+        markerfacecolor='None',markeredgecolor='b',fmt='bD',capsize=8,clip_on=False)
     for b in e[1]:
         b.set_clip_on(False)
     e = plt.errorbar(exp.t2/60.,exp.hrg_MEKc_av,yerr=exp.hrg_MEKc_se,lw=1,
-                    markerfacecolor='None',markeredgecolor='r',fmt='rs',capsize=8,clip_on=False)
+        markerfacecolor='None',markeredgecolor='r',fmt='rs',capsize=8,clip_on=False)
     for b in e[1]:
         b.set_clip_on(False)
     plt.xlim(0,90)
@@ -57,18 +57,18 @@ def plot_func(sim,n_file,viz_type,show_all,stdev,
         plt.plot(sim.t,np.average(PERK_cyt_norm[:,:,1],axis=0),'r')
         if stdev:
             plt.errorbar(sim.t,np.average(PERK_cyt_norm[:,:,0],axis=0),
-                         yerr=[np.std(PERK_cyt_norm[:,i,0],ddof=1) for i in range(len(sim.t))],
-                         fmt='None',ecolor='b',lw=0.05,alpha=0.1)
+                yerr=[np.std(PERK_cyt_norm[:,i,0],ddof=1) for i in range(len(sim.t))],
+                fmt='None',ecolor='b',lw=0.05,alpha=0.1)
             plt.errorbar(sim.t,np.average(PERK_cyt_norm[:,:,1],axis=0),
-                         yerr=[np.std(PERK_cyt_norm[:,i,1],ddof=1) for i in range(len(sim.t))],
-                         fmt='None',ecolor='r',lw=0.05,alpha=0.1)
+                yerr=[np.std(PERK_cyt_norm[:,i,1],ddof=1) for i in range(len(sim.t))],
+                fmt='None',ecolor='r',lw=0.05,alpha=0.1)
 
     e = plt.errorbar(exp.t2/60.,exp.egf_ERKc_av,yerr=exp.egf_ERKc_se,lw=1,
-                    markerfacecolor='None',markeredgecolor='b',fmt='bD',capsize=8,clip_on=False)
+        markerfacecolor='None',markeredgecolor='b',fmt='bD',capsize=8,clip_on=False)
     for b in e[1]:
         b.set_clip_on(False)
     e = plt.errorbar(exp.t2/60.,exp.hrg_ERKc_av,yerr=exp.hrg_ERKc_se,lw=1,
-                    markerfacecolor='None',markeredgecolor='r',fmt='rs',capsize=8,clip_on=False)
+        markerfacecolor='None',markeredgecolor='r',fmt='rs',capsize=8,clip_on=False)
     for b in e[1]:
         b.set_clip_on(False)
     plt.xlim(0,90)
@@ -97,18 +97,18 @@ def plot_func(sim,n_file,viz_type,show_all,stdev,
         plt.plot(sim.t,np.average(PRSK_wcl_norm[:,:,1],axis=0),'r')
         if stdev:
             plt.errorbar(sim.t,np.average(PRSK_wcl_norm[:,:,0],axis=0),
-                         yerr=[np.std(PRSK_wcl_norm[:,i,0],ddof=1) for i in range(len(sim.t))],
-                         fmt='None',ecolor='b',lw=0.05,alpha=0.1)
+                yerr=[np.std(PRSK_wcl_norm[:,i,0],ddof=1) for i in range(len(sim.t))],
+                fmt='None',ecolor='b',lw=0.05,alpha=0.1)
             plt.errorbar(sim.t,np.average(PRSK_wcl_norm[:,:,1],axis=0),
-                         yerr=[np.std(PRSK_wcl_norm[:,i,1],ddof=1) for i in range(len(sim.t))],
-                         fmt='None',ecolor='r',lw=0.05,alpha=0.1)
+                yerr=[np.std(PRSK_wcl_norm[:,i,1],ddof=1) for i in range(len(sim.t))],
+                fmt='None',ecolor='r',lw=0.05,alpha=0.1)
 
     e = plt.errorbar(exp.t2/60.,exp.egf_RSKw_av,yerr=exp.egf_RSKw_se,lw=1,
-                    markerfacecolor='None',markeredgecolor='b',fmt='bD',capsize=8,clip_on=False)
+        markerfacecolor='None',markeredgecolor='b',fmt='bD',capsize=8,clip_on=False)
     for b in e[1]:
         b.set_clip_on(False)
     e = plt.errorbar(exp.t2/60.,exp.hrg_RSKw_av,yerr=exp.hrg_RSKw_se,lw=1,
-                    markerfacecolor='None',markeredgecolor='r',fmt='rs',capsize=8,clip_on=False)
+        markerfacecolor='None',markeredgecolor='r',fmt='rs',capsize=8,clip_on=False)
     for b in e[1]:
         b.set_clip_on(False)
     plt.xlim(0,90)
@@ -137,18 +137,18 @@ def plot_func(sim,n_file,viz_type,show_all,stdev,
         plt.plot(sim.t,np.average(PCREB_wcl_norm[:,:,1],axis=0),'r')
         if stdev:
             plt.errorbar(sim.t,np.average(PCREB_wcl_norm[:,:,0],axis=0),
-                         yerr=[np.std(PCREB_wcl_norm[:,i,0],ddof=1) for i in range(len(sim.t))],
-                         fmt='None',ecolor='b',lw=0.05,alpha=0.1)
+                yerr=[np.std(PCREB_wcl_norm[:,i,0],ddof=1) for i in range(len(sim.t))],
+                fmt='None',ecolor='b',lw=0.05,alpha=0.1)
             plt.errorbar(sim.t,np.average(PCREB_wcl_norm[:,:,1],axis=0),
-                         yerr=[np.std(PCREB_wcl_norm[:,i,1],ddof=1) for i in range(len(sim.t))],
-                         fmt='None',ecolor='r',lw=0.05,alpha=0.1)
+                yerr=[np.std(PCREB_wcl_norm[:,i,1],ddof=1) for i in range(len(sim.t))],
+                fmt='None',ecolor='r',lw=0.05,alpha=0.1)
 
     e = plt.errorbar(exp.t3/60.,exp.egf_CREBw_av,yerr=exp.egf_CREBw_se,lw=1,
-                    markerfacecolor='None',markeredgecolor='b',fmt='bD',capsize=8,clip_on=False)
+        markerfacecolor='None',markeredgecolor='b',fmt='bD',capsize=8,clip_on=False)
     for b in e[1]:
         b.set_clip_on(False)
     e = plt.errorbar(exp.t3/60.,exp.hrg_CREBw_av,yerr=exp.hrg_CREBw_se,lw=1,
-                    markerfacecolor='None',markeredgecolor='r',fmt='rs',capsize=8,clip_on=False)
+        markerfacecolor='None',markeredgecolor='r',fmt='rs',capsize=8,clip_on=False)
     for b in e[1]:
         b.set_clip_on(False)
     plt.xlim(0,90)
@@ -177,18 +177,18 @@ def plot_func(sim,n_file,viz_type,show_all,stdev,
         plt.plot(sim.t,np.average(DUSPmRNA_norm[:,:,1],axis=0),'r')
         if stdev:
             plt.errorbar(sim.t,np.average(DUSPmRNA_norm[:,:,0],axis=0),
-                         yerr=[np.std(DUSPmRNA_norm[:,i,0],ddof=1) for i in range(len(sim.t))],
-                         fmt='None',ecolor='b',lw=0.05,alpha=0.1)
+                yerr=[np.std(DUSPmRNA_norm[:,i,0],ddof=1) for i in range(len(sim.t))],
+                fmt='None',ecolor='b',lw=0.05,alpha=0.1)
             plt.errorbar(sim.t,np.average(DUSPmRNA_norm[:,:,1],axis=0),
-                         yerr=[np.std(DUSPmRNA_norm[:,i,1],ddof=1) for i in range(len(sim.t))],
-                         fmt='None',ecolor='r',lw=0.05,alpha=0.1)
+                yerr=[np.std(DUSPmRNA_norm[:,i,1],ddof=1) for i in range(len(sim.t))],
+                fmt='None',ecolor='r',lw=0.05,alpha=0.1)
 
     e = plt.errorbar(exp.t5/60.,exp.egf_DUSPmRNA_av,yerr=exp.egf_DUSPmRNA_se,lw=1,
-                    markerfacecolor='None',markeredgecolor='b',fmt='bD',capsize=8,clip_on=False)
+        markerfacecolor='None',markeredgecolor='b',fmt='bD',capsize=8,clip_on=False)
     for b in e[1]:
         b.set_clip_on(False)
     e = plt.errorbar(exp.t5/60.,exp.hrg_DUSPmRNA_av,yerr=exp.hrg_DUSPmRNA_se,lw=1,
-                    markerfacecolor='None',markeredgecolor='r',fmt='rs',capsize=8,clip_on=False)
+        markerfacecolor='None',markeredgecolor='r',fmt='rs',capsize=8,clip_on=False)
     for b in e[1]:
         b.set_clip_on(False)
     plt.xlim(0,90)
@@ -217,18 +217,18 @@ def plot_func(sim,n_file,viz_type,show_all,stdev,
         plt.plot(sim.t,np.average(cFosmRNA_norm[:,:,1],axis=0),'r')
         if stdev:
             plt.errorbar(sim.t,np.average(cFosmRNA_norm[:,:,0],axis=0),
-                         yerr=[np.std(cFosmRNA_norm[:,i,0],ddof=1) for i in range(len(sim.t))],
-                         fmt='None',ecolor='b',lw=0.05,alpha=0.1)
+                yerr=[np.std(cFosmRNA_norm[:,i,0],ddof=1) for i in range(len(sim.t))],
+                fmt='None',ecolor='b',lw=0.05,alpha=0.1)
             plt.errorbar(sim.t,np.average(cFosmRNA_norm[:,:,1],axis=0),
-                         yerr=[np.std(cFosmRNA_norm[:,i,1],ddof=1) for i in range(len(sim.t))],
-                         fmt='None',ecolor='r',lw=0.05,alpha=0.1)
+                yerr=[np.std(cFosmRNA_norm[:,i,1],ddof=1) for i in range(len(sim.t))],
+                fmt='None',ecolor='r',lw=0.05,alpha=0.1)
 
     e = plt.errorbar(exp.t4/60.,exp.egf_cFosmRNA_av,yerr=exp.egf_cFosmRNA_se,lw=1,
                     markerfacecolor='None',markeredgecolor='b',fmt='bD',capsize=8,clip_on=False)
     for b in e[1]:
         b.set_clip_on(False)
     e = plt.errorbar(exp.t4/60.,exp.hrg_cFosmRNA_av,yerr=exp.hrg_cFosmRNA_se,lw=1,
-                    markerfacecolor='None',markeredgecolor='r',fmt='rs',capsize=8,clip_on=False)
+        markerfacecolor='None',markeredgecolor='r',fmt='rs',capsize=8,clip_on=False)
     for b in e[1]:
         b.set_clip_on(False)
     plt.xlim(0,90)
@@ -257,18 +257,18 @@ def plot_func(sim,n_file,viz_type,show_all,stdev,
         plt.plot(sim.t,np.average(cFosPro_norm[:,:,1],axis=0),'r')
         if stdev:
             plt.errorbar(sim.t,np.average(cFosPro_norm[:,:,0],axis=0),
-                         yerr=[np.std(cFosPro_norm[:,i,0],ddof=1) for i in range(len(sim.t))],
-                         fmt='None',ecolor='b',lw=0.05,alpha=0.1)
+                yerr=[np.std(cFosPro_norm[:,i,0],ddof=1) for i in range(len(sim.t))],
+                fmt='None',ecolor='b',lw=0.05,alpha=0.1)
             plt.errorbar(sim.t,np.average(cFosPro_norm[:,:,1],axis=0),
-                         yerr=[np.std(cFosPro_norm[:,i,1],ddof=1) for i in range(len(sim.t))],
-                         fmt='None',ecolor='r',lw=0.05,alpha=0.1)
+                yerr=[np.std(cFosPro_norm[:,i,1],ddof=1) for i in range(len(sim.t))],
+                fmt='None',ecolor='r',lw=0.05,alpha=0.1)
 
     e = plt.errorbar(exp.t5/60.,exp.egf_cFosPro_av,yerr=exp.egf_cFosPro_se,lw=1,
-                    markerfacecolor='None',markeredgecolor='b',fmt='bD',capsize=8,clip_on=False)
+        markerfacecolor='None',markeredgecolor='b',fmt='bD',capsize=8,clip_on=False)
     for b in e[1]:
         b.set_clip_on(False)
     e = plt.errorbar(exp.t5/60.,exp.hrg_cFosPro_av,yerr=exp.hrg_cFosPro_se,lw=1,
-                    markerfacecolor='None',markeredgecolor='r',fmt='rs',capsize=8,clip_on=False)
+        markerfacecolor='None',markeredgecolor='r',fmt='rs',capsize=8,clip_on=False)
     for b in e[1]:
         b.set_clip_on(False)
     plt.xlim(0,90)
@@ -297,18 +297,18 @@ def plot_func(sim,n_file,viz_type,show_all,stdev,
         plt.plot(sim.t,np.average(PcFos_norm[:,:,1],axis=0),'r')
         if stdev:
             plt.errorbar(sim.t,np.average(PcFos_norm[:,:,0],axis=0),
-                         yerr=[np.std(PcFos_norm[:,i,0],ddof=1) for i in range(len(sim.t))],
-                         fmt='None',ecolor='b',lw=0.05,alpha=0.1)
+                yerr=[np.std(PcFos_norm[:,i,0],ddof=1) for i in range(len(sim.t))],
+                fmt='None',ecolor='b',lw=0.05,alpha=0.1)
             plt.errorbar(sim.t,np.average(PcFos_norm[:,:,1],axis=0),
-                         yerr=[np.std(PcFos_norm[:,i,1],ddof=1) for i in range(len(sim.t))],
-                         fmt='None',ecolor='r',lw=0.05,alpha=0.1)
+                yerr=[np.std(PcFos_norm[:,i,1],ddof=1) for i in range(len(sim.t))],
+                fmt='None',ecolor='r',lw=0.05,alpha=0.1)
 
     e = plt.errorbar(exp.t2/60.,exp.egf_PcFos_av,yerr=exp.egf_PcFos_se,lw=1,
-                    markerfacecolor='None',markeredgecolor='b',fmt='bD',capsize=8,clip_on=False)
+        markerfacecolor='None',markeredgecolor='b',fmt='bD',capsize=8,clip_on=False)
     for b in e[1]:
         b.set_clip_on(False)
     e = plt.errorbar(exp.t2/60.,exp.hrg_PcFos_av,yerr=exp.hrg_PcFos_se,lw=1,
-                    markerfacecolor='None',markeredgecolor='r',fmt='rs',capsize=8,clip_on=False)
+        markerfacecolor='None',markeredgecolor='r',fmt='rs',capsize=8,clip_on=False)
     for b in e[1]:
         b.set_clip_on(False)
     plt.xlim(0,90)
