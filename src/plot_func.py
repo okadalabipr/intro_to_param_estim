@@ -46,8 +46,8 @@ def plot_func(sim,n_file,viz_type,show_all,stdev,
             plt.plot(sim.t,PERK_cyt_all[i,:,1]/np.max(PERK_cyt_all[i,:,:]),'r',alpha=0.05)
 
     if not viz_type == 'average':
-        plt.plot(sim.t,sim.PERK_cyt[:,0]/np.max(sim.PERK_cyt[:,1]),'b')
-        plt.plot(sim.t,sim.PERK_cyt[:,1]/np.max(sim.PERK_cyt[:,1]),'r')
+        plt.plot(sim.t,sim.PERK_cyt[:,0]/np.max(sim.PERK_cyt),'b')
+        plt.plot(sim.t,sim.PERK_cyt[:,1]/np.max(sim.PERK_cyt),'r')
     else:
         PERK_cyt_norm  = np.empty((n_file,len(sim.tspan),sim.condition))
         for i in range(n_file):
@@ -86,8 +86,8 @@ def plot_func(sim,n_file,viz_type,show_all,stdev,
             plt.plot(sim.t,PRSK_wcl_all[i,:,1]/np.max(PRSK_wcl_all[i,:,:]),'r',alpha=0.05)
 
     if not viz_type == 'average':
-        plt.plot(sim.t,sim.PRSK_wcl[:,0]/np.max(sim.PRSK_wcl[:,1]),'b')
-        plt.plot(sim.t,sim.PRSK_wcl[:,1]/np.max(sim.PRSK_wcl[:,1]),'r')
+        plt.plot(sim.t,sim.PRSK_wcl[:,0]/np.max(sim.PRSK_wcl),'b')
+        plt.plot(sim.t,sim.PRSK_wcl[:,1]/np.max(sim.PRSK_wcl),'r')
     else:
         PRSK_wcl_norm  = np.empty((n_file,len(sim.tspan),sim.condition))
         for i in range(n_file):
@@ -126,8 +126,8 @@ def plot_func(sim,n_file,viz_type,show_all,stdev,
             plt.plot(sim.t,PCREB_wcl_all[i,:,1]/np.max(PCREB_wcl_all[i,:,:]),'r',alpha=0.05)
 
     if not viz_type == 'average':
-        plt.plot(sim.t,sim.PCREB_wcl[:,0]/np.max(sim.PCREB_wcl[:,1]),'b')
-        plt.plot(sim.t,sim.PCREB_wcl[:,1]/np.max(sim.PCREB_wcl[:,1]),'r')
+        plt.plot(sim.t,sim.PCREB_wcl[:,0]/np.max(sim.PCREB_wcl),'b')
+        plt.plot(sim.t,sim.PCREB_wcl[:,1]/np.max(sim.PCREB_wcl),'r')
     else:
         PCREB_wcl_norm  = np.empty((n_file,len(sim.tspan),sim.condition))
         for i in range(n_file):
@@ -166,8 +166,8 @@ def plot_func(sim,n_file,viz_type,show_all,stdev,
             plt.plot(sim.t,DUSPmRNA_all[i,:,1]/np.max(DUSPmRNA_all[i,:,:]),'r',alpha=0.05)
 
     if not viz_type == 'average':
-        plt.plot(sim.t,sim.DUSPmRNA[:,0]/np.max(sim.DUSPmRNA[:,1]),'b')
-        plt.plot(sim.t,sim.DUSPmRNA[:,1]/np.max(sim.DUSPmRNA[:,1]),'r')
+        plt.plot(sim.t,sim.DUSPmRNA[:,0]/np.max(sim.DUSPmRNA),'b')
+        plt.plot(sim.t,sim.DUSPmRNA[:,1]/np.max(sim.DUSPmRNA),'r')
     else:
         DUSPmRNA_norm  = np.empty((n_file,len(sim.tspan),sim.condition))
         for i in range(n_file):
@@ -206,8 +206,8 @@ def plot_func(sim,n_file,viz_type,show_all,stdev,
             plt.plot(sim.t,cFosmRNA_all[i,:,1]/np.max(cFosmRNA_all[i,:,:]),'r',alpha=0.05)
 
     if not viz_type == 'average':
-        plt.plot(sim.t,sim.cFosmRNA[:,0]/np.max(sim.cFosmRNA[:,1]),'b')
-        plt.plot(sim.t,sim.cFosmRNA[:,1]/np.max(sim.cFosmRNA[:,1]),'r')
+        plt.plot(sim.t,sim.cFosmRNA[:,0]/np.max(sim.cFosmRNA),'b')
+        plt.plot(sim.t,sim.cFosmRNA[:,1]/np.max(sim.cFosmRNA),'r')
     else:
         cFosmRNA_norm  = np.empty((n_file,len(sim.tspan),sim.condition))
         for i in range(n_file):
@@ -246,8 +246,8 @@ def plot_func(sim,n_file,viz_type,show_all,stdev,
             plt.plot(sim.t,cFosPro_all[i,:,1]/np.max(cFosPro_all[i,:,:]),'r',alpha=0.05)
 
     if not viz_type == 'average':
-        plt.plot(sim.t,sim.cFosPro[:,0]/np.max(sim.cFosPro[:,1]),'b')
-        plt.plot(sim.t,sim.cFosPro[:,1]/np.max(sim.cFosPro[:,1]),'r')
+        plt.plot(sim.t,sim.cFosPro[:,0]/np.max(sim.cFosPro),'b')
+        plt.plot(sim.t,sim.cFosPro[:,1]/np.max(sim.cFosPro),'r')
     else:
         cFosPro_norm  = np.empty((n_file,len(sim.tspan),sim.condition))
         for i in range(n_file):
@@ -286,8 +286,8 @@ def plot_func(sim,n_file,viz_type,show_all,stdev,
             plt.plot(sim.t,PcFos_all[i,:,1]/np.max(PcFos_all[i,:,:]),'r',alpha=0.05)
 
     if not viz_type == 'average':
-        plt.plot(sim.t,sim.PcFos[:,0]/np.max(sim.PcFos[:,1]),'b')
-        plt.plot(sim.t,sim.PcFos[:,1]/np.max(sim.PcFos[:,1]),'r')
+        plt.plot(sim.t,sim.PcFos[:,0]/np.max(sim.PcFos),'b')
+        plt.plot(sim.t,sim.PcFos[:,1]/np.max(sim.PcFos),'r')
     else:
         PcFos_norm  = np.empty((n_file,len(sim.tspan),sim.condition))
         for i in range(n_file):
