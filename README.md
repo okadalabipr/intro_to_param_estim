@@ -46,7 +46,46 @@ A brief description of each file you will need to use is below:
 
     - [**Fig/**](/runSim/Fig/)<br>
         Within this folder there are several figures that will be saved. One is the ‘param_range.pdf’ which shows the range of values for your parameters based on all the fittings. The others are results of your simulations.
-        
+
+## Requirements
+- Python3+
+    - numpy
+    - scipy
+    - matplotlib
+    - seaborn
+    - jupyter
+
+## Usage
+- Parameter Estimation (runGA/runGA_i.ipynb)
+```python
+%run -i set_current_ipynb.py
+```
+```python
+%run -i run_ga1.py
+
+""" If you want to continue from where you stopeed in the last parameter search,
+
+%run -i run_ga2.py
+
+"""
+```
+- Visualization of Simulation Results (runSim/runSim.ipynb)
+```python
+%run -i run_sim.py
+%matplotlib inline
+%config InlineBackend.figure_formats = {'png','retina'}
+
+"""=============================================================
+    viz_type: 'best', 'average', 'original' or int(1~n_fitparam)
+    show_all: bool
+    stdev: bool (Only when viz_type == 'average')
+================================================================"""
+viz(viz_type='average',show_all=False,stdev=True)
+
+# plt.savefig('./Fig/simulation_average_std.png',bbox_inches='tight')
+plt.show()
+```
+
 ## Algorithm
 #### ga_v1:
 Parameter values are searched by genetic algorithm with Unimodal Normal Distribution Crossover (UNDX) and Minimal Generation Gap (MGG).
@@ -82,14 +121,6 @@ If the best individual has not improved during the last *n*<sub>*p*</sub> genera
 
 1. **Termination**<br>
 Stop if the halting criteria are satisfied. Otherwise, *Generation* ← *Generation* +1, and return to the step 2.
-
-## Requirements
-- Python3+
-    - numpy
-    - scipy
-    - matplotlib
-    - seaborn
-    - jupyter
 
 ## Installation
 
