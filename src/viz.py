@@ -14,7 +14,7 @@ def viz(viz_type,show_all,stdev):
     if viz_type == 'original':
         pass
     else:
-        fitparam_files = os.listdir('../FitParam')
+        fitparam_files = os.listdir('./FitParam')
         for file in fitparam_files:
             if re.match(r'\d',file):
                 n_file += 1
@@ -43,8 +43,8 @@ def viz(viz_type,show_all,stdev):
 
         best_fitness_all = np.empty(n_file)
         for i in range(n_file):
-            if os.path.isfile('../FitParam/%d/BestFitness.npy'%(i+1)):
-                best_fitness_all[i] = np.load('../FitParam/%d/BestFitness.npy'%(i+1))
+            if os.path.isfile('./FitParam/%d/BestFitness.npy'%(i+1)):
+                best_fitness_all[i] = np.load('./FitParam/%d/BestFitness.npy'%(i+1))
             else:
                 best_fitness_all[i] = np.inf
 
@@ -89,8 +89,8 @@ def update_sim(nth_paramset,sim,x,y0):
 
     # get_best_param
     try:
-        generation = np.load('../FitParam/%d/generation.npy'%(nth_paramset))
-        best_indiv = np.load('../FitParam/%d/FitParam%d.npy'%(nth_paramset,int(generation)))
+        generation = np.load('./FitParam/%d/generation.npy'%(nth_paramset))
+        best_indiv = np.load('./FitParam/%d/FitParam%d.npy'%(nth_paramset,int(generation)))
 
         for i in range(len(search_idx[0])):
             x[search_idx[0][i]] = best_indiv[i]
@@ -114,8 +114,8 @@ def save_param_range(n_file,x,y0):
 
     for nth_paramset in range(1,n_file+1):
         try:
-            generation = np.load('../FitParam/%d/generation.npy'%(nth_paramset))
-            best_indiv = np.load('../FitParam/%d/FitParam%d.npy'%(nth_paramset,int(generation)))
+            generation = np.load('./FitParam/%d/generation.npy'%(nth_paramset))
+            best_indiv = np.load('./FitParam/%d/FitParam%d.npy'%(nth_paramset,int(generation)))
         except:
             best_indiv = np.empty(len(search_idx[0])+len(search_idx[1]))
             for i in range(len(search_idx[0])):

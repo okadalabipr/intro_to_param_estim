@@ -37,14 +37,14 @@ A brief description of each file you will need to use is below:
     - [**plot_func.py**](/src/plot_func.py) & [**viz.py**](/src/viz.py)<br>
         This is where you define how you would like each variable to be plotted.
 
-- [**runGA/**](/runGA/)<br>
-    - [**runGA_*n*.ipynb (*n* ≧ 1)**](/runGA/runGA_1.ipynb)<br>
+- [**work/**](/work/)<br>
+    - [**runGA/runGA_*n*.ipynb (*n* ≧ 1)**](/work/runGA/runGA_1.ipynb)<br>
         Run both input boxes and leave it. When you run the *i*<sup>th</sup> file, runGA_(*i+1*).ipynb will be generated in the runGA folder. You can run these different parameter fittings simultaneously.
-- [**runSim/**](/runSim/)<br>
-    - [**runSim.ipynb**](/runSim/runSim.ipynb)<br>
+
+    - [**runSim.ipynb**](/work/runSim.ipynb)<br>
         This is the file that is used to actually run the simulations for your model and plot the results.
 
-    - [**Fig/**](/runSim/Fig/)<br>
+    - [**Fig/**](/work/Fig/)<br>
         Within this folder there are several figures that will be saved. One is the ‘param_range.pdf’ which shows the range of values for your parameters based on all the fittings. The others are results of your simulations.
 
 ## Requirements

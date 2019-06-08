@@ -2,6 +2,7 @@ import os
 import sys
 import time
 import glob
+import shutil
 import re
 import numpy as np
 import warnings
@@ -10,13 +11,13 @@ warnings.filterwarnings('ignore')
 
 def include(pyfile):
     if '.py' in pyfile:
-        with open('../'+pyfile,'r',encoding='utf-8') as f:
+        with open('../../'+pyfile,'r',encoding='utf-8') as f:
             script = f.read()
             exec(script,globals())
     else:
-        files = glob.glob('../'+pyfile)
+        files = glob.glob('../../'+pyfile)
         for file in files:
-            include(file[len('../'):])
+            include(file[len('../../'):])
 
 
 include('ga/*')
@@ -31,8 +32,15 @@ include('src/simulation.py')
 
 nth_paramset = int(re.sub(r'\D','',current_ipynb))
 
-if not os.path.isdir('../FitParam/%d'%(nth_paramset)):
+try:
+    files = os.listdir('../FitParam/%d'%(nth_paramset))
+    for file in files:
+        if '.npy' in file:
+            os.remove('../FitParam/%d/%s'%(nth_paramset,file))
+except:
     os.mkdir('../FitParam/%d'%(nth_paramset))
-    parameter_estimation(nth_paramset)
-else:
-    parameter_estimation_continue(nth_paramset)
+
+if not os.path.isfile('./runGA_%d.ipynb'%(nth_paramset+1)):
+    shutil.copy('./runGA_%d.ipynb'%(nth_paramset),'./runGA_%d.ipynb'%(nth_paramset+1))
+
+parameter_estimation(nth_paramset)
