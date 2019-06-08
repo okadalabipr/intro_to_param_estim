@@ -7,22 +7,22 @@ def converging(
     search_idx,
     search_region
     ):
-    NC = 10
-    children = np.empty((NC,n_gene+1))
+    n_children = 10
+    children = np.empty((n_children,n_gene+1))
 
-    for i in range(NC):
+    for i in range(n_children):
         ip[2:] = np.random.choice(n_population,n_gene,replace=False)
         children[i,:] = xover(population[ip,:],n_gene)
 
-    family = np.empty((NC+2,n_gene+1))
-    family[:NC,:] = children
-    family[NC,:] = population[ip[0],:]
-    family[NC+1,:] = population[ip[1],:]
+    family = np.empty((n_children+2,n_gene+1))
+    family[:n_children,:] = children
+    family[n_children,:] = population[ip[0],:]
+    family[n_children+1,:] = population[ip[1],:]
 
     family = family[np.argsort(family[:,-1]),:]
 
     population[ip[0],:] = family[0,:] # Best, either of parents
-    population[ip[1],:] = family[np.random.randint(low=1,high=NC+2,dtype=np.int),:] # Random
+    population[ip[1],:] = family[np.random.randint(low=1,high=n_children+2,dtype=np.int),:] # Random
 
     if np.isinf(population[ip[1],-1]):
         population[ip[1],-1] = get_fitness(population[ip[1],:n_gene],search_idx,search_region)
