@@ -12,7 +12,7 @@ if not os.path.isdir('./Fig'):
     os.mkdir('./Fig')
 
 
-def using(src_file):
+def include(src_file):
     src_dir = '../src/'
     if '.py' in src_file:
         with open(src_dir+src_file,'r',encoding='utf-8') as f:
@@ -21,15 +21,15 @@ def using(src_file):
     else:
         files = glob.glob(src_dir+src_file)
         for file in files:
-            using(file[len(src_dir):])
+            include(file[len(src_dir):])
 
 
-using('model/f_parameter.py')
-using('model/f_variable.py')
-using('model/differential_equation.py')
-using('model/initial_condition.py')
-using('experimental_data.py')
-using('search_parameter.py')
-using('simulation.py')
-using('plot_func.py')
-using('viz.py')
+include('model/f_parameter.py')
+include('model/f_variable.py')
+include('model/differential_equation.py')
+include('model/initial_condition.py')
+include('experimental_data.py')
+include('search_parameter.py')
+include('simulation.py')
+include('plot_func.py')
+include('viz.py')
