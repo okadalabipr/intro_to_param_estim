@@ -32,6 +32,9 @@ include('src/simulation.py')
 
 nth_paramset = int(re.sub(r'\D','',current_ipynb))
 
+if not os.path.isdir('../FitParam'):
+    os.mkdir('../FitParam')
+
 try:
     files = os.listdir('../FitParam/%d'%(nth_paramset))
     for file in files:

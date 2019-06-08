@@ -37,9 +37,6 @@ def ga_v1(
 
     best_fitness = population[0,-1]
 
-    if not os.path.isdir('../FitParam'):
-        os.mkdir('../FitParam')
-
     np.save('../FitParam/%d/generation.npy'%(nth_paramset),1)
     np.save('../FitParam/%d/FitParam1'%(nth_paramset),best_indiv)
     np.save('../FitParam/%d/BestFitness.npy'%(nth_paramset),best_fitness)
