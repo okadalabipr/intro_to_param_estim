@@ -56,7 +56,7 @@ A brief description of each file you will need to use is below:
     - jupyter
 
 ## Usage
-- Parameter Estimation (runGA/runGA_i.ipynb)
+- Parameter Estimation (work/runGA/runGA_i.ipynb)
 ```javascript
 %%javascript
 IPython.notebook.kernel.execute(
@@ -72,7 +72,7 @@ IPython.notebook.kernel.execute(
 
 """
 ```
-- Visualization of Simulation Results (runSim/runSim.ipynb)
+- Visualization of Simulation Results (work/runSim.ipynb)
 ```python
 %run -i run_sim.py
 %matplotlib inline
