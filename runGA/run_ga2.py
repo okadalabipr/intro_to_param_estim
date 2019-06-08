@@ -8,27 +8,26 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
-def include(src_file):
-    src_dir = '../src/'
-    if '.py' in src_file:
-        with open(src_dir+src_file,'r',encoding='utf-8') as f:
+def include(pyfile):
+    if '.py' in pyfile:
+        with open('../'+pyfile,'r',encoding='utf-8') as f:
             script = f.read()
             exec(script,globals())
     else:
-        files = glob.glob(src_dir+src_file)
+        files = glob.glob('../'+pyfile)
         for file in files:
-            include(file[len(src_dir):])
+            include(file[len('../'):])
 
 
 include('ga/*')
-include('model/f_parameter.py')
-include('model/f_variable.py')
-include('model/differential_equation.py')
-include('model/initial_condition.py')
-include('experimental_data.py')
-include('search_parameter.py')
-include('fitness.py')
-include('simulation.py')
+include('src/model/f_parameter.py')
+include('src/model/f_variable.py')
+include('src/model/differential_equation.py')
+include('src/model/initial_condition.py')
+include('src/experimental_data.py')
+include('src/search_parameter.py')
+include('src/fitness.py')
+include('src/simulation.py')
 
 nth_paramset = int(re.sub(r'\D','',current_ipynb))
 
