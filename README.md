@@ -57,8 +57,11 @@ A brief description of each file you will need to use is below:
 
 ## Usage
 - Parameter Estimation (runGA/runGA_i.ipynb)
-```python
-%run -i set_current_ipynb.py
+```javascript
+%%javascript
+IPython.notebook.kernel.execute(
+    'current_ipynb = "' + IPython.notebook.notebook_name + '"'
+)
 ```
 ```python
 %run -i run_ga1.py
