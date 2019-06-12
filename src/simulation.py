@@ -1,6 +1,6 @@
 from scipy.integrate import ode
 
-def odesolve(diffeq,y0,tspan,args):
+def solveode(diffeq,y0,tspan,args):
     sol = ode(diffeq)
     sol.set_integrator('vode',method='bdf',min_step=1e-8,with_jacobian=True)
     sol.set_initial_value(y0,tspan[0])
@@ -39,7 +39,7 @@ class Simulation(object):
         self.y0 = y0
 
     @classmethod
-    def run_simulation(cls,x,y0):
+    def numerical_integration(cls,x,y0):
 
         for i in range(cls.condition):
             if i==0:
@@ -47,7 +47,7 @@ class Simulation(object):
             elif i==1:
                 x[Ligand] = x[HRG]
 
-            (T,Y) = odesolve(diffeq,y0,cls.tspan,tuple(x))
+            (T,Y) = solveode(diffeq,y0,cls.tspan,tuple(x))
 
             if T[-1] < cls.tspan[-1]:
                 return False

@@ -32,7 +32,7 @@ def get_fitness(individual_gene,search_idx,search_region):
     exp = ExperimentalData()
     sim = Simulation(x,y0)
 
-    if sim.run_simulation(x,y0) is None:
+    if sim.numerical_integration(x,y0) is None:
       fit=np.zeros(7)
 
       # ERK
