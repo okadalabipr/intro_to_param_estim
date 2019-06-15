@@ -224,7 +224,7 @@ def plot_func(sim,n_file,viz_type,show_all,stdev,
                 fmt='None',ecolor='r',lw=0.05,alpha=0.1)
 
     e = plt.errorbar(exp.t4/60.,exp.egf_cFosmRNA_av,yerr=exp.egf_cFosmRNA_se,lw=1,
-                    markerfacecolor='None',markeredgecolor='b',fmt='bD',capsize=8,clip_on=False)
+        markerfacecolor='None',markeredgecolor='b',fmt='bD',capsize=8,clip_on=False)
     for b in e[1]:
         b.set_clip_on(False)
     e = plt.errorbar(exp.t4/60.,exp.hrg_cFosmRNA_av,yerr=exp.hrg_cFosmRNA_se,lw=1,
