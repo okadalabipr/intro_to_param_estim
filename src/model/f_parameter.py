@@ -117,7 +117,7 @@ F_P = [\
 ]
 
 for i,name in enumerate(F_P):
-  exec('%s=%d'%(name,i),globals())
+  exec('%s=%d'%(name,i))
 
 def f_params():
 

@@ -38,4 +38,4 @@ F_V = [\
 ]
 
 for i,name in enumerate(F_V):
-  exec('%s=%d'%(name,i),globals())
+  exec('%s=%d'%(name,i))
