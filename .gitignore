@@ -1,5 +1,14 @@
 # OS generated file
 .DS_Store
 
+
+# compiled files
+*.pyc
+
+
+# python cache
+__pycache__/
+
+
 # Jupyter files
 .ipynb_checkpoints
