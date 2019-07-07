@@ -8,35 +8,35 @@
 
 ## Description
 A brief description of each file you will need to use is below:
-- [**src/**](/src/)<br>
+- [**param_estim/**](/param_estim/)<br>
 
-    - [**model/**](/src/model/)<br>
+    - [**model/**](/param_estim/model/)<br>
 
-        - [**name2idx/**](/src/model/name2idx/)<br>
+        - [**name2idx/**](/param_estim/model/name2idx/)<br>
             This is where you define the parameter/variable names of your model.
 
-        - [**param_const.py**](/src/model/param_const.py)<br>
+        - [**param_const.py**](/param_estim/model/param_const.py)<br>
             This file contains the parameters used in the differential equations.
 
-        - [**differential_equation.py**](/src/model/differential_equation.py)<br>
+        - [**differential_equation.py**](/param_estim/model/differential_equation.py)<br>
             This file contains the differential equations that instruct the model how to change concentrations of reactants over the time course of the simulation.
 
-        - [**initial_condition.py**](/src/model/initial_condition.py)<br>
+        - [**initial_condition.py**](/param_estim/model/initial_condition.py)<br>
             This is where you define initial concentrations.
 
-    - [**simulation.py**](/src/simulation.py)<br>
+    - [**simulation.py**](/param_estim/simulation.py)<br>
         This is where you define the simulations you want to run. In this file you can define different conditions for each simulation (for example, ligand concentration) and how you would like each variable to be simulated (i.e. do you want absolute concentration to be simulated? or percentage change over time? Etc).
 
-    - [**experimental_data.py**](/src/experimental_data.py)<br>
+    - [**experimental_data.py**](/param_estim/experimental_data.py)<br>
         This is where you input the experimental data that you are going to use to try and fit the parameters to.
 
-    - [**search_parameter.py**](/src/search_parameter.py)<br>
+    - [**search_parameter.py**](/param_estim/search_parameter.py)<br>
         This is where you specify the model parameters to estimate.
 
-    - [**fitness.py**](/src/fitness.py)<br>
+    - [**fitness.py**](/param_estim/fitness.py)<br>
         This file calculates the difference between the simulated values and the experimental values.
 
-    - [**plot_func.py**](/src/plot_func.py) & [**viz.py**](/src/viz.py)<br>
+    - [**plot_func.py**](/param_estim/plot_func.py) & [**viz.py**](/param_estim/viz.py)<br>
         This is where you define how you would like each variable to be plotted.
 
 - [**work/**](/work/)<br>
@@ -85,7 +85,7 @@ IPython.notebook.kernel.execute(
     stdev: bool (Only when viz_type == 'average')
 ================================================================"""
 
-viz(viz_type='average',show_all=False,stdev=True)
+viualize_result(viz_type='average',show_all=False,stdev=True)
 ```
 
 ## Algorithm
