@@ -9,7 +9,7 @@ from . import plot_func
 from .search_parameter import search_parameter_index
 from .simulation import Simulation
 
-def viz(viz_type,show_all,stdev):
+def visualize_result(viz_type,show_all,stdev):
     if not viz_type in ['best','average','original']:
         try:
             int(viz_type)

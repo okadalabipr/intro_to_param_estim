@@ -6,4 +6,4 @@ if not os.path.isdir('./Fig'):
     os.mkdir('./Fig')
 
 
-from  param_estim.viz import viz
+from  param_estim.viz import visualize_result
