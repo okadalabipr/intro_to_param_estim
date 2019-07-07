@@ -20,7 +20,10 @@ except:
     os.mkdir('../FitParam/%d'%(nth_paramset))
 
 if not os.path.isfile('./runGA_%d.ipynb'%(nth_paramset+1)):
-    shutil.copy('./runGA_%d.ipynb'%(nth_paramset),'./runGA_%d.ipynb'%(nth_paramset+1))
+    shutil.copy(
+        './runGA_%d.ipynb'%(nth_paramset),
+        './runGA_%d.ipynb'%(nth_paramset+1)
+    )
 
 
 ga.parameter_estimation(nth_paramset)
