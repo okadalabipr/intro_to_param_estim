@@ -1,3 +1,14 @@
+import os
+import re
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+from . import model
+from . import plot_func
+from .search_parameter import search_parameter_index
+from .simulation import Simulation
+
 def viz(viz_type,show_all,stdev):
     if not viz_type in ['best','average','original']:
         try:
@@ -6,8 +17,8 @@ def viz(viz_type,show_all,stdev):
             print("Error: viz_type ∈ {'best','average','original',int(1~n_fitparam)}")
             sys.exit()
 
-    x = f_params()
-    y0 = initial_values()
+    x = model.f_params()
+    y0 = model.initial_values()
     sim = Simulation(x,y0)
 
     n_file = 0
@@ -72,7 +83,7 @@ def viz(viz_type,show_all,stdev):
         else:
             print('Simulation failed.')
 
-    plot_func(sim,n_file,viz_type,show_all,stdev,
+    plot_func.timecourse(sim,n_file,viz_type,show_all,stdev,
         PMEK_cyt_all,
         PERK_cyt_all,
         PRSK_wcl_all,
@@ -134,7 +145,7 @@ def save_param_range(n_file,x,y0):
     plt.gca().yaxis.set_ticks_position('left')
     plt.gca().xaxis.set_ticks_position('bottom')
 
-    ax = sns.lvplot(data=search_param_matrix,
+    ax = sns.boxenplot(data=search_param_matrix,
         orient='h',
         linewidth=0.5,
         palette='Set2'
@@ -142,7 +153,7 @@ def save_param_range(n_file,x,y0):
 
     ax.set_xlabel('Parameter value')
     ax.set_ylabel('')
-    ax.set_yticklabels([F_P[i] for i in search_idx[0]])
+    ax.set_yticklabels([model.C.F_P[i] for i in search_idx[0]])
     ax.set_xscale('log')
 
     plt.savefig('./Fig/param_range.pdf',bbox_inches='tight')

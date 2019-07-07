@@ -1,4 +1,11 @@
+import numpy as np
 from scipy.spatial.distance import cosine
+
+from .model.name2idx import f_parameter as C
+from .model.name2idx import f_variable as V
+from .simulation import Simulation
+from .experimental_data import ExperimentalData
+from ga.transformation import update_param
 
 def compute_objval_abs(sim_data,exp_data):  # Residual Sum of Squares
 
@@ -14,20 +21,20 @@ def get_fitness(individual_gene,search_idx,search_region):
 
     (x,y0) = update_param(individual_gene,search_idx,search_region)
     # constraints
-    x[V6] = x[V5]
-    x[Km6] = x[Km5]
-    x[KimpDUSP] = x[KimDUSP]
-    x[KexpDUSP] = x[KexDUSP]
-    x[KimpcFOS] = x[KimFOS]
-    x[KexpcFOS] = x[KexFOS]
-    x[p52] = x[p47]
-    x[m52] = x[m47]
-    x[p53] = x[p48]
-    x[p54] = x[p49]
-    x[m54] = x[m49]
-    x[p55] = x[p50]
-    x[p56] = x[p51]
-    x[m56] = x[m51]
+    x[C.V6] = x[C.V5]
+    x[C.Km6] = x[C.Km5]
+    x[C.KimpDUSP] = x[C.KimDUSP]
+    x[C.KexpDUSP] = x[C.KexDUSP]
+    x[C.KimpcFOS] = x[C.KimFOS]
+    x[C.KexpcFOS] = x[C.KexFOS]
+    x[C.p52] = x[C.p47]
+    x[C.m52] = x[C.m47]
+    x[C.p53] = x[C.p48]
+    x[C.p54] = x[C.p49]
+    x[C.m54] = x[C.m49]
+    x[C.p55] = x[C.p50]
+    x[C.p56] = x[C.p51]
+    x[C.m56] = x[C.m51]
 
     exp = ExperimentalData()
     sim = Simulation(x,y0)

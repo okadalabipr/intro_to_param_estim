@@ -1,3 +1,5 @@
+import numpy as np
+
 class ExperimentalData(object):
   # _av: average
   # _se: standard error

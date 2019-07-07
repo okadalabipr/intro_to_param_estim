@@ -34,7 +34,9 @@ F_V = [\
   'Fc',
   'Fn',
   'FmRNAc',
-  'PreFmRNAn'\
+  'PreFmRNAn',
+  #
+  'len_f_vars'\
 ]
 
 for i,name in enumerate(F_V):

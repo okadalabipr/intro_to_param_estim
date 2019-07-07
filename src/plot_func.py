@@ -1,4 +1,10 @@
-def plot_func(sim,n_file,viz_type,show_all,stdev,
+import numpy as np
+from matplotlib import pyplot as plt
+from .experimental_data import ExperimentalData
+
+exp = ExperimentalData()
+
+def timecourse(sim,n_file,viz_type,show_all,stdev,
     PMEK_cyt_all,
     PERK_cyt_all,
     PRSK_wcl_all,
@@ -317,3 +323,6 @@ def plot_func(sim,n_file,viz_type,show_all,stdev,
     plt.ylim(0,1.2)
     plt.xlabel('Time (min)')
     plt.ylabel('Phosphorylated c-Fos\nProtein expression')
+
+    #plt.savefig('./Fig/simulation_average_std.png',bbox_inches='tight')
+    plt.show()

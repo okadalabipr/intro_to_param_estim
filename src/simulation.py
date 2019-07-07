@@ -1,4 +1,9 @@
+import numpy as np
 from scipy.integrate import ode
+
+from .model.name2idx import f_parameter as C
+from .model.name2idx import f_variable as V
+from .model.differential_equation import diffeq
 
 def solveode(diffeq,y0,tspan,args):
     sol = ode(diffeq)
@@ -43,20 +48,20 @@ class Simulation(object):
 
         for i in range(cls.condition):
             if i==0:
-                x[Ligand] = x[EGF]
+                x[C.Ligand] = x[C.EGF]
             elif i==1:
-                x[Ligand] = x[HRG]
+                x[C.Ligand] = x[C.HRG]
 
             (T,Y) = solveode(diffeq,y0,cls.tspan,tuple(x))
 
             if T[-1] < cls.tspan[-1]:
                 return False
             else:
-                cls.PMEK_cyt[:,i] = Y[:,ppMEKc]
-                cls.PERK_cyt[:,i] = Y[:,pERKc] + Y[:,ppERKc]
-                cls.PRSK_wcl[:,i] = Y[:,pRSKc] + Y[:,pRSKn]*(x[Vn]/x[Vc])
-                cls.PCREB_wcl[:,i] = Y[:,pCREBn]*(x[Vn]/x[Vc])
-                cls.DUSPmRNA[:,i] = Y[:,duspmRNAc]
-                cls.cFosmRNA[:,i] = Y[:,cfosmRNAc]
-                cls.cFosPro[:,i] = (Y[:,pcFOSn] + Y[:,cFOSn])*(x[Vn]/x[Vc]) + Y[:,cFOSc] + Y[:,pcFOSc]
-                cls.PcFos[:,i] = Y[:,pcFOSn]*(x[Vn]/x[Vc]) + Y[:,pcFOSc]
+                cls.PMEK_cyt[:,i] = Y[:,V.ppMEKc]
+                cls.PERK_cyt[:,i] = Y[:,V.pERKc] + Y[:,V.ppERKc]
+                cls.PRSK_wcl[:,i] = Y[:,V.pRSKc] + Y[:,V.pRSKn]*(x[C.Vn]/x[C.Vc])
+                cls.PCREB_wcl[:,i] = Y[:,V.pCREBn]*(x[C.Vn]/x[C.Vc])
+                cls.DUSPmRNA[:,i] = Y[:,V.duspmRNAc]
+                cls.cFosmRNA[:,i] = Y[:,V.cfosmRNAc]
+                cls.cFosPro[:,i] = (Y[:,V.pcFOSn] + Y[:,V.cFOSn])*(x[C.Vn]/x[C.Vc]) + Y[:,V.cFOSc] + Y[:,V.pcFOSc]
+                cls.PcFos[:,i] = Y[:,V.pcFOSn]*(x[C.Vn]/x[C.Vc]) + Y[:,V.pcFOSc]
