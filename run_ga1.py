@@ -4,7 +4,7 @@ import re
 import warnings
 warnings.filterwarnings('ignore')
 
-import ga
+import genetic_algorithm as ga
 
 nth_paramset = int(re.sub(r'\D','',current_ipynb))
 
