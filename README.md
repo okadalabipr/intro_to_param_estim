@@ -9,12 +9,14 @@
 ## Description
 A brief description of each file you will need to use is below:
 - [**src/**](/src/)<br>
-    - [**model/**](/src/model/)<br>
-        - [**f_parameter.py**](/src/model/f_parameter.py)<br>
-            This file contains the parameters used in the differential equations.
 
-        - [**f_variable.py**](/src/model/f_variable.py)<br>
-            This file is where you define the variables of your model.
+    - [**model/**](/src/model/)<br>
+
+        - [**name2idx/**](/src/model/name2idx/)<br>
+            This is where you define the parameter/variable names of your model.
+
+        - [**param_const.py**](/src/model/param_const.py)<br>
+            This file contains the parameters used in the differential equations.
 
         - [**differential_equation.py**](/src/model/differential_equation.py)<br>
             This file contains the differential equations that instruct the model how to change concentrations of reactants over the time course of the simulation.
@@ -64,17 +66,16 @@ IPython.notebook.kernel.execute(
 )
 ```
 ```python
-%run -i run_ga1.py
-
+%run -i ../../run_ga1.py
 """ If you want to continue from where you stopeed in the last parameter search,
 
-%run -i run_ga2.py
+%run -i ../../run_ga2.py
 
 """
 ```
 - Visualization of Simulation Results (work/runSim.ipynb)
 ```python
-%run -i run_sim.py
+%run -i ../run_sim.py
 %matplotlib inline
 %config InlineBackend.figure_formats = {'png','retina'}
 
@@ -83,10 +84,8 @@ IPython.notebook.kernel.execute(
     show_all: bool
     stdev: bool (Only when viz_type == 'average')
 ================================================================"""
-viz(viz_type='average',show_all=False,stdev=True)
 
-# plt.savefig('./Fig/simulation_average_std.png',bbox_inches='tight')
-plt.show()
+viz(viz_type='average',show_all=False,stdev=True)
 ```
 
 ## Algorithm
