@@ -1,4 +1,7 @@
-# [ga_v2] ENDX + MGG(best&random)
+import numpy as np
+
+from src.fitness import get_fitness
+
 def converging(
     ip,
     population,

@@ -1,4 +1,7 @@
-# [ga_v2] NDM + MGG(best)
+import numpy as np
+
+from src.fitness import get_fitness
+
 def local_search(
     ip,
     population,

@@ -1,4 +1,7 @@
-# [ga_v1] Minimal Generation Gap selection for UNDX
+import numpy as np
+
+from src.fitness import get_fitness
+
 def mgg_variant(
     population,
     n_population,
