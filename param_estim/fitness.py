@@ -5,7 +5,7 @@ from .model.name2idx import f_parameter as C
 from .model.name2idx import f_variable as V
 from .simulation import Simulation
 from .experimental_data import ExperimentalData
-from genetic_algorithm.transformation import update_param
+from .genetic_algorithm.transformation import update_param
 
 def compute_objval_abs(sim_data,exp_data):  # Residual Sum of Squares
 
