@@ -5,9 +5,9 @@ from .transformation import decode_gene2variable
 from .undx_mgg import mgg_variant
 from .converging import converging
 from .local_search import local_search
-from src.fitness import get_fitness
-from src.search_parameter import search_parameter_index
-from src.search_parameter import get_search_region
+from param_estim.fitness import get_fitness
+from param_estim.search_parameter import search_parameter_index
+from param_estim.search_parameter import get_search_region
 
 def parameter_estimation_continue(nth_paramset):
 

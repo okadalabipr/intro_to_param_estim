@@ -1,4 +1,4 @@
-from src import model
+from param_estim import model
 
 def decode_gene2variable(individual_gene,search_region):
 
