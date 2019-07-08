@@ -137,7 +137,7 @@ def save_param_range(n_file,x,y0):
         search_param_matrix[nth_paramset-1,:] = best_indiv
 
     # ==========================================================================
-    # seaborn.lvplot
+    # seaborn.boxenplot
 
     fig = plt.figure(figsize=(8,24))
     plt.gca().spines['right'].set_visible(False)
