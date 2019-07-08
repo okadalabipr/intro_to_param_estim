@@ -1,7 +1,7 @@
 import numpy as np
 from matplotlib import pyplot as plt
-from .experimental_data import ExperimentalData
 
+from .experimental_data import ExperimentalData
 
 def timecourse(sim,n_file,viz_type,show_all,stdev,
     PMEK_cyt_all,
