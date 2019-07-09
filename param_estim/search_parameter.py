@@ -5,7 +5,7 @@ from .model.name2idx import f_parameter as C
 from .model.name2idx import f_variable as V
 from .model.param_const import f_params
 from .model.initial_condition import initial_values
-        
+
 def search_parameter_index():
 
     # Write param index for optimization
@@ -101,6 +101,15 @@ def get_search_region():
 
     search_idx = search_parameter_index()
 
+    if len(search_idx[0]) != len(set(search_idx[0])):
+        print('Error: Duplicate param name.')
+        sys.exit()
+    elif len(search_idx[1]) != len(set(search_idx[1])):
+        print('Error: Duplicate var name.')
+        sys.exit()
+    else:
+        pass
+
     search_param = np.empty(len(search_idx[0])+len(search_idx[1]))
     for i in range(len(search_idx[0])):
         search_param[i] = x[search_idx[0][i]]
@@ -112,7 +121,7 @@ def get_search_region():
         sys.exit()
 
     search_region = np.zeros((2,len(x)+len(y0)))
-    
+
     '''
     # Default: 0.1 ~ 10
     for i in range(len(search_idx[0])):
@@ -124,8 +133,9 @@ def get_search_region():
         search_region[0,search_idx[1][i]+len(x)] = search_param[i+len(search_idx[0])]*0.5 # lower bound
         search_region[1,search_idx[1][i]+len(x)] = search_param[i+len(search_idx[0])]*2.0 # upper bound
     '''
-    
-    # search_region[:,(C or V).param_name] = [lower_bound,upper_bound]
+
+    # search_region[:,C.param_name] = [lower_bound,upper_bound]
+    # search_region[:,V.var_name+len(x)] = [lower_bound,upper_bound]
 
     search_region[:,C.V1] = [7.33e-2,6.60e-01]
     search_region[:,C.Km1] = [1.83e+2,8.50e+2]
@@ -202,7 +212,7 @@ def get_search_region():
     search_region[:,C.KF31] = [np.exp(-10),np.exp(10)]
     search_region[:,C.nF31] = [1.00,4.00]
     search_region[:,C.a] = [1.00e+2,5.00e+2]
-    
+
     search_region = lin2log(search_idx,search_region,len(x),len(search_param))
 
     return search_region
