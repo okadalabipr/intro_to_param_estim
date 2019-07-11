@@ -61,12 +61,20 @@ def timecourse(sim,n_file,viz_type,show_all,stdev,
         plt.plot(sim.t,np.average(PERK_cyt_norm[:,:,0],axis=0),'b')
         plt.plot(sim.t,np.average(PERK_cyt_norm[:,:,1],axis=0),'r')
         if stdev:
-            plt.errorbar(sim.t,np.average(PERK_cyt_norm[:,:,0],axis=0),
-                yerr=[np.std(PERK_cyt_norm[:,i,0],ddof=1) for i in range(len(sim.t))],
-                fmt='None',ecolor='b',lw=0.05,alpha=0.1)
-            plt.errorbar(sim.t,np.average(PERK_cyt_norm[:,:,1],axis=0),
-                yerr=[np.std(PERK_cyt_norm[:,i,1],ddof=1) for i in range(len(sim.t))],
-                fmt='None',ecolor='r',lw=0.05,alpha=0.1)
+            yerr_egf = [np.std(PERK_cyt_norm[:,i,0],ddof=1) for i in range(len(sim.t))]
+            plt.fill_between(
+                sim.t,
+                np.average(PERK_cyt_norm[:,:,0],axis=0) - yerr_egf,
+                np.average(PERK_cyt_norm[:,:,0],axis=0) + yerr_egf,
+                lw=0,color='b',alpha=0.1
+            )
+            yerr_hrg = [np.std(PERK_cyt_norm[:,i,1],ddof=1) for i in range(len(sim.t))]
+            plt.fill_between(
+                sim.t,
+                np.average(PERK_cyt_norm[:,:,1],axis=0) - yerr_hrg,
+                np.average(PERK_cyt_norm[:,:,1],axis=0) + yerr_hrg,
+                lw=0,color='r',alpha=0.1
+            )
 
     e = plt.errorbar(exp.t2/60.,exp.egf_ERKc_av,yerr=exp.egf_ERKc_se,lw=1,
         markerfacecolor='None',markeredgecolor='b',fmt='bD',capsize=8,clip_on=False)
@@ -101,12 +109,20 @@ def timecourse(sim,n_file,viz_type,show_all,stdev,
         plt.plot(sim.t,np.average(PRSK_wcl_norm[:,:,0],axis=0),'b')
         plt.plot(sim.t,np.average(PRSK_wcl_norm[:,:,1],axis=0),'r')
         if stdev:
-            plt.errorbar(sim.t,np.average(PRSK_wcl_norm[:,:,0],axis=0),
-                yerr=[np.std(PRSK_wcl_norm[:,i,0],ddof=1) for i in range(len(sim.t))],
-                fmt='None',ecolor='b',lw=0.05,alpha=0.1)
-            plt.errorbar(sim.t,np.average(PRSK_wcl_norm[:,:,1],axis=0),
-                yerr=[np.std(PRSK_wcl_norm[:,i,1],ddof=1) for i in range(len(sim.t))],
-                fmt='None',ecolor='r',lw=0.05,alpha=0.1)
+            yerr_egf = [np.std(PRSK_wcl_norm[:,i,0],ddof=1) for i in range(len(sim.t))]
+            plt.fill_between(
+                sim.t,
+                np.average(PRSK_wcl_norm[:,:,0],axis=0) - yerr_egf,
+                np.average(PRSK_wcl_norm[:,:,0],axis=0) + yerr_egf,
+                lw=0,color='b',alpha=0.1
+            )
+            yerr_hrg = [np.std(PRSK_wcl_norm[:,i,1],ddof=1) for i in range(len(sim.t))]
+            plt.fill_between(
+                sim.t,
+                np.average(PRSK_wcl_norm[:,:,1],axis=0) - yerr_hrg,
+                np.average(PRSK_wcl_norm[:,:,1],axis=0) + yerr_hrg,
+                lw=0,color='r',alpha=0.1
+            )
 
     e = plt.errorbar(exp.t2/60.,exp.egf_RSKw_av,yerr=exp.egf_RSKw_se,lw=1,
         markerfacecolor='None',markeredgecolor='b',fmt='bD',capsize=8,clip_on=False)
@@ -141,12 +157,20 @@ def timecourse(sim,n_file,viz_type,show_all,stdev,
         plt.plot(sim.t,np.average(PCREB_wcl_norm[:,:,0],axis=0),'b')
         plt.plot(sim.t,np.average(PCREB_wcl_norm[:,:,1],axis=0),'r')
         if stdev:
-            plt.errorbar(sim.t,np.average(PCREB_wcl_norm[:,:,0],axis=0),
-                yerr=[np.std(PCREB_wcl_norm[:,i,0],ddof=1) for i in range(len(sim.t))],
-                fmt='None',ecolor='b',lw=0.05,alpha=0.1)
-            plt.errorbar(sim.t,np.average(PCREB_wcl_norm[:,:,1],axis=0),
-                yerr=[np.std(PCREB_wcl_norm[:,i,1],ddof=1) for i in range(len(sim.t))],
-                fmt='None',ecolor='r',lw=0.05,alpha=0.1)
+            yerr_egf = [np.std(PCREB_wcl_norm[:,i,0],ddof=1) for i in range(len(sim.t))]
+            plt.fill_between(
+                sim.t,
+                np.average(PCREB_wcl_norm[:,:,0],axis=0) - yerr_egf,
+                np.average(PCREB_wcl_norm[:,:,0],axis=0) + yerr_egf,
+                lw=0,color='b',alpha=0.1
+            )
+            yerr_hrg = [np.std(PCREB_wcl_norm[:,i,1],ddof=1) for i in range(len(sim.t))]
+            plt.fill_between(
+                sim.t,
+                np.average(PCREB_wcl_norm[:,:,1],axis=0) - yerr_hrg,
+                np.average(PCREB_wcl_norm[:,:,1],axis=0) + yerr_hrg,
+                lw=0,color='r',alpha=0.1
+            )
 
     e = plt.errorbar(exp.t3/60.,exp.egf_CREBw_av,yerr=exp.egf_CREBw_se,lw=1,
         markerfacecolor='None',markeredgecolor='b',fmt='bD',capsize=8,clip_on=False)
@@ -181,12 +205,20 @@ def timecourse(sim,n_file,viz_type,show_all,stdev,
         plt.plot(sim.t,np.average(DUSPmRNA_norm[:,:,0],axis=0),'b')
         plt.plot(sim.t,np.average(DUSPmRNA_norm[:,:,1],axis=0),'r')
         if stdev:
-            plt.errorbar(sim.t,np.average(DUSPmRNA_norm[:,:,0],axis=0),
-                yerr=[np.std(DUSPmRNA_norm[:,i,0],ddof=1) for i in range(len(sim.t))],
-                fmt='None',ecolor='b',lw=0.05,alpha=0.1)
-            plt.errorbar(sim.t,np.average(DUSPmRNA_norm[:,:,1],axis=0),
-                yerr=[np.std(DUSPmRNA_norm[:,i,1],ddof=1) for i in range(len(sim.t))],
-                fmt='None',ecolor='r',lw=0.05,alpha=0.1)
+            yerr_egf = [np.std(DUSPmRNA_norm[:,i,0],ddof=1) for i in range(len(sim.t))]
+            plt.fill_between(
+                sim.t,
+                np.average(DUSPmRNA_norm[:,:,0],axis=0) - yerr_egf,
+                np.average(DUSPmRNA_norm[:,:,0],axis=0) + yerr_egf,
+                lw=0,color='b',alpha=0.1
+            )
+            yerr_hrg = [np.std(DUSPmRNA_norm[:,i,1],ddof=1) for i in range(len(sim.t))]
+            plt.fill_between(
+                sim.t,
+                np.average(DUSPmRNA_norm[:,:,1],axis=0) - yerr_hrg,
+                np.average(DUSPmRNA_norm[:,:,1],axis=0) + yerr_hrg,
+                lw=0,color='r',alpha=0.1
+            )
 
     e = plt.errorbar(exp.t5/60.,exp.egf_DUSPmRNA_av,yerr=exp.egf_DUSPmRNA_se,lw=1,
         markerfacecolor='None',markeredgecolor='b',fmt='bD',capsize=8,clip_on=False)
@@ -221,12 +253,20 @@ def timecourse(sim,n_file,viz_type,show_all,stdev,
         plt.plot(sim.t,np.average(cFosmRNA_norm[:,:,0],axis=0),'b')
         plt.plot(sim.t,np.average(cFosmRNA_norm[:,:,1],axis=0),'r')
         if stdev:
-            plt.errorbar(sim.t,np.average(cFosmRNA_norm[:,:,0],axis=0),
-                yerr=[np.std(cFosmRNA_norm[:,i,0],ddof=1) for i in range(len(sim.t))],
-                fmt='None',ecolor='b',lw=0.05,alpha=0.1)
-            plt.errorbar(sim.t,np.average(cFosmRNA_norm[:,:,1],axis=0),
-                yerr=[np.std(cFosmRNA_norm[:,i,1],ddof=1) for i in range(len(sim.t))],
-                fmt='None',ecolor='r',lw=0.05,alpha=0.1)
+            yerr_egf = [np.std(cFosmRNA_norm[:,i,0],ddof=1) for i in range(len(sim.t))]
+            plt.fill_between(
+                sim.t,
+                np.average(cFosmRNA_norm[:,:,0],axis=0) - yerr_egf,
+                np.average(cFosmRNA_norm[:,:,0],axis=0) + yerr_egf,
+                lw=0,color='b',alpha=0.1
+            )
+            yerr_hrg = [np.std(cFosmRNA_norm[:,i,1],ddof=1) for i in range(len(sim.t))]
+            plt.fill_between(
+                sim.t,
+                np.average(cFosmRNA_norm[:,:,1],axis=0) - yerr_hrg,
+                np.average(cFosmRNA_norm[:,:,1],axis=0) + yerr_hrg,
+                lw=0,color='r',alpha=0.1
+            )
 
     e = plt.errorbar(exp.t4/60.,exp.egf_cFosmRNA_av,yerr=exp.egf_cFosmRNA_se,lw=1,
         markerfacecolor='None',markeredgecolor='b',fmt='bD',capsize=8,clip_on=False)
@@ -261,12 +301,20 @@ def timecourse(sim,n_file,viz_type,show_all,stdev,
         plt.plot(sim.t,np.average(cFosPro_norm[:,:,0],axis=0),'b')
         plt.plot(sim.t,np.average(cFosPro_norm[:,:,1],axis=0),'r')
         if stdev:
-            plt.errorbar(sim.t,np.average(cFosPro_norm[:,:,0],axis=0),
-                yerr=[np.std(cFosPro_norm[:,i,0],ddof=1) for i in range(len(sim.t))],
-                fmt='None',ecolor='b',lw=0.05,alpha=0.1)
-            plt.errorbar(sim.t,np.average(cFosPro_norm[:,:,1],axis=0),
-                yerr=[np.std(cFosPro_norm[:,i,1],ddof=1) for i in range(len(sim.t))],
-                fmt='None',ecolor='r',lw=0.05,alpha=0.1)
+            yerr_egf = [np.std(cFosPro_norm[:,i,0],ddof=1) for i in range(len(sim.t))]
+            plt.fill_between(
+                sim.t,
+                np.average(cFosPro_norm[:,:,0],axis=0) - yerr_egf,
+                np.average(cFosPro_norm[:,:,0],axis=0) + yerr_egf,
+                lw=0,color='b',alpha=0.1
+            )
+            yerr_hrg = [np.std(cFosPro_norm[:,i,1],ddof=1) for i in range(len(sim.t))]
+            plt.fill_between(
+                sim.t,
+                np.average(cFosPro_norm[:,:,1],axis=0) - yerr_hrg,
+                np.average(cFosPro_norm[:,:,1],axis=0) + yerr_hrg,
+                lw=0,color='r',alpha=0.1
+            )
 
     e = plt.errorbar(exp.t5/60.,exp.egf_cFosPro_av,yerr=exp.egf_cFosPro_se,lw=1,
         markerfacecolor='None',markeredgecolor='b',fmt='bD',capsize=8,clip_on=False)
@@ -301,12 +349,20 @@ def timecourse(sim,n_file,viz_type,show_all,stdev,
         plt.plot(sim.t,np.average(PcFos_norm[:,:,0],axis=0),'b')
         plt.plot(sim.t,np.average(PcFos_norm[:,:,1],axis=0),'r')
         if stdev:
-            plt.errorbar(sim.t,np.average(PcFos_norm[:,:,0],axis=0),
-                yerr=[np.std(PcFos_norm[:,i,0],ddof=1) for i in range(len(sim.t))],
-                fmt='None',ecolor='b',lw=0.05,alpha=0.1)
-            plt.errorbar(sim.t,np.average(PcFos_norm[:,:,1],axis=0),
-                yerr=[np.std(PcFos_norm[:,i,1],ddof=1) for i in range(len(sim.t))],
-                fmt='None',ecolor='r',lw=0.05,alpha=0.1)
+            yerr_egf = [np.std(PcFos_norm[:,i,0],ddof=1) for i in range(len(sim.t))]
+            plt.fill_between(
+                sim.t,
+                np.average(PcFos_norm[:,:,0],axis=0) - yerr_egf,
+                np.average(PcFos_norm[:,:,0],axis=0) + yerr_egf,
+                lw=0,color='b',alpha=0.1
+            )
+            yerr_hrg = [np.std(PcFos_norm[:,i,1],ddof=1) for i in range(len(sim.t))]
+            plt.fill_between(
+                sim.t,
+                np.average(PcFos_norm[:,:,1],axis=0) - yerr_hrg,
+                np.average(PcFos_norm[:,:,1],axis=0) + yerr_hrg,
+                lw=0,color='r',alpha=0.1
+            )
 
     e = plt.errorbar(exp.t2/60.,exp.egf_PcFos_av,yerr=exp.egf_PcFos_se,lw=1,
         markerfacecolor='None',markeredgecolor='b',fmt='bD',capsize=8,clip_on=False)
