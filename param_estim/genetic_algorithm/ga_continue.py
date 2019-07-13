@@ -70,8 +70,6 @@ def ga_v1_continue(
         best_indiv = decode_gene2variable(population[0,:n_gene],search_region)
         best_fitness = population[0,-1]
         return best_indiv,best_fitness
-    else:
-        pass
 
     for i in range(1,n_generation):
         population = mgg_variant(population,n_population,n_children,n_gene,search_idx,search_region)
@@ -87,8 +85,6 @@ def ga_v1_continue(
             best_indiv = decode_gene2variable(population[0,:n_gene],search_region)
             best_fitness = population[0,-1]
             return best_indiv,best_fitness
-        else:
-            pass
 
         np.save('../FitParam/%d/count_num.npy'%(nth_paramset),i+int(count_num)+1)
 
@@ -140,8 +136,6 @@ def ga_v2_continue(
         best_indiv = decode_gene2variable(population[0,:n_gene],search_region)
         best_fitness = population[0,-1]
         return best_indiv,best_fitness
-    else:
-        pass
 
     for i in range(1,n_generation):
         ip = np.random.choice(n_population,n_gene+2,replace=False) # m=n+2
@@ -152,8 +146,6 @@ def ga_v2_continue(
             ip,population = converging(ip,population,n_population,n_gene,search_idx,search_region)
         if i%len(n0) == 0:
             n0 = np.zeros(len(n0))
-        else:
-            pass
 
         n0[i%len(n0)] = population[0,-1]
 
@@ -175,8 +167,6 @@ def ga_v2_continue(
             best_indiv = decode_gene2variable(population[0,:n_gene],search_region)
             best_fitness = population[0,-1]
             return best_indiv,best_fitness
-        else:
-            pass
 
         np.save('../FitParam/%d/count_num.npy'%(nth_paramset),i+int(count_num)+1)
 
