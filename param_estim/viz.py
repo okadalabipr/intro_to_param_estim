@@ -134,7 +134,7 @@ def save_param_range(n_file,x,y0):
             for i in range(len(search_idx[1])):
                 best_indiv[i+len(search_idx[0])] = y0[search_idx[1][i]]
 
-        search_param_matrix[nth_paramset-1,:] = best_indiv
+        search_param_matrix[nth_paramset-1,:] = best_indiv[:len(search_idx[0])]
 
     # ==========================================================================
     # seaborn.boxenplot
