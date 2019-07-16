@@ -19,6 +19,8 @@ def timecourse(sim,n_file,viz_type,show_all,stdev,
     plt.figure(figsize=(20,8))
     plt.rcParams['font.size'] = 16
     plt.rcParams['font.family'] = 'Arial'
+    plt.rcParams['mathtext.fontset'] = 'custom'
+    plt.rcParams['mathtext.it'] = 'Arial:italic'
     plt.rcParams['axes.linewidth'] = 2
     plt.rcParams['lines.linewidth'] = 2.5
     plt.rcParams['lines.markersize'] = 10
