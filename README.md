@@ -58,7 +58,7 @@ A brief description of each file you will need to use is below:
     - jupyter
 
 ## Usage
-- Parameter Estimation (work/runGA/runGA_i.ipynb)
+- Parameter Estimation (work/runGA/runGA_*n*.ipynb, *n*=1, 2, 3, · · ·)
 ```javascript
 %%javascript
 IPython.notebook.kernel.execute(
