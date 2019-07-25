@@ -38,7 +38,7 @@ def mutation(parents,n_gene,search_idx,search_region):
     MAXITER = np.iinfo(np.int8).max
 
     in_range = False
-    for i in range(MAXITER):
+    for _ in range(MAXITER):
         child = ndm(parents,n_gene)
         if 0. <= np.min(child[:n_gene]) and np.max(child[:n_gene]) <= 1.:
             in_range = True
