@@ -1,5 +1,15 @@
 import numpy as np
 from scipy.integrate import ode
+''' from scipy.integrate import odeint
+1. diffeq(t,y,x): (model/differential_equation.py)
+    -> diffeq(y,t,*x):
+
+2. (T,Y) = solveode(diffeq,y0,cls.tspan,tuple(x))
+    -> Y = odeint(diffeq,y0,cls.tspan,args=tuple(x),hmin=1e-8)
+    
+3. if T[-1] < cls.tspan[-1]: return False
+    -> if np.shape(Y)[0] < cls.tspan[-1]: return False
+'''
 
 from .model.name2idx import f_parameter as C
 from .model.name2idx import f_variable as V
