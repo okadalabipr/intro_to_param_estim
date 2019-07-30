@@ -1,4 +1,4 @@
-# param_estim
+# An introduction to parameter estimation
 
 Using Genetic Algorithm to Fit ODE Models to Data
 ***
@@ -126,7 +126,7 @@ Stop if the halting criteria are satisfied. Otherwise, *Generation* ← *Generat
 
 ## Installation
 
-    $ git clone https://github.com/okadalabipr/param_estim.git
+    $ git clone https://github.com/okadalabipr/intro_to_param_estim.git
 
 ## Acknowledgements
 We thank Benjamin Roberts and Iosifina Sampson (University of Leeds) for helpful comments and discussions.
