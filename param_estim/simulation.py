@@ -25,7 +25,6 @@ def solveode(diffeq,y0,tspan,args):
     Y = [y0]
 
     while sol.successful() and sol.t < tspan[-1]:
-        # sol.integrate(tspan[-1],step=True)
         sol.integrate(sol.t+1.)
         T.append(sol.t)
         Y.append(sol.y)
