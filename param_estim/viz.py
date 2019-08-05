@@ -6,7 +6,7 @@ import seaborn as sns
 
 from . import model
 from . import plot_func
-from .search_parameter import search_parameter_index
+from .search_parameter import search_parameter_index, write_bestFitParam
 from .simulation import Simulation
 
 def visualize_result(viz_type,show_all,stdev):
@@ -61,6 +61,7 @@ def visualize_result(viz_type,show_all,stdev):
 
         # global best_paramset
         best_paramset = np.argmin(best_fitness_all) + 1
+        write_bestFitParam(best_paramset)
 
         if viz_type == 'average':
             pass

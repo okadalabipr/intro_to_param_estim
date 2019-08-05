@@ -218,6 +218,36 @@ def get_search_region():
     return search_region
 
 
+def write_bestFitParam(best_paramset):
+        
+    x = f_params()
+    y0 = initial_values()
+
+    search_idx = search_parameter_index()
+
+    try:
+        generation = np.load('./FitParam/%d/generation.npy'%(best_paramset))
+        best_indiv = np.load('./FitParam/%d/FitParam%d.npy'%(best_paramset,int(generation)))
+
+        for i in range(len(search_idx[0])):
+            x[search_idx[0][i]] = best_indiv[i]
+        for i in range(len(search_idx[1])):
+            y0[search_idx[1][i]] = best_indiv[i+len(search_idx[0])]
+
+    except:
+        pass
+    
+    with open('bestFitParam.txt', mode='w') as f:
+        f.write('# param set: %d\n'%(best_paramset))
+        f.write('\n### param_const\n')
+        for i in range(C.len_f_params):
+            f.write('x[C.%s] = %e\n'%(C.F_P[i],x[i]))
+        f.write('\n### initial_values\n')
+        for i in range(V.len_f_vars):
+            if y0[i] != 0:
+                f.write('y0[V.%s] = %e\n'%(V.F_V[i],y0[i]))
+                
+
 def lin2log(search_idx,search_region,n_param_const,n_search_param):
 
         difference = list(
