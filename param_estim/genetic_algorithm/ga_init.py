@@ -92,6 +92,10 @@ def ga_v2(
     search_idx,
     search_region
     ):
+    if n_population < n_gene+2:
+        print('n_population must be larger than %d'%(n_gene+2))
+        sys.exit()
+        
     n_iter = 1
     n0 = np.zeros(2*n_population)
 
