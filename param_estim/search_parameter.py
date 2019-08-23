@@ -249,28 +249,52 @@ def write_bestFitParam(best_paramset):
                 
 
 def lin2log(search_idx,search_region,n_param_const,n_search_param):
+    for i in range(search_region.shape[1]):
+        if np.min(search_region[:,i]) < 0.0:
+            if i <= n_param_const:
+                raise ValueError(
+                    '"C.%s" search_region[lb,ub] must be positive.'%(C.F_P[i])
+                )
+            else:
+                raise ValueError(
+                    '"V.%s" search_region[lb,ub] must be positive.'%(V.F_V[i-n_param_const])
+                )
+        elif np.min(search_region[:,i]) == 0.0 and np.max(search_region[:,i]) != 0:
+            if i <= n_param_const:
+                raise ValueError(
+                    '"C.%s" lower_bound must be larger than 0.'%(C.F_P[i])
+                )
+            else:
+                raise ValueError(
+                    '"V.%s" lower_bound must be larger than 0.'%(V.F_V[i-n_param_const])
+                )
+        elif search_region[1,i] - search_region[0,i] < 0.0:
+            if i <= n_param_const:
+                raise ValueError(
+                    '"C.%s" lower_bound < upper_bound'%(C.F_P[i])
+                )
+            else:
+                raise ValueError(
+                    '"V.%s" lower_bound < upper_bound'%(V.F_V[i-n_param_const])
+                )
+    difference = list(
+        set(np.where(np.any(search_region != 0.,axis=0))[0])^
+        set(np.append(search_idx[0],n_param_const+search_idx[1]))
+    )
+    if len(difference) > 0:
+        for i in range(len(difference)):
+            if difference[i] <= n_param_const:
+                print(
+                    'Set "C.%s" in both search_idx_const and search_region'
+                    %(C.F_P[int(difference[i])])
+                )
+            else:
+                print(
+                    'Set "V.%s" in both search_idx_init and search_region'
+                    %(V.F_V[int(difference[i]-n_param_const)])
+                )
+        sys.exit()
 
-        difference = list(
-            set(np.where(np.any(search_region != 0.,axis=0))[0])^
-            set(np.append(search_idx[0],n_param_const+search_idx[1]))
-        )
-        if len(difference) > 0:
-            for i in range(len(difference)):
-                if difference[i] <= n_param_const:
-                    print(
-                        'Set "%s" in both search_idx_const and search_region'
-                        %(C.F_P[int(difference[i])])
-                    )
-                else:
-                    print(
-                        'Set "%s" in both search_idx_init and search_region'
-                        %(V.F_V[int(difference[i]-n_param_const)])
-                    )
-            sys.exit()
+    search_region = search_region[:,np.any(search_region != 0.,axis=0)]
 
-        search_region = search_region[:,np.any(search_region != 0.,axis=0)]
-        if n_search_param != search_region.shape[1]:
-            print('Error: search_region[lb,ub] must be positive.')
-            sys.exit()
-
-        return np.log10(search_region)
+    return np.log10(search_region)
