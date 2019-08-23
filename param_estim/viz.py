@@ -1,5 +1,4 @@
 import os
-import sys
 import re
 import numpy as np
 import matplotlib.pyplot as plt
@@ -16,7 +15,6 @@ def visualize_result(viz_type,show_all,stdev):
             int(viz_type)
         except ValueError:
             print("Error: viz_type ∈ {'best','average','original',int(1~n_fitparam)}")
-            sys.exit()
 
     x = model.f_params()
     y0 = model.initial_values()
@@ -71,8 +69,9 @@ def visualize_result(viz_type,show_all,stdev):
         elif int(viz_type) <= n_file:
             sim = run_simulation(int(viz_type),sim,x,y0)
         else:
-            print('%d is larger than n_fitparam(%d)'%(int(viz_type),n_file))
-            sys.exit()
+            raise ValueError(
+                '%d is larger than n_fitparam(%d)'%(int(viz_type),n_file)
+            )
 
         if n_file == 1:
             pass
