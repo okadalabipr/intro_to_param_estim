@@ -73,9 +73,7 @@ def visualize_result(viz_type,show_all,stdev):
                 '%d is larger than n_fitparam(%d)'%(int(viz_type),n_file)
             )
 
-        if n_file == 1:
-            pass
-        else:
+        if n_file >= 2:
             save_param_range(n_file,x,y0)
 
     else:
