@@ -367,5 +367,4 @@ def timecourse(sim,n_file,viz_type,show_all,stdev,
     plt.xlabel('Time (min)')
     plt.ylabel('Phosphorylated c-Fos\nProtein expression')
 
-    #plt.savefig('./Fig/simulation_average_std.png',bbox_inches='tight')
-    plt.show()
+    plt.savefig('./Fig/simulation_{}.png'.format(viz_type),dpi=300,bbox_inches='tight')
