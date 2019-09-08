@@ -66,10 +66,10 @@ IPython.notebook.kernel.execute(
 )
 ```
 ```python
-%run -i ../../run_ga1.py
+%run -i ../../run_ga.py
 """ If you want to continue from where you stopeed in the last parameter search,
 
-%run -i ../../run_ga2.py
+%run -i ../../run_ga_continue.py
 
 """
 ```
