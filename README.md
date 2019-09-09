@@ -73,6 +73,11 @@ IPython.notebook.kernel.execute(
 
 """
 ```
+or
+```bash 
+$ nohup python parest.py n >> work/DVODE.log 2>&1 &
+```
+
 - Visualization of Simulation Results (work/runSim.ipynb)
 ```python
 %run -i ../run_sim.py
