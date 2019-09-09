@@ -46,7 +46,7 @@ def ga_v1(
     print('Generation%d: Best Fitness = %e'%(1,population[0,-1]))
     with open('../FitParam/%d/out.txt'%(nth_paramset), mode='w') as f:
             f.write(
-                'Generation1: Best Fitness = %e\n'%(best_fitness)
+                'Generation1: Best Fitness = %e\n'%(population[0,-1])
             )
     best_indiv = decode_gene2variable(population[0,:n_gene],search_region)
 
@@ -113,7 +113,7 @@ def ga_v2(
     print('Generation%d: Best Fitness = %e'%(1,population[0,-1]))
     with open('../FitParam/%d/out.txt'%(nth_paramset), mode='w') as f:
             f.write(
-                'Generation1: Best Fitness = %e\n'%(best_fitness)
+                'Generation1: Best Fitness = %e\n'%(population[0,-1])
             )
     best_indiv = decode_gene2variable(population[0,:n_gene],search_region)
     best_fitness = population[0,-1]
