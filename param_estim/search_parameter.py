@@ -239,10 +239,10 @@ def write_bestFitParam(best_paramset):
     
     with open('bestFitParam.txt', mode='w') as f:
         f.write('# param set: %d\n'%(best_paramset))
-        f.write('\n### param_const\n')
+        f.write('\n### Param. const\n')
         for i in range(C.len_f_params):
             f.write('x[C.%s] = %e\n'%(C.F_P[i],x[i]))
-        f.write('\n### initial_values\n')
+        f.write('\n### Non-zero initial conditions\n')
         for i in range(V.len_f_vars):
             if y0[i] != 0:
                 f.write('y0[V.%s] = %e\n'%(V.F_V[i],y0[i]))
