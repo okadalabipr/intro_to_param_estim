@@ -14,7 +14,7 @@ def parest(nth_paramset):
     try:
         files = os.listdir('../FitParam/%d'%(nth_paramset))
         for file in files:
-            if any(map(file.__contains__,('.npy','.log'))):
+            if any(map(file.__contains__,('.npy','.log','.txt'))):
                 os.remove('../FitParam/%d/%s'%(nth_paramset,file))
     except:
         os.mkdir('../FitParam/%d'%(nth_paramset))
