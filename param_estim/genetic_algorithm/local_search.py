@@ -1,6 +1,6 @@
 import numpy as np
 
-from param_estim.fitness import get_fitness
+from param_estim.fitness import objective
 
 def local_search(
     ip,
@@ -47,7 +47,7 @@ def mutation(parents,n_gene,search_idx,search_region):
     if not in_range:
         child[:n_gene] = np.clip(child[:n_gene],0.,1.)
 
-    child[-1] = get_fitness(child[:n_gene],search_idx,search_region)
+    child[-1] = objective(child[:n_gene],search_idx,search_region)
 
     return child
 

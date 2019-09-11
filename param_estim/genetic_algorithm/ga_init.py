@@ -5,7 +5,7 @@ from .transformation import decode_gene2variable
 from .undx_mgg import mgg_variant
 from .converging import converging
 from .local_search import local_search
-from param_estim.fitness import get_fitness
+from param_estim.fitness import objective
 from param_estim.search_parameter import search_parameter_index
 from param_estim.search_parameter import get_search_region
 
@@ -180,7 +180,7 @@ def get_initial_population(n_population,n_gene,search_idx,search_region):
     for i in range(n_population):
         while np.isinf(population[i,-1]) or np.isnan(population[i,-1]):
             population[i,:n_gene] = np.random.rand(n_gene)
-            population[i,-1] = get_fitness(population[i,:n_gene],search_idx,search_region)
+            population[i,-1] = objective(population[i,:n_gene],search_idx,search_region)
         sys.stdout.write('\r%d/%d'%(i+1,n_population))
     sys.stdout.write('\n')
 

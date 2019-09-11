@@ -5,7 +5,7 @@ from .transformation import decode_gene2variable
 from .undx_mgg import mgg_variant
 from .converging import converging
 from .local_search import local_search
-from param_estim.fitness import get_fitness
+from param_estim.fitness import objective
 from param_estim.search_parameter import search_parameter_index
 from param_estim.search_parameter import get_search_region
 
@@ -48,7 +48,7 @@ def ga_v1_continue(
     count_num = np.load('../FitParam/%d/count_num.npy'%(nth_paramset))
     generation = np.load('../FitParam/%d/generation.npy'%(nth_paramset))
     best_indiv = np.load('../FitParam/%d/FitParam%d.npy'%(nth_paramset,int(generation)))
-    best_fitness = get_fitness(
+    best_fitness = objective(
         (np.log10(best_indiv) - search_region[0,:])/(search_region[1,:] - search_region[0,:]),
         search_idx,
         search_region
@@ -116,7 +116,7 @@ def ga_v2_continue(
     count_num = np.load('../FitParam/%d/count_num.npy'%(nth_paramset))
     generation = np.load('../FitParam/%d/generation.npy'%(nth_paramset))
     best_indiv = np.load('../FitParam/%d/FitParam%d.npy'%(nth_paramset,int(generation)))
-    best_fitness = get_fitness(
+    best_fitness = objective(
         (np.log10(best_indiv) - search_region[0,:])/(search_region[1,:] - search_region[0,:]),
         search_idx,
         search_region
@@ -198,7 +198,7 @@ def get_initial_population_continue(nth_paramset,n_population,n_gene,search_idx,
                 ) - search_region[0,:]
             )/(search_region[1,:] - search_region[0,:])
             population[i,:n_gene] = np.clip(population[i,:n_gene],0.,1.)
-            population[i,-1] = get_fitness(population[i,:n_gene],search_idx,search_region)
+            population[i,-1] = objective(population[i,:n_gene],search_idx,search_region)
         sys.stdout.write('\r%d/%d'%(i+1,n_population))
     sys.stdout.write('\n')
 

@@ -1,6 +1,6 @@
 import numpy as np
 
-from param_estim.fitness import get_fitness
+from param_estim.fitness import objective
 
 def converging(
     ip,
@@ -28,7 +28,7 @@ def converging(
     population[ip[1],:] = family[np.random.randint(low=1,high=n_children+2,dtype=np.int),:] # Random
 
     if np.isinf(population[ip[1],-1]):
-        population[ip[1],-1] = get_fitness(population[ip[1],:n_gene],search_idx,search_region)
+        population[ip[1],-1] = objective(population[ip[1],:n_gene],search_idx,search_region)
 
     population = population[np.argsort(population[:,-1]),:]
 
