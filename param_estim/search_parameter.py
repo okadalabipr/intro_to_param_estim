@@ -111,10 +111,10 @@ def get_search_region():
         pass
 
     search_param = np.empty(len(search_idx[0])+len(search_idx[1]))
-    for i in range(len(search_idx[0])):
-        search_param[i] = x[search_idx[0][i]]
-    for i in range(len(search_idx[1])):
-        search_param[i+len(search_idx[0])] = y0[search_idx[1][i]]
+    for i,j in enumerate(search_idx[0]):
+        search_param[i] = x[j]
+    for i,j in enumerate(search_idx[1]):
+        search_param[i+len(search_idx[0])] = y0[j]
 
     if np.any(search_param == 0.):
         print('Error: search_param must not contain zero.')
@@ -124,14 +124,14 @@ def get_search_region():
 
     '''
     # Default: 0.1 ~ 10
-    for i in range(len(search_idx[0])):
-        search_region[0,search_idx[0][i]] = search_param[i]*0.1 # lower bound
-        search_region[1,search_idx[0][i]] = search_param[i]*10. # upper bound
+    for i,j in enumerate(search_idx[0]):
+        search_region[0,j] = search_param[i]*0.1 # lower bound
+        search_region[1,j] = search_param[i]*10. # upper bound
 
     # Default: 0.5 ~ 2
-    for i in range(len(search_idx[1])):
-        search_region[0,search_idx[1][i]+len(x)] = search_param[i+len(search_idx[0])]*0.5 # lower bound
-        search_region[1,search_idx[1][i]+len(x)] = search_param[i+len(search_idx[0])]*2.0 # upper bound
+    for i,j in enumerate(search_idx[1]):
+        search_region[0,j+len(x)] = search_param[i+len(search_idx[0])]*0.5 # lower bound
+        search_region[1,j+len(x)] = search_param[i+len(search_idx[0])]*2.0 # upper bound
     '''
 
     # search_region[:,C.param_name] = [lower_bound,upper_bound]
@@ -229,10 +229,10 @@ def write_bestFitParam(best_paramset):
         generation = np.load('./FitParam/%d/generation.npy'%(best_paramset))
         best_indiv = np.load('./FitParam/%d/FitParam%d.npy'%(best_paramset,int(generation)))
 
-        for i in range(len(search_idx[0])):
-            x[search_idx[0][i]] = best_indiv[i]
-        for i in range(len(search_idx[1])):
-            y0[search_idx[1][i]] = best_indiv[i+len(search_idx[0])]
+        for i,j in enumerate(search_idx[0]):
+            x[j] = best_indiv[i]
+        for i,j in enumerate(search_idx[1]):
+            y0[j] = best_indiv[i+len(search_idx[0])]
 
     except:
         pass
@@ -282,16 +282,16 @@ def lin2log(search_idx,search_region,n_param_const,n_search_param):
         set(np.append(search_idx[0],n_param_const+search_idx[1]))
     )
     if len(difference) > 0:
-        for i in range(len(difference)):
-            if difference[i] <= n_param_const:
+        for i,j in enumerate(difference):
+            if j <= n_param_const:
                 print(
                     'Set "C.%s" in both search_idx_const and search_region'
-                    %(C.F_P[int(difference[i])])
+                    %(C.F_P[int(j)])
                 )
             else:
                 print(
                     'Set "V.%s" in both search_idx_init and search_region'
-                    %(V.F_V[int(difference[i]-n_param_const)])
+                    %(V.F_V[int(j-n_param_const)])
                 )
         sys.exit()
 

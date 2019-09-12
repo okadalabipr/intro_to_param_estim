@@ -102,10 +102,10 @@ def run_simulation(nth_paramset,sim,x,y0):
         generation = np.load('./FitParam/%d/generation.npy'%(nth_paramset))
         best_indiv = np.load('./FitParam/%d/FitParam%d.npy'%(nth_paramset,int(generation)))
 
-        for i in range(len(search_idx[0])):
-            x[search_idx[0][i]] = best_indiv[i]
-        for i in range(len(search_idx[1])):
-            y0[search_idx[1][i]] = best_indiv[i+len(search_idx[0])]
+        for i,j in enumerate(search_idx[0]):
+            x[j] = best_indiv[i]
+        for i,j in enumerate(search_idx[1]):
+            y0[j] = best_indiv[i+len(search_idx[0])]
 
     except:
         pass
@@ -128,10 +128,10 @@ def save_param_range(n_file,x,y0):
             best_indiv = np.load('./FitParam/%d/FitParam%d.npy'%(nth_paramset,int(generation)))
         except:
             best_indiv = np.empty(len(search_idx[0])+len(search_idx[1]))
-            for i in range(len(search_idx[0])):
-                best_indiv[i] = x[search_idx[0][i]]
-            for i in range(len(search_idx[1])):
-                best_indiv[i+len(search_idx[0])] = y0[search_idx[1][i]]
+            for i,j in enumerate(search_idx[0]):
+                best_indiv[i] = x[j]
+            for i,j in enumerate(search_idx[1]):
+                best_indiv[i+len(search_idx[0])] = y0[j]
 
         search_param_matrix[nth_paramset-1,:] = best_indiv[:len(search_idx[0])]
 

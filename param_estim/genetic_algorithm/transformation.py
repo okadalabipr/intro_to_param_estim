@@ -12,9 +12,9 @@ def update_param(individual_gene,search_idx,search_region):
 
     X = decode_gene2variable(individual_gene,search_region)
 
-    for i in range(len(search_idx[0])):
-        x[search_idx[0][i]] = X[i]
-    for i in range(len(search_idx[1])):
-        y0[search_idx[1][i]] = X[i+len(search_idx[0])]
+    for i,j in enumerate(search_idx[0]):
+        x[j] = X[i]
+    for i,j in enumerate(search_idx[1]):
+        y0[j] = X[i+len(search_idx[0])]
 
     return x, y0
