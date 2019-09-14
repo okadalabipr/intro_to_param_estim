@@ -64,13 +64,13 @@ def timecourse(sim,n_file,viz_type,show_all,stdev,
         plt.plot(sim.t,np.mean(PERK_cyt_norm[:,:,1],axis=0),'r')
         if stdev:
             mean_egf = np.mean(PERK_cyt_norm[:,:,0],axis=0)
-            yerr_egf = [np.std(PERK_cyt_norm[:,i,0],ddof=1) for i in range(len(sim.t))]
+            yerr_egf = [np.std(PERK_cyt_norm[:,i,0],ddof=1) for i,_ in enumerate(sim.t)]
             plt.fill_between(
                 sim.t, mean_egf - yerr_egf, mean_egf + yerr_egf,
                 lw=0,color='b',alpha=0.1
             )
             mean_hrg = np.mean(PERK_cyt_norm[:,:,1],axis=0)
-            yerr_hrg = [np.std(PERK_cyt_norm[:,i,1],ddof=1) for i in range(len(sim.t))]
+            yerr_hrg = [np.std(PERK_cyt_norm[:,i,1],ddof=1) for i,_ in enumerate(sim.t)]
             plt.fill_between(
                 sim.t, mean_hrg - yerr_hrg, mean_hrg + yerr_hrg,
                 lw=0,color='r',alpha=0.1
@@ -110,13 +110,13 @@ def timecourse(sim,n_file,viz_type,show_all,stdev,
         plt.plot(sim.t,np.mean(PRSK_wcl_norm[:,:,1],axis=0),'r')
         if stdev:
             mean_egf = np.mean(PRSK_wcl_norm[:,:,0],axis=0)
-            yerr_egf = [np.std(PRSK_wcl_norm[:,i,0],ddof=1) for i in range(len(sim.t))]
+            yerr_egf = [np.std(PRSK_wcl_norm[:,i,0],ddof=1) for i,_ in enumerate(sim.t)]
             plt.fill_between(
                 sim.t, mean_egf - yerr_egf, mean_egf + yerr_egf,
                 lw=0,color='b',alpha=0.1
             )
             mean_hrg = np.mean(PRSK_wcl_norm[:,:,1],axis=0)
-            yerr_hrg = [np.std(PRSK_wcl_norm[:,i,1],ddof=1) for i in range(len(sim.t))]
+            yerr_hrg = [np.std(PRSK_wcl_norm[:,i,1],ddof=1) for i,_ in enumerate(sim.t)]
             plt.fill_between(
                 sim.t, mean_hrg - yerr_hrg, mean_hrg + yerr_hrg,
                 lw=0,color='r',alpha=0.1
@@ -156,13 +156,13 @@ def timecourse(sim,n_file,viz_type,show_all,stdev,
         plt.plot(sim.t,np.mean(PCREB_wcl_norm[:,:,1],axis=0),'r')
         if stdev:
             mean_egf = np.mean(PCREB_wcl_norm[:,:,0],axis=0)
-            yerr_egf = [np.std(PCREB_wcl_norm[:,i,0],ddof=1) for i in range(len(sim.t))]
+            yerr_egf = [np.std(PCREB_wcl_norm[:,i,0],ddof=1) for i,_ in enumerate(sim.t)]
             plt.fill_between(
                 sim.t, mean_egf - yerr_egf, mean_egf + yerr_egf,
                 lw=0,color='b',alpha=0.1
             )
             mean_hrg = np.mean(PCREB_wcl_norm[:,:,1],axis=0)
-            yerr_hrg = [np.std(PCREB_wcl_norm[:,i,1],ddof=1) for i in range(len(sim.t))]
+            yerr_hrg = [np.std(PCREB_wcl_norm[:,i,1],ddof=1) for i,_ in enumerate(sim.t)]
             plt.fill_between(
                 sim.t, mean_hrg - yerr_hrg, mean_hrg + yerr_hrg,
                 lw=0,color='r',alpha=0.1
@@ -202,13 +202,13 @@ def timecourse(sim,n_file,viz_type,show_all,stdev,
         plt.plot(sim.t,np.mean(DUSPmRNA_norm[:,:,1],axis=0),'r')
         if stdev:
             mean_egf = np.mean(DUSPmRNA_norm[:,:,0],axis=0)
-            yerr_egf = [np.std(DUSPmRNA_norm[:,i,0],ddof=1) for i in range(len(sim.t))]
+            yerr_egf = [np.std(DUSPmRNA_norm[:,i,0],ddof=1) for i,_ in enumerate(sim.t)]
             plt.fill_between(
                 sim.t, mean_egf - yerr_egf, mean_egf + yerr_egf,
                 lw=0,color='b',alpha=0.1
             )
             mean_hrg = np.mean(DUSPmRNA_norm[:,:,1],axis=0)
-            yerr_hrg = [np.std(DUSPmRNA_norm[:,i,1],ddof=1) for i in range(len(sim.t))]
+            yerr_hrg = [np.std(DUSPmRNA_norm[:,i,1],ddof=1) for i,_ in enumerate(sim.t)]
             plt.fill_between(
                 sim.t, mean_hrg - yerr_hrg, mean_hrg + yerr_hrg,
                 lw=0,color='r',alpha=0.1
@@ -248,13 +248,13 @@ def timecourse(sim,n_file,viz_type,show_all,stdev,
         plt.plot(sim.t,np.mean(cFosmRNA_norm[:,:,1],axis=0),'r')
         if stdev:
             mean_egf = np.mean(cFosmRNA_norm[:,:,0],axis=0)
-            yerr_egf = [np.std(cFosmRNA_norm[:,i,0],ddof=1) for i in range(len(sim.t))]
+            yerr_egf = [np.std(cFosmRNA_norm[:,i,0],ddof=1) for i,_ in enumerate(sim.t)]
             plt.fill_between(
                 sim.t, mean_egf - yerr_egf, mean_egf + yerr_egf,
                 lw=0,color='b',alpha=0.1
             )
             mean_hrg = np.mean(cFosmRNA_norm[:,:,1],axis=0)
-            yerr_hrg = [np.std(cFosmRNA_norm[:,i,1],ddof=1) for i in range(len(sim.t))]
+            yerr_hrg = [np.std(cFosmRNA_norm[:,i,1],ddof=1) for i,_ in enumerate(sim.t)]
             plt.fill_between(
                 sim.t, mean_hrg - yerr_hrg, mean_hrg + yerr_hrg,
                 lw=0,color='r',alpha=0.1
@@ -294,13 +294,13 @@ def timecourse(sim,n_file,viz_type,show_all,stdev,
         plt.plot(sim.t,np.mean(cFosPro_norm[:,:,1],axis=0),'r')
         if stdev:
             mean_egf = np.mean(cFosPro_norm[:,:,0],axis=0)
-            yerr_egf = [np.std(cFosPro_norm[:,i,0],ddof=1) for i in range(len(sim.t))]
+            yerr_egf = [np.std(cFosPro_norm[:,i,0],ddof=1) for i,_ in enumerate(sim.t)]
             plt.fill_between(
                 sim.t, mean_egf - yerr_egf, mean_egf + yerr_egf,
                 lw=0,color='b',alpha=0.1
             )
             mean_hrg = np.mean(cFosPro_norm[:,:,1],axis=0)
-            yerr_hrg = [np.std(cFosPro_norm[:,i,1],ddof=1) for i in range(len(sim.t))]
+            yerr_hrg = [np.std(cFosPro_norm[:,i,1],ddof=1) for i,_ in enumerate(sim.t)]
             plt.fill_between(
                 sim.t, mean_hrg - yerr_hrg, mean_hrg + yerr_hrg,
                 lw=0,color='r',alpha=0.1
@@ -340,13 +340,13 @@ def timecourse(sim,n_file,viz_type,show_all,stdev,
         plt.plot(sim.t,np.mean(PcFos_norm[:,:,1],axis=0),'r')
         if stdev:
             mean_egf = np.mean(PcFos_norm[:,:,0],axis=0)
-            yerr_egf = [np.std(PcFos_norm[:,i,0],ddof=1) for i in range(len(sim.t))]
+            yerr_egf = [np.std(PcFos_norm[:,i,0],ddof=1) for i,_ in enumerate(sim.t)]
             plt.fill_between(
                 sim.t, mean_egf - yerr_egf, mean_egf + yerr_egf,
                 lw=0,color='b',alpha=0.1
             )
             mean_hrg = np.mean(PcFos_norm[:,:,1],axis=0)
-            yerr_hrg = [np.std(PcFos_norm[:,i,1],ddof=1) for i in range(len(sim.t))]
+            yerr_hrg = [np.std(PcFos_norm[:,i,1],ddof=1) for i,_ in enumerate(sim.t)]
             plt.fill_between(
                 sim.t, mean_hrg - yerr_hrg, mean_hrg + yerr_hrg,
                 lw=0,color='r',alpha=0.1
