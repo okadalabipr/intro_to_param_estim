@@ -40,7 +40,7 @@ def objective(individual_gene,search_idx,search_region):
     exp = ExperimentalData()
     sim = Simulation(x,y0)
 
-    if sim.numerical_integration(x,y0) is None:
+    if sim.simulate(x,y0) is None:
       error = np.zeros(7)
 
       # ERK

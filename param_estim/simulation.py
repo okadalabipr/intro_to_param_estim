@@ -53,7 +53,7 @@ class Simulation(object):
         self.y0 = y0
 
     @classmethod
-    def numerical_integration(cls,x,y0):
+    def simulate(cls,x,y0):
 
         for i in range(cls.condition):
             if i==0:

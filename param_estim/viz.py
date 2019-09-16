@@ -40,7 +40,7 @@ def visualize_result(viz_type,show_all,stdev):
 
     if n_file > 0:
         for i in range(n_file):
-            sim = run_simulation(i+1,sim,x,y0)
+            sim = update_sim(i+1,sim,x,y0)
 
             PMEK_cyt_all[i,:,:]  = sim.PMEK_cyt
             PERK_cyt_all[i,:,:]  = sim.PERK_cyt
@@ -65,9 +65,9 @@ def visualize_result(viz_type,show_all,stdev):
         if viz_type == 'average':
             pass
         elif viz_type == 'best':
-            sim = run_simulation(int(best_paramset),sim,x,y0)
+            sim = update_sim(int(best_paramset),sim,x,y0)
         elif int(viz_type) <= n_file:
-            sim = run_simulation(int(viz_type),sim,x,y0)
+            sim = update_sim(int(viz_type),sim,x,y0)
         else:
             raise ValueError(
                 '%d is larger than n_fitparam(%d)'%(int(viz_type),n_file)
@@ -77,7 +77,7 @@ def visualize_result(viz_type,show_all,stdev):
             save_param_range(n_file,x,y0)
 
     else:
-        if sim.numerical_integration(x,y0) is None:
+        if sim.simulate(x,y0) is None:
             pass
         else:
             print('Simulation failed.')
@@ -94,7 +94,7 @@ def visualize_result(viz_type,show_all,stdev):
     )
 
 
-def run_simulation(nth_paramset,sim,x,y0):
+def update_sim(nth_paramset,sim,x,y0):
     search_idx = search_parameter_index()
 
     # get_best_param
@@ -110,9 +110,7 @@ def run_simulation(nth_paramset,sim,x,y0):
     except:
         pass
 
-    if sim.numerical_integration(x,y0) is None:
-        pass
-    else:
+    if sim.simulate(x,y0) is not None:
         print('Simulation failed.\nparameter_set #%d'%(nth_paramset))
 
     return sim
