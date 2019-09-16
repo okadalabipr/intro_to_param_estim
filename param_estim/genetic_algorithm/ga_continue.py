@@ -190,7 +190,7 @@ def get_initial_population_continue(nth_paramset,n_population,n_gene,search_idx,
     print('initpop')
     for i in range(n_population):
         while np.isinf(population[i,-1]) or np.isnan(population[i,-1]):
-            population[i,:n_gene] = encode_bestindiv2gene
+            population[i,:n_gene] = encode_bestindiv2randgene(best_indiv,search_region,p0_bounds)
             population[i,:n_gene] = np.clip(population[i,:n_gene],0.,1.)
             population[i,-1] = objective(population[i,:n_gene],search_idx,search_region)
         sys.stdout.write('\r%d/%d'%(i+1,n_population))
