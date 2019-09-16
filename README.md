@@ -2,7 +2,7 @@
 
 Using Genetic Algorithm to Fit ODE Models to Data
 ***
-![simulation_average](work/Fig/simulation_average.png)
+![simulation_average](work/figure/simulation_average.png)
 
  Points (blue diamonds, EGF; red squares, HRG) denote experimental data, solid lines denote simulations.
 
