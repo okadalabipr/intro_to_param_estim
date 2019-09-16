@@ -1,7 +1,7 @@
 import sys
 import numpy as np
 
-from .transformation import decode_gene2variable
+from .converter import decode_gene2variable
 from .undx_mgg import mgg_variant
 from .converging import converging
 from .local_search import local_search

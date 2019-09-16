@@ -3,9 +3,11 @@ from scipy.spatial.distance import cosine
 
 from .model.name2idx import f_parameter as C
 from .model.name2idx import f_variable as V
+from .model.param_const import f_params
+from .model.initial_condition import initial_values
 from .simulation import Simulation
 from .experimental_data import ExperimentalData
-from .genetic_algorithm.transformation import update_param
+from .genetic_algorithm.converter import decode_gene2variable
 
 def compute_objval_abs(sim_data,exp_data):  # Residual Sum of Squares
 
@@ -19,8 +21,17 @@ def compute_objval_cs(sim_data,exp_data):  # Cosine similarity
 
 # Define an objective function to be minimized.
 def objective(individual_gene,search_idx,search_region):
+    # update_param
+    x = f_params()
+    y0 = initial_values()
 
-    (x,y0) = update_param(individual_gene,search_idx,search_region)
+    indiv = decode_gene2variable(individual_gene,search_region)
+
+    for i,j in enumerate(search_idx[0]):
+        x[j] = indiv[i]
+    for i,j in enumerate(search_idx[1]):
+        y0[j] = indiv[i+len(search_idx[0])]
+        
     # constraints
     x[C.V6] = x[C.V5]
     x[C.Km6] = x[C.Km5]
