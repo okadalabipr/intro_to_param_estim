@@ -46,7 +46,7 @@ A brief description of each file you will need to use is below:
     - [**runSim.ipynb**](/work/runSim.ipynb)<br>
         This is the file that is used to actually run the simulations for your model and plot the results.
 
-    - [**Fig/**](/work/Fig/)<br>
+    - [**figure/**](/work/figure/)<br>
         Within this folder there are several figures that will be saved. One is the ‘param_range.pdf’ which shows the range of values for your parameters based on all the fittings. The others are results of your simulations.
 
 ## Requirements

@@ -153,6 +153,6 @@ def save_param_range(n_file,x,y0):
     ax.set_yticklabels([model.C.F_P[i] for i in search_idx[0]])
     ax.set_xscale('log')
 
-    plt.savefig('./Fig/param_range.pdf',bbox_inches='tight')
+    plt.savefig('./figure/param_range.pdf',bbox_inches='tight')
     plt.close(fig)
     # ==========================================================================
