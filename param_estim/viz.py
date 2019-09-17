@@ -29,27 +29,27 @@ def visualize_result(viz_type,show_all,stdev):
             if re.match(r'\d',file):
                 n_file += 1
 
-    PMEK_cyt_all  = np.empty((n_file,len(sim.tspan),sim.condition))
-    PERK_cyt_all  = np.empty((n_file,len(sim.tspan),sim.condition))
-    PRSK_wcl_all  = np.empty((n_file,len(sim.tspan),sim.condition))
-    PCREB_wcl_all = np.empty((n_file,len(sim.tspan),sim.condition))
-    DUSPmRNA_all  = np.empty((n_file,len(sim.tspan),sim.condition))
-    cFosmRNA_all  = np.empty((n_file,len(sim.tspan),sim.condition))
-    cFosPro_all   = np.empty((n_file,len(sim.tspan),sim.condition))
-    PcFos_all     = np.empty((n_file,len(sim.tspan),sim.condition))
+    PMEK_cyt_all  = np.ones((n_file,len(sim.tspan),sim.condition))*np.nan
+    PERK_cyt_all  = np.ones((n_file,len(sim.tspan),sim.condition))*np.nan
+    PRSK_wcl_all  = np.ones((n_file,len(sim.tspan),sim.condition))*np.nan
+    PCREB_wcl_all = np.ones((n_file,len(sim.tspan),sim.condition))*np.nan
+    DUSPmRNA_all  = np.ones((n_file,len(sim.tspan),sim.condition))*np.nan
+    cFosmRNA_all  = np.ones((n_file,len(sim.tspan),sim.condition))*np.nan
+    cFosPro_all   = np.ones((n_file,len(sim.tspan),sim.condition))*np.nan
+    PcFos_all     = np.ones((n_file,len(sim.tspan),sim.condition))*np.nan
 
     if n_file > 0:
         for i in range(n_file):
-            sim = update_sim(i+1,sim,x,y0)
-
-            PMEK_cyt_all[i,:,:]  = sim.PMEK_cyt
-            PERK_cyt_all[i,:,:]  = sim.PERK_cyt
-            PRSK_wcl_all[i,:,:]  = sim.PRSK_wcl
-            PCREB_wcl_all[i,:,:] = sim.PCREB_wcl
-            DUSPmRNA_all[i,:,:]  = sim.DUSPmRNA
-            cFosmRNA_all[i,:,:]  = sim.cFosmRNA
-            cFosPro_all[i,:,:]   = sim.cFosPro
-            PcFos_all[i,:,:]     = sim.PcFos
+            (sim,successful) = update_sim(i+1,sim,x,y0)
+            if successful:
+                PMEK_cyt_all[i,:,:]  = sim.PMEK_cyt
+                PERK_cyt_all[i,:,:]  = sim.PERK_cyt
+                PRSK_wcl_all[i,:,:]  = sim.PRSK_wcl
+                PCREB_wcl_all[i,:,:] = sim.PCREB_wcl
+                DUSPmRNA_all[i,:,:]  = sim.DUSPmRNA
+                cFosmRNA_all[i,:,:]  = sim.cFosmRNA
+                cFosPro_all[i,:,:]   = sim.cFosPro
+                PcFos_all[i,:,:]     = sim.PcFos
 
         best_fitness_all = np.empty(n_file)
         for i in range(n_file):
@@ -110,8 +110,11 @@ def update_sim(nth_paramset,sim,x,y0):
     except:
         pass
 
-    if sim.simulate(x,y0) is not None:
+    if sim.simulate(x,y0) is None:
+        return sim,True
+    else:
         print('Simulation failed.\nparameter_set #%d'%(nth_paramset))
+        return sim,False
 
     return sim
 
