@@ -65,9 +65,9 @@ def visualize_result(viz_type,show_all,stdev):
         if viz_type == 'average':
             pass
         elif viz_type == 'best':
-            sim = update_sim(int(best_paramset),sim,x,y0)
+            sim,_ = update_sim(int(best_paramset),sim,x,y0)
         elif int(viz_type) <= n_file:
-            sim = update_sim(int(viz_type),sim,x,y0)
+            sim,_ = update_sim(int(viz_type),sim,x,y0)
         else:
             raise ValueError(
                 '%d is larger than n_fitparam(%d)'%(int(viz_type),n_file)
@@ -115,8 +115,6 @@ def update_sim(nth_paramset,sim,x,y0):
     else:
         print('Simulation failed.\nparameter_set #%d'%(nth_paramset))
         return sim,False
-
-    return sim
 
 
 def save_param_range(n_file,x,y0):
