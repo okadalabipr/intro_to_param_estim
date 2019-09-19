@@ -4,11 +4,11 @@ from scipy.integrate import ode
 1. diffeq(t,y,x): (model/differential_equation.py)
     -> diffeq(y,t,*x):
 
-2. (T,Y) = solveode(diffeq,y0,cls.tspan,tuple(x))
-    -> Y = odeint(diffeq,y0,cls.tspan,args=tuple(x),hmin=1e-8)
+2. (T,Y) = solveode(diffeq,y0,self.tspan,tuple(x))
+    -> Y = odeint(diffeq,y0,self.tspan,args=tuple(x),hmin=1e-8)
     
-3. if T[-1] < cls.tspan[-1]: return False
-    -> if np.shape(Y)[0] < cls.tspan[-1]: return False
+3. if T[-1] < self.tspan[-1]: return False
+    -> if np.shape(Y)[0] < self.tspan[-1]: return False
 '''
 
 from .model.name2idx import f_parameter as C
@@ -48,29 +48,25 @@ class Simulation(object):
     cFosPro   = np.empty((len(tspan),condition))
     PcFos     = np.empty((len(tspan),condition))
 
-    def __init__(self,x,y0):
-        self.x = x
-        self.y0 = y0
+    
+    def simulate(self,x,y0):
 
-    @classmethod
-    def simulate(cls,x,y0):
-
-        for i in range(cls.condition):
+        for i in range(self.condition):
             if i==0:
                 x[C.Ligand] = x[C.EGF]
             elif i==1:
                 x[C.Ligand] = x[C.HRG]
 
-            (T,Y) = solveode(diffeq,y0,cls.tspan,tuple(x))
+            (T,Y) = solveode(diffeq,y0,self.tspan,tuple(x))
 
-            if T[-1] < cls.tspan[-1]:
+            if T[-1] < self.tspan[-1]:
                 return False
             else:
-                cls.PMEK_cyt[:,i] = Y[:,V.ppMEKc]
-                cls.PERK_cyt[:,i] = Y[:,V.pERKc] + Y[:,V.ppERKc]
-                cls.PRSK_wcl[:,i] = Y[:,V.pRSKc] + Y[:,V.pRSKn]*(x[C.Vn]/x[C.Vc])
-                cls.PCREB_wcl[:,i] = Y[:,V.pCREBn]*(x[C.Vn]/x[C.Vc])
-                cls.DUSPmRNA[:,i] = Y[:,V.duspmRNAc]
-                cls.cFosmRNA[:,i] = Y[:,V.cfosmRNAc]
-                cls.cFosPro[:,i] = (Y[:,V.pcFOSn] + Y[:,V.cFOSn])*(x[C.Vn]/x[C.Vc]) + Y[:,V.cFOSc] + Y[:,V.pcFOSc]
-                cls.PcFos[:,i] = Y[:,V.pcFOSn]*(x[C.Vn]/x[C.Vc]) + Y[:,V.pcFOSc]
+                self.PMEK_cyt[:,i] = Y[:,V.ppMEKc]
+                self.PERK_cyt[:,i] = Y[:,V.pERKc] + Y[:,V.ppERKc]
+                self.PRSK_wcl[:,i] = Y[:,V.pRSKc] + Y[:,V.pRSKn]*(x[C.Vn]/x[C.Vc])
+                self.PCREB_wcl[:,i] = Y[:,V.pCREBn]*(x[C.Vn]/x[C.Vc])
+                self.DUSPmRNA[:,i] = Y[:,V.duspmRNAc]
+                self.cFosmRNA[:,i] = Y[:,V.cfosmRNAc]
+                self.cFosPro[:,i] = (Y[:,V.pcFOSn] + Y[:,V.cFOSn])*(x[C.Vn]/x[C.Vc]) + Y[:,V.cFOSc] + Y[:,V.pcFOSc]
+                self.PcFos[:,i] = Y[:,V.pcFOSn]*(x[C.Vn]/x[C.Vc]) + Y[:,V.pcFOSc]

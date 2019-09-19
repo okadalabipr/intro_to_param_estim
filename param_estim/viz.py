@@ -18,7 +18,7 @@ def visualize_result(viz_type,show_all,stdev):
 
     x = model.f_params()
     y0 = model.initial_values()
-    sim = Simulation(x,y0)
+    sim = Simulation()
 
     n_file = 0
     if viz_type == 'original':

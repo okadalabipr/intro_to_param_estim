@@ -49,7 +49,7 @@ def objective(individual_gene,search_idx,search_region):
     x[C.m56] = x[C.m51]
 
     exp = ExperimentalData()
-    sim = Simulation(x,y0)
+    sim = Simulation()
 
     if sim.simulate(x,y0) is None:
       error = np.zeros(7)
