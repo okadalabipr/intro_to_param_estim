@@ -1,5 +1,5 @@
-from .name2idx import f_parameter as C
-from .name2idx import f_variable as V
+from .name2idx import parameters as C
+from .name2idx import variables as V
 
 # Refined Model
 def diffeq(t,y,x):

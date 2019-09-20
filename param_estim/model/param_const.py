@@ -1,4 +1,4 @@
-from .name2idx import f_parameter as C
+from .name2idx import parameters as C
 
 def f_params():
 

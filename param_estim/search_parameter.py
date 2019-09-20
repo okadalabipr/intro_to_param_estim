@@ -1,8 +1,8 @@
 import sys
 import numpy as np
 
-from .model.name2idx import f_parameter as C
-from .model.name2idx import f_variable as V
+from .model.name2idx import parameters as C
+from .model.name2idx import variables as V
 from .model.param_const import f_params
 from .model.initial_condition import initial_values
 
@@ -241,11 +241,11 @@ def write_bestFitParam(best_paramset):
         f.write('# param set: %d\n'%(best_paramset))
         f.write('\n### Param. const\n')
         for i in range(C.len_f_params):
-            f.write('x[C.%s] = %e\n'%(C.F_P[i],x[i]))
+            f.write('x[C.%s] = %e\n'%(C.param_names[i],x[i]))
         f.write('\n### Non-zero initial conditions\n')
         for i in range(V.len_f_vars):
             if y0[i] != 0:
-                f.write('y0[V.%s] = %e\n'%(V.F_V[i],y0[i]))
+                f.write('y0[V.%s] = %e\n'%(V.var_names[i],y0[i]))
                 
 
 def lin2log(search_idx,search_region,n_param_const,n_search_param):
@@ -253,29 +253,29 @@ def lin2log(search_idx,search_region,n_param_const,n_search_param):
         if np.min(search_region[:,i]) < 0.0:
             if i <= n_param_const:
                 raise ValueError(
-                    '"C.%s" search_region[lb,ub] must be positive.'%(C.F_P[i])
+                    '"C.%s" search_region[lb,ub] must be positive.'%(C.param_names[i])
                 )
             else:
                 raise ValueError(
-                    '"V.%s" search_region[lb,ub] must be positive.'%(V.F_V[i-n_param_const])
+                    '"V.%s" search_region[lb,ub] must be positive.'%(V.var_names[i-n_param_const])
                 )
         elif np.min(search_region[:,i]) == 0.0 and np.max(search_region[:,i]) != 0:
             if i <= n_param_const:
                 raise ValueError(
-                    '"C.%s" lower_bound must be larger than 0.'%(C.F_P[i])
+                    '"C.%s" lower_bound must be larger than 0.'%(C.param_names[i])
                 )
             else:
                 raise ValueError(
-                    '"V.%s" lower_bound must be larger than 0.'%(V.F_V[i-n_param_const])
+                    '"V.%s" lower_bound must be larger than 0.'%(V.var_names[i-n_param_const])
                 )
         elif search_region[1,i] - search_region[0,i] < 0.0:
             if i <= n_param_const:
                 raise ValueError(
-                    '"C.%s" lower_bound < upper_bound'%(C.F_P[i])
+                    '"C.%s" lower_bound < upper_bound'%(C.param_names[i])
                 )
             else:
                 raise ValueError(
-                    '"V.%s" lower_bound < upper_bound'%(V.F_V[i-n_param_const])
+                    '"V.%s" lower_bound < upper_bound'%(V.var_names[i-n_param_const])
                 )
     difference = list(
         set(np.where(np.any(search_region != 0.,axis=0))[0])^
@@ -286,12 +286,12 @@ def lin2log(search_idx,search_region,n_param_const,n_search_param):
             if j <= n_param_const:
                 print(
                     'Set "C.%s" in both search_idx_const and search_region'
-                    %(C.F_P[int(j)])
+                    %(C.param_names[int(j)])
                 )
             else:
                 print(
                     'Set "V.%s" in both search_idx_init and search_region'
-                    %(V.F_V[int(j-n_param_const)])
+                    %(V.var_names[int(j-n_param_const)])
                 )
         sys.exit()
 

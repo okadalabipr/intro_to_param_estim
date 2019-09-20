@@ -1,8 +1,8 @@
 import numpy as np
 from scipy.spatial.distance import cosine
 
-from .model.name2idx import f_parameter as C
-from .model.name2idx import f_variable as V
+from .model.name2idx import parameters as C
+from .model.name2idx import variables as V
 from .model.param_const import f_params
 from .model.initial_condition import initial_values
 from .simulation import Simulation

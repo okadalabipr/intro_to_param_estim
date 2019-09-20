@@ -1,4 +1,4 @@
-F_V = [\
+var_names = [\
     'ppMEKc',
     'CREBn',
     'pCREBn',
@@ -39,5 +39,5 @@ F_V = [\
     'len_f_vars'\
 ]
 
-for i,name in enumerate(F_V):
+for i,name in enumerate(var_names):
     exec('%s=%d'%(name,i))

@@ -1,6 +1,6 @@
 # param set: 27
 
-### param_const
+### Param. const
 x[C.V1] = 3.685601e-01
 x[C.Km1] = 6.792180e+02
 x[C.V2] = 2.200000e-01
@@ -116,7 +116,7 @@ x[C.Ligand] = 0.000000e+00
 x[C.EGF] = 0.000000e+00
 x[C.HRG] = 1.000000e+00
 
-### initial_values
+### Non-zero initial conditions
 y0[V.CREBn] = 1.000000e+03
 y0[V.ERKc] = 9.600000e+02
 y0[V.Elk1n] = 1.510000e+03

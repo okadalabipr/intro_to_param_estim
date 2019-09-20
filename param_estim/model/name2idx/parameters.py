@@ -1,4 +1,4 @@
-F_P = [\
+param_names = [\
     'V1',
     'Km1',
     'V2',
@@ -118,5 +118,5 @@ F_P = [\
     'len_f_params'\
 ]
 
-for i,name in enumerate(F_P):
+for i,name in enumerate(param_names):
     exec('%s=%d'%(name,i))

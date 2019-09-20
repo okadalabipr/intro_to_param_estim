@@ -11,8 +11,8 @@ from scipy.integrate import ode
     -> if np.shape(Y)[0] < self.tspan[-1]: return False
 '''
 
-from .model.name2idx import f_parameter as C
-from .model.name2idx import f_variable as V
+from .model.name2idx import parameters as C
+from .model.name2idx import variables as V
 from .model.differential_equation import diffeq
 
 def solveode(diffeq,y0,tspan,args):
