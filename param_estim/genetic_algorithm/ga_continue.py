@@ -2,7 +2,7 @@ import sys
 import numpy as np
 
 from .converter import *
-from .undx_mgg import mgg_variant
+from .undx_mgg import mgg_alternation
 from .converging import converging
 from .local_search import local_search
 from param_estim.fitness import objective
@@ -72,7 +72,7 @@ def ga_v1_continue(
         return best_indiv,best_fitness
 
     for i in range(1,n_generation):
-        population = mgg_variant(population,n_population,n_children,n_gene,search_idx,search_region)
+        population = mgg_alternation(population,n_population,n_children,n_gene,search_idx,search_region)
         print('Generation%d: Best Fitness = %e'%(i+int(count_num)+1,population[0,-1]))
         best_indiv = decode_gene2variable(population[0,:n_gene],search_region)
 

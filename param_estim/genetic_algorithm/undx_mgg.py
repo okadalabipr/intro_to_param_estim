@@ -2,7 +2,7 @@ import numpy as np
 
 from param_estim.fitness import objective
 
-def mgg_variant(
+def mgg_alternation(
     population,
     n_population,
     n_children,
