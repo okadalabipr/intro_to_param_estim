@@ -118,5 +118,5 @@ param_names = [\
     'len_f_params'\
 ]
 
-for i,name in enumerate(param_names):
-    exec('%s=%d'%(name,i))
+for idx,name in enumerate(param_names):
+    exec('%s=%d'%(name,idx))
