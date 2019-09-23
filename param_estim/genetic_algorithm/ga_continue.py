@@ -45,9 +45,9 @@ def ga_v1_continue(
     search_region,
     p0_bounds
     ):
-    count_num = np.load('../FitParam/%d/count_num.npy'%(nth_paramset))
-    generation = np.load('../FitParam/%d/generation.npy'%(nth_paramset))
-    best_indiv = np.load('../FitParam/%d/FitParam%d.npy'%(nth_paramset,int(generation)))
+    count_num = np.load('./out/%d/count_num.npy'%(nth_paramset))
+    generation = np.load('./out/%d/generation.npy'%(nth_paramset))
+    best_indiv = np.load('./out/%d/fit_param%d.npy'%(nth_paramset,int(generation)))
     best_fitness = objective(
         (np.log10(best_indiv) - search_region[0,:])/(search_region[1,:] - search_region[0,:]),
         search_idx,
@@ -62,7 +62,7 @@ def ga_v1_continue(
     else:
         best_indiv = decode_gene2variable(population[0,:n_gene],search_region)
         best_fitness = population[0,-1]
-        np.save('../FitParam/%d/FitParam%d.npy'%(nth_paramset,int(count_num)+1),best_indiv)
+        np.save('./out/%d/fit_param%d.npy'%(nth_paramset,int(count_num)+1),best_indiv)
 
     print('Generation%d: Best Fitness = %e'%(int(count_num)+1,population[0,-1]))
 
@@ -77,8 +77,9 @@ def ga_v1_continue(
         best_indiv = decode_gene2variable(population[0,:n_gene],search_region)
 
         if population[0,-1] < best_fitness:
-            np.save('../FitParam/%d/FitParam%d.npy'%(nth_paramset,i+int(count_num)+1),best_indiv)
-            np.save('../FitParam/%d/generation.npy'%(nth_paramset),i+int(count_num)+1)
+            np.save('./out/%d/fit_param%d.npy'%(nth_paramset,i+int(count_num)+1),best_indiv)
+            np.save('./out/%d/generation.npy'%(nth_paramset),i+int(count_num)+1)
+            np.save('./out/%d/best_fitness'%(nth_paramset),best_fitness)
         best_fitness = population[0,-1]
 
         if population[0,-1] <= allowable_error:
@@ -86,7 +87,7 @@ def ga_v1_continue(
             best_fitness = population[0,-1]
             return best_indiv,best_fitness
 
-        np.save('../FitParam/%d/count_num.npy'%(nth_paramset),i+int(count_num)+1)
+        np.save('./out/%d/count_num.npy'%(nth_paramset),i+int(count_num)+1)
 
     best_indiv = decode_gene2variable(population[0,:n_gene],search_region)
 
@@ -113,9 +114,9 @@ def ga_v2_continue(
     n_iter = 1
     n0 = np.zeros(2*n_population)
 
-    count_num = np.load('../FitParam/%d/count_num.npy'%(nth_paramset))
-    generation = np.load('../FitParam/%d/generation.npy'%(nth_paramset))
-    best_indiv = np.load('../FitParam/%d/FitParam%d.npy'%(nth_paramset,int(generation)))
+    count_num = np.load('./out/%d/count_num.npy'%(nth_paramset))
+    generation = np.load('./out/%d/generation.npy'%(nth_paramset))
+    best_indiv = np.load('./out/%d/fit_param%d.npy'%(nth_paramset,int(generation)))
     best_fitness = objective(
         (np.log10(best_indiv) - search_region[0,:])/(search_region[1,:] - search_region[0,:]),
         search_idx,
@@ -130,7 +131,7 @@ def ga_v2_continue(
     else:
         best_indiv = decode_gene2variable(population[0,:n_gene],search_region)
         best_fitness = population[0,-1]
-        np.save('../FitParam/%d/FitParam%d.npy'%(nth_paramset,int(count_num)+1),best_indiv)
+        np.save('./out/%d/fit_param%d.npy'%(nth_paramset,int(count_num)+1),best_indiv)
 
     n0[0] = population[0,-1]
 
@@ -163,8 +164,9 @@ def ga_v2_continue(
         best_indiv = decode_gene2variable(population[0,:n_gene],search_region)
 
         if population[0,-1] < best_fitness:
-            np.save('../FitParam/%d/generation.npy'%(nth_paramset),i+int(count_num)+1)
-            np.save('../FitParam/%d/FitParam%d.npy'%(nth_paramset,i+int(count_num)+1),best_indiv)
+            np.save('./out/%d/generation.npy'%(nth_paramset),i+int(count_num)+1)
+            np.save('./out/%d/fit_param%d.npy'%(nth_paramset,i+int(count_num)+1),best_indiv)
+            np.save('./out/%d/best_fitness'%(nth_paramset),best_fitness)
         best_fitness = population[0,-1]
 
         if population[0,-1] <= allowable_error:
@@ -172,7 +174,7 @@ def ga_v2_continue(
             best_fitness = population[0,-1]
             return best_indiv,best_fitness
 
-        np.save('../FitParam/%d/count_num.npy'%(nth_paramset),i+int(count_num)+1)
+        np.save('./out/%d/count_num.npy'%(nth_paramset),i+int(count_num)+1)
 
     best_indiv = decode_gene2variable(population[0,:n_gene],search_region)
 
@@ -182,8 +184,8 @@ def ga_v2_continue(
 
 
 def get_initial_population_continue(nth_paramset,n_population,n_gene,search_idx,search_region,p0_bounds):
-    generation = np.load('../FitParam/%d/generation.npy'%(nth_paramset))
-    best_indiv = np.load('../FitParam/%d/FitParam%d.npy'%(nth_paramset,int(generation)))
+    generation = np.load('./out/%d/generation.npy'%(nth_paramset))
+    best_indiv = np.load('./out/%d/fit_param%d.npy'%(nth_paramset,int(generation)))
 
     population = np.inf*np.ones((n_population,n_gene+1))
 
