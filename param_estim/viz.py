@@ -6,7 +6,8 @@ import seaborn as sns
 
 from . import model
 from . import plot_func
-from .search_parameter import search_parameter_index, write_bestFitParam
+from .search_parameter import search_parameter_index, write_best_fit_param
+from .observable import num_observables
 from .simulation import Simulation
 
 def visualize_result(viz_type,show_all,stdev):
@@ -14,7 +15,7 @@ def visualize_result(viz_type,show_all,stdev):
         try:
             int(viz_type)
         except ValueError:
-            print("Error: viz_type ∈ {'best','average','original',int(1~n_fitparam)}")
+            print("Error: viz_type ∈ {'best','average','original',int(1~n_fit_param)}")
 
     x = model.f_params()
     y0 = model.initial_values()
@@ -24,43 +25,30 @@ def visualize_result(viz_type,show_all,stdev):
     if viz_type == 'original':
         pass
     else:
-        fitparam_files = os.listdir('./FitParam')
-        for file in fitparam_files:
+        fit_param_files = os.listdir('./out')
+        for file in fit_param_files:
             if re.match(r'\d',file):
                 n_file += 1
-
-    PMEK_cyt_all  = np.ones((n_file,len(sim.tspan),sim.condition))*np.nan
-    PERK_cyt_all  = np.ones((n_file,len(sim.tspan),sim.condition))*np.nan
-    PRSK_wcl_all  = np.ones((n_file,len(sim.tspan),sim.condition))*np.nan
-    PCREB_wcl_all = np.ones((n_file,len(sim.tspan),sim.condition))*np.nan
-    DUSPmRNA_all  = np.ones((n_file,len(sim.tspan),sim.condition))*np.nan
-    cFosmRNA_all  = np.ones((n_file,len(sim.tspan),sim.condition))*np.nan
-    cFosPro_all   = np.ones((n_file,len(sim.tspan),sim.condition))*np.nan
-    PcFos_all     = np.ones((n_file,len(sim.tspan),sim.condition))*np.nan
+    
+    simulations_all = np.ones((num_observables,n_file,len(sim.tspan),sim.condition))*np.nan
 
     if n_file > 0:
         for i in range(n_file):
             (sim,successful) = update_sim(i+1,sim,x,y0)
             if successful:
-                PMEK_cyt_all[i,:,:]  = sim.PMEK_cyt
-                PERK_cyt_all[i,:,:]  = sim.PERK_cyt
-                PRSK_wcl_all[i,:,:]  = sim.PRSK_wcl
-                PCREB_wcl_all[i,:,:] = sim.PCREB_wcl
-                DUSPmRNA_all[i,:,:]  = sim.DUSPmRNA
-                cFosmRNA_all[i,:,:]  = sim.cFosmRNA
-                cFosPro_all[i,:,:]   = sim.cFosPro
-                PcFos_all[i,:,:]     = sim.PcFos
+                for j in range(num_observables):
+                    simulations_all[j,i,:,:] = sim.simulations[j,:,:]
 
         best_fitness_all = np.empty(n_file)
         for i in range(n_file):
-            if os.path.isfile('./FitParam/%d/BestFitness.npy'%(i+1)):
-                best_fitness_all[i] = np.load('./FitParam/%d/BestFitness.npy'%(i+1))
+            if os.path.isfile('./out/%d/best_fitness.npy'%(i+1)):
+                best_fitness_all[i] = np.load('./out/%d/best_fitness.npy'%(i+1))
             else:
                 best_fitness_all[i] = np.inf
 
         # global best_paramset
         best_paramset = np.argmin(best_fitness_all) + 1
-        write_bestFitParam(best_paramset)
+        write_best_fit_param(best_paramset)
 
         if viz_type == 'average':
             pass
@@ -70,7 +58,7 @@ def visualize_result(viz_type,show_all,stdev):
             sim,_ = update_sim(int(viz_type),sim,x,y0)
         else:
             raise ValueError(
-                '%d is larger than n_fitparam(%d)'%(int(viz_type),n_file)
+                '%d is larger than n_fit_param(%d)'%(int(viz_type),n_file)
             )
 
         if n_file >= 2:
@@ -82,16 +70,7 @@ def visualize_result(viz_type,show_all,stdev):
         else:
             print('Simulation failed.')
 
-    plot_func.timecourse(sim,n_file,viz_type,show_all,stdev,
-        PMEK_cyt_all,
-        PERK_cyt_all,
-        PRSK_wcl_all,
-        PCREB_wcl_all,
-        DUSPmRNA_all,
-        cFosmRNA_all,
-        cFosPro_all,
-        PcFos_all
-    )
+    plot_func.timecourse(sim,n_file,viz_type,show_all,stdev,simulations_all)
 
 
 def update_sim(nth_paramset,sim,x,y0):
@@ -99,8 +78,8 @@ def update_sim(nth_paramset,sim,x,y0):
 
     # get_best_param
     try:
-        generation = np.load('./FitParam/%d/generation.npy'%(nth_paramset))
-        best_indiv = np.load('./FitParam/%d/FitParam%d.npy'%(nth_paramset,int(generation)))
+        generation = np.load('./out/%d/generation.npy'%(nth_paramset))
+        best_indiv = np.load('./out/%d/fit_param%d.npy'%(nth_paramset,int(generation)))
 
         for i,j in enumerate(search_idx[0]):
             x[j] = best_indiv[i]
@@ -123,8 +102,8 @@ def save_param_range(n_file,x,y0):
 
     for nth_paramset in range(1,n_file+1):
         try:
-            generation = np.load('./FitParam/%d/generation.npy'%(nth_paramset))
-            best_indiv = np.load('./FitParam/%d/FitParam%d.npy'%(nth_paramset,int(generation)))
+            generation = np.load('./out/%d/generation.npy'%(nth_paramset))
+            best_indiv = np.load('./out/%d/fit_param%d.npy'%(nth_paramset,int(generation)))
         except:
             best_indiv = np.empty(len(search_idx[0])+len(search_idx[1]))
             for i,j in enumerate(search_idx[0]):

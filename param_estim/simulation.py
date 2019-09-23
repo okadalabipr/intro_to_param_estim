@@ -14,6 +14,7 @@ from scipy.integrate import ode
 from .model.name2idx import parameters as C
 from .model.name2idx import variables as V
 from .model.differential_equation import diffeq
+from .observable import num_observables,dynamics
 
 def solveode(diffeq,y0,tspan,args):
     sol = ode(diffeq)
@@ -38,17 +39,9 @@ class Simulation(object):
     condition = 2
 
     t = np.array(tspan)/60. # sec. -> min. (plot_func.py)
-
-    PMEK_cyt  = np.empty((len(tspan),condition))
-    PERK_cyt  = np.empty((len(tspan),condition))
-    PRSK_wcl  = np.empty((len(tspan),condition))
-    PCREB_wcl = np.empty((len(tspan),condition))
-    DUSPmRNA  = np.empty((len(tspan),condition))
-    cFosmRNA  = np.empty((len(tspan),condition))
-    cFosPro   = np.empty((len(tspan),condition))
-    PcFos     = np.empty((len(tspan),condition))
-
     
+    simulations = np.empty((num_observables,len(tspan),condition))
+
     def simulate(self,x,y0):
 
         for i in range(self.condition):
@@ -62,11 +55,26 @@ class Simulation(object):
             if T[-1] < self.tspan[-1]:
                 return False
             else:
-                self.PMEK_cyt[:,i] = Y[:,V.ppMEKc]
-                self.PERK_cyt[:,i] = Y[:,V.pERKc] + Y[:,V.ppERKc]
-                self.PRSK_wcl[:,i] = Y[:,V.pRSKc] + Y[:,V.pRSKn]*(x[C.Vn]/x[C.Vc])
-                self.PCREB_wcl[:,i] = Y[:,V.pCREBn]*(x[C.Vn]/x[C.Vc])
-                self.DUSPmRNA[:,i] = Y[:,V.duspmRNAc]
-                self.cFosmRNA[:,i] = Y[:,V.cfosmRNAc]
-                self.cFosPro[:,i] = (Y[:,V.pcFOSn] + Y[:,V.cFOSn])*(x[C.Vn]/x[C.Vc]) + Y[:,V.cFOSc] + Y[:,V.pcFOSc]
-                self.PcFos[:,i] = Y[:,V.pcFOSn]*(x[C.Vn]/x[C.Vc]) + Y[:,V.pcFOSc]
+                self.simulations[dynamics['Phosphorylated_MEKc'],:,i] = \
+                    Y[:,V.ppMEKc]
+                    
+                self.simulations[dynamics['Phosphorylated_ERKc'],:,i] = \
+                    Y[:,V.pERKc] + Y[:,V.ppERKc]
+                    
+                self.simulations[dynamics['Phosphorylated_RSKw'],:,i] = \
+                    Y[:,V.pRSKc] + Y[:,V.pRSKn]*(x[C.Vn]/x[C.Vc])
+                    
+                self.simulations[dynamics['Phosphorylated_CREBw'],:,i] = \
+                    Y[:,V.pCREBn]*(x[C.Vn]/x[C.Vc])
+                    
+                self.simulations[dynamics['dusp_mRNA'],:,i] = \
+                    Y[:,V.duspmRNAc]
+                    
+                self.simulations[dynamics['cfos_mRNA'],:,i] = \
+                    Y[:,V.cfosmRNAc]
+                    
+                self.simulations[dynamics['cFos_Protein'],:,i] = \
+                    (Y[:,V.pcFOSn] + Y[:,V.cFOSn])*(x[C.Vn]/x[C.Vc]) + Y[:,V.cFOSc] + Y[:,V.pcFOSc]
+                    
+                self.simulations[dynamics['Phosphorylated_cFos'],:,i] = \
+                    Y[:,V.pcFOSn]*(x[C.Vn]/x[C.Vc]) + Y[:,V.pcFOSc]

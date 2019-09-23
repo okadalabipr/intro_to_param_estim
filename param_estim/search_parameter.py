@@ -218,7 +218,7 @@ def get_search_region():
     return search_region
 
 
-def write_bestFitParam(best_paramset):
+def write_best_fit_param(best_paramset):
         
     x = f_params()
     y0 = initial_values()
@@ -226,8 +226,8 @@ def write_bestFitParam(best_paramset):
     search_idx = search_parameter_index()
 
     try:
-        generation = np.load('./FitParam/%d/generation.npy'%(best_paramset))
-        best_indiv = np.load('./FitParam/%d/FitParam%d.npy'%(best_paramset,int(generation)))
+        generation = np.load('./out/%d/generation.npy'%(best_paramset))
+        best_indiv = np.load('./out/%d/fit_param%d.npy'%(best_paramset,int(generation)))
 
         for i,j in enumerate(search_idx[0]):
             x[j] = best_indiv[i]
@@ -237,7 +237,7 @@ def write_bestFitParam(best_paramset):
     except:
         pass
     
-    with open('bestFitParam.txt', mode='w') as f:
+    with open('best_fit_param.txt', mode='w') as f:
         f.write('# param set: %d\n'%(best_paramset))
         f.write('\n### Param. const\n')
         for i in range(C.len_f_params):
