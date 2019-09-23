@@ -25,14 +25,17 @@ def visualize_result(viz_type,show_all,stdev):
     if viz_type == 'original':
         pass
     else:
-        fit_param_files = os.listdir('./out')
-        for file in fit_param_files:
-            if re.match(r'\d',file):
-                n_file += 1
+        if os.path.isdir('./out'):
+            fit_param_files = os.listdir('./out')
+            for file in fit_param_files:
+                if re.match(r'\d',file):
+                    n_file += 1
     
     simulations_all = np.ones((num_observables,n_file,len(sim.tspan),sim.condition))*np.nan
 
     if n_file > 0:
+        if n_file == 1 and viz_type == 'average':
+            viz_type = 'best'
         for i in range(n_file):
             (sim,successful) = update_sim(i+1,sim,x,y0)
             if successful:
