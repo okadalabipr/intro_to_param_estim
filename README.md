@@ -2,7 +2,7 @@
 
 Using Genetic Algorithm to Fit ODE Models to Data
 ***
-![simulation_average](work/figure/simulation_average.png)
+![simulation_average](figure/simulation_average.png)
 
  Points (blue diamonds, EGF; red squares, HRG) denote experimental data, solid lines denote simulations.
 
@@ -39,15 +39,14 @@ A brief description of each file you will need to use is below:
     - [**plot_func.py**](/param_estim/plot_func.py) & [**viz.py**](/param_estim/viz.py)<br>
         This is where you define how you would like each variable to be plotted.
 
-- [**work/**](/work/)<br>
-    - [**runGA/runGA_*n*.ipynb (*n* ≧ 1)**](/work/runGA/runGA_1.ipynb)<br>
-        Run both input boxes and leave it. When you run the *i*<sup>th</sup> file, runGA_(*i+1*).ipynb will be generated in the runGA folder. You can run these different parameter fittings simultaneously.
+- [**runGA_*n*.ipynb (*n* ≧ 1)**](runGA_1.ipynb)<br>
+    Run both input boxes and leave it. When you run the *i*<sup>th</sup> file, runGA_(*i+1*).ipynb will be generated in the runGA folder. You can run these different parameter fittings simultaneously.
 
-    - [**runSim.ipynb**](/work/runSim.ipynb)<br>
-        This is the file that is used to actually run the simulations for your model and plot the results.
+- [**runSim.ipynb**](runSim.ipynb)<br>
+    This is the file that is used to actually run the simulations for your model and plot the results.
 
-    - [**figure/**](/work/figure/)<br>
-        Within this folder there are several figures that will be saved. One is the ‘param_range.pdf’ which shows the range of values for your parameters based on all the fittings. The others are results of your simulations.
+- [**figure/**](figure/)<br>
+    Within this folder there are several figures that will be saved. One is the ‘param_range.pdf’ which shows the range of values for your parameters based on all the fittings. The others are results of your simulations.
 
 ## Requirements
 - Python3+
@@ -66,23 +65,21 @@ IPython.notebook.kernel.execute(
 )
 ```
 ```python
-%run -i ../../run_ga.py
+%run -i run_ga.py
 """ If you want to continue from where you stopeed in the last parameter search,
 
-%run -i ../../run_ga_continue.py
+%run -i run_ga_continue.py
 
 """
 ```
 or
 ```bash 
-$ nohup python parest.py n >> work/DVODE.log 2>&1 &
+$ nohup python run_ga.py n(=1,2,3, · · ·) >> DVODE.log 2>&1 &
 ```
 
 - Visualization of Simulation Results (work/runSim.ipynb)
 ```python
-%run -i ../run_sim.py
-%matplotlib inline
-%config InlineBackend.figure_formats = {'png','retina'}
+from param_estim.viz import visualize_result
 
 """=============================================================
     viz_type: 'best', 'average', 'original' or int(1~n_fitparam)
