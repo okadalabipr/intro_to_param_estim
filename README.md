@@ -87,7 +87,7 @@ from param_estim.viz import visualize_result
     stdev: bool (Only when viz_type == 'average')
 ================================================================"""
 
-viualize_result(viz_type='average',show_all=False,stdev=True)
+visualize_result(viz_type='average',show_all=False,stdev=True)
 ```
 
 ## Algorithm
