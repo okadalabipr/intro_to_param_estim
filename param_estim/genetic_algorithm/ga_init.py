@@ -9,7 +9,7 @@ from param_estim.fitness import objective
 from param_estim.search_parameter import search_parameter_index
 from param_estim.search_parameter import get_search_region
 
-def parameter_estimation(nth_paramset):
+def optimize(nth_paramset):
 
     search_idx = search_parameter_index()
     search_region = get_search_region()

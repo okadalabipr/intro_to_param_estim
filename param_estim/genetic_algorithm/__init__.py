@@ -1,2 +1,2 @@
-from .ga_init import parameter_estimation
-from .ga_continue import parameter_estimation_continue
+from .ga_init import optimize
+from .ga_continue import optimize_continue

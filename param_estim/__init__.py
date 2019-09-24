@@ -1,1 +1,1 @@
-from .viz import visualize_result
+from .genetic_algorithm import optimize, optimize_continue

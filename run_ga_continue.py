@@ -4,14 +4,14 @@ import re
 import warnings
 warnings.filterwarnings('ignore')
 
-from param_estim import genetic_algorithm as ga
+from param_estim import optimize,optimize_continue
 
 def run_ga_continue(nth_paramset):
     if not os.path.isdir('./out/%d'%(nth_paramset)):
         os.mkdir('./out/%d'%(nth_paramset))
-        ga.parameter_estimation(nth_paramset)
+        optimize(nth_paramset)
     else:
-        ga.parameter_estimation_continue(nth_paramset)
+        optimize_continue(nth_paramset)
         
 if __name__ == '__main__':
     args = sys.argv

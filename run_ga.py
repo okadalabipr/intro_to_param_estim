@@ -5,7 +5,7 @@ import re
 import warnings
 warnings.filterwarnings('ignore')
 
-from param_estim import genetic_algorithm as ga
+from param_estim import optimize
 
 
 def run_ga(nth_paramset):
@@ -25,7 +25,7 @@ def run_ga(nth_paramset):
             './runGA_%d.ipynb'%(nth_paramset+1)
         )
 
-    ga.parameter_estimation(nth_paramset)
+    optimize(nth_paramset)
     
 if __name__ == '__main__':
     args = sys.argv
