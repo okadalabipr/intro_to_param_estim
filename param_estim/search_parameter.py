@@ -237,7 +237,7 @@ def write_best_fit_param(best_paramset):
     except:
         pass
     
-    with open('best_fit_param.txt', mode='w') as f:
+    with open('./out/best_fit_param.txt', mode='w') as f:
         f.write('# param set: %d\n'%(best_paramset))
         f.write('\n### Param. const\n')
         for i in range(C.len_f_params):
