@@ -1,7 +1,7 @@
 import numpy as np
 from matplotlib import pyplot as plt
 
-from .observable import num_observables,dynamics
+from .observable import *
 from .experimental_data import ExperimentalData
 
 def timecourse(sim,n_file,viz_type,show_all,stdev,simulations_all):
@@ -58,8 +58,8 @@ def timecourse(sim,n_file,viz_type,show_all,stdev,simulations_all):
         plt.yticks([0,0.2,0.4,0.6,0.8,1,1.2])
         plt.ylim(0,1.2)
         plt.xlabel('Time (min)')
-        plt.title(list(dynamics.keys())[j])
+        plt.title(observable_names[j])
 
         plt.savefig('./figure/simulation_{0}_{1}.pdf'.
-                    format(viz_type,list(dynamics.keys())[j]),bbox_inches='tight')
+                    format(viz_type,observable_names[j]),bbox_inches='tight')
         plt.close()
