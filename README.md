@@ -57,7 +57,7 @@ A brief description of each file you will need to use is below:
     - jupyter
 
 ## Usage
-- Parameter Estimation (work/runGA/runGA_*n*.ipynb, *n*=1, 2, 3, · · ·)
+### Parameter Estimation (runGA_*n*.ipynb, *n*=1, 2, 3, · · ·)
 ```javascript
 %%javascript
 IPython.notebook.kernel.execute(
@@ -77,7 +77,7 @@ or
 $ nohup python run_ga.py n(=1,2,3, · · ·) >> DVODE.log 2>&1 &
 ```
 
-- Visualization of Simulation Results (work/runSim.ipynb)
+### Visualization of Simulation Results (runSim.ipynb)
 ```python
 from param_estim.viz import visualize_result
 
@@ -88,6 +88,10 @@ from param_estim.viz import visualize_result
 ================================================================"""
 
 visualize_result(viz_type='average',show_all=False,stdev=True)
+```
+or
+```bash
+$ python run_sim.py
 ```
 
 ## Algorithm
