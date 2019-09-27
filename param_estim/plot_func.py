@@ -14,8 +14,8 @@ def timecourse(sim,n_file,viz_type,show_all,stdev,simulations_all):
         plt.gca().spines['right'].set_visible(False)
         plt.gca().spines['top'].set_visible(False)
         plt.rcParams['font.size'] = 12
-        plt.rcParams['axes.linewidth'] = 2
-        plt.rcParams['lines.linewidth'] = 2.5
+        plt.rcParams['axes.linewidth'] = 1
+        plt.rcParams['lines.linewidth'] = 2
         plt.rcParams['lines.markersize'] = 10
         
         
@@ -50,8 +50,8 @@ def timecourse(sim,n_file,viz_type,show_all,stdev,simulations_all):
                     lw=0,color='r',alpha=0.1
                 )
 
-        plt.plot(exp_t/60.,exp.data[j]['EGF'],'bo',clip_on=False)
-        plt.plot(exp_t/60.,exp.data[j]['HRG'],'ro',clip_on=False)
+        plt.plot(exp_t/60.,exp.data[j]['EGF'],'o',markerfacecolor='None',markeredgecolor='b',clip_on=False)
+        plt.plot(exp_t/60.,exp.data[j]['HRG'],'o',markerfacecolor='None',markeredgecolor='r',clip_on=False)
 
         plt.xlim(0,90)
         plt.xticks([0,30,60,90])
