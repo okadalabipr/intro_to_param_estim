@@ -8,7 +8,7 @@ def timecourse(sim,n_file,viz_type,show_all,stdev,simulations_all):
 
     exp = ExperimentalData()
 
-    for j in range(num_observables):
+    for j,title in enumerate(observable_names):
         
         plt.figure(figsize=(4,3))
         plt.gca().spines['right'].set_visible(False)
@@ -58,8 +58,8 @@ def timecourse(sim,n_file,viz_type,show_all,stdev,simulations_all):
         plt.yticks([0,0.2,0.4,0.6,0.8,1,1.2])
         plt.ylim(0,1.2)
         plt.xlabel('Time (min)')
-        plt.title(observable_names[j])
+        plt.title(title)
 
         plt.savefig('./figure/simulation_{0}_{1}.pdf'.
-                    format(viz_type,observable_names[j]),bbox_inches='tight')
+                    format(viz_type,title),bbox_inches='tight')
         plt.close()
