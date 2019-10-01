@@ -66,7 +66,7 @@ IPython.notebook.kernel.execute(
 ```
 ```python
 %run -i run_ga.py
-""" If you want to continue from where you stopeed in the last parameter search,
+""" If you want to continue from where you stopped in the last parameter search,
 
 %run -i run_ga_continue.py
 
