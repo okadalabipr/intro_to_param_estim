@@ -57,14 +57,15 @@ def objective(individual_gene,search_idx,search_region):
         for i,target in enumerate(observable_names):
             exp_t = exp.get_timepoint(i)
             norm_max = np.max(sim.simulations[dynamics[target]])
-            error[i] = compute_objval_abs(
-                *diff_sim_and_exp(
-                    sim.simulations[dynamics[target]],
-                    exp.data[dynamics[target]],
-                    exp_timepoint=exp_t,num_condition=sim.condition,
-                    norm_max_sim=norm_max
+            if exp.data[dynamics[target]] is not None:
+                error[i] = compute_objval_abs(
+                    *diff_sim_and_exp(
+                        sim.simulations[dynamics[target]],
+                        exp.data[dynamics[target]],
+                        exp_timepoint=exp_t,num_condition=sim.condition,
+                        norm_max_sim=norm_max
+                    )
                 )
-            )
         return np.sum(error)
     else:
         return np.inf
