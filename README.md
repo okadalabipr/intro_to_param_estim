@@ -79,7 +79,7 @@ $ nohup python run_ga.py n(=1,2,3, · · ·) >> DVODE.log 2>&1 &
 
 ### Visualization of Simulation Results (runSim.ipynb)
 ```python
-from param_estim.viz import visualize_result
+from param_estim.viz import visualize_simulations
 
 """=============================================================
     viz_type: 'best', 'average', 'original' or int(1~n_fitparam)
@@ -87,7 +87,7 @@ from param_estim.viz import visualize_result
     stdev: bool (Only when viz_type == 'average')
 ================================================================"""
 
-visualize_result(viz_type='average',show_all=False,stdev=True)
+visualize_simulations(viz_type='average',show_all=False,stdev=True)
 ```
 or
 ```bash
