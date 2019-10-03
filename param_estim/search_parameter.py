@@ -122,7 +122,7 @@ def get_search_region():
 
     search_region = np.zeros((2,len(x)+len(y0)))
 
-    '''
+
     # Default: 0.1 ~ 10
     for i,j in enumerate(search_idx[0]):
         search_region[0,j] = search_param[i]*0.1 # lower bound
@@ -132,11 +132,19 @@ def get_search_region():
     for i,j in enumerate(search_idx[1]):
         search_region[0,j+len(x)] = search_param[i+len(search_idx[0])]*0.5 # lower bound
         search_region[1,j+len(x)] = search_param[i+len(search_idx[0])]*2.0 # upper bound
-    '''
+    
 
     # search_region[:,C.param_name] = [lower_bound,upper_bound]
     # search_region[:,V.var_name+len(x)] = [lower_bound,upper_bound]
 
+    # Hill coefficient
+    search_region[:,C.n10] = [1.00,4.00]
+    search_region[:,C.n31] = [1.00,4.00]
+    search_region[:,C.n57] = [1.00,4.00]
+    search_region[:,C.nF31] = [1.00,4.00]
+    
+    ''' Example ================================================================
+    
     search_region[:,C.V1] = [7.33e-2,6.60e-01]
     search_region[:,C.Km1] = [1.83e+2,8.50e+2]
     search_region[:,C.V5] = [6.48e-3,7.20e+1]
@@ -212,6 +220,8 @@ def get_search_region():
     search_region[:,C.KF31] = [np.exp(-10),np.exp(10)]
     search_region[:,C.nF31] = [1.00,4.00]
     search_region[:,C.a] = [1.00e+2,5.00e+2]
+    
+    ========================================================================='''
 
     search_region = lin2log(search_idx,search_region,len(x),len(search_param))
 
