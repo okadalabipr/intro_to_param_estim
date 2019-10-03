@@ -18,7 +18,7 @@ def optimize(nth_paramset):
     n_population = int(5*search_region.shape[1])
     n_children = 50
     n_gene = search_region.shape[1]
-    allowable_error = 0.5
+    allowable_error = 0.35
 
     (best_indiv,best_fitness) = ga_v2(
         nth_paramset,
