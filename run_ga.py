@@ -19,7 +19,8 @@ def run_ga(nth_paramset):
     except:
         os.mkdir('./out/%d'%(nth_paramset))
 
-    if not os.path.isfile('./runGA_%d.ipynb'%(nth_paramset+1)):
+    if os.path.isfile('./runGA_%d.ipynb'%(nth_paramset)) \
+        and not os.path.isfile('./runGA_%d.ipynb'%(nth_paramset+1)):
         shutil.copy(
             './runGA_%d.ipynb'%(nth_paramset),
             './runGA_%d.ipynb'%(nth_paramset+1)
