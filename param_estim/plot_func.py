@@ -18,9 +18,6 @@ def timecourse(sim,n_file,viz_type,show_all,stdev,simulations_all):
         plt.rcParams['lines.linewidth'] = 2
         plt.rcParams['lines.markersize'] = 10
         
-        
-        exp_t = exp.get_timepoint(j)
-        
         if show_all:
             for i in range(n_file):
                 plt.plot(sim.t,simulations_all[j,i,:,0]/np.max(simulations_all[j,i,:,:]),'b',alpha=0.05)
@@ -51,6 +48,7 @@ def timecourse(sim,n_file,viz_type,show_all,stdev,simulations_all):
                 )
                 
         if exp.data[j] is not None:
+            exp_t = exp.get_timepoint(j)
             plt.plot(exp_t/60.,exp.data[j]['EGF'],'o',markerfacecolor='None',markeredgecolor='b',clip_on=False)
             plt.plot(exp_t/60.,exp.data[j]['HRG'],'o',markerfacecolor='None',markeredgecolor='r',clip_on=False)
 
