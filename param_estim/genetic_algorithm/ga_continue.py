@@ -63,6 +63,11 @@ def ga_v1_continue(
         best_indiv = decode_gene2variable(population[0,:n_gene],search_region)
         best_fitness = population[0,-1]
         np.save('./out/%d/fit_param%d.npy'%(nth_paramset,int(count_num)+1),best_indiv)
+        
+    with open('./out/%d/out.txt'%(nth_paramset), mode='a') as f:
+        f.write(
+            'Generation%d: Best Fitness = %e\n'%(int(count_num)+1, best_fitness)
+        )
 
     print('Generation%d: Best Fitness = %e'%(int(count_num)+1,population[0,-1]))
 
@@ -137,6 +142,11 @@ def ga_v2_continue(
         best_indiv = decode_gene2variable(population[0,:n_gene],search_region)
         best_fitness = population[0,-1]
         np.save('./out/%d/fit_param%d.npy'%(nth_paramset,int(count_num)+1),best_indiv)
+        
+    with open('./out/%d/out.txt'%(nth_paramset), mode='a') as f:
+        f.write(
+            'Generation%d: Best Fitness = %e\n'%(int(count_num)+1, best_fitness)
+        )
 
     n0[0] = population[0,-1]
 
