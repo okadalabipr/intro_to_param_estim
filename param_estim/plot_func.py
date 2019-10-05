@@ -49,8 +49,8 @@ def timecourse(sim,n_file,viz_type,show_all,stdev,simulations_all):
                 
         if exp.data[j] is not None:
             exp_t = exp.get_timepoint(j)
-            plt.plot(exp_t/60.,exp.data[j]['EGF'],'o',markerfacecolor='None',markeredgecolor='b',clip_on=False)
-            plt.plot(exp_t/60.,exp.data[j]['HRG'],'o',markerfacecolor='None',markeredgecolor='r',clip_on=False)
+            plt.plot(exp_t/60.,exp.data[j]['EGF'],'D',markerfacecolor='None',markeredgecolor='b',clip_on=False)
+            plt.plot(exp_t/60.,exp.data[j]['HRG'],'s',markerfacecolor='None',markeredgecolor='r',clip_on=False)
 
         plt.xlim(0,90)
         plt.xticks([0,30,60,90])
