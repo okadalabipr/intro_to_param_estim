@@ -74,7 +74,7 @@ IPython.notebook.kernel.execute(
 ```
 or
 ```bash 
-$ nohup python run_ga.py n(=1,2,3, · · ·) >> DVODE.log 2>&1 &
+$ nohup python run_ga.py n & # n = 1, 2, 3, · · ·
 ```
 
 ### Visualization of Simulation Results (runSim.ipynb)
