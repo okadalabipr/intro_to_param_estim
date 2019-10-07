@@ -64,7 +64,7 @@ def ga_v1_continue(
         best_fitness = population[0,-1]
         np.save('./out/%d/fit_param%d.npy'%(nth_paramset,int(count_num)+1),best_indiv)
         
-    with open('./out/%d/out.txt'%(nth_paramset), mode='a') as f:
+    with open('./out/%d/out.log'%(nth_paramset), mode='a') as f:
         f.write(
             'Generation%d: Best Fitness = %e\n'%(int(count_num)+1, best_fitness)
         )
@@ -89,7 +89,7 @@ def ga_v1_continue(
         
         np.save('./out/%d/count_num.npy'%(nth_paramset),i+int(count_num)+1)
         
-        with open('./out/%d/out.txt'%(nth_paramset), mode='a') as f:
+        with open('./out/%d/out.log'%(nth_paramset), mode='a') as f:
             f.write(
                 'Generation%d: Best Fitness = %e\n'%(i+int(count_num)+1, best_fitness)
             )
@@ -143,7 +143,7 @@ def ga_v2_continue(
         best_fitness = population[0,-1]
         np.save('./out/%d/fit_param%d.npy'%(nth_paramset,int(count_num)+1),best_indiv)
         
-    with open('./out/%d/out.txt'%(nth_paramset), mode='a') as f:
+    with open('./out/%d/out.log'%(nth_paramset), mode='a') as f:
         f.write(
             'Generation%d: Best Fitness = %e\n'%(int(count_num)+1, best_fitness)
         )
@@ -186,7 +186,7 @@ def ga_v2_continue(
         
         np.save('./out/%d/count_num.npy'%(nth_paramset),i+int(count_num)+1)
         
-        with open('./out/%d/out.txt'%(nth_paramset), mode='a') as f:
+        with open('./out/%d/out.log'%(nth_paramset), mode='a') as f:
             f.write(
                 'Generation%d: Best Fitness = %e\n'%(i+int(count_num)+1, best_fitness)
             )

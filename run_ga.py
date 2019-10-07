@@ -14,7 +14,7 @@ def run_ga(nth_paramset):
     try:
         files = os.listdir('./out/%d'%(nth_paramset))
         for file in files:
-            if any(map(file.__contains__,('.npy','.txt'))):
+            if any(map(file.__contains__,('.npy','.log'))):
                 os.remove('./out/%d/%s'%(nth_paramset,file))
     except:
         os.mkdir('./out/%d'%(nth_paramset))
