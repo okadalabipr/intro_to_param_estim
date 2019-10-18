@@ -12,7 +12,7 @@ observable_names = [
 ]
 
 num_observables = len(observable_names)
-dynamics = dict(zip(observable_names,range(num_observables)))
+species = dict(zip(observable_names,range(num_observables)))
 
 
 def diff_sim_and_exp(

@@ -1,7 +1,7 @@
 import numpy as np
 from matplotlib import pyplot as plt
 
-from .observable import *
+from .observable import observable_names, num_observables
 from .experimental_data import ExperimentalData
 
 def timecourse(sim,n_file,viz_type,show_all,stdev,simulations_all):
@@ -47,10 +47,10 @@ def timecourse(sim,n_file,viz_type,show_all,stdev,simulations_all):
                     lw=0,color='r',alpha=0.1
                 )
                 
-        if exp.data[j] is not None:
+        if exp.experiments[j] is not None:
             exp_t = exp.get_timepoint(j)
-            plt.plot(exp_t/60.,exp.data[j]['EGF'],'D',markerfacecolor='None',markeredgecolor='b',clip_on=False)
-            plt.plot(exp_t/60.,exp.data[j]['HRG'],'s',markerfacecolor='None',markeredgecolor='r',clip_on=False)
+            plt.plot(exp_t/60.,exp.experiments[j]['EGF'],'D',markerfacecolor='None',markeredgecolor='b',clip_on=False)
+            plt.plot(exp_t/60.,exp.experiments[j]['HRG'],'s',markerfacecolor='None',markeredgecolor='r',clip_on=False)
 
         plt.xlim(0,90)
         plt.xticks([0,30,60,90])

@@ -8,7 +8,7 @@ from . import model
 from . import plot_func
 from .search_parameter import search_parameter_index, write_best_fit_param
 from .observable import num_observables
-from .simulation import Simulation
+from .simulation import NumericalSimulation
 
 def visualize_simulations(viz_type,show_all,stdev):
     if not viz_type in ['best','average','original']:
@@ -19,7 +19,7 @@ def visualize_simulations(viz_type,show_all,stdev):
 
     x = model.f_params()
     y0 = model.initial_values()
-    sim = Simulation()
+    sim = NumericalSimulation()
 
     n_file = 0
     if viz_type == 'original':

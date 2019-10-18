@@ -6,7 +6,7 @@ from .model.name2idx import variables as V
 from .model.param_const import f_params
 from .model.initial_condition import initial_values
 from .observable import *
-from .simulation import Simulation
+from .simulation import NumericalSimulation
 from .experimental_data import ExperimentalData
 from .genetic_algorithm.converter import decode_gene2variable
 
@@ -50,18 +50,18 @@ def objective(individual_gene,search_idx,search_region):
     x[C.m56] = x[C.m51]
 
     exp = ExperimentalData()
-    sim = Simulation()
+    sim = NumericalSimulation()
 
     if sim.simulate(x,y0) is None:
         error = np.zeros(num_observables)
         for i,target in enumerate(observable_names):
             exp_t = exp.get_timepoint(i)
-            norm_max = np.max(sim.simulations[dynamics[target]])
-            if exp.data[dynamics[target]] is not None:
+            norm_max = np.max(sim.simulations[species[target]])
+            if exp.experiments[species[target]] is not None:
                 error[i] = compute_objval_abs(
                     *diff_sim_and_exp(
-                        sim.simulations[dynamics[target]],
-                        exp.data[dynamics[target]],
+                        sim.simulations[species[target]],
+                        exp.experiments[species[target]],
                         exp_timepoint=exp_t,num_condition=sim.condition,
                         norm_max_sim=norm_max
                     )
@@ -69,84 +69,84 @@ def objective(individual_gene,search_idx,search_region):
         '''
         error = np.zeros(16)
         
-        norm_max = np.max(sim.simulations[dynamics['Phosphorylated_MEKc']])
+        norm_max = np.max(sim.simulations[species['Phosphorylated_MEKc']])
         error[0] = compute_objval_abs(
-            sim.simulations[dynamics['Phosphorylated_MEKc']][exp.t2,0]/norm_max,
-            exp.data[dynamics['Phosphorylated_MEKc']]['EGF']
+            sim.simulations[species['Phosphorylated_MEKc']][exp.t2,0]/norm_max,
+            exp.experiments[species['Phosphorylated_MEKc']]['EGF']
         )
         error[1] = compute_objval_abs(
-            sim.simulations[dynamics['Phosphorylated_MEKc']][exp.t2,1]/norm_max,
-            exp.data[dynamics['Phosphorylated_MEKc']]['HRG']
+            sim.simulations[species['Phosphorylated_MEKc']][exp.t2,1]/norm_max,
+            exp.experiments[species['Phosphorylated_MEKc']]['HRG']
         )
         
-        norm_max = np.max(sim.simulations[dynamics['Phosphorylated_ERKc']])
+        norm_max = np.max(sim.simulations[species['Phosphorylated_ERKc']])
         error[2] = compute_objval_abs(
-            sim.simulations[dynamics['Phosphorylated_ERKc']][exp.t2,0]/norm_max,
-            exp.data[dynamics['Phosphorylated_ERKc']]['EGF']
+            sim.simulations[species['Phosphorylated_ERKc']][exp.t2,0]/norm_max,
+            exp.experiments[species['Phosphorylated_ERKc']]['EGF']
         )
         error[3] = compute_objval_abs(
-            sim.simulations[dynamics['Phosphorylated_MEKc']][exp.t2,1]/norm_max,
-            exp.data[dynamics['Phosphorylated_ERKc']]['HRG']
+            sim.simulations[species['Phosphorylated_MEKc']][exp.t2,1]/norm_max,
+            exp.experiments[species['Phosphorylated_ERKc']]['HRG']
         )
         
-        norm_max = np.max(sim.simulations[dynamics['Phosphorylated_RSKw']])
+        norm_max = np.max(sim.simulations[species['Phosphorylated_RSKw']])
         error[4] = compute_objval_abs(
-            sim.simulations[dynamics['Phosphorylated_RSKw']][exp.t2,0]/norm_max,
-            exp.data[dynamics['Phosphorylated_RSKw']]['EGF']
+            sim.simulations[species['Phosphorylated_RSKw']][exp.t2,0]/norm_max,
+            exp.experiments[species['Phosphorylated_RSKw']]['EGF']
         )
         error[5] = compute_objval_abs(
-            sim.simulations[dynamics['Phosphorylated_RSKw']][exp.t2,1]/norm_max,
-            exp.data[dynamics['Phosphorylated_RSKw']]['HRG']
+            sim.simulations[species['Phosphorylated_RSKw']][exp.t2,1]/norm_max,
+            exp.experiments[species['Phosphorylated_RSKw']]['HRG']
         )
         
-        norm_max = np.max(sim.simulations[dynamics['Phosphorylated_CREBw']])
+        norm_max = np.max(sim.simulations[species['Phosphorylated_CREBw']])
         error[6] = compute_objval_abs(
-            sim.simulations[dynamics['Phosphorylated_CREBw']][exp.t3,0]/norm_max,
-            exp.data[dynamics['Phosphorylated_CREBw']]['EGF']
+            sim.simulations[species['Phosphorylated_CREBw']][exp.t3,0]/norm_max,
+            exp.experiments[species['Phosphorylated_CREBw']]['EGF']
         )
         error[7] = compute_objval_abs(
-            sim.simulations[dynamics['Phosphorylated_CREBw']][exp.t3,1]/norm_max,
-            exp.data[dynamics['Phosphorylated_CREBw']]['HRG']
+            sim.simulations[species['Phosphorylated_CREBw']][exp.t3,1]/norm_max,
+            exp.experiments[species['Phosphorylated_CREBw']]['HRG']
         )
         
-        norm_max = np.max(sim.simulations[dynamics['dusp_mRNA']])
+        norm_max = np.max(sim.simulations[species['dusp_mRNA']])
         error[8] = compute_objval_abs(
-            sim.simulations[dynamics['dusp_mRNA']][exp.t5,0]/norm_max,
-            exp.data[dynamics['dusp_mRNA']]['EGF']
+            sim.simulations[species['dusp_mRNA']][exp.t5,0]/norm_max,
+            exp.experiments[species['dusp_mRNA']]['EGF']
         )
         error[9] = compute_objval_abs(
-            sim.simulations[dynamics['dusp_mRNA']][exp.t5,1]/norm_max,
-            exp.data[dynamics['dusp_mRNA']]['HRG']
+            sim.simulations[species['dusp_mRNA']][exp.t5,1]/norm_max,
+            exp.experiments[species['dusp_mRNA']]['HRG']
         )
         
-        norm_max = np.max(sim.simulations[dynamics['cfos_mRNA']])
+        norm_max = np.max(sim.simulations[species['cfos_mRNA']])
         error[10] = compute_objval_abs(
-            sim.simulations[dynamics['cfos_mRNA']][exp.t4,0]/norm_max,
-            exp.data[dynamics['cfos_mRNA']]['EGF']
+            sim.simulations[species['cfos_mRNA']][exp.t4,0]/norm_max,
+            exp.experiments[species['cfos_mRNA']]['EGF']
         )
         error[11] = compute_objval_abs(
-            sim.simulations[dynamics['cfos_mRNA']][exp.t4,1]/norm_max,
-            exp.data[dynamics['cfos_mRNA']]['HRG']
+            sim.simulations[species['cfos_mRNA']][exp.t4,1]/norm_max,
+            exp.experiments[species['cfos_mRNA']]['HRG']
         )
         
-        norm_max = np.max(sim.simulations[dynamics['cFos_Protein']])
+        norm_max = np.max(sim.simulations[species['cFos_Protein']])
         error[12] = compute_objval_abs(
-            sim.simulations[dynamics['cFos_Protein']][exp.t5,0]/norm_max,
-            exp.data[dynamics['cFos_Protein']]['EGF']
+            sim.simulations[species['cFos_Protein']][exp.t5,0]/norm_max,
+            exp.experiments[species['cFos_Protein']]['EGF']
         )
         error[13] = compute_objval_abs(
-            sim.simulations[dynamics['cFos_Protein']][exp.t5,1]/norm_max,
-            exp.data[dynamics['cFos_Protein']]['HRG']
+            sim.simulations[species['cFos_Protein']][exp.t5,1]/norm_max,
+            exp.experiments[species['cFos_Protein']]['HRG']
         )
         
-        norm_max = np.max(sim.simulations[dynamics['Phosphorylated_cFos']])
+        norm_max = np.max(sim.simulations[species['Phosphorylated_cFos']])
         error[14] = compute_objval_abs(
-            sim.simulations[dynamics['Phosphorylated_cFos']][exp.t2,0]/norm_max,
-            exp.data[dynamics['Phosphorylated_cFos']]['EGF']
+            sim.simulations[species['Phosphorylated_cFos']][exp.t2,0]/norm_max,
+            exp.experiments[species['Phosphorylated_cFos']]['EGF']
         )
         error[15] = compute_objval_abs(
-            sim.simulations[dynamics['Phosphorylated_cFos']][exp.t2,1]/norm_max,
-            exp.data[dynamics['Phosphorylated_cFos']]['HRG']
+            sim.simulations[species['Phosphorylated_cFos']][exp.t2,1]/norm_max,
+            exp.experiments[species['Phosphorylated_cFos']]['HRG']
         )
         '''
         return np.sum(error)
