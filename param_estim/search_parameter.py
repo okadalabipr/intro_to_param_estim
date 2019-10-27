@@ -1,3 +1,4 @@
+import os
 import sys
 import numpy as np
 
@@ -235,7 +236,7 @@ def write_best_fit_param(best_paramset):
 
     search_idx = search_parameter_index()
 
-    try:
+    if os.path.isfile('./out/%d/generation.npy'%(best_paramset)):
         generation = np.load('./out/%d/generation.npy'%(best_paramset))
         best_indiv = np.load('./out/%d/fit_param%d.npy'%(best_paramset,int(generation)))
 
@@ -243,8 +244,7 @@ def write_best_fit_param(best_paramset):
             x[j] = best_indiv[i]
         for i,j in enumerate(search_idx[1]):
             y0[j] = best_indiv[i+len(search_idx[0])]
-
-    except:
+    else:
         pass
     
     with open('./out/best_fit_param.txt', mode='w') as f:
