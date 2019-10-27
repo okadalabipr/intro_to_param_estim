@@ -68,9 +68,7 @@ def visualize_simulations(viz_type,show_all,stdev):
             save_param_range(n_file,x,y0)
 
     else:
-        if sim.simulate(x,y0) is None:
-            pass
-        else:
+        if sim.simulate(x,y0) is not None:
             print('Simulation failed.')
 
     plot_func.timecourse(sim,n_file,viz_type,show_all,stdev,simulations_all)
@@ -80,7 +78,7 @@ def update_sim(nth_paramset,sim,x,y0):
     search_idx = search_parameter_index()
 
     # get_best_param
-    try:
+    if os.path.isfile('./out/%d/generation.npy'%(nth_paramset)):
         generation = np.load('./out/%d/generation.npy'%(nth_paramset))
         best_indiv = np.load('./out/%d/fit_param%d.npy'%(nth_paramset,int(generation)))
 
@@ -88,8 +86,7 @@ def update_sim(nth_paramset,sim,x,y0):
             x[j] = best_indiv[i]
         for i,j in enumerate(search_idx[1]):
             y0[j] = best_indiv[i+len(search_idx[0])]
-
-    except:
+    else:
         pass
 
     if sim.simulate(x,y0) is None:
