@@ -33,7 +33,7 @@ def objective(individual_gene,search_idx,search_region):
     for i,j in enumerate(search_idx[1]):
         y0[j] = indiv[i+len(search_idx[0])]
         
-    # constraints
+    # constraints ==============================================================
     x[C.V6] = x[C.V5]
     x[C.Km6] = x[C.Km5]
     x[C.KimpDUSP] = x[C.KimDUSP]
@@ -48,6 +48,7 @@ def objective(individual_gene,search_idx,search_region):
     x[C.p55] = x[C.p50]
     x[C.p56] = x[C.p51]
     x[C.m56] = x[C.m51]
+    # ==========================================================================
 
     exp = ExperimentalData()
     sim = NumericalSimulation()
@@ -62,7 +63,8 @@ def objective(individual_gene,search_idx,search_region):
                     *diff_sim_and_exp(
                         sim.simulations[species[target]],
                         exp.experiments[species[target]],
-                        exp_timepoint=exp_t,num_condition=sim.condition,
+                        exp_timepoint=exp_t,
+                        num_condition=sim.condition,
                         norm_max_sim=norm_max
                     )
                 )
