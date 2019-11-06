@@ -2,6 +2,7 @@ import os
 import sys
 import shutil
 import re
+import multiprocessing
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -34,4 +35,10 @@ if __name__ == '__main__':
         nth_paramset = int(re.sub(r'\D','',current_ipynb))
         run_ga(nth_paramset)
     else:
-        run_ga(int(args[1]))
+        if len(args) == 2:
+            run_ga(int(args[1]))
+        elif len(args) == 3:
+            n_proc = max(1, multiprocessing.cpu_count() - 1)
+            p = multiprocessing.Pool(processes=n_proc)
+            p.map(run_ga, range(int(args[1]),int(args[2])+1))
+            p.close()
