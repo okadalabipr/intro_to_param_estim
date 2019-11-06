@@ -24,11 +24,10 @@ A brief description of each file you will need to use is below:
         - [**initial_condition.py**](/param_estim/model/initial_condition.py)<br>
             This is where you define initial concentrations.
 
-    - [**simulation.py**](/param_estim/simulation.py)<br>
-        This is where you define the simulations you want to run. In this file you can define different conditions for each simulation (for example, ligand concentration) and how you would like each variable to be simulated (i.e. do you want absolute concentration to be simulated? or percentage change over time? Etc).
-
-    - [**experimental_data.py**](/param_estim/experimental_data.py)<br>
-        This is where you input the experimental data that you are going to use to try and fit the parameters to.
+    - [**observalbe.py**](/param_estim/observable.py)<br>
+        This is the file to
+        - define the simulations you want to run. In this file you can define different conditions for each simulation (for example, ligand concentration) and how you would like each variable to be simulated (i.e. do you want absolute concentration to be simulated? or percentage change over time? Etc).
+        - input the experimental data that you are going to use to try and fit the parameters to.
 
     - [**search_parameter.py**](/param_estim/search_parameter.py)<br>
         This is where you specify the model parameters to estimate.
