@@ -1,8 +1,7 @@
 import numpy as np
 from matplotlib import pyplot as plt
 
-from .observable import observable_names, num_observables
-from .experimental_data import ExperimentalData
+from .observable import observable_names, num_observables, ExperimentalData
 
 def timecourse(sim,n_file,viz_type,show_all,stdev,simulations_all):
 

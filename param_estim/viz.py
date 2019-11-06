@@ -7,8 +7,7 @@ import seaborn as sns
 from . import model
 from . import plot_func
 from .search_parameter import search_parameter_index, write_best_fit_param
-from .observable import num_observables
-from .simulation import NumericalSimulation
+from .observable import num_observables, NumericalSimulation
 
 def visualize_simulations(viz_type,show_all,stdev):
     if not viz_type in ['best','average','original']:

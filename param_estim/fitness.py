@@ -6,8 +6,6 @@ from .model.name2idx import variables as V
 from .model.param_const import f_params
 from .model.initial_condition import initial_values
 from .observable import *
-from .simulation import NumericalSimulation
-from .experimental_data import ExperimentalData
 from .genetic_algorithm.converter import decode_gene2variable
 
 def compute_objval_abs(sim_data,exp_data):  # Residual Sum of Squares
