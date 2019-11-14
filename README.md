@@ -78,7 +78,7 @@ $ nohup python run_ga.py n & # n = 1, 2, 3, · · ·
 
 ### Visualization of Simulation Results (runSim.ipynb)
 ```python
-from param_estim.viz import visualize_simulations
+from param_estim.viz import simulate_all
 
 """=============================================================
     viz_type: 'best', 'average', 'original' or int(1~n_fitparam)
@@ -86,7 +86,7 @@ from param_estim.viz import visualize_simulations
     stdev: bool (Only when viz_type == 'average')
 ================================================================"""
 
-visualize_simulations(viz_type='average',show_all=False,stdev=True)
+simulate_all(viz_type='average',show_all=False,stdev=True)
 ```
 or
 ```bash

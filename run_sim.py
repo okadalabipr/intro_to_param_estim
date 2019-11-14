@@ -5,7 +5,7 @@ warnings.filterwarnings('ignore')
 if not os.path.isdir('./figure'):
     os.mkdir('./figure')
 
-from  param_estim.viz import visualize_simulations
+from  param_estim.viz import simulate_all
 
 if __name__ == '__main__':
     """=============================================================
@@ -13,4 +13,4 @@ if __name__ == '__main__':
     show_all: bool
     stdev: bool (Only when viz_type == 'average')
     ================================================================"""
-    visualize_simulations(viz_type='average',show_all=False,stdev=True)
+    simulate_all(viz_type='average',show_all=False,stdev=True)
