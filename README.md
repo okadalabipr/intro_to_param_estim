@@ -64,16 +64,20 @@ IPython.notebook.kernel.execute(
 )
 ```
 ```python
-%run -i run_ga.py
+%run -i optimize.py
 """ If you want to continue from where you stopped in the last parameter search,
 
-%run -i run_ga_continue.py
+%run -i optimize_continue.py
 
 """
 ```
 or
 ```bash 
-$ nohup python run_ga.py n & # n = 1, 2, 3, · · ·
+$ nohup python optimize.py n &
+```
+- If you want to search multiple parameter sets (from *n1* to *n2*) simutaneously,
+```bash
+$ nohup python optimize.py n1 n2 &
 ```
 
 ### Visualization of Simulation Results (runSim.ipynb)
