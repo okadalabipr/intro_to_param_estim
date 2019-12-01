@@ -2,10 +2,10 @@ import os
 import sys
 import numpy as np
 
-from .model.name2idx import parameters as C
-from .model.name2idx import variables as V
-from .model.param_const import f_params
-from .model.initial_condition import initial_values
+from model.name2idx import parameters as C
+from model.name2idx import variables as V
+from model.param_const import f_params
+from model.initial_condition import initial_values
 
 def search_parameter_index():
 

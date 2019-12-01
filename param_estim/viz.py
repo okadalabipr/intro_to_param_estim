@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from . import model
+import model
 from . import plot_func
 from .search_parameter import search_parameter_index, write_best_fit_param
 from .observable import num_observables, NumericalSimulation

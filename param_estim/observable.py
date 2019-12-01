@@ -1,9 +1,9 @@
 import numpy as np
 from scipy.integrate import ode
 
-from .model.name2idx import parameters as C
-from .model.name2idx import variables as V
-from .model.differential_equation import diffeq
+from model.name2idx import parameters as C
+from model.name2idx import variables as V
+from model.differential_equation import diffeq
     
 observable_names = [
     'Phosphorylated_MEKc',

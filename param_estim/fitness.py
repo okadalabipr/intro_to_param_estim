@@ -1,10 +1,10 @@
 import numpy as np
 from scipy.spatial.distance import cosine
 
-from .model.name2idx import parameters as C
-from .model.name2idx import variables as V
-from .model.param_const import f_params
-from .model.initial_condition import initial_values
+from model.name2idx import parameters as C
+from model.name2idx import variables as V
+from model.param_const import f_params
+from model.initial_condition import initial_values
 from .observable import *
 from .genetic_algorithm.converter import decode_gene2variable
 
