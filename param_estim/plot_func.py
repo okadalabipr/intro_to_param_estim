@@ -1,23 +1,23 @@
 import numpy as np
 from matplotlib import pyplot as plt
 
-from .observable import observable_names, num_observables, ExperimentalData
+from .observable import species, ExperimentalData
 
 def timecourse(sim,n_file,viz_type,show_all,stdev,simulations_all):
 
     exp = ExperimentalData()
     
-    plt.rcParams['font.size'] = 12
+    plt.rcParams['font.size'] = 18
     plt.rcParams['axes.linewidth'] = 1
     plt.rcParams['lines.linewidth'] = 2
     plt.rcParams['lines.markersize'] = 10
-#   plt.rcParams['font.family'] = 'Arial'
-#   plt.rcParams['mathtext.fontset'] = 'custom'
-#   plt.rcParams['mathtext.it'] = 'Arial:italic'
+    plt.rcParams['font.family'] = 'Arial'
+    plt.rcParams['mathtext.fontset'] = 'custom'
+    plt.rcParams['mathtext.it'] = 'Arial:italic'
 
     cmap = plt.get_cmap('tab10')
 
-    for i,title in enumerate(observable_names):
+    for i,title in enumerate(species):
 
         plt.figure(figsize=(4,3))
         plt.gca().spines['right'].set_visible(False)
@@ -25,30 +25,30 @@ def timecourse(sim,n_file,viz_type,show_all,stdev,simulations_all):
 
         if show_all:
             for j in range(n_file):
-                for l in range(sim.condition):
+                for l,_ in enumerate(sim.conditions):
                     plt.plot(
                         sim.t,simulations_all[i,j,:,l]/np.max(simulations_all[i,j,:,:]),
                         color=cmap(l),alpha=0.05
                     )
 
         if not viz_type == 'average':
-            for l in range(sim.condition):
+            for l,_ in enumerate(sim.conditions):
                 plt.plot(
                     sim.t,sim.simulations[i,:,l]/np.max(sim.simulations[i]),
                     color=cmap(l)
                 )
         else:
-            normalized = np.empty((num_observables,n_file,len(sim.tspan),sim.condition))
+            normalized = np.empty((len(species),n_file,len(sim.tspan),len(sim.conditions)))
             for j in range(n_file):
-                for l in range(sim.condition):
+                for l,_ in enumerate(sim.conditions):
                     normalized[i,j,:,l] = simulations_all[i,j,:,l]/np.max(simulations_all[i,j,:,:])
-            for l in range(sim.condition):
+            for l,_ in enumerate(sim.conditions):
                 plt.plot(
                     sim.t,np.nanmean(normalized[i,:,:,l],axis=0),
                     color=cmap(l)
                 )
             if stdev:
-                for l in range(sim.condition):
+                for l,_ in enumerate(sim.conditions):
                     mean = np.nanmean(normalized[i,:,:,l],axis=0)
                     yerr = [np.nanstd(normalized[i,:,k,l],ddof=1) for k,_ in enumerate(sim.t)]
                     plt.fill_between(
@@ -58,22 +58,23 @@ def timecourse(sim,n_file,viz_type,show_all,stdev,simulations_all):
 
         if exp.experiments[i] is not None:
             exp_t = exp.get_timepoint(i)
-            keys = list(exp.experiments[i].keys())
-            for l,key in enumerate(keys):
-                plt.plot(
-                    exp_t/60.,exp.experiments[i][key],'D',
-                    markerfacecolor='None',
-                    markeredgecolor=cmap(l),
-                    clip_on=False
-                )
+            for l,condition in enumerate(sim.conditions):
+                if condition in exp.experiments[i]:
+                    plt.plot(
+                        np.array(exp_t)/60.,exp.experiments[i][condition],'D',
+                        markerfacecolor='None',
+                        markeredgecolor=cmap(l),
+                        clip_on=False
+                    )
 
         plt.xlim(0,90)
         plt.xticks([0,30,60,90])
-        plt.yticks([0,0.2,0.4,0.6,0.8,1,1.2])
+        plt.yticks([0,0.3,0.6,0.9,1.2])
         plt.ylim(0,1.2)
         plt.xlabel('Time (min)')
         plt.title(title)
 
-        plt.savefig('./figure/simulation_{0}_{1}.pdf'.
-                    format(viz_type,title),bbox_inches='tight')
+        plt.savefig(
+            './figure/{0}_{1}.pdf'.format(viz_type,title),bbox_inches='tight'
+        )
         plt.close()
