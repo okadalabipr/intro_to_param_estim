@@ -71,7 +71,7 @@ $ nohup python optimize.py n1 n2 &
 
 ### Visualization of Simulation Results (runSim.ipynb)
 ```python
-from param_estim.simulation import simulate_all
+from param_estim.dynamics import simulate_all
 
 """
 ----------------------------------------------------------------
