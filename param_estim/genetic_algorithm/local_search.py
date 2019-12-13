@@ -2,15 +2,7 @@ import numpy as np
 
 from param_estim.fitness import objective
 
-def local_search(
-    ip,
-    population,
-    n_population,
-    n_children,
-    n_gene,
-    search_idx,
-    search_region
-    ):
+def local_search(ip,population,n_population,n_children,n_gene,search_idx,search_region):
     idx = [True]*n_population
     idx[ip[0]] = False
 
@@ -43,7 +35,6 @@ def mutation(parents,n_gene,search_idx,search_region):
         if 0. <= np.min(child[:n_gene]) and np.max(child[:n_gene]) <= 1.:
             in_range = True
             break
-
     if not in_range:
         child[:n_gene] = np.clip(child[:n_gene],0.,1.)
 
@@ -52,8 +43,8 @@ def mutation(parents,n_gene,search_idx,search_region):
     return child
 
 
-# Normal Distribution Mutation
 def ndm(parents,n_gene):
+    """Normal Distribution Mutation"""
     GAMMA = 0.35/n_gene**0.5
 
     child = np.empty(n_gene+1)
