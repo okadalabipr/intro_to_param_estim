@@ -19,7 +19,7 @@ def optimize_continue(nth_paramset):
     search_idx = search_parameter_index()
     search_region = get_search_region()
 
-    n_generation = 10000
+    max_generation = 10000
     n_population = int(5*search_region.shape[1])
     n_children = 50
     n_gene = search_region.shape[1]
@@ -28,7 +28,7 @@ def optimize_continue(nth_paramset):
 
     (best_indiv,best_fitness) = ga_v2_continue(
         nth_paramset,
-        n_generation,
+        max_generation,
         n_population,
         n_children,
         n_gene,
@@ -39,16 +39,18 @@ def optimize_continue(nth_paramset):
     )
 
 
-def ga_v1_continue(nth_paramset,n_generation,n_population,n_children,n_gene,
+def ga_v1_continue(nth_paramset,max_generation,n_population,n_children,n_gene,
                     allowable_error,search_idx,search_region,p0_bounds):
-    count_num = np.load('./out/%d/count_num.npy'%(nth_paramset))
-    saved_generation = np.load('./out/%d/generation.npy'%(nth_paramset))
-    best_indiv = np.load('./out/%d/fit_param%d.npy'%(nth_paramset,int(saved_generation)))
+    count_num = \
+        np.load('./out/%d/count_num.npy'%(nth_paramset))
+    best_generation = \
+        np.load('./out/%d/generation.npy'%(nth_paramset))
+    best_indiv = \
+        np.load('./out/%d/fit_param%d.npy'%(nth_paramset,int(best_generation)))
     best_fitness = objective(
         (np.log10(best_indiv) - search_region[0,:])/(search_region[1,:] - search_region[0,:]),
         search_idx,search_region
     )
-
     population = get_initial_population_continue(
         nth_paramset,n_population,n_gene,search_idx,search_region,p0_bounds
     )
@@ -65,16 +67,16 @@ def ga_v1_continue(nth_paramset,n_generation,n_population,n_children,n_gene,
         f.write(
             'Generation%d: Best Fitness = %e\n'%(int(count_num)+1, best_fitness)
         )
-
-    print('Generation%d: Best Fitness = %e'%(int(count_num)+1,population[0,-1]))
-
+    print(
+        'Generation%d: Best Fitness = %e'%(int(count_num)+1,population[0,-1])
+    )
     if population[0,-1] <= allowable_error:
         best_indiv = decode_gene2variable(population[0,:n_gene],search_region)
         best_fitness = population[0,-1]
         return best_indiv,best_fitness
 
     generation = 1
-    while generation < n_generation:
+    while generation < max_generation:
         population = mgg_alternation(
             population,n_population,n_children,n_gene,search_idx,search_region
         )
@@ -93,8 +95,9 @@ def ga_v1_continue(nth_paramset,n_generation,n_population,n_children,n_gene,
             )
         best_fitness = population[0,-1]
         
-        np.save('./out/%d/count_num.npy'%(nth_paramset),generation+int(count_num)+1)
-        
+        np.save(
+            './out/%d/count_num.npy'%(nth_paramset),generation+int(count_num)+1
+        )
         with open('./out/%d/out.log'%(nth_paramset), mode='a') as f:
             f.write(
                 'Generation%d: Best Fitness = %e\n'%(generation+int(count_num)+1, best_fitness)
@@ -112,7 +115,7 @@ def ga_v1_continue(nth_paramset,n_generation,n_population,n_children,n_gene,
     return best_indiv,best_fitness
 
 
-def ga_v2_continue(nth_paramset,n_generation,n_population,n_children,n_gene,
+def ga_v2_continue(nth_paramset,max_generation,n_population,n_children,n_gene,
                     allowable_error,search_idx,search_region,p0_bounds):
     if n_population < n_gene+2:
         print('n_population must be larger than %d'%(n_gene+2))
@@ -121,19 +124,20 @@ def ga_v2_continue(nth_paramset,n_generation,n_population,n_children,n_gene,
     n_iter = 1
     n0 = np.empty(2*n_population)
 
-    count_num = np.load('./out/%d/count_num.npy'%(nth_paramset))
-    saved_generation = np.load('./out/%d/generation.npy'%(nth_paramset))
-    best_indiv = np.load('./out/%d/fit_param%d.npy'%(nth_paramset,int(saved_generation)))
+    count_num = \
+        np.load('./out/%d/count_num.npy'%(nth_paramset))
+    best_generation = \
+        np.load('./out/%d/generation.npy'%(nth_paramset))
+    best_indiv = \
+        np.load('./out/%d/fit_param%d.npy'%(nth_paramset,int(best_generation)))
     best_fitness = objective(
         (np.log10(best_indiv) - search_region[0,:])/(search_region[1,:] - search_region[0,:]),
         search_idx,
         search_region
     )
-
     population = get_initial_population_continue(
         nth_paramset,n_population,n_gene,search_idx,search_region,p0_bounds
     )
-
     if best_fitness < population[0,-1]:
         population[0,:n_gene] = \
             (np.log10(best_indiv) - search_region[0,:])/(search_region[1,:] - search_region[0,:])
@@ -147,18 +151,18 @@ def ga_v2_continue(nth_paramset,n_generation,n_population,n_children,n_gene,
         f.write(
             'Generation%d: Best Fitness = %e\n'%(int(count_num)+1, best_fitness)
         )
-
     n0[0] = population[0,-1]
 
-    print('Generation%d: Best Fitness = %e'%(int(count_num)+1,population[0,-1]))
-
+    print(
+        'Generation%d: Best Fitness = %e'%(int(count_num)+1,population[0,-1])
+    )
     if population[0,-1] <= allowable_error:
         best_indiv = decode_gene2variable(population[0,:n_gene],search_region)
         best_fitness = population[0,-1]
         return best_indiv,best_fitness
 
     generation = 1
-    while generation < n_generation:
+    while generation < max_generation:
         ip = np.random.choice(n_population,n_gene+2,replace=False)  # m = n + 2
         ip, population = converging(
             ip,population,n_population,n_gene,search_idx,search_region
@@ -200,8 +204,9 @@ def ga_v2_continue(nth_paramset,n_generation,n_population,n_children,n_gene,
             )
         best_fitness = population[0,-1]
         
-        np.save('./out/%d/count_num.npy'%(nth_paramset),generation+int(count_num)+1)
-        
+        np.save(
+            './out/%d/count_num.npy'%(nth_paramset),generation+int(count_num)+1
+        )
         with open('./out/%d/out.log'%(nth_paramset), mode='a') as f:
             f.write(
                 'Generation%d: Best Fitness = %e\n'%(generation+int(count_num)+1, best_fitness)
@@ -220,12 +225,14 @@ def ga_v2_continue(nth_paramset,n_generation,n_population,n_children,n_gene,
 
 
 def get_initial_population_continue(nth_paramset,n_population,n_gene,search_idx,search_region,p0_bounds):
-    saved_generation = np.load('./out/%d/generation.npy'%(nth_paramset))
-    best_indiv = np.load('./out/%d/fit_param%d.npy'%(nth_paramset,int(saved_generation)))
+    best_generation = \
+        np.load('./out/%d/generation.npy'%(nth_paramset))
+    best_indiv = \
+        np.load('./out/%d/fit_param%d.npy'%(nth_paramset,int(best_generation)))
 
     population = np.full((n_population,n_gene+1),np.inf)
 
-    print('initpop')
+    print('Generating the initial population. . .')
     for i in range(n_population):
         while np.isinf(population[i,-1]) or np.isnan(population[i,-1]):
             population[i,:n_gene] = encode_bestindiv2randgene(best_indiv,search_region,p0_bounds)
