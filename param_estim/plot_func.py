@@ -1,6 +1,8 @@
 import numpy as np
 from matplotlib import pyplot as plt
+import seaborn as sns
 
+import model
 from .observable import species, ExperimentalData
 
 def timecourse(sim,n_file,viz_type,show_all,stdev,simulations_all):
@@ -78,3 +80,45 @@ def timecourse(sim,n_file,viz_type,show_all,stdev,simulations_all):
             './figure/{0}_{1}.pdf'.format(viz_type,title),bbox_inches='tight'
         )
         plt.close()
+        
+        
+def param_range(search_idx,search_param_matrix,portrait):
+    if portrait:
+        fig = plt.figure(figsize=(8,24))
+        plt.gca().spines['right'].set_visible(False)
+        plt.gca().spines['top'].set_visible(False)
+        plt.gca().yaxis.set_ticks_position('left')
+        plt.gca().xaxis.set_ticks_position('bottom')
+
+        ax = sns.boxenplot(data=search_param_matrix,
+            orient='h',
+            linewidth=0.5,
+            palette='Set2'
+        )
+
+        ax.set_xlabel('Parameter value')
+        ax.set_ylabel('')
+        ax.set_yticklabels([model.C.param_names[i] for i in search_idx[0]])
+        ax.set_xscale('log')
+
+        plt.savefig('./figure/param_range.pdf',bbox_inches='tight')
+        plt.close(fig)
+    else:
+        fig = plt.figure(figsize=(30,6))
+        plt.gca().spines['right'].set_visible(False)
+        plt.gca().spines['top'].set_visible(False)
+        plt.gca().yaxis.set_ticks_position('left')
+        plt.gca().xaxis.set_ticks_position('bottom')
+
+        ax = sns.boxenplot(data=search_param_matrix,
+            linewidth=0.5,
+            palette='Set2'
+        )
+
+        ax.set_xlabel('')
+        ax.set_xticklabels([model.C.param_names[i] for i in search_idx[0]],rotation=45)
+        ax.set_ylabel('Parameter value')
+        ax.set_yscale('log')
+
+        plt.savefig('./figure/param_range.pdf',bbox_inches='tight')
+        plt.close(fig)
