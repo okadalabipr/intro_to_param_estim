@@ -84,41 +84,82 @@ def timecourse(sim,n_file,viz_type,show_all,stdev,simulations_all):
         
 def param_range(search_idx,search_param_matrix,portrait):
     if portrait:
-        fig = plt.figure(figsize=(8,24))
-        plt.gca().spines['right'].set_visible(False)
-        plt.gca().spines['top'].set_visible(False)
-        plt.gca().yaxis.set_ticks_position('left')
-        plt.gca().xaxis.set_ticks_position('bottom')
+        if len(search_idx[0]) > 0:
+            fig = plt.figure(figsize=(8,len(search_idx[0])/2.5))
+            plt.gca().spines['right'].set_visible(False)
+            plt.gca().spines['top'].set_visible(False)
+            plt.gca().yaxis.set_ticks_position('left')
+            plt.gca().xaxis.set_ticks_position('bottom')
 
-        ax = sns.boxenplot(data=search_param_matrix,
-            orient='h',
-            linewidth=0.5,
-            palette='Set2'
-        )
+            ax = sns.boxenplot(
+                data=search_param_matrix[:,:len(search_idx[0])],
+                orient='h',
+                linewidth=0.5,
+                palette='Set2'
+            )
+            ax.set_xlabel('Parameter value')
+            ax.set_ylabel('')
+            ax.set_yticklabels([model.C.param_names[i] for i in search_idx[0]])
+            ax.set_xscale('log')
 
-        ax.set_xlabel('Parameter value')
-        ax.set_ylabel('')
-        ax.set_yticklabels([model.C.param_names[i] for i in search_idx[0]])
-        ax.set_xscale('log')
+            plt.savefig('./figure/param_range.pdf',bbox_inches='tight')
+            plt.close(fig)
+        if len(search_idx[1]) > 0:
+            fig = plt.figure(figsize=(8,len(search_idx[1])/2.5))
+            plt.gca().spines['right'].set_visible(False)
+            plt.gca().spines['top'].set_visible(False)
+            plt.gca().yaxis.set_ticks_position('left')
+            plt.gca().xaxis.set_ticks_position('bottom')
 
-        plt.savefig('./figure/param_range.pdf',bbox_inches='tight')
-        plt.close(fig)
+            ax = sns.boxenplot(
+                data=search_param_matrix[:,len(search_idx[0]):],
+                orient='h',
+                linewidth=0.5,
+                palette='Set2'
+            )
+            ax.set_xlabel('Initial value')
+            ax.set_ylabel('')
+            ax.set_yticklabels([model.V.var_names[i] for i in search_idx[1]])
+            ax.set_xscale('log')
+
+            plt.savefig('./figure/initial_value_range.pdf',bbox_inches='tight')
+            plt.close(fig)
     else:
-        fig = plt.figure(figsize=(30,6))
-        plt.gca().spines['right'].set_visible(False)
-        plt.gca().spines['top'].set_visible(False)
-        plt.gca().yaxis.set_ticks_position('left')
-        plt.gca().xaxis.set_ticks_position('bottom')
+        if len(search_idx[0]) > 0:
+            fig = plt.figure(figsize=(len(search_idx[0])/2.2,6))
+            plt.gca().spines['right'].set_visible(False)
+            plt.gca().spines['top'].set_visible(False)
+            plt.gca().yaxis.set_ticks_position('left')
+            plt.gca().xaxis.set_ticks_position('bottom')
 
-        ax = sns.boxenplot(data=search_param_matrix,
-            linewidth=0.5,
-            palette='Set2'
-        )
+            ax = sns.boxenplot(
+                data=search_param_matrix[:,:len(search_idx[0])],
+                linewidth=0.5,
+                palette='Set2'
+            )
+            ax.set_xlabel('')
+            ax.set_xticklabels([model.C.param_names[i] for i in search_idx[0]],rotation=45)
+            ax.set_ylabel('Parameter value')
+            ax.set_yscale('log')
 
-        ax.set_xlabel('')
-        ax.set_xticklabels([model.C.param_names[i] for i in search_idx[0]],rotation=45)
-        ax.set_ylabel('Parameter value')
-        ax.set_yscale('log')
+            plt.savefig('./figure/param_range_h.pdf',bbox_inches='tight')
+            plt.close(fig)
+        if len(search_idx[1]) > 0:
+            fig = plt.figure(figsize=(len(search_idx[1])/2.2,6))
+            plt.gca().spines['right'].set_visible(False)
+            plt.gca().spines['top'].set_visible(False)
+            plt.gca().yaxis.set_ticks_position('left')
+            plt.gca().xaxis.set_ticks_position('bottom')
 
-        plt.savefig('./figure/param_range.pdf',bbox_inches='tight')
-        plt.close(fig)
+            ax = sns.boxenplot(
+                data=search_param_matrix[:,len(search_idx[0]):],
+                linewidth=0.5,
+                palette='Set2'
+            )
+            ax.set_xlabel('')
+            ax.set_xticklabels([model.V.var_names[i] for i in search_idx[1]],rotation=45)
+            ax.set_ylabel('Initial value')
+            ax.set_yscale('log')
+
+            plt.savefig('./figure/initail_value_range_h.pdf',bbox_inches='tight')
+            plt.close(fig)
