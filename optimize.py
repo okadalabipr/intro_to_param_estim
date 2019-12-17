@@ -17,7 +17,7 @@ def run_ga(nth_paramset):
         for file in files:
             if any(map(file.__contains__,('.npy','.log'))):
                 os.remove('./out/%d/%s'%(nth_paramset,file))
-    except:
+    except FileNotFoundError:
         os.mkdir('./out/%d'%(nth_paramset))
 
     if os.path.isfile('./runGA_%d.ipynb'%(nth_paramset)) \
