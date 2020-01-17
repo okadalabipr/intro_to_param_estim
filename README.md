@@ -36,7 +36,7 @@ A brief description of each file you will need to use is below:
 
 
 - [**runGA_*n*.ipynb (*n* ≧ 1)**](runGA_1.ipynb)<br>
-    Run both input boxes and leave it. When you run the *i*<sup>th</sup> file, runGA_(*i+1*).ipynb will be generated in the runGA folder. You can run these different parameter fittings simultaneously.
+    Run both input boxes and leave it. When you run the *i*<sup>th</sup> file, runGA_(*i+1*).ipynb will be generated. You can run these different parameter fittings simultaneously.
 
 - [**runSim.ipynb**](runSim.ipynb)<br>
     This is the file that is used to actually run the simulations for your model and plot the results.
@@ -73,15 +73,23 @@ $ nohup python optimize.py n1 n2 &
 ```python
 from param_estim.dynamics import simulate_all
 
-"""
-----------------------------------------------------------------
-    viz_type: 'best', 'average', 'original' or int(1~n_fitparam)
-    show_all: bool
-    stdev: bool (Only when viz_type == 'average')
-----------------------------------------------------------------
-"""
-
 simulate_all(viz_type='average',show_all=False,stdev=True)
+ """Simulate ODE model with estimated parameter values.
+
+    Parameters
+    ----------
+    viz_type : str
+        - 'average': The average of simulation results with parameter sets in "out/"
+        - 'best': The best simulation result in "out/", simulation with "best_fit_param"
+        - 'original': Simulation with the default parameters and initial values defined in "model/"
+        - 'n(=1,2,...)': Use the parameter set in "out/n/"
+    show_all : bool
+        Whether to show all simulation results
+    stdev: bool
+        If True, the standard deviation of simulated values will be shown
+        (only when viz_type == 'average')
+
+    """
 ```
 or
 ```bash
