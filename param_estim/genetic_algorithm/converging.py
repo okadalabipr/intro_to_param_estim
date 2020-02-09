@@ -30,14 +30,11 @@ def converging(ip,population,n_population,n_gene,search_idx,search_region):
 
 def xover(parents,n_gene):
     MAXITER = 100
-
-    in_range = False
     for _ in range(MAXITER):
         child = endx(parents,n_gene)
         if 0. <= np.min(child[:n_gene]) and np.max(child[:n_gene]) <= 1.:
-            in_range = True
             break
-    if not in_range:
+    else:
         child[:n_gene] = np.clip(child[:n_gene],0.,1.)
 
     child[-1] = np.inf

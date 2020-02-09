@@ -34,13 +34,11 @@ def mgg_alternation(population,n_population,n_children,n_gene,search_idx,search_
 
 def get_new_child(parents,n_gene,search_idx,search_region):
     MAXITER = 100
-    in_range = False
     for _ in range(MAXITER):
         child = undx(parents,n_gene)
         if 0. <= np.min(child[:n_gene]) and np.max(child[:n_gene]) <= 1.:
-            in_range = True
             break
-    if not in_range:
+    else:
         child[:n_gene] = np.clip(child[:n_gene],0.,1.)
 
     child[-1] = objective(child[:n_gene],search_idx,search_region)
