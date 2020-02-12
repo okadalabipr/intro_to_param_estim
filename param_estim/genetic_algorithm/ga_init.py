@@ -183,10 +183,12 @@ def ga_v2(nth_paramset, max_generation, n_population, n_children, n_gene,
         Stop if the halting criteria are satisfied.
         Otherwise, Generation ← Generation +1, and return to the step 2.
     """
-    if n_population < n_gene+2:
-        print('n_population must be larger than %d' % (n_gene+2))
-        sys.exit()
-
+    if n_population < n_gene + 2:
+        raise ValueError(
+            'n_population must be larger than %d' % (
+                n_gene + 2
+            )
+        )
     n_iter = 1
     n0 = np.empty(2*n_population)
 
