@@ -252,38 +252,50 @@ def lin2log(search_idx, search_region, n_param_const, n_search_param):
             message = 'search_region[lb,ub] must be positive.'
             if i <= n_param_const:
                 raise ValueError(
-                    '"C.%s": ' % (C.param_names[i]) + message
+                    '"C.%s": ' % (
+                        C.param_names[i]
+                    ) + message
                 )
             else:
                 raise ValueError(
-                    '"V.%s": ' % (V.var_names[i-n_param_const]) + message
+                    '"V.%s": ' % (
+                        V.var_names[i-n_param_const]
+                    ) + message
                 )
         elif np.min(search_region[:, i]) == 0.0 and np.max(search_region[:, i]) != 0:
             message = 'lower_bound must be larger than 0.'
             if i <= n_param_const:
                 raise ValueError(
-                    '"C.%s" ' % (C.param_names[i]) + message
+                    '"C.%s" ' % (
+                        C.param_names[i]
+                    ) + message
                 )
             else:
                 raise ValueError(
-                    '"V.%s" ' % (V.var_names[i-n_param_const]) + message
+                    '"V.%s" ' % (
+                        V.var_names[i-n_param_const]
+                    ) + message
                 )
         elif search_region[1, i] - search_region[0, i] < 0.0:
             message = 'lower_bound < upper_bound'
             if i <= n_param_const:
                 raise ValueError(
-                    '"C.%s" : ' % (C.param_names[i]) + message
+                    '"C.%s" : ' % (
+                        C.param_names[i]
+                    ) + message
                 )
             else:
                 raise ValueError(
-                    '"V.%s" : ' % (V.var_names[i-n_param_const]) + message
+                    '"V.%s" : ' % (
+                        V.var_names[i-n_param_const]
+                    ) + message
                 )
     difference = list(
         set(np.where(np.any(search_region != 0., axis=0))[0]) ^
         set(np.append(search_idx[0], n_param_const+search_idx[1]))
     )
     if len(difference) > 0:
-        message = 'in both search_idx_const and search_region'
+        message = 'in both search_idx and search_region'
         for i, j in enumerate(difference):
             if j <= n_param_const:
                 print(
