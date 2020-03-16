@@ -24,7 +24,7 @@ class NumericalSimulation(object):
 
     conditions = ['EGF', 'HRG']
 
-    simulations = np.empty((len(observables), len(tspan), len(conditions)))
+    simulations = np.empty((len(observables), len(t), len(conditions)))
 
     def simulate(self, x, y0):
         # get steady state
