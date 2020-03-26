@@ -70,26 +70,28 @@ $ nohup python optimize.py n1 n2 &
 ```
 
 ### Visualization of Simulation Results (runSim.ipynb)
+```viz_type```:
+
+- 'average'
+    : The average of simulation results with parameter sets in ```fitparam/```
+
+- 'best'
+    : The best simulation result in ```fitparam/```, simulation with ```best_fit_param```
+
+- 'original'
+    : Simulation with the default parameters and initial values defined in ```model/```
+
+- 'n(=1,2,...)'
+    : Use the parameter set in ```fitparam/n/```
+
 ```python
 from param_estim.dynamics import simulate_all
 
-simulate_all(viz_type='average',show_all=False,stdev=True)
- """Simulate ODE model with estimated parameter values.
-
-    Parameters
-    ----------
-    viz_type : str
-        - 'average': The average of simulation results with parameter sets in "out/"
-        - 'best': The best simulation result in "out/", simulation with "best_fit_param"
-        - 'original': Simulation with the default parameters and initial values defined in "model/"
-        - 'n(=1,2,...)': Use the parameter set in "out/n/"
-    show_all : bool
-        Whether to show all simulation results
-    stdev: bool
-        If True, the standard deviation of simulated values will be shown
-        (only when viz_type == 'average')
-
-    """
+simulate_all(
+    viz_type='average', # This is where you define how you would like each observable to be plotted.
+    show_all=False,     # Whether to show all simulation results.
+    stdev=True          # If True, the standard deviation of simulated values will be shown (only when viz_type == 'average').
+)
 ```
 or
 ```bash
