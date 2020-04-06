@@ -190,7 +190,7 @@ def ga_v2(nth_paramset, max_generation, n_population, n_children, n_gene,
             )
         )
     n_iter = 1
-    n0 = np.empty(2*n_population)
+    n0 = np.empty(3*n_population)
 
     population = get_initial_population(
         n_population, n_gene, search_idx, search_region
@@ -228,10 +228,7 @@ def ga_v2(nth_paramset, max_generation, n_population, n_children, n_gene,
             ip, population = converging(
                 ip, population, n_population, n_gene, search_idx, search_region
             )
-        if generation % len(n0) == 0:
-            n0 = np.empty_like(n0)
-            n0[0] = population[0, -1]
-        elif generation % len(n0) == len(n0)-1:
+        if generation % len(n0) == len(n0) - 1:
             n0[-1] = population[0, -1]
             if n0[0] == n0[-1]:
                 n_iter *= 2
