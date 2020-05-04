@@ -1,27 +1,24 @@
 import numpy as np
 from scipy.spatial.distance import cosine
 
-from model.name2idx import parameters as C
-from model.name2idx import variables as V
-from model.param_const import f_params
-from model.initial_condition import initial_values
+from model import C, V, f_params, initial_values
 from .observable import *
 from .genetic_algorithm.converter import decode_gene2variable
 
-def compute_objval_rss(sim_data,exp_data):
+def compute_objval_rss(sim_data, exp_data):
     """Residual Sum of Squares"""
 
-    return np.dot((sim_data-exp_data),(sim_data-exp_data))
+    return np.dot((sim_data-exp_data), (sim_data-exp_data))
 
 
-def compute_objval_cs(sim_data,exp_data):
+def compute_objval_cs(sim_data, exp_data):
     """Cosine distance"""
 
-    return cosine(sim_data,exp_data)
+    return cosine(sim_data, exp_data)
 
 
 def diff_sim_and_exp(sim_matrix, exp_dict, exp_timepoint, conditions,
-                     sim_norm_max=1, exp_norm_max=1):
+                        sim_norm_max=1, exp_norm_max=1):
     sim_val = []
     exp_val = []
 
@@ -34,12 +31,12 @@ def diff_sim_and_exp(sim_matrix, exp_dict, exp_timepoint, conditions,
     return np.array(sim_val)/sim_norm_max, np.array(exp_val)/exp_norm_max
 
 
-def objective(individual_gene,search_idx,search_region):
+def objective(individual_gene, search_idx, search_region):
     """Define an objective function to be minimized"""
     x = f_params()
     y0 = initial_values()
 
-    indiv = decode_gene2variable(individual_gene,search_region)
+    indiv = decode_gene2variable(individual_gene, search_region)
 
     for i,j in enumerate(search_idx[0]):
         x[j] = indiv[i]
