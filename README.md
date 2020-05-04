@@ -21,9 +21,7 @@ A brief description of each file you will need to use is below:
     |Name|Description|
     |---|---|
     |[`name2idx/`](model/name2idx/)|This is where you define the parameter/variable names of your model.|
-    |[`param_const.py`](model/param_const.py)|This file contains the parameters used in the differential equations.|
-    |[`differential_equation.py`](model/differential_equation.py)|This file contains the differential equations that instruct the model how to change concentrations of reactants over the time course of the simulation.|
-    |[`initial_condition.py`](model/initial_condition.py)|This is where you define initial concentrations.|
+    |[`set_model.py`](model/set_model.py)|This file contains the differential equations, parameters and initial concentrations.|
 
 - [**param_estim/**](param_estim/)
 
@@ -64,34 +62,36 @@ or
 ```bash 
 $ nohup python optimize.py n &
 ```
-- If you want to search multiple parameter sets (from *n1* to *n2*) simutaneously,
+- If you want to search multiple parameter sets (from *n1* to *n2*) simultaneously,
 ```bash
 $ nohup python optimize.py n1 n2 &
 ```
 
 ### Visualization of Simulation Results (runSim.ipynb)
-```viz_type```:
+**viz_type**:
 
-- 'average'
+- ```'average'```
     : The average of simulation results with parameter sets in ```fitparam/```
 
-- 'best'
+- ```'best'```
     : The best simulation result in ```fitparam/```, simulation with ```best_fit_param```
 
-- 'original'
+- ```'original'```
     : Simulation with the default parameters and initial values defined in ```model/```
 
-- 'n(=1,2,...)'
+- ```'n(=1,2,...)'```
     : Use the parameter set in ```fitparam/n/```
+
+**show_all** : bool
+- Whether to show all simulation results.
+
+**stdev** : bool
+- If True, the standard deviation of simulated values will be shown (only when ```viz_type == 'average'```).
 
 ```python
 from param_estim.dynamics import simulate_all
 
-simulate_all(
-    viz_type='average', # This is where you define how you would like each observable to be plotted.
-    show_all=False,     # Whether to show all simulation results.
-    stdev=True          # If True, the standard deviation of simulated values will be shown (only when viz_type == 'average').
-)
+simulate_all(viz_type='average', show_all=False, stdev=True)
 ```
 or
 ```bash
