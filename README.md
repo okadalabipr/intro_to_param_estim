@@ -68,7 +68,7 @@ $ nohup python optimize.py n1 n2 &
 ```
 
 ### Visualization of Simulation Results (runSim.ipynb)
-**viz_type**:
+**viz_type** : str
 
 - ```'average'```
     : The average of simulation results with parameter sets in ```fitparam/```
@@ -89,13 +89,16 @@ $ nohup python optimize.py n1 n2 &
 - If True, the standard deviation of simulated values will be shown (only when ```viz_type == 'average'```).
 
 ```python
+import os
+import warnings
+warnings.filterwarnings('ignore')
+
+if not os.path.isdir('./figure'):
+    os.mkdir('./figure')
+
 from param_estim.dynamics import simulate_all
 
-simulate_all(viz_type='average', show_all=False, stdev=True)
-```
-or
-```bash
-$ python run_sim.py
+simulate_all(viz_type='average',show_all=False,stdev=True)
 ```
 
 ## Installation
