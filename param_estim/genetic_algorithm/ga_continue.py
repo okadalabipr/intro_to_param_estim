@@ -7,8 +7,7 @@ from .undx_mgg import mgg_alternation
 from .converging import converging
 from .local_search import local_search
 from param_estim.fitness import objective
-from param_estim.search_parameter import search_parameter_index
-from param_estim.search_parameter import get_search_region
+from param_estim.search_parameter import search_parameter_index, get_search_region
 
 
 def optimize_continue(nth_paramset):
