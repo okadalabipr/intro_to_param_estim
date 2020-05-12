@@ -96,7 +96,7 @@ warnings.filterwarnings('ignore')
 if not os.path.isdir('./figure'):
     os.mkdir('./figure')
 
-from param_estim.dynamics import simulate_all
+from param_estim import simulate_all
 
 simulate_all(viz_type='average',show_all=False,stdev=True)
 ```
