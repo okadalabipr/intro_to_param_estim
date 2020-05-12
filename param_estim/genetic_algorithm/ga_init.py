@@ -128,7 +128,7 @@ def ga_v2(nth_paramset, max_generation, n_population, n_children, n_gene,
 
     2. Selection for reproduction
         As parents for the recombination operator, ENDX, select m individuals, 
-        p1, p2, · · · ,pm, without replacement from the population.
+        p1, p2, . . .,pm, without replacement from the population.
 
     3. Generation of offsprings
         Generate Nc children by applying ENDX to the selected parents. 
@@ -158,7 +158,7 @@ def ga_v2(nth_paramset, max_generation, n_population, n_children, n_gene,
         slightly converges the population by repeating the following procedure Niter times.
 
         (i) Select m individuals without replacement from the population. 
-            The selected individuals, expressed here as p1, p2, · · · , pm, are 
+            The selected individuals, expressed here as p1, p2, . . ., pm, are 
             used as the parents for an extended normal distribution crossover 
             (ENDX) applied in the next step.
 
@@ -172,7 +172,7 @@ def ga_v2(nth_paramset, max_generation, n_population, n_children, n_gene,
         (iii) Select two individuals from a family containing the two parents, 
             i.e., p1 and p2, and their children. The first selected individual 
             should be the one with the best objective value, and the second 
-            should be selected randomly.Then, replace the two parents with 
+            should be selected randomly. Then, replace the two parents with 
             the selected individuals.
 
     7. Adaptation of Niter
