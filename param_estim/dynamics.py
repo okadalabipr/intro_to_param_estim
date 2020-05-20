@@ -9,7 +9,6 @@ from .observable import observables, NumericalSimulation
 
 
 def _load_best_param(paramset, x, y0):
-    search_idx = search_parameter_index()
     if os.path.isfile('./out/%d/generation.npy' % (paramset)):
         best_generation = np.load(
             './out/%d/generation.npy' % (
