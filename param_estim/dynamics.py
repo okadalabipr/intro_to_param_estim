@@ -4,11 +4,11 @@ import numpy as np
 
 from model import C, V, f_params, initial_values
 from . import plot_func
-from .search_parameter import search_parameter_index
+from .search_parameter import search_parameter_index, update_param
 from .observable import observables, NumericalSimulation
 
 
-def _update_param(paramset, x, y0):
+def _load_best_param(paramset, x, y0):
     search_idx = search_parameter_index()
     if os.path.isfile('./out/%d/generation.npy' % (paramset)):
         best_generation = np.load(
@@ -21,10 +21,8 @@ def _update_param(paramset, x, y0):
                 paramset, int(best_generation)
             )
         )
-        for i, j in enumerate(search_idx[0]):
-            x[j] = best_indiv[i]
-        for i, j in enumerate(search_idx[1]):
-            y0[j] = best_indiv[i+len(search_idx[0])]
+        
+        (x, y0) = update_param(best_indiv, x, y0)
 
     return x, y0
 
@@ -35,7 +33,7 @@ def _validate(nth_paramset, x, y0):
     # -------------------------------------------------------------------------
     sim = NumericalSimulation()
     
-    (x, y0) = _update_param(nth_paramset, x, y0)
+    (x, y0) = _load_best_param(nth_paramset, x, y0)
 
     if sim.simulate(x, y0) is None:
         return sim, True
@@ -79,7 +77,7 @@ def _get_search_param_matrix(n_file, x, y0):
 
 def write_best_fit_param(best_paramset, x, y0):
 
-    (x, y0) = _update_param(best_paramset, x, y0)
+    (x, y0) = _load_best_param(best_paramset, x, y0)
     
     with open('./out/best_fit_param.txt', mode='w') as f:
         f.write(
