@@ -7,7 +7,7 @@ from .undx_mgg import mgg_alternation
 from .converging import converging
 from .local_search import local_search
 from param_estim.fitness import objective
-from param_estim.search_parameter import search_parameter_index, get_search_region
+from param_estim.search_parameter import get_search_region
 
 
 def optimize_continue(nth_paramset):
@@ -16,7 +16,6 @@ def optimize_continue(nth_paramset):
         time.time_ns()*nth_paramset % 2**32
     )
 
-    search_idx = search_parameter_index()
     search_region = get_search_region()
 
     max_generation = 10000
@@ -33,14 +32,13 @@ def optimize_continue(nth_paramset):
         n_children,
         n_gene,
         allowable_error,
-        search_idx,
         search_region,
         p0_bounds
     )
 
 
 def ga_v1_continue(nth_paramset, max_generation, n_population, n_children, n_gene,
-                   allowable_error, search_idx, search_region, p0_bounds):
+                   allowable_error, search_region, p0_bounds):
     count_num = np.load(
         './out/%d/count_num.npy' % (nth_paramset)
     )
@@ -52,11 +50,10 @@ def ga_v1_continue(nth_paramset, max_generation, n_population, n_children, n_gen
     )
     best_fitness = objective(
         (np.log10(best_indiv) - search_region[0, :]) /
-        (search_region[1, :] - search_region[0, :]),
-        search_idx, search_region
+        (search_region[1, :] - search_region[0, :]), search_region
     )
     population = get_initial_population_continue(
-        nth_paramset, n_population, n_gene, search_idx, search_region, p0_bounds
+        nth_paramset, n_population, n_gene, search_region, p0_bounds
     )
     if best_fitness < population[0, -1]:
         population[0, :n_gene] = (
@@ -93,7 +90,7 @@ def ga_v1_continue(nth_paramset, max_generation, n_population, n_children, n_gen
     generation = 1
     while generation < max_generation:
         population = mgg_alternation(
-            population, n_population, n_children, n_gene, search_idx, search_region
+            population, n_population, n_children, n_gene, search_region
         )
         print(
             'Generation%d: Best Fitness = %e' % (
@@ -143,7 +140,7 @@ def ga_v1_continue(nth_paramset, max_generation, n_population, n_children, n_gen
 
 
 def ga_v2_continue(nth_paramset, max_generation, n_population, n_children, n_gene,
-                   allowable_error, search_idx, search_region, p0_bounds):
+                   allowable_error, search_region, p0_bounds):
     if n_population < n_gene+2:
         raise ValueError(
             'n_population must be larger than %d' % (
@@ -164,12 +161,10 @@ def ga_v2_continue(nth_paramset, max_generation, n_population, n_children, n_gen
     )
     best_fitness = objective(
         (np.log10(best_indiv) - search_region[0, :]) /
-        (search_region[1, :] - search_region[0, :]),
-        search_idx,
-        search_region
+        (search_region[1, :] - search_region[0, :]), search_region
     )
     population = get_initial_population_continue(
-        nth_paramset, n_population, n_gene, search_idx, search_region, p0_bounds
+        nth_paramset, n_population, n_gene, search_region, p0_bounds
     )
     if best_fitness < population[0, -1]:
         population[0, :n_gene] = (
@@ -211,15 +206,15 @@ def ga_v2_continue(nth_paramset, max_generation, n_population, n_children, n_gen
     while generation < max_generation:
         ip = np.random.choice(n_population, n_gene+2, replace=False)
         ip, population = converging(
-            ip, population, n_population, n_gene, search_idx, search_region
+            ip, population, n_population, n_gene, search_region
         )
         ip, population = local_search(
-            ip, population, n_population, n_children, n_gene, search_idx, search_region
+            ip, population, n_population, n_children, n_gene, search_region
         )
         for _ in range(n_iter-1):
             ip = np.random.choice(n_population, n_gene+2, replace=False)
             ip, population = converging(
-                ip, population, n_population, n_gene, search_idx, search_region
+                ip, population, n_population, n_gene, search_region
             )
         if generation % len(n0) == len(n0) - 1:
             n0[-1] = population[0, -1]
@@ -279,7 +274,7 @@ def ga_v2_continue(nth_paramset, max_generation, n_population, n_children, n_gen
 
 
 def get_initial_population_continue(nth_paramset, n_population, n_gene,
-                                    search_idx, search_region, p0_bounds):
+                                    search_region, p0_bounds):
     best_generation = np.load(
         './out/%d/generation.npy' % (nth_paramset)
     )
@@ -297,7 +292,7 @@ def get_initial_population_continue(nth_paramset, n_population, n_gene,
             )
             population[i, :n_gene] = np.clip(population[i, :n_gene], 0., 1.)
             population[i, -1] = objective(
-                population[i, :n_gene], search_idx, search_region
+                population[i, :n_gene], search_region
             )
         sys.stdout.write('\r%d/%d' % (i+1, n_population))
     sys.stdout.write('\n')

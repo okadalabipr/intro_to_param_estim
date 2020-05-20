@@ -7,7 +7,7 @@ from .undx_mgg import mgg_alternation
 from .converging import converging
 from .local_search import local_search
 from param_estim.fitness import objective
-from param_estim.search_parameter import search_parameter_index, get_search_region
+from param_estim.search_parameter import get_search_region
 
 
 def optimize(nth_paramset):
@@ -16,7 +16,6 @@ def optimize(nth_paramset):
         time.time_ns()*nth_paramset % 2**32
     )
 
-    search_idx = search_parameter_index()
     search_region = get_search_region()
 
     max_generation = 10000
@@ -32,19 +31,18 @@ def optimize(nth_paramset):
         n_children,
         n_gene,
         allowable_error,
-        search_idx,
         search_region
     )
 
 
 def ga_v1(nth_paramset, max_generation, n_population, n_children, n_gene,
-          allowable_error, search_idx, search_region):
+          allowable_error, search_region):
     """
     Parameter values are searched by genetic algorithm with 
     Unimodal Normal Distribution Crossover (UNDX) and Minimal Generation Gap (MGG)
     """
     population = get_initial_population(
-        n_population, n_gene, search_idx, search_region
+        n_population, n_gene, search_region
     )
     print('Generation%d: Best Fitness = %e' % (1, population[0, -1]))
     with open('./out/%d/out.log' % (nth_paramset), mode='w') as f:
@@ -68,7 +66,7 @@ def ga_v1(nth_paramset, max_generation, n_population, n_children, n_gene,
     generation = 1
     while generation < max_generation:
         population = mgg_alternation(
-            population, n_population, n_children, n_gene, search_idx, search_region
+            population, n_population, n_children, n_gene, search_region
         )
         print(
             'Generation%d: Best Fitness = %e' % (
@@ -116,7 +114,7 @@ def ga_v1(nth_paramset, max_generation, n_population, n_children, n_gene,
 
 
 def ga_v2(nth_paramset, max_generation, n_population, n_children, n_gene,
-          allowable_error, search_idx, search_region):
+          allowable_error, search_region):
     """ga_v2 optimizes an objective function through the following procedure.
 
     1. Initialization
@@ -192,7 +190,7 @@ def ga_v2(nth_paramset, max_generation, n_population, n_children, n_gene,
     n0 = np.empty(3*n_population)
 
     population = get_initial_population(
-        n_population, n_gene, search_idx, search_region
+        n_population, n_gene, search_region
     )
     n0[0] = population[0, -1]
     print('Generation%d: Best Fitness = %e' % (1, population[0, -1]))
@@ -217,15 +215,15 @@ def ga_v2(nth_paramset, max_generation, n_population, n_children, n_gene,
     while generation < max_generation:
         ip = np.random.choice(n_population, n_gene+2, replace=False)
         ip, population = converging(
-            ip, population, n_population, n_gene, search_idx, search_region
+            ip, population, n_population, n_gene, search_region
         )
         ip, population = local_search(
-            ip, population, n_population, n_children, n_gene, search_idx, search_region
+            ip, population, n_population, n_children, n_gene, search_region
         )
         for _ in range(n_iter-1):
             ip = np.random.choice(n_population, n_gene+2, replace=False)
             ip, population = converging(
-                ip, population, n_population, n_gene, search_idx, search_region
+                ip, population, n_population, n_gene, search_region
             )
         if generation % len(n0) == len(n0) - 1:
             n0[-1] = population[0, -1]
@@ -281,7 +279,7 @@ def ga_v2(nth_paramset, max_generation, n_population, n_children, n_gene,
     return best_indiv, best_fitness
 
 
-def get_initial_population(n_population, n_gene, search_idx, search_region):
+def get_initial_population(n_population, n_gene, search_region):
     population = np.full((n_population, n_gene+1), np.inf)
 
     print('Generating the initial population. . .')
@@ -289,7 +287,7 @@ def get_initial_population(n_population, n_gene, search_idx, search_region):
         while np.isinf(population[i, -1]) or np.isnan(population[i, -1]):
             population[i, :n_gene] = np.random.rand(n_gene)
             population[i, -1] = objective(
-                population[i, :n_gene], search_idx, search_region
+                population[i, :n_gene], search_region
             )
         sys.stdout.write('\r%d/%d' % (i+1, n_population))
     sys.stdout.write('\n')
