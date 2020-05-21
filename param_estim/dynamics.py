@@ -8,31 +8,30 @@ from .search_parameter import search_parameter_index, update_param
 from .observable import observables, NumericalSimulation
 
 
-def _load_best_param(paramset, x, y0):
-    if os.path.isfile('./out/%d/generation.npy' % (paramset)):
-        best_generation = np.load(
-            './out/%d/generation.npy' % (
-                paramset
-            )
+def _load_best_param(paramset):
+    best_generation = np.load(
+        './out/%d/generation.npy' % (
+            paramset
         )
-        best_indiv = np.load(
-            './out/%d/fit_param%d.npy' % (
-                paramset, int(best_generation)
-            )
+    )
+    best_indiv = np.load(
+        './out/%d/fit_param%d.npy' % (
+            paramset, int(best_generation)
         )
-        
-        (x, y0) = update_param(best_indiv, x, y0)
+    )
+    
+    (x, y0) = update_param(best_indiv)
 
     return x, y0
 
 
-def _validate(nth_paramset, x, y0):
+def _validate(nth_paramset):
     # -------------------------------------------------------------------------
     # Validates the dynamical viability of a set of estimated parameter values.
     # -------------------------------------------------------------------------
     sim = NumericalSimulation()
     
-    (x, y0) = _load_best_param(nth_paramset, x, y0)
+    (x, y0) = _load_best_param(nth_paramset)
 
     if sim.simulate(x, y0) is None:
         return sim, True
@@ -45,37 +44,28 @@ def _validate(nth_paramset, x, y0):
         return sim, False
 
 
-def _get_optimized_param(n_file, search_idx, x, y0):
+def _get_optimized_param(n_file, search_idx):
     popt = np.empty((n_file, len(search_idx[0])))
     for nth_paramset in range(1, n_file+1):
-        if os.path.isfile('./out/%d/generation.npy' % (nth_paramset)):
-            best_generation = np.load(
-                './out/%d/generation.npy' % (
-                    nth_paramset
-                )
+        best_generation = np.load(
+            './out/%d/generation.npy' % (
+                nth_paramset
             )
-            best_indiv = np.load(
-                './out/%d/fit_param%d.npy' % (
-                    nth_paramset, int(best_generation)
-                )
+        )
+        best_indiv = np.load(
+            './out/%d/fit_param%d.npy' % (
+                nth_paramset, int(best_generation)
             )
-        else:
-            best_indiv = np.empty(
-                len(search_idx[0]) + len(search_idx[1])
-            )
-            for i, j in enumerate(search_idx[0]):
-                best_indiv[i] = x[j]
-            for i, j in enumerate(search_idx[1]):
-                best_indiv[i+len(search_idx[0])] = y0[j]
+        )
 
         popt[nth_paramset-1, :] = best_indiv[:len(search_idx[0])]
 
     return popt
 
 
-def write_best_fit_param(best_paramset, x, y0):
+def write_best_fit_param(best_paramset):
 
-    (x, y0) = _load_best_param(best_paramset, x, y0)
+    (x, y0) = _load_best_param(best_paramset)
     
     with open('./out/best_fit_param.txt', mode='w') as f:
         f.write(
@@ -128,8 +118,6 @@ def simulate_all(viz_type, show_all, stdev):
                 "Avairable viz_type are: 'best','average','original','n(=1, 2, ...)'"
             )
 
-    x = f_params()
-    y0 = initial_values()
     sim = NumericalSimulation()
 
     n_file = 0
@@ -147,7 +135,7 @@ def simulate_all(viz_type, show_all, stdev):
         if n_file == 1 and viz_type == 'average':
             viz_type = 'best'
         for i in range(n_file):
-            (sim, successful) = _validate(i+1, x, y0)
+            (sim, successful) = _validate(i+1)
             if successful:
                 for j, _ in enumerate(observables):
                     simulations_all[j, i, :, :] = sim.simulations[j, :, :]
@@ -165,14 +153,14 @@ def simulate_all(viz_type, show_all, stdev):
 
         # global best_paramset
         best_paramset = np.argmin(best_fitness_all) + 1
-        write_best_fit_param(best_paramset, x, y0)
+        write_best_fit_param(best_paramset)
 
         if viz_type == 'average':
             pass
         elif viz_type == 'best':
-            sim, _ = _validate(int(best_paramset), x, y0)
+            sim, _ = _validate(int(best_paramset))
         elif int(viz_type) <= n_file:
-            sim, _ = _validate(int(viz_type), x, y0)
+            sim, _ = _validate(int(viz_type))
         else:
             raise ValueError(
                 '%d is larger than n_fit_param(%d)' % (
@@ -181,11 +169,13 @@ def simulate_all(viz_type, show_all, stdev):
             )
         if 2 <= n_file:
             search_idx = search_parameter_index()
-            popt = _get_optimized_param(n_file, search_idx, x, y0)
+            popt = _get_optimized_param(n_file, search_idx)
             plot_func.param_range(
                 search_idx, popt, portrait=True
             )
     else:
+        x = f_params()
+        y0 = initial_values()
         if sim.simulate(x, y0) is not None:
             print(
                 'Simulation failed.'

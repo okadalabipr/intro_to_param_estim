@@ -1,7 +1,6 @@
 import numpy as np
 from scipy.spatial.distance import cosine
 
-from model import C, V, f_params, initial_values
 from .observable import *
 from .search_parameter import update_param
 from .genetic_algorithm.converter import decode_gene2variable
@@ -36,12 +35,9 @@ def _diff_sim_and_exp(sim_matrix, exp_dict, exp_timepoint, conditions,
 def objective(individual_gene, search_region):
     """Define an objective function to be minimized
     """
-    x = f_params()
-    y0 = initial_values()
-
     indiv = decode_gene2variable(individual_gene, search_region)
 
-    (x, y0) = update_param(indiv, x, y0)
+    (x, y0) = update_param(indiv)
 
     exp = ExperimentalData()
     sim = NumericalSimulation()
