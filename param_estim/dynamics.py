@@ -45,9 +45,8 @@ def _validate(nth_paramset, x, y0):
         return sim, False
 
 
-def _get_search_param_matrix(n_file, x, y0):
-    search_idx = search_parameter_index()
-    search_param_matrix = np.empty((n_file, len(search_idx[0])))
+def _get_optimized_param(n_file, search_idx, x, y0):
+    popt = np.empty((n_file, len(search_idx[0])))
     for nth_paramset in range(1, n_file+1):
         if os.path.isfile('./out/%d/generation.npy' % (nth_paramset)):
             best_generation = np.load(
@@ -69,9 +68,9 @@ def _get_search_param_matrix(n_file, x, y0):
             for i, j in enumerate(search_idx[1]):
                 best_indiv[i+len(search_idx[0])] = y0[j]
 
-        search_param_matrix[nth_paramset-1, :] = best_indiv[:len(search_idx[0])]
+        popt[nth_paramset-1, :] = best_indiv[:len(search_idx[0])]
 
-    return search_idx, search_param_matrix
+    return popt
 
 
 def write_best_fit_param(best_paramset, x, y0):
@@ -180,9 +179,11 @@ def simulate_all(viz_type, show_all, stdev):
                     int(viz_type), n_file
                 )
             )
-        if n_file >= 2:
+        if 2 <= n_file:
+            search_idx = search_parameter_index()
+            popt = _get_optimized_param(n_file, search_idx, x, y0)
             plot_func.param_range(
-                *_get_search_param_matrix(n_file, x, y0), portrait=True
+                search_idx, popt, portrait=True
             )
     else:
         if sim.simulate(x, y0) is not None:

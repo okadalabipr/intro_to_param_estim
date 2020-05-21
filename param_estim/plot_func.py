@@ -100,7 +100,7 @@ def timecourse(sim, n_file, viz_type, show_all, stdev, simulations_all):
         plt.close()
         
         
-def param_range(search_idx, search_param_matrix, portrait):
+def param_range(search_idx, popt, portrait):
     
     plt.rcParams['font.size'] = 12
     plt.rcParams['axes.linewidth'] = 1.2
@@ -114,7 +114,7 @@ def param_range(search_idx, search_param_matrix, portrait):
         if len(search_idx[0]) > 0:
             fig = plt.figure(figsize=(8, len(search_idx[0])/2.5))
             ax = sns.boxenplot(
-                data=search_param_matrix[:, :len(search_idx[0])], 
+                data=popt[:, :len(search_idx[0])], 
                 orient='h', 
                 linewidth=0.5, 
                 palette='Set2'
@@ -132,7 +132,7 @@ def param_range(search_idx, search_param_matrix, portrait):
         if len(search_idx[1]) > 0:
             fig = plt.figure(figsize=(8, len(search_idx[1])/2.5))
             ax = sns.boxenplot(
-                data=search_param_matrix[:, len(search_idx[0]):], 
+                data=popt[:, len(search_idx[0]):], 
                 orient='h', 
                 linewidth=0.5, 
                 palette='Set2'
@@ -151,7 +151,7 @@ def param_range(search_idx, search_param_matrix, portrait):
         if len(search_idx[0]) > 0:
             fig = plt.figure(figsize=(len(search_idx[0])/2.2, 6))
             ax = sns.boxenplot(
-                data=search_param_matrix[:, :len(search_idx[0])], 
+                data=popt[:, :len(search_idx[0])], 
                 linewidth=0.5, 
                 palette='Set2'
             )
@@ -168,7 +168,7 @@ def param_range(search_idx, search_param_matrix, portrait):
         if len(search_idx[1]) > 0:
             fig = plt.figure(figsize=(len(search_idx[1])/2.2, 6))
             ax = sns.boxenplot(
-                data=search_param_matrix[:, len(search_idx[0]):], 
+                data=popt[:, len(search_idx[0]):], 
                 linewidth=0.5, 
                 palette='Set2'
             )
