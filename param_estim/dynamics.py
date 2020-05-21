@@ -64,9 +64,26 @@ def _get_optimized_param(n_file, search_idx):
 
 
 def write_best_fit_param(best_paramset):
+    x = f_params()
+    y0 = initial_values()
 
-    (x, y0) = _load_best_param(best_paramset)
-    
+    search_idx = search_parameter_index()
+
+    best_generation = np.load(
+        './out/%d/generation.npy' % (
+            best_paramset
+        )
+    )
+    best_indiv = np.load(
+        './out/%d/fit_param%d.npy' % (
+            best_paramset, int(best_generation)
+        )
+    )
+    for i,j in enumerate(search_idx[0]):
+        x[j] = best_indiv[i]
+    for i,j in enumerate(search_idx[1]):
+        y0[j] = best_indiv[i+len(search_idx[0])]
+
     with open('./out/best_fit_param.txt', mode='w') as f:
         f.write(
             '# param set: %d\n' % (
