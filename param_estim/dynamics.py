@@ -8,7 +8,7 @@ from .search_parameter import search_parameter_index, update_param
 from .observable import observables, NumericalSimulation
 
 
-def _load_best_param(paramset):
+def _get_indiv(paramset):
     best_generation = np.load(
         './out/%d/generation.npy' % (
             paramset
@@ -19,6 +19,12 @@ def _load_best_param(paramset):
             paramset, int(best_generation)
         )
     )
+
+    return best_indiv
+
+
+def _load_param(paramset):
+    best_indiv = _get_indiv(paramset)
     
     (x, y0) = update_param(best_indiv)
 
@@ -31,7 +37,7 @@ def _validate(nth_paramset):
     # -------------------------------------------------------------------------
     sim = NumericalSimulation()
     
-    (x, y0) = _load_best_param(nth_paramset)
+    (x, y0) = _load_param(nth_paramset)
 
     if sim.simulate(x, y0) is None:
         return sim, True
@@ -47,17 +53,7 @@ def _validate(nth_paramset):
 def _get_optimized_param(n_file, search_idx):
     popt = np.empty((n_file, len(search_idx[0])))
     for nth_paramset in range(1, n_file+1):
-        best_generation = np.load(
-            './out/%d/generation.npy' % (
-                nth_paramset
-            )
-        )
-        best_indiv = np.load(
-            './out/%d/fit_param%d.npy' % (
-                nth_paramset, int(best_generation)
-            )
-        )
-
+        best_indiv = _get_indiv(nth_paramset)
         popt[nth_paramset-1, :] = best_indiv[:len(search_idx[0])]
 
     return popt
@@ -69,16 +65,7 @@ def write_best_fit_param(best_paramset):
 
     search_idx = search_parameter_index()
 
-    best_generation = np.load(
-        './out/%d/generation.npy' % (
-            best_paramset
-        )
-    )
-    best_indiv = np.load(
-        './out/%d/fit_param%d.npy' % (
-            best_paramset, int(best_generation)
-        )
-    )
+    best_indiv = _get_indiv(best_paramset)
     for i,j in enumerate(search_idx[0]):
         x[j] = best_indiv[i]
     for i,j in enumerate(search_idx[1]):
