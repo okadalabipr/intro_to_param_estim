@@ -32,10 +32,10 @@ def _diff_sim_and_exp(sim_matrix, exp_dict, exp_timepoint, conditions,
     return np.array(sim_val)/sim_norm_max, np.array(exp_val)/exp_norm_max
 
 
-def objective(individual_gene, search_region):
+def objective(individual_gene, search_rgn):
     """Define an objective function to be minimized
     """
-    indiv = decode_gene2variable(individual_gene, search_region)
+    indiv = decode_gene2variable(individual_gene, search_rgn)
 
     (x, y0) = update_param(indiv)
 

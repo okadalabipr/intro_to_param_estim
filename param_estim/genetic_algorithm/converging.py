@@ -36,7 +36,7 @@ def _xover(parents, n_gene):
     return child
 
 
-def converging(ip, population, n_population, n_gene, search_region):
+def converging(ip, population, n_population, n_gene, search_rgn):
     n_children = 10
     children = np.empty((n_children, n_gene+1))
 
@@ -57,7 +57,7 @@ def converging(ip, population, n_population, n_gene, search_region):
 
     if np.isinf(population[ip[1], -1]):
         population[ip[1], -1] = objective(
-            population[ip[1], :n_gene], search_region
+            population[ip[1], :n_gene], search_rgn
         )
     population = population[np.argsort(population[:, -1]), :]
 

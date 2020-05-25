@@ -4,7 +4,7 @@ import csv
 import numpy as np
 
 from param_estim.name2idx import C, V
-from param_estim.set_search_param import get_index
+from param_estim.set_search_param import get_search_index
 
 def get_param():
     # -------------------------------------------
@@ -17,7 +17,7 @@ def get_param():
         if re.match(r'\d',file):
             n_file += 1
 
-    search_idx = get_index()
+    search_idx = get_search_index()
 
     if len(search_idx[0]) > 0:
         optimized_params = np.empty(
