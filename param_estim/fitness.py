@@ -2,7 +2,7 @@ import numpy as np
 from scipy.spatial.distance import cosine
 
 from .observable import *
-from .search_parameter import update_param
+from .set_search_param import update_param
 from .genetic_algorithm.converter import decode_gene2variable
 
 

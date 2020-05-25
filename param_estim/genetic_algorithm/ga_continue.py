@@ -7,7 +7,7 @@ from .undx_mgg import mgg_alternation
 from .converging import converging
 from .local_search import local_search
 from param_estim.fitness import objective
-from param_estim.search_parameter import get_search_region
+from param_estim.set_search_param import get_region
 
 
 def optimize_continue(nth_paramset):
@@ -16,7 +16,7 @@ def optimize_continue(nth_paramset):
         time.time_ns()*nth_paramset % 2**32
     )
 
-    search_region = get_search_region()
+    search_region = get_region()
 
     max_generation = 10000
     n_population = int(5*search_region.shape[1])

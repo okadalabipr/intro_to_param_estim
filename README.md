@@ -22,7 +22,7 @@ A brief description of each file you will need to use is below:
     |[`name2idx/`](param_estim/name2idx/)|This is where you define the parameter/variable names of your model.|
     |[`set_model.py`](param_estim/set_model.py)|This file contains the differential equations, parameters and initial concentrations.|
     |[`observalbe.py`](param_estim/observable.py)|This is the file to define the simulations you want to run and input the experimental data that you are going to use to try and fit the parameters to.|
-    |[`search_parameter.py`](param_estim/search_parameter.py)|This is where you specify the model parameters to estimate.|
+    |[`set_search_param.py`](param_estim/set_search_param.py)|This is where you specify the model parameters to estimate.|
     |[`fitness.py`](param_estim/fitness.py)|This is where you define an objective function to minimize, e.g. the distance between model simulation and experimental data.|
 
 - [**runGA_*n*.ipynb (*n* ≧ 1)**](runGA_1.ipynb)<br>

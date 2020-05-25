@@ -4,7 +4,7 @@ import numpy as np
 
 from .name2idx import C, V
 from .set_model import f_params, initial_values
-from .search_parameter import search_parameter_index, update_param
+from .set_search_param import get_index, update_param
 from .observable import observables, NumericalSimulation
 from . import plot_func
 
@@ -64,7 +64,7 @@ def write_best_fit_param(best_paramset):
     x = f_params()
     y0 = initial_values()
 
-    search_idx = search_parameter_index()
+    search_idx = get_index()
 
     best_indiv = _get_indiv(best_paramset)
     for i,j in enumerate(search_idx[0]):
@@ -173,7 +173,7 @@ def simulate_all(viz_type, show_all, stdev):
                 )
             )
         if 2 <= n_file:
-            search_idx = search_parameter_index()
+            search_idx = get_index()
             popt = _get_optimized_param(n_file, search_idx)
             plot_func.param_range(
                 search_idx, popt, portrait=True

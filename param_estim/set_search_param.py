@@ -4,7 +4,7 @@ from .name2idx import C, V
 from .set_model import f_params, initial_values
 
 
-def search_parameter_index():
+def get_index():
     """Specify model parameters and/or initial values to optimize
     """
     # parameters
@@ -94,11 +94,11 @@ def search_parameter_index():
     return search_idx_params, search_idx_initvars
 
 
-def get_search_region():
+def get_region():
     x = f_params()
     y0 = initial_values()
 
-    search_idx = search_parameter_index()
+    search_idx = get_index()
     search_param = _init_search_param(search_idx, x, y0)
 
     search_region = np.zeros((2, len(x)+len(y0)))
@@ -213,7 +213,7 @@ def update_param(indiv):
     x = f_params()
     y0 = initial_values()
 
-    search_idx = search_parameter_index()
+    search_idx = get_index()
 
     for i,j in enumerate(search_idx[0]):
         x[j] = indiv[i]
