@@ -1,6 +1,8 @@
 import numpy as np
 
-from model import C, V, f_params, initial_values
+from .name2idx import C, V
+from .set_model import f_params, initial_values
+
 
 def search_parameter_index():
     """Specify model parameters and/or initial values to optimize

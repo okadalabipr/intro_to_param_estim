@@ -16,13 +16,14 @@ Using Genetic Algorithm to Fit ODE Models to Data
 ## Description
 A brief description of each file you will need to use is below:
 
-|Name|Description|
-|---|---|
-|[`model/name2idx/`](model/name2idx/)|This is where you define the parameter/variable names of your model.|
-|[`model/set_model.py`](model/set_model.py)|This file contains the differential equations, parameters and initial concentrations.|
-|[`param_estim/observalbe.py`](param_estim/observable.py)|This is the file to define the simulations you want to run and input the experimental data that you are going to use to try and fit the parameters to.|
-|[`param_estim/search_parameter.py`](param_estim/search_parameter.py)|This is where you specify the model parameters to estimate.|
-|[`param_estim/fitness.py`](param_estim/fitness.py)|This is where you define an objective function to minimize, e.g. the distance between model simulation and experimental data.|
+- [`param_estim/`](param_estim/)
+    |Name|Description|
+    |---|---|
+    |[`name2idx/`](param_estim/name2idx/)|This is where you define the parameter/variable names of your model.|
+    |[`set_model.py`](param_estim/set_model.py)|This file contains the differential equations, parameters and initial concentrations.|
+    |[`observalbe.py`](param_estim/observable.py)|This is the file to define the simulations you want to run and input the experimental data that you are going to use to try and fit the parameters to.|
+    |[`search_parameter.py`](param_estim/search_parameter.py)|This is where you specify the model parameters to estimate.|
+    |[`fitness.py`](param_estim/fitness.py)|This is where you define an objective function to minimize, e.g. the distance between model simulation and experimental data.|
 
 - [**runGA_*n*.ipynb (*n* ≧ 1)**](runGA_1.ipynb)<br>
     Run both input boxes and leave it. When you run the *i*<sup>th</sup> file, runGA_(*i+1*).ipynb will be generated. You can run these different parameter fittings simultaneously.

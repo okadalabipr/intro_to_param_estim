@@ -2,10 +2,11 @@ import os
 import re
 import numpy as np
 
-from model import C, V, f_params, initial_values
-from . import plot_func
+from .name2idx import C, V
+from .set_model import f_params, initial_values
 from .search_parameter import search_parameter_index, update_param
 from .observable import observables, NumericalSimulation
+from . import plot_func
 
 
 def _get_indiv(paramset):

@@ -1,6 +1,7 @@
 import numpy as np
 
-from model import C, V, diffeq
+from .name2idx import C, V
+from .set_model import diffeq
 from .solver import solveode, get_steady_state
 
 observables = [

@@ -3,7 +3,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 import seaborn as sns
 
-import model
+from .name2idx import C, V
 from .observable import observables, ExperimentalData
 
 def timecourse(sim, n_file, viz_type, show_all, stdev, simulations_all):
@@ -122,7 +122,7 @@ def param_range(search_idx, popt, portrait):
             sns.despine()
             ax.set_xlabel('Parameter value')
             ax.set_ylabel('')
-            ax.set_yticklabels([model.C.param_names[i] for i in search_idx[0]])
+            ax.set_yticklabels([C.param_names[i] for i in search_idx[0]])
             ax.set_xscale('log')
 
             plt.savefig(
@@ -140,7 +140,7 @@ def param_range(search_idx, popt, portrait):
             sns.despine()
             ax.set_xlabel('Initial value')
             ax.set_ylabel('')
-            ax.set_yticklabels([model.V.var_names[i] for i in search_idx[1]])
+            ax.set_yticklabels([V.var_names[i] for i in search_idx[1]])
             ax.set_xscale('log')
 
             plt.savefig(
@@ -157,7 +157,7 @@ def param_range(search_idx, popt, portrait):
             )
             sns.despine()
             ax.set_xlabel('')
-            ax.set_xticklabels([model.C.param_names[i] for i in search_idx[0]], rotation=45)
+            ax.set_xticklabels([C.param_names[i] for i in search_idx[0]], rotation=45)
             ax.set_ylabel('Parameter value')
             ax.set_yscale('log')
 
@@ -174,7 +174,7 @@ def param_range(search_idx, popt, portrait):
             )
             sns.despine()
             ax.set_xlabel('')
-            ax.set_xticklabels([model.V.var_names[i] for i in search_idx[1]], rotation=45)
+            ax.set_xticklabels([V.var_names[i] for i in search_idx[1]], rotation=45)
             ax.set_ylabel('Initial value')
             ax.set_yscale('log')
 
