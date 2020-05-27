@@ -3,7 +3,6 @@ from scipy.spatial.distance import cosine
 
 from .observable import *
 from .set_search_param import update_param
-from .genetic_algorithm.converter import decode_gene2variable
 
 
 def _compute_objval_rss(sim_data, exp_data):
@@ -30,6 +29,16 @@ def _diff_sim_and_exp(sim_matrix, exp_dict, exp_timepoint, conditions,
             exp_val.extend(exp_dict[condition])
 
     return np.array(sim_val)/sim_norm_max, np.array(exp_val)/exp_norm_max
+
+
+def decode_gene2variable(individual_gene, search_rgn):
+    indiv_var = 10**(
+        individual_gene * (
+            search_rgn[1, :] - search_rgn[0, :]
+        ) + search_rgn[0, :]
+    )
+
+    return indiv_var
 
 
 def objective(individual_gene, search_rgn):

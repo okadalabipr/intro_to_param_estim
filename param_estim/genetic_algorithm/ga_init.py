@@ -2,11 +2,10 @@ import sys
 import time
 import numpy as np
 
-from .converter import decode_gene2variable
 from .undx_mgg import mgg_alternation
 from .converging import converging
 from .local_search import local_search
-from param_estim.fitness import objective
+from param_estim.fitness import objective, decode_gene2variable
 from param_estim.set_search_param import get_search_region
 
 

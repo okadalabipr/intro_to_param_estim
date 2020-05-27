@@ -2,11 +2,10 @@ import sys
 import time
 import numpy as np
 
-from .converter import *
 from .undx_mgg import mgg_alternation
 from .converging import converging
 from .local_search import local_search
-from param_estim.fitness import objective
+from param_estim.fitness import objective, decode_gene2variable
 from param_estim.set_search_param import get_search_region
 
 
@@ -287,7 +286,7 @@ def get_initial_population_continue(nth_paramset, n_population, n_gene,
     print('Generating the initial population. . .')
     for i in range(n_population):
         while np.isinf(population[i, -1]) or np.isnan(population[i, -1]):
-            population[i, :n_gene] = encode_bestindiv2randgene(
+            population[i, :n_gene] = _encode_bestindiv2randgene(
                 best_indiv, search_rgn, p0_bounds
             )
             population[i, :n_gene] = np.clip(population[i, :n_gene], 0., 1.)
@@ -300,3 +299,17 @@ def get_initial_population_continue(nth_paramset, n_population, n_gene,
     population = population[np.argsort(population[:, -1]), :]
 
     return population
+
+
+def _encode_bestindiv2randgene(best_indiv, search_rgn, p0_bounds):
+    rand_gene = (
+        np.log10(
+            best_indiv * 10**(
+                np.random.rand(len(best_indiv))
+                * np.log10(p0_bounds[1]/p0_bounds[0])
+                + np.log10(p0_bounds[0])
+            )
+        ) - search_rgn[0, :]
+    ) / (search_rgn[1, :] - search_rgn[0, :])
+
+    return rand_gene
