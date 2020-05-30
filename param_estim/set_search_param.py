@@ -240,6 +240,17 @@ def update_param(indiv):
     return x, y0
 
 
+def decode_gene2val(indiv_gene):
+    search_rgn = get_search_region()
+    indiv = 10**(
+        indiv_gene * (
+            search_rgn[1, :] - search_rgn[0, :]
+        ) + search_rgn[0, :]
+    )
+
+    return indiv
+
+
 def _init_search_param(search_idx, x, y0):
     """Initialize search_param
     """
