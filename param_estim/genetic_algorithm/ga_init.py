@@ -38,9 +38,7 @@ def ga_v1(nth_paramset, max_generation, n_population, n_children, n_gene, allowa
     Parameter values are searched by genetic algorithm with 
     Unimodal Normal Distribution Crossover (UNDX) and Minimal Generation Gap (MGG)
     """
-    population = get_initial_population(
-        n_population, n_gene
-    )
+    population = get_initial_population(n_population, n_gene)
     print('Generation%d: Best Fitness = %e' % (1, population[0, -1]))
     with open('./out/%d/out.log' % (nth_paramset), mode='w') as f:
         f.write(
@@ -55,9 +53,9 @@ def ga_v1(nth_paramset, max_generation, n_population, n_children, n_gene, allowa
     np.save('./out/%d/best_fitness.npy' % (nth_paramset), best_fitness)
 
     if population[0, -1] <= allowable_error:
-        best_indiv = decode_gene2val(
-            population[0, :n_gene])
+        best_indiv = decode_gene2val(population[0, :n_gene])
         best_fitness = population[0, -1]
+
         return best_indiv, best_fitness
 
     generation = 1
@@ -70,8 +68,7 @@ def ga_v1(nth_paramset, max_generation, n_population, n_children, n_gene, allowa
                 generation + 1, population[0, -1]
             )
         )
-        best_indiv = decode_gene2val(
-            population[0, :n_gene])
+        best_indiv = decode_gene2val(population[0, :n_gene])
 
         if population[0, -1] < best_fitness:
             np.save(
@@ -96,10 +93,9 @@ def ga_v1(nth_paramset, max_generation, n_population, n_children, n_gene, allowa
                 )
             )
         if population[0, -1] <= allowable_error:
-            best_indiv = decode_gene2val(
-                population[0, :n_gene]
-            )
+            best_indiv = decode_gene2val(population[0, :n_gene])
             best_fitness = population[0, -1]
+
             return best_indiv, best_fitness
 
         generation += 1
@@ -110,8 +106,7 @@ def ga_v1(nth_paramset, max_generation, n_population, n_children, n_gene, allowa
     return best_indiv, best_fitness
 
 
-def ga_v2(nth_paramset, max_generation, n_population, n_children, n_gene,
-          allowable_error):
+def ga_v2(nth_paramset, max_generation, n_population, n_children, n_gene, allowable_error):
     """ga_v2 optimizes an objective function through the following procedure.
 
     1. Initialization
@@ -186,9 +181,7 @@ def ga_v2(nth_paramset, max_generation, n_population, n_children, n_gene,
     n_iter = 1
     n0 = np.empty(3*n_population)
 
-    population = get_initial_population(
-        n_population, n_gene
-    )
+    population = get_initial_population(n_population, n_gene)
     n0[0] = population[0, -1]
     print('Generation%d: Best Fitness = %e' % (1, population[0, -1]))
     with open('./out/%d/out.log' % (nth_paramset), mode='w') as f:
@@ -203,9 +196,9 @@ def ga_v2(nth_paramset, max_generation, n_population, n_children, n_gene,
     np.save('./out/%d/best_fitness.npy' % (nth_paramset), best_fitness)
 
     if population[0, -1] <= allowable_error:
-        best_indiv = decode_gene2val(
-            population[0, :n_gene])
+        best_indiv = decode_gene2val(population[0, :n_gene])
         best_fitness = population[0, -1]
+
         return best_indiv, best_fitness
 
     generation = 1
@@ -236,8 +229,7 @@ def ga_v2(nth_paramset, max_generation, n_population, n_children, n_gene,
                 generation + 1, population[0, -1]
             )
         )
-        best_indiv = decode_gene2val(
-            population[0, :n_gene])
+        best_indiv = decode_gene2val(population[0, :n_gene])
 
         if population[0, -1] < best_fitness:
             np.save(
@@ -262,10 +254,9 @@ def ga_v2(nth_paramset, max_generation, n_population, n_children, n_gene,
                 )
             )
         if population[0, -1] <= allowable_error:
-            best_indiv = decode_gene2val(
-                population[0, :n_gene]
-            )
+            best_indiv = decode_gene2val(population[0, :n_gene])
             best_fitness = population[0, -1]
+
             return best_indiv, best_fitness
 
         generation += 1
