@@ -60,4 +60,4 @@ def local_search(ip, population, n_population, n_children, n_gene):
 
     population = population[np.argsort(population[:, -1]), :]
 
-    return ip, population
+    return population
