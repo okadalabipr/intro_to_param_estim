@@ -87,11 +87,11 @@ def get_search_index():
     ]
 
     # initial values
-    search_idx_initvars = [
+    search_idx_initials = [
         # V.(variable name)
     ]
 
-    return search_idx_params, search_idx_initvars
+    return search_idx_params, search_idx_initials
 
 
 def get_search_region():
@@ -203,9 +203,7 @@ def get_search_region():
     ----------------------------------------------------------------------------
     '''
 
-    search_rgn = _conv_lin2log(
-        search_rgn, search_idx, len(x), len(search_param)
-    )
+    search_rgn = _conv_lin2log(search_rgn, search_idx)
     return search_rgn
 
 
@@ -275,64 +273,63 @@ def _init_search_param(search_idx, x, y0):
             if x[int(idx)] == 0.:
                 raise ValueError(
                     '"C.{}" in search_idx_params: '.format(
-                        C.param_names[int(idx)]
+                        C.parameters[int(idx)]
                     ) + message
                 )
         for _, idx in enumerate(search_idx[1]):
             if y0[int(idx)] == 0.:
                 raise ValueError(
-                    '"V.{}" in search_idx_initvars: '.format(
-                        V.var_names[int(idx)]
+                    '"V.{}" in search_idx_initials: '.format(
+                        V.species[int(idx)]
                     ) + message
                 )
     
     return search_param
 
 
-def _conv_lin2log(search_rgn, search_idx, n_param_const, n_search_param):
+def _conv_lin2log(search_rgn, search_idx):
     """Convert Linear scale to Logarithmic scale
     """
     for i in range(search_rgn.shape[1]):
         if np.min(search_rgn[:, i]) < 0.0:
             message = 'search_rgn[lb,ub] must be positive.'
-            if i <= n_param_const:
-                raise ValueError(
-                    '"C.{}": '.format(
-                        C.param_names[i]
+            if i <= C.n_parameters:
+                raise ValueError('"C.{}": '.format(
+                        C.parameters[i]
                     ) + message
                 )
             else:
                 raise ValueError(
                     '"V.{}": '.format(
-                        V.var_names[i-n_param_const]
+                        V.species[i-C.n_parameters]
                     ) + message
                 )
         elif np.min(search_rgn[:, i]) == 0 and np.max(search_rgn[:, i]) != 0:
             message = 'lower_bound must be larger than 0.'
-            if i <= n_param_const:
+            if i <= C.n_parameters:
                 raise ValueError(
                     '"C.{}" '.format(
-                        C.param_names[i]
+                        C.parameters[i]
                     ) + message
                 )
             else:
                 raise ValueError(
                     '"V.{}" '.format(
-                        V.var_names[i-n_param_const]
+                        V.species[i-C.n_parameters]
                     ) + message
                 )
         elif search_rgn[1, i] - search_rgn[0, i] < 0.0:
             message = 'lower_bound < upper_bound'
-            if i <= n_param_const:
+            if i <= C.n_parameters:
                 raise ValueError(
                     '"C.{}" : '.format(
-                        C.param_names[i]
+                        C.parameters[i]
                     ) + message
                 )
             else:
                 raise ValueError(
                     '"V.{}" : '.format(
-                        V.var_names[i-n_param_const]
+                        V.species[i-C.n_parameters]
                     ) + message
                 )
     difference = list(
@@ -343,23 +340,23 @@ def _conv_lin2log(search_rgn, search_idx, n_param_const, n_search_param):
         ) ^ set(
             np.append(
                 search_idx[0],
-                [n_param_const + idx for (_, idx) in enumerate(search_idx[1])]
+                [C.n_parameters + idx for (_, idx) in enumerate(search_idx[1])]
             )
         )
     )
     if len(difference) > 0:
         message = 'in both search_idx and search_rgn'
         for i, j in enumerate(difference):
-            if j <= n_param_const:
+            if j <= C.n_parameters:
                 raise ValueError(
                     'Set "C.{}" '.format(
-                        C.param_names[int(j)]
+                        C.parameters[int(j)]
                     ) + message
                 )
             else:
                 raise ValueError(
                     'Set "V.{}" '.format(
-                        V.var_names[int(j-n_param_const)]
+                        V.species[int(j-C.n_parameters)]
                     ) + message
                 )
     search_rgn = search_rgn[:, np.any(search_rgn != 0., axis=0)]

@@ -69,7 +69,7 @@ def diffeq(t, y, x):
     v[62] = x[C.KimF] * y[V.Fc] - x[C.KexF] * (x[C.Vn]/x[C.Vc]) * y[V.Fn]
     v[63] = x[C.p63] * y[V.Fn]
 
-    dydt = [0] * V.len_f_vars
+    dydt = [0] * V.n_species
 
     if x[C.Ligand] == x[C.EGF]:  # EGF=10nM
         if t < 300.:
@@ -151,7 +151,7 @@ def diffeq(t, y, x):
 
 def param_values():
 
-    x = [0] * C.len_f_params
+    x = [0] * C.n_parameters
 
     x[C.V1] = 0.34284837
     x[C.Km1] = 307.0415253
@@ -275,7 +275,7 @@ def param_values():
 
 def initial_values():
     
-    y0 = [0] * V.len_f_vars
+    y0 = [0] * V.n_species
 
     y0[V.ERKc] = 9.60e+02
     y0[V.RSKc] = 3.53e+02

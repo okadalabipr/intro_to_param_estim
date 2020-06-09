@@ -42,7 +42,7 @@ def get_param():
                 )
                 optimized_params[0, 0] = ''
                 optimized_params[1, 0] = '*Error*'
-                optimized_params[i+2, 0] = C.param_names[param_index]
+                optimized_params[i+2, 0] = C.parameters[param_index]
                 optimized_params[0, j+1] = str(j+1)
                 optimized_params[1, j+1] = '{:8.3e}'.format(error)
                 optimized_params[i+2, j+1] = '{:8.3e}'.format(best_indiv[i])
@@ -52,10 +52,10 @@ def get_param():
             writer.writerows(optimized_params)
 
     if len(search_idx[1]) > 0:
-        optimized_initvars = np.empty(
+        optimized_initials = np.empty(
             (len(search_idx[1])+2, n_file+1), dtype='<U21'
         )
-        for i, var_index in enumerate(search_idx[1]):
+        for i, specie_index in enumerate(search_idx[1]):
             for j in range(n_file):
                 generation = np.load(
                     './out/{:d}/generation.npy'.format(
@@ -72,16 +72,17 @@ def get_param():
                         j + 1
                     )
                 )
-                optimized_initvars[0, 0] = ''
-                optimized_initvars[1, 0] = '*Error*'
-                optimized_initvars[i+2, 0] = V.var_names[var_index]
-                optimized_initvars[0, j+1] = str(j+1)
-                optimized_initvars[1, j+1] = '{:8.3e}'.format(error)
-                optimized_initvars[i+2, j+1] = '{:8.3e}'.format(best_indiv[i+len(search_idx[0])])
+                optimized_initials[0, 0] = ''
+                optimized_initials[1, 0] = '*Error*'
+                optimized_initials[i+2, 0] = V.species[specie_index]
+                optimized_initials[0, j+1] = str(j+1)
+                optimized_initials[1, j+1] = '{:8.3e}'.format(error)
+                optimized_initials[i+2, j+1] = \
+                    '{:8.3e}'.format(best_indiv[i+len(search_idx[0])])
 
         with open('optimized_inital_varlues.csv', 'w') as f:
             writer = csv.writer(f, lineterminator='\n')
-            writer.writerows(optimized_initvars)
+            writer.writerows(optimized_initials)
 
 
 if __name__ == '__main__':

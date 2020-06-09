@@ -81,20 +81,20 @@ def write_best_fit_param(best_paramset):
         f.write(
             '\n### Param. const\n'
         )
-        for i in range(C.len_f_params):
+        for i in range(C.n_parameters):
             f.write(
                 'x[C.%s] = %8.3e\n' % (
-                    C.param_names[i], x[i]
+                    C.parameters[i], x[i]
                 )
             )
         f.write(
             '\n### Non-zero initial conditions\n'
         )
-        for i in range(V.len_f_vars):
+        for i in range(V.n_species):
             if y0[i] != 0:
                 f.write(
                     'y0[V.%s] = %8.3e\n' % (
-                        V.var_names[i], y0[i]
+                        V.species[i], y0[i]
                     )
                 )
                 

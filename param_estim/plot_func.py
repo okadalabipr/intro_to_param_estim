@@ -122,7 +122,7 @@ def param_range(search_idx, popt, portrait):
             sns.despine()
             ax.set_xlabel('Parameter value')
             ax.set_ylabel('')
-            ax.set_yticklabels([C.param_names[i] for i in search_idx[0]])
+            ax.set_yticklabels([C.parameters[i] for i in search_idx[0]])
             ax.set_xscale('log')
 
             plt.savefig(
@@ -140,7 +140,7 @@ def param_range(search_idx, popt, portrait):
             sns.despine()
             ax.set_xlabel('Initial value')
             ax.set_ylabel('')
-            ax.set_yticklabels([V.var_names[i] for i in search_idx[1]])
+            ax.set_yticklabels([V.species[i] for i in search_idx[1]])
             ax.set_xscale('log')
 
             plt.savefig(
@@ -157,7 +157,7 @@ def param_range(search_idx, popt, portrait):
             )
             sns.despine()
             ax.set_xlabel('')
-            ax.set_xticklabels([C.param_names[i] for i in search_idx[0]], rotation=45)
+            ax.set_xticklabels([C.parameters[i] for i in search_idx[0]], rotation=45)
             ax.set_ylabel('Parameter value')
             ax.set_yscale('log')
 
@@ -174,7 +174,7 @@ def param_range(search_idx, popt, portrait):
             )
             sns.despine()
             ax.set_xlabel('')
-            ax.set_xticklabels([V.var_names[i] for i in search_idx[1]], rotation=45)
+            ax.set_xticklabels([V.species[i] for i in search_idx[1]], rotation=45)
             ax.set_ylabel('Initial value')
             ax.set_yscale('log')
 
