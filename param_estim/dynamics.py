@@ -3,7 +3,7 @@ import re
 import numpy as np
 
 from .name2idx import C, V
-from .set_model import f_params, initial_values
+from .set_model import param_values, initial_values
 from .set_search_param import get_search_index, update_param
 from .observable import observables, NumericalSimulation
 from . import plot_func
@@ -61,7 +61,7 @@ def _get_optimized_param(n_file, search_idx):
 
 
 def write_best_fit_param(best_paramset):
-    x = f_params()
+    x = param_values()
     y0 = initial_values()
 
     search_idx = get_search_index()
@@ -179,7 +179,7 @@ def simulate_all(viz_type, show_all, stdev):
                 search_idx, popt, portrait=True
             )
     else:
-        x = f_params()
+        x = param_values()
         y0 = initial_values()
         if sim.simulate(x, y0) is not None:
             print(
