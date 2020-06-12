@@ -106,14 +106,10 @@ def simulate_all(viz_type, show_all, stdev):
         If True, the standard deviation of simulated values will be shown
         (only when viz_type == 'average')
     """
-    if not viz_type in ['best', 'average', 'original']:
-        try:
-            int(viz_type)
-        except ValueError:
-            print(
-                "Avairable viz_type are: 'best','average','original','n(=1, 2, ...)'"
-            )
-
+    if not viz_type in ['best', 'average', 'original'] and not viz_type.isdecimal():
+        raise(
+            "Avairable viz_type are: 'best','average','original','n(=1, 2, ...)'"
+        )
     sim = NumericalSimulation()
 
     n_file = 0
