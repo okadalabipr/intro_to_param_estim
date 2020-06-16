@@ -45,6 +45,9 @@ def timecourse(sim, n_file, viz_type, show_all, stdev, simulations_all):
                     normalized[i, j, :, l] = (
                         simulations_all[i, j, :, l] / np.max(simulations_all[i, j, :, :])
                     )
+            normalized[i,:,:,:] = normalized[i,:,:,:] / np.max(
+                np.nanmean(normalized[i,:,:,:], axis=0)
+            )
             for l, _ in enumerate(sim.conditions):
                 plt.plot(
                     sim.t, np.nanmean(normalized[i, :, :, l], axis=0), 
