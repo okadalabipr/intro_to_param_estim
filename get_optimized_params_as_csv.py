@@ -42,7 +42,7 @@ def get_param():
                 )
                 optimized_params[0, 0] = ''
                 optimized_params[1, 0] = '*Error*'
-                optimized_params[i+2, 0] = C.parameters[param_index]
+                optimized_params[i+2, 0] = C.NAMES[param_index]
                 optimized_params[0, j+1] = str(j+1)
                 optimized_params[1, j+1] = '{:8.3e}'.format(error)
                 optimized_params[i+2, j+1] = '{:8.3e}'.format(best_indiv[i])
@@ -74,7 +74,7 @@ def get_param():
                 )
                 optimized_initials[0, 0] = ''
                 optimized_initials[1, 0] = '*Error*'
-                optimized_initials[i+2, 0] = V.species[specie_index]
+                optimized_initials[i+2, 0] = V.NAMES[specie_index]
                 optimized_initials[0, j+1] = str(j+1)
                 optimized_initials[1, j+1] = '{:8.3e}'.format(error)
                 optimized_initials[i+2, j+1] = \
