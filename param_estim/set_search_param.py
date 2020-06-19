@@ -294,43 +294,32 @@ def _conv_lin2log(search_rgn, search_idx):
         if np.min(search_rgn[:, i]) < 0.0:
             message = 'search_rgn[lb,ub] must be positive.'
             if i <= C.NUM:
-                raise ValueError('"C.{}": '.format(
-                        C.NAMES[i]
-                    ) + message
+                raise ValueError(
+                    '"C.{}": '.format(C.NAMES[i]) + message
                 )
             else:
                 raise ValueError(
-                    '"V.{}": '.format(
-                        V.NAMES[i-C.NUM]
-                    ) + message
+                    '"V.{}": '.format(V.NAMES[i-C.NUM]) + message
                 )
         elif np.min(search_rgn[:, i]) == 0 and np.max(search_rgn[:, i]) != 0:
             message = 'lower_bound must be larger than 0.'
             if i <= C.NUM:
                 raise ValueError(
-                    '"C.{}" '.format(
-                        C.NAMES[i]
-                    ) + message
+                    '"C.{}" '.format(C.NAMES[i]) + message
                 )
             else:
                 raise ValueError(
-                    '"V.{}" '.format(
-                        V.NAMES[i-C.NUM]
-                    ) + message
+                    '"V.{}" '.format(V.NAMES[i-C.NUM]) + message
                 )
         elif search_rgn[1, i] - search_rgn[0, i] < 0.0:
             message = 'lower_bound < upper_bound'
             if i <= C.NUM:
                 raise ValueError(
-                    '"C.{}" : '.format(
-                        C.NAMES[i]
-                    ) + message
+                    '"C.{}" : '.format(C.NAMES[i]) + message
                 )
             else:
                 raise ValueError(
-                    '"V.{}" : '.format(
-                        V.NAMES[i-C.NUM]
-                    ) + message
+                    '"V.{}" : '.format(V.NAMES[i-C.NUM]) + message
                 )
     difference = list(
         set(
@@ -346,18 +335,14 @@ def _conv_lin2log(search_rgn, search_idx):
     )
     if len(difference) > 0:
         message = 'in both search_idx and search_rgn'
-        for i, j in enumerate(difference):
-            if j <= C.NUM:
+        for _, idx in enumerate(difference):
+            if idx <= C.NUM:
                 raise ValueError(
-                    'Set "C.{}" '.format(
-                        C.NAMES[int(j)]
-                    ) + message
+                    'Set "C.{}" '.format(C.NAMES[int(idx)]) + message
                 )
             else:
                 raise ValueError(
-                    'Set "V.{}" '.format(
-                        V.NAMES[int(j-C.NUM)]
-                    ) + message
+                    'Set "V.{}" '.format(V.NAMES[int(idx-C.NUM)]) + message
                 )
     search_rgn = search_rgn[:, np.any(search_rgn != 0., axis=0)]
 
